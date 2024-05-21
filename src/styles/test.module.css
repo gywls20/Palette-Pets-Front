@@ -1,0 +1,15 @@
+/* test.module.css */
+
+.headerContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.headerBox {
+    max-width: 33.33%;
+}
+
+.grow {
+    flex-grow: 1;
+}

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {styled} from '@mui/material/styles';
+import { useState } from 'react';
+import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,13 +14,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import {useState} from "react";
-import {CssBaseline} from "@mui/material";
+import { CssBaseline } from '@mui/material';
+import styles from '../styles/test.module.css'
 
 export default function Header() {
-    // 이거 메뉴 닫을 때 쓰는 변수
     const [anchorEl, setAnchorEl] = useState(null);
-    // 이건 모바일 열고 닫을 때 쓰는 변수
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
@@ -117,17 +116,16 @@ export default function Header() {
     );
 
     return (
-
-        <Box sx={{ flexGrow: 1 }}>
+        
+        <Box className={styles.headerBox}>
             <CssBaseline />
-            <AppBar position="fixed">
+            <AppBar className={styles.headerContainer}>
                 <Toolbar>
                     <IconButton
                         size="large"
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        sx={{ mr: 2 }}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -135,12 +133,11 @@ export default function Header() {
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
                         냥가왈부
                     </Typography>
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <Box className={styles.grow} />
+                    <Box >
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="error">
                                 <MailIcon />
@@ -167,7 +164,7 @@ export default function Header() {
                             <AccountCircle />
                         </IconButton>
                     </Box>
-                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                    <Box >
                         <IconButton
                             size="large"
                             aria-label="show more"
