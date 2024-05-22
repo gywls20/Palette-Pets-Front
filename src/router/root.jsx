@@ -15,7 +15,7 @@ const root = createBrowserRouter([
     {
         path:"test",
         element: <Suspense fallback={<Loading />}><TestPage/></Suspense>, // 여기엔 그 기능의 인덱스나 메인 페이지 넣는듯
-        children:testRouter()
+        children: testRouter()
     },
 ]);
 
