@@ -1,10 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpRightDots, faCommentDots, faDog, faHeart, faHouseMedical, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import BoardViewStyle from '../css/boardView.module.css'
 import Cat from '../image/cat.jpg'
 import Pat from '../image/pat.jpg'
+import Category from './Category';
 
 
 const BoardView = () => {
@@ -15,28 +16,8 @@ const BoardView = () => {
                 <img className={BoardViewStyle.image} src={Pat} alt="Pat" />
             </div>
 
-            <div className={BoardViewStyle.iconsBar}>
-                <button className={BoardViewStyle.iconButtonColumn}>
-                    <FontAwesomeIcon icon={faArrowUpRightDots} style={{ color: "#ff0000" }} className={BoardViewStyle.iconColumn} />
-                    <span>인기</span>
-                </button>
-
-                <button className={BoardViewStyle.iconButtonColumn}>
-                    <FontAwesomeIcon icon={faHouseMedical} style={{color: "#ff0000",}} className={BoardViewStyle.iconColumn} />
-                    <span>병원</span>
-                </button>
-
-                <button className={BoardViewStyle.iconButtonColumn}>
-                    <FontAwesomeIcon icon={faDog} style={{color: "#9a4a09",}} className={BoardViewStyle.iconColumn} />
-                    <span>미용</span>
-                </button>
-
-                <button className={BoardViewStyle.iconButtonColumn}>
-                    <FontAwesomeIcon icon={faLocationDot} style={{color: "#002ee6",}} className={BoardViewStyle.iconColumn} />
-                    <span>산책</span>
-                </button>
-            </div>
-
+            <Category/>            
+            
             <div className={BoardViewStyle.postsSection}>
                 <div className={BoardViewStyle.postsHeader}>
                     <span className={BoardViewStyle.postsTitle}>오늘의 인기글</span>
@@ -55,13 +36,13 @@ const BoardView = () => {
                         <p className={BoardViewStyle.postContent}>여기에 게시물 내용이 들어갑니다. 여기에 게시물 내용이 들어갑니다.</p>
                         <div className={BoardViewStyle.postActions}>
                             <button className={BoardViewStyle.postActionButton}>
-                                <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff" }} />
-                                <span className={BoardViewStyle.actionText}>좋아요</span>
+                                <FontAwesomeIcon icon={faHeart} className={BoardViewStyle.postAction} style={{ color: "#ffffff" }} />
+                                <span>좋아요</span>
                             </button>
 
                             <button className={BoardViewStyle.postActionButton}>
-                                <FontAwesomeIcon icon={faCommentDots} />
-                                <span className={BoardViewStyle.actionText}>댓글</span>
+                                <FontAwesomeIcon icon={faCommentDots} className={BoardViewStyle.postAction} />
+                                <span>댓글</span>
                             </button>
                         </div>
                     </div>

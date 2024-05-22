@@ -10,21 +10,6 @@
     width: 100%;
 }
 
-.iconsBar {
-    padding: 1rem;
-    display: flex;
-    justify-content: space-around;
-    background-color: #f9fafb;
-}
-
-.iconButtonColumn {
-    flex-direction: column;
-}
-
-.iconColumn {
-    margin-right: 0.3rem;
-}
-
 .postsSection {
     padding: 1rem;
 }
@@ -53,9 +38,9 @@
 }
 
 .post {
-    padding: 1rem;
+    
     background-color: white;
-    border-radius: 0.5rem;
+    
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -86,6 +71,10 @@
     font-size: 0.875rem;
 }
 
+.actionText {
+    font-size: 0.75rem;
+}
+
 .postActions {
     margin-top: 0.5rem;
     display: flex;
@@ -95,11 +84,15 @@
 }
 
 .postActionButton {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+    /* 버튼 내부 텍스트 크기 줄이기 */
+    font-size: 0.75rem;
+
+    /* 버튼 크기 줄이기 */
+    padding: 0.3rem 0.5rem;
 }
 
-.actionText {
+
+.postAction {
+    /* 아이콘 크기 줄이기 */
     font-size: 0.75rem;
 }
