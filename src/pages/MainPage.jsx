@@ -14,7 +14,6 @@ const MainPage = () => {
                 <Video/>
                 <BoardView/>
                 <UpdateComp/>
-                <TestComp/>
             </DefaultLayout>
         </>
     )

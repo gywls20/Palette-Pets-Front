@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import BoardViewStyle from '../css/boardView.module.css'
+import ImgStyle from '../css/img.module.css';
+
 import Cat from '../image/cat.jpg'
 import Pat from '../image/pat.jpg'
 import Category from './Category';
@@ -12,8 +14,8 @@ const BoardView = () => {
 
     return (
         <div>
-            <div className={BoardViewStyle.imageTool}>
-                <img className={BoardViewStyle.image} src={Pat} alt="Pat" />
+            <div className={ImgStyle.imageTool}>
+                <img className={ImgStyle.image} src={Pat} alt="Pat" />
             </div>
 
             <Category/>            
