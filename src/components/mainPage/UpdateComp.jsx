@@ -7,19 +7,19 @@ const UpdateComp = () => {
             <h3>냥가왈부 업데이트</h3>
             <div className={'updateList'}>
                 <div className="upL">
-                    <a className="upList" href="https://www.fordong.co.kr/board/post/127300">
+                    <a className="upList" href="">
                     <span className="upL1">첫번째 업데이트🐶</span></a>
                     <hr className="updateHr"/>
-                    <a className="upList" href="https://www.fordong.co.kr/board/post/127281">
+                    <a className="upList" href="">
                         <span className="upL2">두번째 업데이트🐶</span></a>
                     <hr className="updateHr"/>
-                    <a className="upList" href="https://www.fordong.co.kr/board/post/125930">
+                    <a className="upList" href="">
                         <span className="upL3">세번째 업데이트🐶</span></a>
                     <hr className="updateHr"/>
-                    <a className="upList" href="https://www.fordong.co.kr/board/post/124663">
+                    <a className="upList" href="">
                         <span className="upL4">네번째 업데이트🐶</span></a>
                     <hr className="updateHr"/>
-                    <a className="upList" href="https://www.fordong.co.kr/board/post/124476">
+                    <a className="upList" href="">
                         <span className="upL5">다섯번째 업데이트🐶</span></a>
                     <hr className="updateHr"/>
                 </div>
