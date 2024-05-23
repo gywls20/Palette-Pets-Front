@@ -20,7 +20,7 @@ export default function ReviewComp() {
 
     return (
         <Slider {...settings}>
-            <div className={"reviewSlider"}>
+            <div className='reviewSlider'>
                 <Container maxWidth="sm" sx={{mt: 4}}>
                     <Link href="#" sx={{textDecoration: 'none'}}>
                         <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
@@ -28,13 +28,13 @@ export default function ReviewComp() {
                                 src="https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG"
                                 sx={{width: 48, height: 48, mr: 2}}
                             />
-                            <Box sx={{flexGrow: 1}}>
+                            <Box sx={{flexGrow: 0}}>
+                                <Typography variant="body2" color="text.secondary">
+                                    <AccessTimeIcon sx={{verticalAlign: 'middle', mr: 0.5}}/>몇 시간 전
+                                </Typography>
                                 <Typography variant="subtitle1" color="text.primary">
                                     첫번째 후기 글입니다.
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    <AccessTimeIcon sx={{verticalAlign: 'middle', mr: 0.5}}/>몇 시간 전
-                                </Typography>
                             </Box>
                         </Box>
                         <Box sx={{display: 'flex', alignItems: 'center'}}>
@@ -62,13 +62,13 @@ export default function ReviewComp() {
                                 src="https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG"
                                 sx={{width: 48, height: 48, mr: 2}}
                             />
-                            <Box sx={{flexGrow: 1}}>
+                            <Box sx={{flexGrow: 0}}>
+                                <Typography variant="body2" color="text.secondary">
+                                    <AccessTimeIcon sx={{verticalAlign: 'middle', mr: 0.5}}/>몇 시간 전
+                                </Typography>
                                 <Typography variant="subtitle1" color="text.primary">
                                     두번째 후기 글입니다.
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    <AccessTimeIcon sx={{verticalAlign: 'middle', mr: 0.5}}/>몇 시간 전
-                                </Typography>
                             </Box>
                         </Box>
                         <Box sx={{display: 'flex', alignItems: 'center'}}>
@@ -96,12 +96,12 @@ export default function ReviewComp() {
                                 src="https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG"
                                 sx={{width: 48, height: 48, mr: 2}}
                             />
-                            <Box sx={{flexGrow: 1}}>
-                                <Typography variant="subtitle1" color="text.primary">
-                                    세번째 후기 글입니다.
-                                </Typography>
+                            <Box sx={{flexGrow: 0}}>
                                 <Typography variant="body2" color="text.secondary">
                                     <AccessTimeIcon sx={{verticalAlign: 'middle', mr: 0.5}}/>몇 시간 전
+                                </Typography>
+                                <Typography variant="subtitle1" color="text.primary">
+                                    세번째 후기 글입니다.
                                 </Typography>
                             </Box>
                         </Box>

@@ -19,7 +19,10 @@ const MainPage = () => {
                 <br/>
                 <UpdateComp/>
                 <br/>
+<<<<<<< HEAD
                 <TestComp/>
+=======
+>>>>>>> 5799d2c7b093b152256fcbfe40e091e040f642b9
             </DefaultLayout>
         </>
     )
