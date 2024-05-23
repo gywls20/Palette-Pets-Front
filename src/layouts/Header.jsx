@@ -120,7 +120,7 @@ export default function Header() {
 
         <Box sx={{ flexGrow: 1 }}>
             <CssBaseline />
-            <AppBar position="fixed">
+            <AppBar position="static">
                 <Toolbar>
                     <IconButton
                         size="large"
