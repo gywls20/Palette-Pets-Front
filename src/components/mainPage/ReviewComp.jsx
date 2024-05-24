@@ -121,8 +121,6 @@ export default function ReviewComp() {
                     </Link>
                 </Container>
             </div>
-
-
         </Slider>
     );
 }
