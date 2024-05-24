@@ -82,18 +82,18 @@ button:focus-visible {
 /*reviewComp*/
 
 .slick-track {
-  display: block;!important;
-  width: 20rem; !important;
+  display: block !important;
+  /* width: 200%  !important; */
 }
 
 .reviewSlider {
-  display: block;!important;
-  width: 20rem; !important;
+  display: flex !important;
 }
 
 .MuiContainer-root,
 .MuiContainer-maxWidthSm,
 .css-o31nrr-MuiContainer-root {
   display: block;
-  width: 20rem; !important;
+  width: 100% ;
+
 }
