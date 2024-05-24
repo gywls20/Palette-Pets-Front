@@ -19,6 +19,7 @@ const MainPage = () => {
                 <br/>
                 <UpdateComp/>
                 <br/>
+                <TestComp/>
             </DefaultLayout>
         </>
     )
