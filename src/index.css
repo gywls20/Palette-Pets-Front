@@ -97,3 +97,24 @@ button:focus-visible {
   width: 100% ;
 
 }
+
+@media only screen and (max-width: 600px) {
+  .css-11b3ww9-MuiPaper-root-MuiAppBar-root,
+  .css-1yn37ft-MuiPaper-root{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 25rem;
+  }
+}
+
+
+@media only screen and (min-width: 600px) {
+  .css-11b3ww9-MuiPaper-root-MuiAppBar-root,
+  .css-1yn37ft-MuiPaper-root{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 40rem;
+  }
+}
