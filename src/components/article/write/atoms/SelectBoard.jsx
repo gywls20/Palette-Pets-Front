@@ -27,7 +27,7 @@ const SelectBoard = () => {
         <>
 
             <Box sx={{ minWidth: 120 }}>
-                <FormControl sx={{minWidth:500}}>
+                <FormControl sx={{m:3, width:"80%"}}>
                 <InputLabel id="demo-simple-select-label">게시판 선택</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"

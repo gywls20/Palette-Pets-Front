@@ -20,7 +20,7 @@ const ArticleWriteBlock = () => {
             <ArticleImagePreviewComp/>
            
         </div>
-        
+
     );
     
 };

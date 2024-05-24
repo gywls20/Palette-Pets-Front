@@ -18,7 +18,7 @@ export default function InputTitleContent() {
         <Box
         component="form"
         sx={{
-            '& .MuiTextField-root': { m: 1, width: 500 },
+            '& .MuiTextField-root': { m: 1, width: '80%' },
         }}
         noValidate
         autoComplete="off"
@@ -51,7 +51,7 @@ export default function InputTitleContent() {
         <Box
             component="form"
             sx={{
-                '& .MuiTextField-root': { m: 1, width: 500 },
+                '& .MuiTextField-root': { m: 1, width: '80%' },
             }}
             noValidate
             autoComplete="off"

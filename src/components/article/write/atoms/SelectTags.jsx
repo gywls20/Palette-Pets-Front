@@ -20,16 +20,16 @@ const MenuProps = {
 };
 
 const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
+ '고양이',
+ '강아지',
+ '뭔강아지',
+ '큰강아지',
+ '사료추천',
+ '간식추천',
+ '산책로',
+ '어디갈까',
+ 
+
 ];
 
 function getStyles(name, personName, theme) {
@@ -59,8 +59,8 @@ export default function SelectTags() {
     console.log(e.value.label)
   }
   return (
-    <div>
-      <FormControl sx={{ m: 1, width: 500 }}>
+    <>
+      <FormControl sx={{m:1 ,width:"80%"}}>
         <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
@@ -89,6 +89,6 @@ export default function SelectTags() {
           ))}
         </Select>
       </FormControl>
-    </div>
+    </>
   );
 }
