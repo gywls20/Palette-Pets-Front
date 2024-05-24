@@ -7,6 +7,9 @@ const MainPage = lazy(() => import('./../pages/MainPage'));
 const LoginPage = lazy(() => import('./../pages/LoginPage'));
 const JoinPage = lazy(() => import('./../pages/JoinPage'));
 const TestPage = lazy(() => import('../pages/test/TestPage.jsx'));
+const ManagerPage = lazy(() => import('../pages/manager/ManagerPage.jsx'))
+const ReportList = lazy(() => import('../pages/manager/ReportList.jsx'))
+const HistoryList = lazy(() => import('../pages/manager/HistoryList.jsx'))
 
 const root = createBrowserRouter([
     {
@@ -31,6 +34,21 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading />}><JoinPage/></Suspense>, // 여기엔 그 기능의 인덱스나 메인 페이지 넣는듯
         children:testRouter()
     },
+
+    {
+        path:"manager",
+        element: <Suspense fallback={<Loading />}><ManagerPage/></Suspense>,
+        // children:managerRouter()
+    },
+    {
+        path: "manager/reportList",
+        element: <Suspense fallback={<Loading/>}><ReportList/></Suspense>
+    },
+    {
+        path: "manager/historyList",
+        element: <Suspense fallback={<Loading/>}><HistoryList/></Suspense>
+    },
+
 ]);
 
 export default root;

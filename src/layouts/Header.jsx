@@ -1,15 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 import * as React from 'react';
-import {styled} from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -22,7 +21,7 @@ export default function Header() {
     const navigate = useNavigate
     const Login = () => navigate("login")
 
-    
+
     // 이거 메뉴 닫을 때 쓰는 변수
     const [anchorEl, setAnchorEl] = useState(null);
     // 이건 모바일 열고 닫을 때 쓰는 변수
@@ -92,7 +91,7 @@ export default function Header() {
             <MenuItem>
                 <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                     <Badge badgeContent={4} color="error">
-                        <MailIcon />
+                        <MailIcon/>
                     </Badge>
                 </IconButton>
                 <p>채팅</p>
@@ -104,7 +103,7 @@ export default function Header() {
                     color="inherit"
                 >
                     <Badge badgeContent={17} color="error">
-                        <NotificationsIcon />
+                        <NotificationsIcon/>
                     </Badge>
                 </IconButton>
                 <p>알림</p>
@@ -118,81 +117,100 @@ export default function Header() {
                     color="inherit"
                     onClick={Login}
                 >
-                    <AccountCircle />
+                    <AccountCircle/>
                 </IconButton>
                 <p>프로필</p>
             </MenuItem>
         </Menu>
     );
 
-    return (
+        const [open, setOpen] = useState(false);
 
-        <Box sx={{ flexGrow: 1 }}>
-            <CssBaseline />
-            <AppBar position="fixed">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: 'block' }}
-                        
-                    >
-                        <Link to="/" style={{color: '#fff'}}>냥가왈부</Link>
-                    </Typography>
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={4} color="error">
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
+        function handleButtonClick() {
+            setOpen(!open);
+        }
+
+        return (
+
+            <Box sx={{flexGrow: 1}}>
+                <CssBaseline/>
+                <AppBar position="fixed">
+                    <Toolbar>
+                        <div>
+                            {/*<IconButton*/}
+                            {/*    size="large"*/}
+                            {/*    edge="start"*/}
+                            {/*    color="inherit"*/}
+                            {/*    aria-label="open drawer"*/}
+                            {/*    sx={{mr: 2}}*/}
+                            {/*    onClick={handleButtonClick}*/}
+                            {/*>*/}
+                            {/*    <MenuIcon/>*/}
+                            {/*    <div className={"menuSlide"}*/}
+                            {/*         style={{display: open ? 'block' : 'none'}}>*/}
+                            {/*        <ul className={"show"}>*/}
+                            {/*            <li><Link to="/" style={{color: '#fff'}}>공지사항</Link></li>*/}
+                            {/*            <li><Link to="/" style={{color: '#fff'}}>자유 게시판</Link></li>*/}
+                            {/*            <li><Link to="/" style={{color: '#fff'}}>후기 게시판</Link></li>*/}
+                            {/*            <li><Link to="/manager" style={{color: '#fff'}}>관리자 페이지</Link></li>*/}
+                            {/*        </ul>*/}
+                            {/*    </div>*/}
+                            {/*</IconButton>*/}
+
+                        </div>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{display: 'block'}}
                         >
-                            <Badge badgeContent={17} color="error">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
-                    </Box>
-                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="show more"
-                            aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon />
-                        </IconButton>
-                    </Box>
-                </Toolbar>
-            </AppBar>
-            {renderMobileMenu}
-            {renderMenu}
-        </Box>
-    );
+                            <Link to="/" style={{color: '#fff'}}>냥가왈부</Link>
+                        </Typography>
+                        <Box sx={{flexGrow: 1}}/>
+                        <Box sx={{display: {xs: 'none', md: 'flex'}}}>
+                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                                <Badge badgeContent={4} color="error">
+                                    <MailIcon/>
+                                </Badge>
+                            </IconButton>
+                            <IconButton
+                                size="large"
+                                aria-label="show 17 new notifications"
+                                color="inherit"
+                            >
+                                <Badge badgeContent={17} color="error">
+                                    <NotificationsIcon/>
+                                </Badge>
+                            </IconButton>
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={handleProfileMenuOpen}
+                                color="inherit"
+                            >
+                                <AccountCircle/>
+                            </IconButton>
+                        </Box>
+                        <Box sx={{display: {xs: 'flex', md: 'none'}}}>
+                            <IconButton
+                                size="large"
+                                aria-label="show more"
+                                aria-controls={mobileMenuId}
+                                aria-haspopup="true"
+                                onClick={handleMobileMenuOpen}
+                                color="inherit"
+                            >
+                                <MoreIcon/>
+                            </IconButton>
+                        </Box>
+                    </Toolbar>
+                </AppBar>
+                {renderMobileMenu}
+                {renderMenu}
+            </Box>
+
+        );
 }
