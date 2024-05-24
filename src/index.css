@@ -5,7 +5,9 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #FFF !important;
+  font-size: 1rem;
+  /* background-color: #242424; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,11 +25,17 @@ a:hover {
 }
 
 body {
-  margin: 0;
-  display: flex;
+  padding: 0;
+  margin: auto;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 40rem;
+  background-color: #f3f4f6;
+  height: 100vh;
+  /* display: flex; */
+  /* margin: 0; */
+  /* min-width: 320px; */
 }
 
 h1 {
@@ -57,7 +65,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #000;
   }
   a:hover {
     color: #747bff;

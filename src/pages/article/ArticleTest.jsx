@@ -5,9 +5,9 @@ import Button from '@mui/material/Button';
 const ArticleTest = () => {
     const [userDTO, setUserDTO] = useState({
         id : 1,
-        articleTags:'자유게시판',
-        title : 'test1111',
-        content : 'test22222'
+        articleTags:'류원근',
+        title : '짱짱',
+        content : '리액트고수'
 
     });
 
