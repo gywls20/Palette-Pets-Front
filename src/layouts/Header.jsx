@@ -15,8 +15,13 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {useState} from "react";
 import {CssBaseline} from "@mui/material";
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Header() {
+    const navigate = useNavigate
+    const Login = () => navigate("login")
+
+    
     // 이거 메뉴 닫을 때 쓰는 변수
     const [anchorEl, setAnchorEl] = useState(null);
     // 이건 모바일 열고 닫을 때 쓰는 변수
@@ -60,7 +65,9 @@ export default function Header() {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>프로필</MenuItem>
-            <MenuItem onClick={handleMenuClose}>이거 뭐하지</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                <Link to='login'>로그인</Link>
+            </MenuItem>
         </Menu>
     );
 
@@ -108,6 +115,7 @@ export default function Header() {
                     aria-controls="primary-search-account-menu"
                     aria-haspopup="true"
                     color="inherit"
+                    onClick={Login}
                 >
                     <AccountCircle />
                 </IconButton>
@@ -135,9 +143,10 @@ export default function Header() {
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                        sx={{ display: 'block' }}
+                        
                     >
-                        냥가왈부
+                        <Link to="/" style={{color: '#fff'}}>냥가왈부</Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>

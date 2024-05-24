@@ -8,6 +8,8 @@ html{
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
+  background-color: #FFF !important;
+  font-size: 1rem;
   /* background-color: #242424; */
 
   font-synthesis: none;
@@ -66,7 +68,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #000;
   }
   a:hover {
     color: #747bff;
