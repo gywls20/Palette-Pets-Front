@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import * as React from 'react';
 import {styled} from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -128,7 +129,7 @@ export default function Header() {
 
         <Box sx={{ flexGrow: 1 }}>
             <CssBaseline />
-            <AppBar position="static">
+            <AppBar position="fixed">
                 <Toolbar>
                     <IconButton
                         size="large"

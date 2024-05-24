@@ -1,5 +1,3 @@
-import { Update } from "@mui/icons-material";
-import TestComp from "../components/TestComp.jsx";
 import DefaultLayout from "../layouts/DefaultLayout.jsx";
 import {useNavigate} from 'react-router-dom'
 import {useCallback} from 'react'
@@ -21,11 +19,10 @@ const MainPage = () => {
         <>
             <DefaultLayout>
                 <Video/>
+                <UpdateComp/>
                 <br/>
                 <BoardView/>
                 <ReviewComp/>
-                <br/>
-                <UpdateComp/>
                 <br/>
             </DefaultLayout>
         </>

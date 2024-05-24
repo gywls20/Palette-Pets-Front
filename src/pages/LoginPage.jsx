@@ -6,10 +6,14 @@ const MainPage = () => {
 
     return (
         <>
+            <br/>
+            <br/>
             <HomeDefaultLayout>
                 <LoginImg/>
                 <LoginForm/>
             </HomeDefaultLayout>
+            <br/>
+            <br/>
         </>
     )
 }
