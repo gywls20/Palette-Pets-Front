@@ -1,5 +1,3 @@
-import { Update } from "@mui/icons-material";
-import TestComp from "../components/TestComp.jsx";
 import DefaultLayout from "../layouts/DefaultLayout.jsx";
 
 import Video from "../test/main/Video.jsx";
@@ -13,13 +11,11 @@ const MainPage = () => {
         <>
             <DefaultLayout>
                 <Video/>
+                <UpdateComp/>
                 <br/>
                 <BoardView/>
                 <ReviewComp/>
                 <br/>
-                <UpdateComp/>
-                <br/>
-                <TestComp/>
             </DefaultLayout>
         </>
     )

@@ -6,14 +6,18 @@ import JoinForm from '../test/join/JoinForm.jsx';
 
 const JoinPage = () => {
     return (
-        <div>
             <>
-            <HomeDefaultLayout>
-                <WelcomeImg/>
-                <JoinForm/>
-            </HomeDefaultLayout>
+                <br/>
+                <br/>
+                <br/>
+                <HomeDefaultLayout>
+                    <WelcomeImg/>
+                    <JoinForm/>
+                </HomeDefaultLayout>
+                <br/>
+                <br/>
+                <br/>
         </>
-        </div>
     );
 };
 
