@@ -28,6 +28,8 @@ a:hover {
 }
 
 body {
+
+  padding: 0.5rem 0 0 0;
   margin: auto;
   place-items: center;
   justify-content: space-between;
@@ -112,11 +114,10 @@ button:focus-visible {
 @media only screen and (min-width: 600px) {
   .css-11b3ww9-MuiPaper-root-MuiAppBar-root,
   .css-1yn37ft-MuiPaper-root{
+    text-align: center;
     position: fixed;
     left: 50%;
     transform: translate(-50%, 0%);
     width: 40rem;
   }
-
- 
 }
