@@ -44,30 +44,32 @@ const Footer = () => {
   }, []);
 
   return (
-    <>
-      <CssBaseline />
-      <Paper
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-        elevation={3}>
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={handleNavigationChange}>
-          <BottomNavigationAction label="Recents" icon={<Restore />} />
-          <BottomNavigationAction label="Favorites" icon={<Favorite />} />
-          <BottomNavigationAction label="Archive" icon={<Archive />} />
-          <BottomNavigationAction label="Location On" icon={<LocationOn />} />
-        </BottomNavigation>
-      </Paper>
-      {showButton && (
-        <IconButton
-          className={"topButton"}
-          onClick={moveToTop}
-          aria-label="move to top">
-          <KeyboardArrowUp />
-        </IconButton>
-      )}
-    </>
+      <>
+        <CssBaseline/>
+        <Paper
+            sx={{position: "fixed", bottom: 0, left: 0, right: 0}}
+            elevation={3}>
+          <button className="floating-button"></button>
+          <BottomNavigation
+              showLabels
+              value={value}
+              onChange={handleNavigationChange}>
+            <BottomNavigationAction label="Recents" icon={<Restore/>}/>
+            <BottomNavigationAction label="Favorites" icon={<Favorite/>}/>
+            <BottomNavigationAction label="Archive" icon={<Archive/>}/>
+            <BottomNavigationAction label="Location On" icon={<LocationOn/>}/>
+          </BottomNavigation>
+        </Paper>
+        {showButton && (
+            <IconButton
+                className={"topButton"}
+                onClick={moveToTop}
+                aria-label="move to top">
+              <KeyboardArrowUp/>
+            </IconButton>
+        )}
+
+      </>
   );
 };
 

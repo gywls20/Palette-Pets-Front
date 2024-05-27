@@ -34,21 +34,7 @@
     bottom: 27px;
 }
 
-.floating-button {
-    position: fixed;
-    bottom: 70px;
-    right: 16px;
-    width: 56px;
-    height: 56px;
-    background-color: #6366f1;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+
 
 .header{
     padding: 2rem 0 0 0 ;
