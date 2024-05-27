@@ -27,11 +27,13 @@
     justify-content: center;
     width: 32px;
     height: 32px;
-    background-color: #f3f4f6;
     border-radius: 50%;
     font-weight: 500;
     color: #1f2937;
+    position: relative;
+    bottom: 27px;
 }
+
 .floating-button {
     position: fixed;
     bottom: 70px;
@@ -50,4 +52,8 @@
 
 .header{
     padding: 2rem 0 0 0 ;
+}
+
+.container {
+    background-color: #f9fafb;
 }
