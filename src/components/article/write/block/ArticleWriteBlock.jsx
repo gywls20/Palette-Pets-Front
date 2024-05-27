@@ -4,10 +4,12 @@ import SelectBoard from '../atoms/SelectBoard';
 import SelectTags from '../atoms/SelectTags';
 import ArticleImageUploadComp from '../atoms/ArticleImageUploadComp';
 import ArticleImagePreviewComp from '../atoms/ArticleImagePreviewComp';
+import ArticleWriteFooter from '../atoms/ArticleWriteFooter';
 
 
 const ArticleWriteBlock = () => {
-
+    
+    
     return (
 
 
@@ -18,7 +20,8 @@ const ArticleWriteBlock = () => {
             <InputTitleContent/>
             <ArticleImageUploadComp/>
             <ArticleImagePreviewComp/>
-           
+            <ArticleWriteFooter/>
+
         </div>
 
     );
