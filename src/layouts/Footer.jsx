@@ -11,7 +11,7 @@ import {
   Archive,
   Favorite,
   LocationOn,
-  Restore,
+  Home,
   KeyboardArrowUp,
 } from "@mui/icons-material";
 
@@ -54,7 +54,7 @@ const Footer = () => {
               showLabels
               value={value}
               onChange={handleNavigationChange}>
-            <BottomNavigationAction label="Recents" icon={<Restore/>}/>
+            <BottomNavigationAction label="Recents" icon={<Home/>}/>
             <BottomNavigationAction label="Favorites" icon={<Favorite/>}/>
             <BottomNavigationAction label="Archive" icon={<Archive/>}/>
             <BottomNavigationAction label="Location On" icon={<LocationOn/>}/>
