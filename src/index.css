@@ -128,7 +128,9 @@ button:focus-visible {
   height: 30px;
   width: 50px;
   background-color: lightskyblue;
-  position: fixed ;
-  bottom: 60px ;
-  align-content: center;
+  bottom: 70px;
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
 }

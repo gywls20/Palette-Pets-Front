@@ -21,10 +21,8 @@ const MainPage = () => {
                 <Video/>
                 <UpdateComp/>
                 <br/>
-                <UpdateComp/>
                 <BoardView/>
                 <ReviewComp/>
-                <br/>
                 <br/>
             </DefaultLayout>
         </>
