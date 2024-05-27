@@ -19,8 +19,8 @@ const jsonHeaders = {
 }
 
 // test 조회 api -> 예시용 (쓰지마세요)
-export const getBoardOne = (id) => {
-    return axios.get(`/boards/${id}`, {
+export const memberTest = () => {
+    return axios.get(`${API_SERVER_HOST}/member/test`, {
         headers : {
             jsonHeaders
         }

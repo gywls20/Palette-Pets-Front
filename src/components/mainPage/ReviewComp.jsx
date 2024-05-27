@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import Slider from "react-slick";
 import { Container, Box, Typography, Avatar, Link, Badge } from '@mui/material';
@@ -5,7 +6,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 
 export default function ReviewComp() {
     let settings = {
@@ -121,8 +122,6 @@ export default function ReviewComp() {
                     </Link>
                 </Container>
             </div>
-
-
         </Slider>
     );
 }
