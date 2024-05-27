@@ -8,7 +8,7 @@ import BoardViewStyle from '../css/boardView.module.css'
 import ImgStyle from '../css/img.module.css';
 
 import Cat from '../image/cat.jpg'
-import Pat from '../image/pat.jpg'
+import Pet from '../image/pet.jpg'
 import Category from './Category';
 
 
@@ -33,7 +33,7 @@ const BoardView = () => {
     return (
         <div>
             <div className={ImgStyle.imageTool}>
-                <img className={ImgStyle.image} src={Pat} alt="Pat" />
+                <img className={ImgStyle.image} src={Pet} alt="Pet" />
             </div>
 
             <Category/>            

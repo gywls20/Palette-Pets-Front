@@ -1,12 +1,12 @@
 import React from 'react';
 import DefaultLayout from '../layouts/DefaultLayout';
-import PatAge from '../test/main/PatAge';
+import PetAge from '../test/main/PetAge';
 
 const HealthCalculatorPage = () => {
     return (
         <>
         <DefaultLayout>
-           <PatAge />
+           <PetAge />
         </DefaultLayout>
     </>
     );
