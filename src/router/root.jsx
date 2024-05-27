@@ -36,6 +36,7 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading />}><JoinPage/></Suspense>, // 여기엔 그 기능의 인덱스나 메인 페이지 넣는듯
         children:testRouter()
     },
+
     {
         path:"/article",
         element: <Suspense fallback={<Loading />}><AriticlePage/></Suspense>, 
@@ -47,10 +48,12 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading />}><BoardPage/></Suspense>,
         // children:boardRouter()
     },
+
     {
         path: "/board/reportList",
         element: <Suspense fallback={<Loading/>}><ReportList/></Suspense>
     },
+    
     {
         path: "/board/historyList",
         element: <Suspense fallback={<Loading/>}><HistoryList/></Suspense>
