@@ -1,0 +1,71 @@
+
+.body {
+    font-family: 'Roboto', sans-serif;
+}
+.icon {
+    width: 24px;
+    height: 24px;
+}
+.post {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 16px 0;
+}
+.post:last-child {
+    border-bottom: none;
+}
+.post-title {
+    font-weight: 500;
+}
+.post-meta {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+.post-comments {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: #f3f4f6;
+    border-radius: 50%;
+    font-weight: 500;
+    color: #1f2937;
+}
+.floating-button {
+    position: fixed;
+    bottom: 70px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+    background-color: #6366f1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.all {
+}
+
+.comment{
+
+}
+
+.dailyLife{
+
+}
+
+.informationSharing{
+
+}
+
+.animalHospital{
+
+}
+
+.feed{
+
+}

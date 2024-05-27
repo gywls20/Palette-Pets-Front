@@ -28,7 +28,7 @@ a:hover {
 }
 
 body {
-  padding: 4rem 0 0 0;
+  padding: 0 0 0 0;
   margin: auto;
   place-items: center;
   justify-content: space-between;
@@ -83,11 +83,11 @@ button:focus-visible {
 
 .slick-track {
   display: block !important;
-  /* width: 200%  !important; */
 }
 
 .reviewSlider {
   display: flex !important;
+  margin-bottom: 1rem;
 }
 
 .MuiContainer-root,
@@ -100,69 +100,35 @@ button:focus-visible {
 
 @media only screen and (max-width: 600px) {
   .css-11b3ww9-MuiPaper-root-MuiAppBar-root,
-  .css-1yn37ft-MuiPaper-root{
+  .css-gy4i07-MuiPaper-root{
     position: fixed;
     left: 50%;
     transform: translate(-50%, 0%);
     width: 22rem;
   }
 
-  /*.show {*/
-  /*  border-radius: 0 0 5px 5px ;*/
-  /*  text-align: left;*/
-  /*  list-style:none;*/
-  /*  z-index: 9999;*/
-  /*  margin-left: -2.6rem;*/
-  /*  background-color: #1976d2;*/
-  /*  display: block;*/
-  /*  position: absolute;*/
-  /*  width: 24rem;*/
-  /*  height: auto;*/
-  /*  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2),*/
-  /*  0 4px 5px 0 rgba(0,0,0,0.14),*/
-  /*  0 1px 10px 0 rgba(0,0,0,0.12);*/
-  /*  transition: width 1s;*/
-  /*}*/
 }
 
 
 @media only screen and (min-width: 600px) {
   .css-11b3ww9-MuiPaper-root-MuiAppBar-root,
-  .css-1yn37ft-MuiPaper-root{
+  .css-gy4i07-MuiPaper-root{
     text-align: center;
     position: fixed;
     left: 50%;
     transform: translate(-50%, 0%);
     width: 40rem;
   }
-  /*.show {*/
-  /*  border-radius: 0 0 5px 5px ;*/
-  /*  text-align: left;*/
-  /*  list-style:none;*/
-  /*  z-index: 9999;*/
-  /*  margin-left: -3rem;*/
-  /*  background-color: #1976d2;*/
-  /*  display: block;*/
-  /*  position: absolute;*/
-  /*  width: 40rem;*/
-  /*  height: auto;*/
-  /*  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2),*/
-  /*  0 4px 5px 0 rgba(0,0,0,0.14),*/
-  /*  0 1px 10px 0 rgba(0,0,0,0.12);*/
-  /*  transition: 10s;*/
-  /*}*/
+
 }
 
-.reviewSlider{
-  margin-bottom: 1rem;
-}
-cd
-/*.show > li {*/
-/*  font-size: 15px;*/
-/*  margin-top: 1rem;*/
-/*  margin-bottom: 1rem;*/
-/*}*/
 
-/*.menuSlide{*/
-/*  transform: translateY(-100%);*/
-/*}*/
+.topButton {
+  border-radius: 10px;
+  height: 30px;
+  width: 50px;
+  background-color: lightskyblue;
+  position: fixed ;
+  bottom: 60px ;
+  align-content: center;
+}

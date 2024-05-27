@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,6 +15,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import {useState} from "react";
 import {CssBaseline} from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
+
 
 export default function Header() {
     const navigate = useNavigate
@@ -124,40 +124,12 @@ export default function Header() {
         </Menu>
     );
 
-        const [open, setOpen] = useState(false);
-
-        function handleButtonClick() {
-            setOpen(!open);
-        }
-
         return (
 
             <Box sx={{flexGrow: 1}}>
                 <CssBaseline/>
                 <AppBar position="fixed">
                     <Toolbar>
-                        <div>
-                            {/*<IconButton*/}
-                            {/*    size="large"*/}
-                            {/*    edge="start"*/}
-                            {/*    color="inherit"*/}
-                            {/*    aria-label="open drawer"*/}
-                            {/*    sx={{mr: 2}}*/}
-                            {/*    onClick={handleButtonClick}*/}
-                            {/*>*/}
-                            {/*    <MenuIcon/>*/}
-                            {/*    <div className={"menuSlide"}*/}
-                            {/*         style={{display: open ? 'block' : 'none'}}>*/}
-                            {/*        <ul className={"show"}>*/}
-                            {/*            <li><Link to="/" style={{color: '#fff'}}>공지사항</Link></li>*/}
-                            {/*            <li><Link to="/" style={{color: '#fff'}}>자유 게시판</Link></li>*/}
-                            {/*            <li><Link to="/" style={{color: '#fff'}}>후기 게시판</Link></li>*/}
-                            {/*            <li><Link to="/manager" style={{color: '#fff'}}>관리자 페이지</Link></li>*/}
-                            {/*        </ul>*/}
-                            {/*    </div>*/}
-                            {/*</IconButton>*/}
-
-                        </div>
                         <Typography
                             variant="h6"
                             noWrap
@@ -213,4 +185,7 @@ export default function Header() {
             </Box>
 
         );
+
+
+
 }

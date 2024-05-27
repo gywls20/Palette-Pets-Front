@@ -11,12 +11,12 @@ const MainPage = () => {
         <>
             <DefaultLayout>
                 <Video/>
+                <UpdateComp/>
                 <br/>
                 <UpdateComp/>
                 <BoardView/>
                 <ReviewComp/>
                 <br/>
-
                 <br/>
             </DefaultLayout>
         </>
