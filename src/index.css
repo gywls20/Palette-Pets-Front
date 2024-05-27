@@ -28,7 +28,7 @@ a:hover {
 }
 
 body {
-  padding: 0 0 0 0;
+  padding: 0.5rem 0 0 0;
   margin: auto;
   place-items: center;
   justify-content: space-between;
@@ -98,18 +98,18 @@ button:focus-visible {
 
 }
 
+/* heater, footer app width */
 @media only screen and (max-width: 600px) {
   .css-11b3ww9-MuiPaper-root-MuiAppBar-root,
   .css-gy4i07-MuiPaper-root{
     position: fixed;
     left: 50%;
     transform: translate(-50%, 0%);
-    width: 22rem;
+    width: 100%;
   }
-
 }
 
-
+/* heater, footer wed width */
 @media only screen and (min-width: 600px) {
   .css-11b3ww9-MuiPaper-root-MuiAppBar-root,
   .css-gy4i07-MuiPaper-root{

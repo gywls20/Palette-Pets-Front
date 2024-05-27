@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
+import {styled} from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -21,7 +22,7 @@ export default function Header() {
     const navigate = useNavigate
     const Login = () => navigate("login")
 
-
+    
     // 이거 메뉴 닫을 때 쓰는 변수
     const [anchorEl, setAnchorEl] = useState(null);
     // 이건 모바일 열고 닫을 때 쓰는 변수
@@ -91,7 +92,7 @@ export default function Header() {
             <MenuItem>
                 <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                     <Badge badgeContent={4} color="error">
-                        <MailIcon/>
+                        <MailIcon />
                     </Badge>
                 </IconButton>
                 <p>채팅</p>
@@ -103,7 +104,7 @@ export default function Header() {
                     color="inherit"
                 >
                     <Badge badgeContent={17} color="error">
-                        <NotificationsIcon/>
+                        <NotificationsIcon />
                     </Badge>
                 </IconButton>
                 <p>알림</p>
@@ -117,7 +118,7 @@ export default function Header() {
                     color="inherit"
                     onClick={Login}
                 >
-                    <AccountCircle/>
+                    <AccountCircle />
                 </IconButton>
                 <p>프로필</p>
             </MenuItem>
@@ -185,7 +186,4 @@ export default function Header() {
             </Box>
 
         );
-
-
-
 }

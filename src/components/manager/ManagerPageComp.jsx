@@ -6,27 +6,15 @@ import bombIcon from "../../test/image/BoardList/bomb.png"
 import dogIcon from "../../test/image/BoardList/dog.png"
 import jellyIcon from "../../test/image/BoardList/jelly.png"
 import heartIcon from "../../test/image/BoardList/heart.png"
+import Category from "../../test/main/Category.jsx";
 
 const ManagerPageComp = () => {
 
     return (
         <>
-            <header className="bg-white shadow">
-                <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-                    <div className="">
-                        <img src={homeIcon} alt="전체" className="icon"/>
-                        <img src={bombIcon} alt="이벤트" className="icon"/>
-                        <img src={dogIcon} alt="icon" className="icon"/>
-                        <img src={jellyIcon} alt="icon" className="icon"/>
-                        <img src={heartIcon} alt="icon" className="icon"/>
-                        <img src={dogIcon} alt="icon" className="icon"/>
-                        <img src={dogIcon} alt="icon" className="icon"/>
-                        <img src={dogIcon} alt="icon" className="icon"/>
-                        <img src={dogIcon} alt="icon" className="icon"/>
-                        <img src={dogIcon} alt="icon" className="icon"/>
-                    </div>
-                </div>
-            </header>
+            <div className='header'>
+                <Category/>
+            </div>
             <hr/>
             <main className="container mx-auto px-4 py-4">
                 <div className="post">

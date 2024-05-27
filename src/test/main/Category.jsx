@@ -3,12 +3,13 @@ import React from 'react';
 import CategoryStyle from '../css/category.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightDots, faDog, faHouseMedical, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import SelectTags from '../../components/article/write/atoms/SelectTags';
 
 const Category = () => {
     return (
         <>
             <div>
-                <br/>
+                <SelectTags/>
             </div>
 
             <div className={CategoryStyle.iconsBar}>    
