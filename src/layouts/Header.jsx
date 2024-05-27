@@ -20,8 +20,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function Header() {
     const navigate = useNavigate
-    const Login = () => navigate("login")
-
+    const Login = () => navigate("/login")
+    const Home = () => navigate("/")
     
     // 이거 메뉴 닫을 때 쓰는 변수
     const [anchorEl, setAnchorEl] = useState(null);

@@ -3,7 +3,7 @@ import React from "react";
 import "../../styles/manager/BoardList.css";
 import Category from "../../test/main/Category.jsx";
 
-const ManagerPageComp = () => {
+const BoardPageComp = () => {
   return (
     <>
       <div className="header">
@@ -90,4 +90,4 @@ const ManagerPageComp = () => {
   );
 };
 
-export default ManagerPageComp;
+export default BoardPageComp;

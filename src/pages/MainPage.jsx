@@ -24,7 +24,6 @@ const MainPage = () => {
                 <BoardView/>
                 <ReviewComp/>
                 <br/>
-                <br/>
             </DefaultLayout>
         </>
     )

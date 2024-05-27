@@ -122,7 +122,6 @@ button:focus-visible {
 
 }
 
-
 .topButton {
   border-radius: 10px;
   height: 30px;
@@ -133,20 +132,24 @@ button:focus-visible {
   margin: 0 auto;
   left: 0;
   right: 0;
+
 }
 
 .floating-button {
   position: fixed;
   bottom: 70px;
   right: 16px;
-  width: 56px;
-  height: 56px;
+  width: 40px;
+  height: 40px;
   background-color: #6366f1;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 24px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.css-0{
+  background-color: #f3f4f6;
 }
