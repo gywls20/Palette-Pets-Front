@@ -50,17 +50,10 @@ const Category = () => {
                     </button>
                 </Link>
 
-                <Link to='#'>
+                <Link to='/healthCalculatorPage'>
                     <button className={CategoryStyle.iconButtonColumn}>
                     <FontAwesomeIcon icon={faBone} className={CategoryStyle.iconColumn} />
-                        <span> 사료 주기</span>
-                    </button>
-                </Link>
-
-                <Link to='https://tools.mypetlife.co.kr/calculator/age'>
-                    <button className={CategoryStyle.iconButtonColumn}>
-                        <PetsIcon className={CategoryStyle.iconColumn} style={{color: "#9a4a09",}}/>
-                        <span> 우리아이의 나이는</span>
+                        <span> 건강 계산기</span>
                     </button>
                 </Link>
             </div>

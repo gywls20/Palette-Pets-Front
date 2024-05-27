@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import testRouter from "./testRouter.jsx";
 import articleRouter from "./articleRouter.jsx";
 import BoardPage from "../pages/manager/BoardPage.jsx";
+import HealthCalculatorPage from "../pages/HealthCalculatorPage.jsx";
 
 const Loading = () => <>Loading...</>;
 const MainPage = lazy(() => import('./../pages/MainPage'));
@@ -41,6 +42,11 @@ const root = createBrowserRouter([
         path:"/article",
         element: <Suspense fallback={<Loading />}><AriticlePage/></Suspense>, 
         children: articleRouter({Loading : Loading() })
+    },
+
+    {
+        path:"/healthCalculatorPage",
+        element: <Suspense fallback={<Loading />}><HealthCalculatorPage/></Suspense>,
     },
 
     {
