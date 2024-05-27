@@ -1,11 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import "../../styles/manager/BoardList.css"
-import homeIcon from "../../test/image/BoardList/home.png"
-import bombIcon from "../../test/image/BoardList/bomb.png"
-import dogIcon from "../../test/image/BoardList/dog.png"
-import jellyIcon from "../../test/image/BoardList/jelly.png"
-import heartIcon from "../../test/image/BoardList/heart.png"
 import Category from "../../test/main/Category.jsx";
 
 const ManagerPageComp = () => {
@@ -90,7 +85,6 @@ const ManagerPageComp = () => {
                     </div>
                 </div>
             </main>
-            <button className="floating-button">+</button>
         </>
     );
 }
