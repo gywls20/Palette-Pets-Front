@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
-import MenuIcon from '@mui/icons-material/Menu';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {useState} from "react";
 import {CssBaseline} from "@mui/material";
@@ -80,8 +79,9 @@ export default function Header() {
             onClose={handleMobileMenuClose}
         >
 
+            
             <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
+                <HomeIcon
                     size="large"
                     aria-label="account of current user"
                     aria-controls="primary-search-account-menu"
@@ -89,10 +89,9 @@ export default function Header() {
                     color="inherit"
                     onClick={Home}
                 >
-                    <HomeIcon />
-                </IconButton>
-                <p>홈</p>
+                </HomeIcon>
             </MenuItem>
+            
         </Menu>
     );
 
@@ -102,15 +101,6 @@ export default function Header() {
             <CssBaseline />
             <AppBar position="fixed">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
                     <Typography
                         variant="h6"
                         noWrap
@@ -127,10 +117,9 @@ export default function Header() {
                             aria-label="account of current user"
                             aria-controls={menuId}
                             aria-haspopup="true"
-                            onClick={Home}
                             color="inherit"
                         >
-                            <HomeIcon />
+                            <HomeIcon  onClick={Home}/>
                         </IconButton>
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

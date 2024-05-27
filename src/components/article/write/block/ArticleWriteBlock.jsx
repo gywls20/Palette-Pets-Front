@@ -14,9 +14,7 @@ const ArticleWriteBlock = () => {
 
 
         <div>
-
             <SelectBoard/>
-            <SelectTags/>
             <InputTitleContent/>
             <ArticleImageUploadComp/>
             <ArticleImagePreviewComp/>
