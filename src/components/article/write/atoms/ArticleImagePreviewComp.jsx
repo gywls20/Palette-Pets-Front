@@ -1,13 +1,13 @@
-import {useState} from 'react';
+import { Box, Container, CssBaseline } from '@mui/material';
+import React from 'react';
 
-
-export default function ArticleImagePreviewComp() {
-
-
+const ArticleImagePreviewComp = () => {
+  
   return (
-    <div>
-
-      <p>이미지 프리뷰 영역</p>
-    </div>
+    <>
+    
+    </>
   );
-}
+};
+
+export default ArticleImagePreviewComp;
