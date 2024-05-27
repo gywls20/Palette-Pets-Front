@@ -26,8 +26,8 @@ const SelectBoard = () => {
     return (
         <>
 
-            <Box sx={{ minWidth: 120 }}>
-                <FormControl sx={{m:3, width:"80%"}}>
+            <Box sx={{ minWidth: 120}}>
+                <FormControl sx={{m:2, width:"80%"}}>
                 <InputLabel id="demo-simple-select-label">게시판 선택</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
@@ -36,10 +36,11 @@ const SelectBoard = () => {
                     
                     label="게시판 선택"
                     onChange={handleChange}
+                    
                 >
                     {
                         boardList.map(item => 
-                            <MenuItem Key={item.idx} value={item.boardValue}>{item.boardName}</MenuItem>
+                            <MenuItem key={item.idx} value={item.boardValue}>{item.boardName}</MenuItem>
                         )
                     }
                   
