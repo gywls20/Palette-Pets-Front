@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import "../../styles/manager/BoardList.css";
+import "../../styles/board/BoardList.css";
 import Category from "../../test/main/Category.jsx";
 
 const BoardPageComp = () => {

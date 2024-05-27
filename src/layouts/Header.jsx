@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
-import {styled} from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,6 +15,9 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import {useState} from "react";
 import {CssBaseline} from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
+import {faDog} from "@fortawesome/free-solid-svg-icons";
+import {faCat} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export default function Header() {
