@@ -1,7 +1,7 @@
 import ManagerPageComp from "../../components/manager/ManagerPageComp.jsx";
 import DefaultLayout from "../../layouts/DefaultLayout.jsx";
 
-const ManagerPage = () => {
+const BoardPage = () => {
     return (
         <DefaultLayout>
             <ManagerPageComp/>
@@ -9,4 +9,4 @@ const ManagerPage = () => {
     );
 };
 
-export default ManagerPage;
+export default BoardPage;
