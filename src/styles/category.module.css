@@ -1,5 +1,5 @@
 .iconsBar {
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
     justify-content: space-around;
     background-color: #f9fafb;
@@ -9,13 +9,13 @@
     flex-direction: column;
 
     /* 버튼 내부 텍스트 크기 줄이기 */
-    font-size: 0.7rem;
+    font-size: 0.9rem;
 
     /* 버튼 크기 줄이기 */
-    padding: 0.3rem 0.5rem;
+    padding: 0.4rem 0.6rem;
 }
 
 .iconColumn {
     /* 아이콘 크기 줄이기 */
-    font-size: 0.7rem;
+    font-size: 0.9rem;
 }
