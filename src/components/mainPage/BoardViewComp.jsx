@@ -1,19 +1,36 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Box, Modal } from '@mui/material';
 
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
 import ImgStyle from '../../styles/img.module.css';
-
-import Cat from '../../image/cat.jpg'
-import Pet from '../../image/pet.jpg'
+import Anhae from '../../image/anhae.jpg'
 import CategoryComp from '../CategoryComp';
 
+import pet from '../../image/pet.jpg';
+import donggeul from '../../image/donggeul.jpg';
+import ppaekkom from '../../image/ppaekkom.jpg';
+import snowdog from '../../image/snowdog.jpg';
+import sleepingdog2 from '../../image/sleepingdog2.jpg';
+import sleepingdog from '../../image/sleepingdog.jpg';
+import sleepingcat from '../../image/sleepingcat.jpg';
 
+//필요한 이미지
+const images = [
+    pet,
+    donggeul,
+    ppaekkom,
+    snowdog,
+    sleepingdog2,
+    sleepingdog,
+    sleepingcat
+];
 
 const BoardView = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
     const [modal, setModal] = useState(false)
 
     const openModal = () => setModal(true)
@@ -29,12 +46,20 @@ const BoardView = () => {
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
-      };
+    };
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+        }, 3000); //3초마다 슬라이드 전환
+
+        return () => clearInterval(interval);
+    }, []);
+    
     return (
         <div>
             <div className={ImgStyle.imageTool}>
-                <img className={ImgStyle.image} src={Pet} alt="Pet" />
+                <img className={ImgStyle.image} src={images[currentIndex]} alt={`slide ${currentIndex}`} />
             </div>
 
             <CategoryComp/>            
@@ -48,7 +73,7 @@ const BoardView = () => {
                 <div className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
                         <div className={BoardViewStyle.postHeader}>
-                            <img src={Cat} alt="User" className={BoardViewStyle.postUserImage} onClick={openModal} />
+                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={openModal} />
                             <div>
                                 <p className={BoardViewStyle.postUserName}>사용자 이름</p>
                                 <p className={BoardViewStyle.postTime}>2시간 전</p>
@@ -62,7 +87,7 @@ const BoardView = () => {
                             aria-describedby="modal-modal-description"
                         >
                             <Box sx={style}>
-                                <img src={Cat} alt="User"/>
+                                <img src={Anhae} alt="User"/>
                             </Box>
                         </Modal>
 
