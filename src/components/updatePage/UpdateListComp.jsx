@@ -5,8 +5,6 @@ import "../../styles/update/UpdateList.css";
 const UpdateListComp = () => {
   return (
     <>
-      <div className="header">
-      </div>
       <main className="container mx-auto px-4 py-4">
         <div className="post">
           <div className="flex justify-between items-center">

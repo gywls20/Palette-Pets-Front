@@ -1,7 +1,7 @@
 import DefaultLayout from "../layouts/DefaultLayout.jsx";
-import Video from "../test/main/Video.jsx";
+import VideoComp from "../components/mainPage/VideoComp.jsx";
 import UpdateComp from "../components/mainPage/UpdateComp.jsx";
-import BoardView from "../test/main/BoardView.jsx";
+import BoardViewComp from "../components/mainPage/BoardViewComp.jsx";
 import ReviewComp from "../components/mainPage/ReviewComp.jsx";
 
 
@@ -9,10 +9,10 @@ const MainPage = () => {
     return (
         <>
             <DefaultLayout>
-                <Video/>
+                <VideoComp/>
                 <UpdateComp/>
                 <br/>
-                <BoardView/>
+                <BoardViewComp/>
                 <ReviewComp/>
                 <br/>
             </DefaultLayout>

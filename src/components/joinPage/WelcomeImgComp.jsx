@@ -1,9 +1,9 @@
 import React from 'react';
 
-import ImgStyle from '../css/img.module.css'
-import WelcomeImage from '../image/welcome.jpg'
+import ImgStyle from '../../styles/img.module.css'
+import WelcomeImage from '../../image/join/welcome.jpg'
 
-const WelcomeImg = () => {
+const WelcomeImgComp = () => {
     return (
         <div className={ImgStyle.imageTool}>
             <img src={WelcomeImage} alt="Welcome" className={ImgStyle.image} />
@@ -11,4 +11,4 @@ const WelcomeImg = () => {
     );
 };
 
-export default WelcomeImg;
+export default WelcomeImgComp;

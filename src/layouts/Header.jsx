@@ -12,10 +12,10 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import SearchIcon from '@mui/icons-material/Search';
 import {useState} from "react";
 import {CssBaseline} from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export default function Header() {
@@ -90,7 +90,15 @@ export default function Header() {
             onClose={handleMobileMenuClose}
         >
             <MenuItem>
-                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                <IconButton size="large" color="inherit">
+                    <Badge>
+                        <SearchIcon/>
+                    </Badge>
+                </IconButton>
+                <p>검색</p>
+            </MenuItem>
+            <MenuItem>
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                     <Badge badgeContent={4} color="error">
                         <MailIcon />
                     </Badge>
@@ -141,6 +149,11 @@ export default function Header() {
                         </Typography>
                         <Box sx={{flexGrow: 1}}/>
                         <Box sx={{display: {xs: 'none', md: 'flex'}}}>
+                            <IconButton size="large" color="inherit">
+                                <Badge>
+                                    <SearchIcon/>
+                                </Badge>
+                            </IconButton>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                                 <Badge badgeContent={4} color="error">
                                     <MailIcon/>
