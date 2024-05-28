@@ -38,13 +38,18 @@ const CategoryComp = () => {
 
                 <Link to='#'>
                     <button className={CategoryStyle.iconButtonColumn}>
+                        <FontAwesomeIcon icon={faDog} className={CategoryStyle.iconColumn} style={{color: "#9a4a09",}} />
+                        <span> 미용</span>
+                    </button>
+                </Link>
+
+                <Link to='#'>
+                    <button className={CategoryStyle.iconButtonColumn}>
                         <FontAwesomeIcon icon={faLocationDot} className={CategoryStyle.iconColumn} style={{color: "#002ee6",}} />
                         <span> 산책</span>
                     </button>
-                </Link>               
-            </div>
-                
-            <div className={CategoryStyle.iconsBar}>
+                </Link>   
+
                 <Link to='#'>
                     <button className={CategoryStyle.iconButtonColumn}>
                         <FontAwesomeIcon icon={faHouseMedical} className={CategoryStyle.iconColumn} style={{color: "#ff0000",}} />
@@ -52,13 +57,6 @@ const CategoryComp = () => {
                     </button>
                 </Link>
 
-                <Link to='#'>
-                    <button className={CategoryStyle.iconButtonColumn}>
-                        <FontAwesomeIcon icon={faDog} className={CategoryStyle.iconColumn} style={{color: "#9a4a09",}} />
-                        <span> 미용</span>
-                    </button>
-                </Link>
-               
                 <Link to='/healthCalculatorPage'>
                     <button className={CategoryStyle.iconButtonColumn}>
                     <FontAwesomeIcon icon={faBone} className={CategoryStyle.iconColumn} />
