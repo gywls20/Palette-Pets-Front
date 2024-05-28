@@ -1,13 +1,12 @@
 import React from 'react';
 
-import CategoryStyle from '../css/category.module.css'
-import PetsIcon from '@mui/icons-material/Pets';
+import CategoryStyle from '../styles/category.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightDots, faBone, faDog, faHouseMedical, faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import SelectTags from '../../components/article/write/atoms/SelectTags';
+import SelectTags from './article/write/atoms/SelectTags';
 import { Link } from 'react-router-dom';
 
-const Category = () => {
+const CategoryComp = () => {
     return (
         <>
             <div>
@@ -61,4 +60,4 @@ const Category = () => {
     );
 };
 
-export default Category;
+export default CategoryComp;

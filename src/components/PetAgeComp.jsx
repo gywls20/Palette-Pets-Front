@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { differenceInDays, differenceInMonths, differenceInYears, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCat, faDog } from '@fortawesome/free-solid-svg-icons';
-import PetStyle from '../css/petAge.module.css'
-import ImgStyle from '../css/img.module.css'
+import PetStyle from '../styles/petAge.module.css'
+import ImgStyle from '../styles/img.module.css'
 
 import Age from '../image/age.jpg'
 
-const PetAge = () => {
+const PetAgeComp = () => {
     function calculatePetAge(petType, actualAge) {
         let humanAge = 0;
 
@@ -104,4 +104,4 @@ const PetAge = () => {
     return <PetAgeForm />;
 };
 
-export default PetAge;
+export default PetAgeComp;

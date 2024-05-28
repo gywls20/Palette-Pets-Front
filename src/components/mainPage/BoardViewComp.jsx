@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Box, Modal } from '@mui/material';
 
-import BoardViewStyle from '../css/boardView.module.css'
-import ImgStyle from '../css/img.module.css';
+import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
+import ImgStyle from '../../styles/img.module.css';
 
-import Cat from '../image/cat.jpg'
-import Pet from '../image/pet.jpg'
-import Category from './Category';
+import Cat from '../../image/cat.jpg'
+import Pet from '../../image/pet.jpg'
+import CategoryComp from '../CategoryComp';
+
 
 
 const BoardView = () => {
@@ -36,7 +37,7 @@ const BoardView = () => {
                 <img className={ImgStyle.image} src={Pet} alt="Pet" />
             </div>
 
-            <Category/>            
+            <CategoryComp/>            
             
             <div className={BoardViewStyle.postsSection}>
                 <div className={BoardViewStyle.postsHeader}>

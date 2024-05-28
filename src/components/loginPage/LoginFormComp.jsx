@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import LoginStyle from '../css/login.module.css'
+import LoginStyle from '../../styles/loginPage/login.module.css'
 
-const LoginForm = () => {
+const LoginFormComp = () => {
     return (
         <div>
             <div className={LoginStyle.body}>
@@ -38,4 +38,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default LoginFormComp;

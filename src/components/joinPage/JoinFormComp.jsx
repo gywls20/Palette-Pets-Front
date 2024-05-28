@@ -2,9 +2,9 @@ import React from 'react';
 import { faEnvelope, faIdBadge, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import JoinStyle from '../css/join.module.css'
+import JoinStyle from '../../styles/joinPage/join.module.css'
 
-const JoinForm = () => {
+const JoinFormComp = () => {
     return (
         <div>
             <div className={JoinStyle.header}>
@@ -43,4 +43,4 @@ const JoinForm = () => {
     );
 };
 
-export default JoinForm;
+export default JoinFormComp;

@@ -1,14 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import "../../styles/manager/BoardList.css"
-import Category from "../../test/main/Category.jsx";
+import CategoryComp from '../CategoryComp';
+
 
 const ManagerPageComp = () => {
 
     return (
         <>
             <div className='header'>
-                <Category/>
+                <CategoryComp/>
             </div>
             <hr/>
             <main className="container mx-auto px-4 py-4">
