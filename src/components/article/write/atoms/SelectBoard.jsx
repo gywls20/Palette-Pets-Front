@@ -5,23 +5,24 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { useArticleImageUpload } from "../context/ArticleImageUploadContext";
 
 
 const boardList = [
-    {idx:2,boardName:"자유게시판", boardValue:'FREEBOARD'},
+    {idx:1,boardName:"자유게시판", boardValue:'FREEBOARD'},
     {idx:2,boardName:"공지사항",boardValue:'NOTICE'},
-    {idx:2,boardName:"반려동물 자랑",boardValue:'PETINTORODUCE'},
-    {idx:2,boardName:"반려동물 관련 정보",boardValue:'PETINFO'},
-    {idx:2,boardName:"반려동물 산책 추천",boardValue:'PET'},
+    {idx:3,boardName:"반려동물 자랑",boardValue:'PETINTORODUCE'},
+    {idx:4,boardName:"반려동물 관련 정보",boardValue:'PETINFO'},
+    {idx:5,boardName:"반려동물 산책 추천",boardValue:'PET'},
 
 ]
-const SelectBoard = () => {
-    const [boardName, setBoardName] = useState('');
 
-    const handleChange = (event) => {
-        
-        setBoardName(event.target.value);
-    };
+const SelectBoard = () => {
+    const articleImageUploadContext = useArticleImageUpload();
+    const {boardName,boardNameChange} = articleImageUploadContext;
+
+    
+
   
     return (
         <>
@@ -33,9 +34,9 @@ const SelectBoard = () => {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={boardName}
-                    
+                    inputProps={{MenuProps: {disableScrollLock: true}}}
                     label="게시판 선택"
-                    onChange={handleChange}
+                    onChange={boardNameChange}
                     
                 >
                     {

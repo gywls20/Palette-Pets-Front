@@ -5,6 +5,7 @@ import SelectTags from '../atoms/SelectTags';
 import ArticleImageUploadComp from '../atoms/ArticleImageUploadComp';
 import ArticleImagePreviewComp from '../atoms/ArticleImagePreviewComp';
 import ArticleWriteFooter from '../atoms/ArticleWriteFooter';
+import ArticleImageEdit from '../atoms/ArticleImageEdit';
 
 
 const ArticleWriteBlock = () => {
@@ -14,13 +15,14 @@ const ArticleWriteBlock = () => {
 
 
         <div>
+            
             <SelectBoard/>
             <SelectTags/>
             <InputTitleContent/>
             <ArticleImageUploadComp/>
             <ArticleImagePreviewComp/>
             <ArticleWriteFooter/>
-
+           
         </div>
 
     );

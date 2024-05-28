@@ -5,7 +5,6 @@ const ArticleWriteFooter = () => {
     return (
         <div>
             <Button>Submit</Button>
-            
             <Button>Reset</Button>
         </div>
     );

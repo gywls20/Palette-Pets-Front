@@ -1,11 +1,16 @@
 import React from 'react';
 
-const ArticleDeleteModal = () => {
+const UserMakeTags = () => {
+
+
+    
     return (
+
         <div>
             
+
         </div>
     );
 };
 
-export default ArticleDeleteModal;
+export default UserMakeTags;
