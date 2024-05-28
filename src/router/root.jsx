@@ -12,6 +12,7 @@ const TestPage = lazy(() => import('../pages/test/TestPage.jsx'));
 const AriticlePage = lazy(()=>import('../pages/AriticlePage.jsx'));
 const ReportList = lazy(() => import('../pages/manager/ReportList.jsx'))
 const HistoryList = lazy(() => import('../pages/manager/HistoryList.jsx'))
+const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'))
 
 const root = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const root = createBrowserRouter([
     {
         path: "/board/historyList",
         element: <Suspense fallback={<Loading/>}><HistoryList/></Suspense>
+    },
+    {
+        path: "/pet",
+        element: <Suspense fallback={<Loading/>}><PetPage/></Suspense>
     },
 
 ]);
