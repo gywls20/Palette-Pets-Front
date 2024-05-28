@@ -1,27 +1,18 @@
 import DefaultLayout from "../layouts/DefaultLayout.jsx";
-import {useNavigate} from 'react-router-dom'
-import {useCallback} from 'react'
 
-import Video from "../test/main/Video.jsx";
+import VideoComp from "../components/mainPage/VideoComp.jsx";
 import UpdateComp from "../components/mainPage/UpdateComp.jsx";
-import BoardView from "../test/main/BoardView.jsx";
+import BoardViewComp from "../components/mainPage/BoardViewComp.jsx";
 import ReviewComp from "../components/mainPage/ReviewComp.jsx";
 
 const MainPage = () => {
-
-    let navigate = useNavigate();
-
-    const handleClickList = useCallback(() => {
-        navigate({pathname: 'test'})
-    })
-    
     return (
         <>
             <DefaultLayout>
-                <Video/>
+                <VideoComp/>
                 <UpdateComp/>
                 <br/>
-                <BoardView/>
+                <BoardViewComp/>
                 <ReviewComp/>
                 <br/>
             </DefaultLayout>
