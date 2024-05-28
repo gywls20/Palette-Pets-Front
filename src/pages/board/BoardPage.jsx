@@ -1,10 +1,10 @@
-import ManagerPageComp from "../../components/manager/ManagerPageComp.jsx";
+import BoardPageComp from "../../components/boardPage/BoardPageComp.jsx";
 import DefaultLayout from "../../layouts/DefaultLayout.jsx";
 
 const BoardPage = () => {
     return (
         <DefaultLayout>
-            <ManagerPageComp/>
+            <BoardPageComp/>
         </DefaultLayout>
     );
 };

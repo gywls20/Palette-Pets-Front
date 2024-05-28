@@ -10,7 +10,7 @@ html{
   color: rgba(255, 255, 255, 0.87);
   background-color: #FFF !important;
   font-size: 1rem;
-  background-color: #FFF;
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -148,4 +148,8 @@ button:focus-visible {
   justify-content: center;
   color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.css-0{
+  background-color: #f3f4f6;
 }

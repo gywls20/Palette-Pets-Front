@@ -1,0 +1,10 @@
+body {
+    padding: 1rem 0 0 0;
+    margin: auto;
+    place-items: center;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 40rem;
+    background-color: #f3f4f6;
+    height: 100vh;
+}
