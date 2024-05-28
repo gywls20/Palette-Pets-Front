@@ -15,8 +15,6 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import {useState} from "react";
 import {CssBaseline} from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
-import {faDog} from "@fortawesome/free-solid-svg-icons";
-import {faCat} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 

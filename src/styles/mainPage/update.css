@@ -53,3 +53,18 @@
 @media only screen and (min-width: 1200px) {
 
 }
+
+.updateButton {
+    margin-top: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    height: 25px;
+    width: 70px;
+    color:white;
+    background-color: black;
+}
+
+.updateButton:hover {
+    color: white;
+    background-color: #6b7280;
+}
