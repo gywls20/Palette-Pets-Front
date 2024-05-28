@@ -21,7 +21,7 @@ const LoginForm = () => {
         console.log(token);
 
         if (token === false) {
-            alert(`Login failed.`);
+            alert(`Login failed`);
             window.location.reload();
         } else {
             console.log('로그인 성공');
