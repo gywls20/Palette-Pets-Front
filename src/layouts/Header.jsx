@@ -1,7 +1,5 @@
-// eslint-disable-next-line no-unused-vars
 import * as React from 'react';
-import IconButton from '@mui/material/IconButton';
-import {styled} from '@mui/material/styles';
+import {useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,16 +11,27 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import {useState} from "react";
-import {CssBaseline} from "@mui/material";
-import { Link, useNavigate } from 'react-router-dom';
+import {CssBaseline, IconButton} from "@mui/material";
+import {Link, useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
+import {logout} from "../service/api.jsx";
+import {deleteToken} from "../store/MemberSlice.js";
 
 
 export default function Header() {
     const navigate = useNavigate
     const Login = () => navigate("/login")
     const Home = () => navigate("/")
-    
+    const token = useSelector((state) => state.MemberSlice.token);
+    const dispatch = useDispatch();
+
+    // 로그아웃 요청 api
+    const requestLogout = async () => {
+        const result = await logout();
+        dispatch(deleteToken());
+        console.log(result);
+    }
+
     // 이거 메뉴 닫을 때 쓰는 변수
     const [anchorEl, setAnchorEl] = useState(null);
     // 이건 모바일 열고 닫을 때 쓰는 변수
@@ -66,9 +75,17 @@ export default function Header() {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>프로필</MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-                <Link to='login'>로그인</Link>
-            </MenuItem>
+            {
+                token ? (
+                    <MenuItem onClick={handleMenuClose}>
+                        <Link onClick={requestLogout}>로그아웃</Link>
+                    </MenuItem>
+                ) : (
+                    <MenuItem onClick={handleMenuClose}>
+                        <Link to='login'>로그인</Link>
+                    </MenuItem>
+                )
+            }
         </Menu>
     );
 

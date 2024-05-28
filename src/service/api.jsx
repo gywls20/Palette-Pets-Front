@@ -33,3 +33,37 @@ export const memberTest = () => {
             return error.response.data;
         });
 }
+
+// login 로직
+export const login = (dto) => {
+    return axios.post(`${API_SERVER_HOST}/login`, {
+        username : dto.username,
+        password: dto.password,
+    }, {
+        headers: jsonHeaders
+    })
+        .then((response) => {
+            const token = response.headers.authorization;
+            return token;
+        })
+        .catch((error) => {
+            console.error(error);
+            console.error(error.response.data);
+            return error.response.data;
+        });
+}
+
+// logout post 요청
+export const logout = () => {
+    return axios.post(`${API_SERVER_HOST}/logout`,{},{
+        headers: jsonHeaders
+    })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.error(error);
+            console.error(error.response.data);
+            return error.response.data;
+        });
+}
