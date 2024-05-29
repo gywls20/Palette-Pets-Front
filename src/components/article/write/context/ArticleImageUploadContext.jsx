@@ -1,4 +1,5 @@
 import React,{createContext,useContext,useEffect,useState} from "react";
+import axios from "axios";
 
 
 //Create a Context 
@@ -19,11 +20,42 @@ export default function ArticleImageUploadProvider({children}){
     const [files, setFiles] = useState([]); // 파일 정보 Files -> 유사 객체 배열 -> 배열로 얕게 복사
 
     const [articleBody,setArticleBody] =useState( {
-        boardName:boardName,
-        tags:select,
-        title:title,
-        content:content
+        articleId:0,
+        articleTags:'',
+        title:'',
+        content:''
     })
+
+ 
+    //title,content handler
+    const inputTitle = (e)=>{
+        setTitle(e.target.value);
+       
+    }
+
+    const inputContent = (e)=>{
+        setContent(e.target.value);
+        
+    }
+
+    //boardName handler
+    const boardNameChange = (e) => {
+        
+        setBoardName(e.target.value);
+      
+    };
+
+    const onSubmit=(e)=>{
+
+        setArticleBody({articleId:1,articleTags:boardName + ' ' + select.toString(),title:title,content:content})
+        console.log(articleBody)
+        e.preventDefault();
+        axios.post('http://localhost:8080/Post/articleWrite',articleBody)
+             .then(response=>console.log(response))
+             .catch(error => console.log(error))
+        reset();
+    }
+
     const reset =()=>{
         setBoardName('');
         setTitle('');
@@ -31,36 +63,12 @@ export default function ArticleImageUploadProvider({children}){
         setSelect([]);
         setImgList([]);
         setFiles([]);
-        setArticleBody({boardName:'',tags:[],title:'',content:''})
+        setArticleBody({articleId:'',articleTags:'',title:'',content:''})
     }
-    //title,content handler
-    const inputTitle = (e)=>{
-        setTitle(e.target.value);
-        setArticleBody({...articleBody,title:e.target.value})
-    }
-
-    const inputContent = (e)=>{
-        setContent(e.target.value);
-        setArticleBody({...articleBody,content:e.target.value})
-    }
-
-    //boardName handler
-    const boardNameChange = (e) => {
-        
-        setBoardName(e.target.value);
-        setArticleBody({...articleBody,boardName:e.target.value})
-    };
-
-    //select handler
-    useEffect(()=>{
-        setArticleBody({...articleBody,tags:select})
-    },[select])
-
-   
 
     return (                    
         //value에 추가하는 값은 객체 { { } } 중괄호 속에 중괄호 주어라
-        <ArticleImageUploadContext.Provider value={{boardName,boardNameChange,title,content,inputTitle,inputContent,select,setSelect,imgList, setImgList,files, setFiles,reset}} > 
+        <ArticleImageUploadContext.Provider value={{boardName,boardNameChange,title,content,inputTitle,inputContent,select,setSelect,imgList, setImgList,files, setFiles,reset,onSubmit}} > 
             {children}
 
         </ArticleImageUploadContext.Provider>
