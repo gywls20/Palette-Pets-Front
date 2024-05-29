@@ -83,7 +83,7 @@ export default function Header() {
                     </MenuItem>
                 ) : (
                     <MenuItem onClick={handleMenuClose}>
-                        <Link to='login'>로그인</Link>
+                        <Link to='/login'>로그인</Link>
                     </MenuItem>
                 )
             }

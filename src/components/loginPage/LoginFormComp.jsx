@@ -1,17 +1,11 @@
 import {Link, useNavigate} from 'react-router-dom';
-
-<<<<<<< HEAD:src/components/loginPage/LoginFormComp.jsx
 import LoginStyle from '../../styles/loginPage/login.module.css'
-
-const LoginFormComp = () => {
-=======
-import LoginStyle from '../css/login.module.css'
 import {login} from "../../service/api.jsx";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {saveToken} from "../../store/MemberSlice.js";
 
-const LoginForm = () => {
+const LoginFormComp = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -35,7 +29,6 @@ const LoginForm = () => {
         }
     }
 
->>>>>>> 7eb3ca760786be9123415af909985ebfaf0900ca:src/test/login/LoginForm.jsx
     return (
         <div>
             <div className={LoginStyle.body}>
