@@ -1,19 +1,31 @@
-import { Box, Typography, Card, CardContent, CardMedia, Button } from '@mui/material';
+import {Box, Button, Card, CardContent, CardMedia, Typography} from '@mui/material';
 import ListIcon from '@mui/icons-material/List';
 import SendIcon from '@mui/icons-material/Send';
 import {useNavigate} from "react-router-dom";
+import {useState} from "react";
+import PetUpdateForm from "./PetUpdateForm.jsx";
+
 const PetDetails = () => {
     const pet = {
         petId: 1,
         createdWho: 1,
         petName: "김승원",
         petImage: "https://images.mypetlife.co.kr/content/uploads/2023/11/17133418/61fbb115-3845-4427-b72d-76c5e650cd3c.jpeg",
-        petCategory1: "강아지",
-        petCategory2: "진돗개",
+        petCategory1: "dog",
+        petCategory2: "jindo",
         petBirth: "2022-01-01",
         petGender:'F',
         petWeight: 20,
         petImgList: {}
+    };
+
+    // 펫 등록 폼 -> 모달 처럼 관리
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
 
     const navigate = useNavigate();
@@ -47,12 +59,25 @@ const PetDetails = () => {
                             목록으로
                         </Button>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <Button variant="contained" color={"inherit"} startIcon={<SendIcon />} size="large">
+                        <Button onClick={openModal}
+                                variant="contained"
+                                color={"inherit"}
+                                startIcon={<SendIcon />}
+                                size="large"
+                        >
                             수정하기
                         </Button>
                     </Box>
                 </CardContent>
             </Card>
+
+            {isModalOpen && (
+                <div className="modal-overlay" onClick={closeModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <PetUpdateForm closeModal={closeModal} pet={pet} />
+                    </div>
+                </div>
+            )}
         </Box>
     );
 };
