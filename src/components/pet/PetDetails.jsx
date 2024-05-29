@@ -1,5 +1,7 @@
 import { Box, Typography, Card, CardContent, CardMedia, Button } from '@mui/material';
-
+import ListIcon from '@mui/icons-material/List';
+import SendIcon from '@mui/icons-material/Send';
+import {useNavigate} from "react-router-dom";
 const PetDetails = () => {
     const pet = {
         petId: 1,
@@ -14,9 +16,11 @@ const PetDetails = () => {
         petImgList: {}
     };
 
+    const navigate = useNavigate();
+
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', p: 2 }}>
-            <Card sx={{ maxWidth: 500, width: '100%' }}>
+            <Card sx={{ maxWidth: '100%', width: '100%', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)' }}>
                 <CardMedia
                     component="img"
                     height="300"
@@ -36,8 +40,14 @@ const PetDetails = () => {
                     <Typography variant="h6" color="text.secondary" gutterBottom>
                         몸무게 : {pet.petWeight} kg
                     </Typography>
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
-                        <Button variant="contained" color="primary" size="large">
+                    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                        <Button variant="contained" color="primary" startIcon={<ListIcon />} size="large"
+                            onClick={() => navigate('/pet')}
+                        >
+                            목록으로
+                        </Button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <Button variant="contained" color={"inherit"} startIcon={<SendIcon />} size="large">
                             수정하기
                         </Button>
                     </Box>

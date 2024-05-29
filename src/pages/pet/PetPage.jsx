@@ -21,7 +21,7 @@ const PetPage = () => {
     };
 
     const test = async () => {
-        const result = await jwtTestRequest(token);
+        const result = await jwtTestRequest();
         console.log(result);
         alert(result);
     }
