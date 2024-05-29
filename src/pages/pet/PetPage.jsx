@@ -16,18 +16,11 @@ const PetPage = () => {
 
     return (
         <>
-            <br/>
-            <br/>
-            <br/>
             <DefaultLayout>
-                <h1>펫 관리 페이지</h1>
                 <Outlet />
                 {/*<br/>*/}
                 {/*<Button variant="contained" onClick={test}>요청 및 재발급 테스트 버튼</Button>*/}
             </DefaultLayout>
-            <br/>
-            <br/>
-            <br/>
         </>
     );
 };

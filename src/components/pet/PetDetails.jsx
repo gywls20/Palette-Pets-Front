@@ -1,9 +1,28 @@
-import {Box, Button, Card, CardContent, CardMedia, Typography} from '@mui/material';
+import {Box, Button, Card, CardContent, CardMedia, IconButton, Typography} from '@mui/material';
 import ListIcon from '@mui/icons-material/List';
 import SendIcon from '@mui/icons-material/Send';
+import CloseIcon from '@mui/icons-material/Close';
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import PetUpdateForm from "./PetUpdateForm.jsx";
+import { styled } from '@mui/system';
+
+const RoundedCardMedia = styled(CardMedia)({
+    borderRadius: '50%',
+    width: 150,
+    height: 150,
+    margin: 'auto',
+    marginTop: 20,
+    marginBottom: 10,
+});
+
+const CloseButton = styled(IconButton)({
+    position: 'flex',
+    top: 10,
+    right: '-43%',
+    color: 'gray',
+});
+
 
 const PetDetails = () => {
     const pet = {
@@ -28,12 +47,26 @@ const PetDetails = () => {
         setIsModalOpen(false);
     };
 
+    const handleCloseClick = () => {
+        // X 버튼 클릭 시 수행할 동작을 여기에 작성합니다.
+        const isDelete = confirm("정말로 삭제 하시겠습니까?");
+        if (isDelete) {
+            alert("삭제됨 flag=" + isDelete);
+        } else {
+            alert("삭제안됨 flag=" + isDelete);
+        }
+        // navigate('/pet');
+    };
+
     const navigate = useNavigate();
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', p: 2 }}>
             <Card sx={{ maxWidth: '100%', width: '100%', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)' }}>
-                <CardMedia
+                <CloseButton onClick={handleCloseClick}>
+                    <CloseIcon />
+                </CloseButton>
+                <RoundedCardMedia
                     component="img"
                     height="300"
                     image={pet.petImage}
