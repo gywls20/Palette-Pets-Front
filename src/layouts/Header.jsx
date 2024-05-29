@@ -1,9 +1,5 @@
 import * as React from 'react';
-<<<<<<< HEAD
 import IconButton from '@mui/material/IconButton';
-=======
-import {useState} from 'react';
->>>>>>> 7eb3ca760786be9123415af909985ebfaf0900ca
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,13 +12,11 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import SearchIcon from '@mui/icons-material/Search';
-import {useState} from "react";
+import { useState } from 'react';
 import {CssBaseline} from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
-import {CssBaseline, IconButton} from "@mui/material";
-import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../service/api.jsx";
-import {deleteToken} from "../store/MemberSlice.js";
+import { useDispatch, useSelector } from 'react-redux';
+
 
 
 export default function Header() {
