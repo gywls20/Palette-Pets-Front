@@ -4,21 +4,20 @@ import React,{useState,useRef, useEffect} from 'react';
 
 
 const ArticleImageEdit = (props) => {
+  
     const dragItem = useRef();
     const dragOverItem = useRef();
 
     const {imgList,setImgList,files,setFiles,deleteChoiceImage}= props
     
-    // const [list, setList] = useState(null);
-    
-    
-
     const dragStart = idx => {
       dragItem.current = idx;
+      
     };
   
     const dragEnter = idx => {
       dragOverItem.current = idx;
+      
     };
   
     const drop = () => {
@@ -54,6 +53,9 @@ const ArticleImageEdit = (props) => {
               onDragEnter={() => dragEnter(index)}
               onDragOver={e => e.preventDefault()}
               onDragEnd={drop}
+              // onTouchStart={()=> dragStart(index)}
+              // onTouchCancel={()=>dragEnter(index)}
+              
               key={index}
               draggable
               className='image-container editImage-container'

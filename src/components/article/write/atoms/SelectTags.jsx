@@ -61,7 +61,7 @@ export default function SelectTags() {
   }
   return (
     <>
-    <div className='dlfpsadlfpsd'>
+    <div>
       <FormControl sx={{m:1 ,width:"80%"}}>
         <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel>
         <Select
