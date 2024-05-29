@@ -5,6 +5,8 @@ import PetRegisterForm from "../../components/pet/PetRegisterForm.jsx";
 import {useState} from "react";
 import {Button} from "@mui/material";
 import "./../../styles/pet/petPage.css"
+import PetList from "../../components/pet/PetList.jsx";
+import PetDetails from "../../components/pet/PetDetails.jsx";
 
 const PetPage = () => {
     const token = useSelector((state) => state.MemberSlice.token);
@@ -19,7 +21,7 @@ const PetPage = () => {
     };
 
     const test = async () => {
-        const result = await jwtTestRequest(token);
+        const result = await jwtTestRequest();
         console.log(result);
         alert(result);
     }
@@ -31,7 +33,8 @@ const PetPage = () => {
             <br/>
             <HomeDefaultLayout>
                 <h1>펫 관리 페이지</h1>
-                <div>여기 펫 리스트</div>
+                <PetDetails/>
+                <PetList/>
                 <Button onClick={openModal}>펫 등록하기</Button>
                 {isModalOpen && (
                     <div className="modal-overlay" onClick={closeModal}>
