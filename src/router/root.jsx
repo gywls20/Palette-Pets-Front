@@ -2,7 +2,7 @@ import {lazy, Suspense} from "react";
 import { createBrowserRouter } from "react-router-dom";
 import testRouter from "./testRouter.jsx";
 import articleRouter from "./articleRouter.jsx";
-import BoardPage from "../pages/manager/BoardPage.jsx";
+import BoardPage from "../pages/board/BoardPage.jsx";
 import HealthCalculatorPage from "../pages/HealthCalculatorPage.jsx";
 
 const Loading = () => <>Loading...</>;
@@ -11,8 +11,12 @@ const LoginPage = lazy(() => import('./../pages/LoginPage'));
 const JoinPage = lazy(() => import('./../pages/JoinPage'));
 const TestPage = lazy(() => import('../pages/test/TestPage.jsx'));
 const AriticlePage = lazy(()=>import('../pages/AriticlePage.jsx'));
+const ManagerPage = lazy(() => import('../pages/manager/ManagerPage'));
 const ReportList = lazy(() => import('../pages/manager/ReportList.jsx'))
 const HistoryList = lazy(() => import('../pages/manager/HistoryList.jsx'))
+const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'))
+const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'))
+
 
 const root = createBrowserRouter([
     {
@@ -56,13 +60,28 @@ const root = createBrowserRouter([
     },
 
     {
-        path: "/board/reportList",
+        path:"/manager",
+        element: <Suspense fallback={<Loading />}><ManagerPage/></Suspense>,
+        // children:boardRouter()
+    },
+
+    {
+        path: "/manager/reportList",
         element: <Suspense fallback={<Loading/>}><ReportList/></Suspense>
     },
     
     {
-        path: "/board/historyList",
+        path: "/manager/historyList",
         element: <Suspense fallback={<Loading/>}><HistoryList/></Suspense>
+    },
+    {
+        path: "/pet",
+        element: <Suspense fallback={<Loading/>}><PetPage/></Suspense>
+    },
+
+    {
+        path: "/updateList",
+        element: <Suspense fallback={<Loading/>}><UpdateList/></Suspense>
     },
 
 ]);

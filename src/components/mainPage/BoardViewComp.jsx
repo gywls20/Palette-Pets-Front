@@ -3,15 +3,11 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Box, Modal } from '@mui/material';
+import AutoSlideImgComp from './AutoSlideImgComp';
 
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
-import ImgStyle from '../../styles/img.module.css';
-
-import Cat from '../../image/cat.jpg'
-import Pet from '../../image/pet.jpg'
-import CategoryComp from '../CategoryComp';
-
-
+import Anhae from '../../image/anhae.jpg'
+import CategoryComp from '../CategoryComp'
 
 const BoardView = () => {
     const [modal, setModal] = useState(false)
@@ -29,13 +25,11 @@ const BoardView = () => {
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
-      };
-
+    };
+    
     return (
         <div>
-            <div className={ImgStyle.imageTool}>
-                <img className={ImgStyle.image} src={Pet} alt="Pet" />
-            </div>
+            <AutoSlideImgComp/>
 
             <CategoryComp/>            
             
@@ -48,7 +42,7 @@ const BoardView = () => {
                 <div className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
                         <div className={BoardViewStyle.postHeader}>
-                            <img src={Cat} alt="User" className={BoardViewStyle.postUserImage} onClick={openModal} />
+                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={openModal} />
                             <div>
                                 <p className={BoardViewStyle.postUserName}>사용자 이름</p>
                                 <p className={BoardViewStyle.postTime}>2시간 전</p>
@@ -62,7 +56,7 @@ const BoardView = () => {
                             aria-describedby="modal-modal-description"
                         >
                             <Box sx={style}>
-                                <img src={Cat} alt="User"/>
+                                <img src={Anhae} alt="User"/>
                             </Box>
                         </Modal>
 

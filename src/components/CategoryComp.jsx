@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 
 import CategoryStyle from '../styles/category.module.css'
@@ -30,8 +31,8 @@ const CategoryComp = () => {
 
                 <Link to='#'>
                     <button className={CategoryStyle.iconButtonColumn}>
-                        <FontAwesomeIcon icon={faHouseMedical} className={CategoryStyle.iconColumn} style={{color: "#ff0000",}} />
-                        <span> 병원</span>
+                        <FontAwesomeIcon icon={faArrowUpRightDots} className={CategoryStyle.iconColumn} style={{ color: "#ff0000" }} />
+                        <span> 자유게시판</span>
                     </button>
                 </Link>
 
@@ -46,6 +47,13 @@ const CategoryComp = () => {
                     <button className={CategoryStyle.iconButtonColumn}>
                         <FontAwesomeIcon icon={faLocationDot} className={CategoryStyle.iconColumn} style={{color: "#002ee6",}} />
                         <span> 산책</span>
+                    </button>
+                </Link>   
+
+                <Link to='#'>
+                    <button className={CategoryStyle.iconButtonColumn}>
+                        <FontAwesomeIcon icon={faHouseMedical} className={CategoryStyle.iconColumn} style={{color: "#ff0000",}} />
+                        <span> 병원</span>
                     </button>
                 </Link>
 
