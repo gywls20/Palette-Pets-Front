@@ -75,10 +75,10 @@ export const logout = () => {
 }
 
 // jwt 및 재발급 테스트용 GET 요청
-export const jwtTestRequest = (token) => {
+export const jwtTestRequest = () => {
     return jwtAxios.get(`${API_SERVER_HOST}/api/hello`, {
         headers: {
-            "Authorization": token
+            // "Authorization": token
         }
     })
         .then(response => response.data)
@@ -87,21 +87,6 @@ export const jwtTestRequest = (token) => {
             return error.response.data;
         });
 }
-
-// 요청 인터셉터 추가
-// todo : redux persist 에서 어세스 토큰 값 가져오는 코드 추가
-// jwtAxios.interceptors.request.use(
-//     (config) => {
-//         // const token = localStorage.getItem("accessToken");
-//         if (token) {
-//             config.headers["Authorization"] = token;
-//         }
-//         return config;
-//     },
-//     (error) => {
-//         return Promise.reject(error);
-//     }
-// );
 
 
 // Redux Persist를 사용하여 저장한 상태의 키 이름
@@ -140,6 +125,24 @@ const setPersistedState = (state) => {
         console.error("Failed to update persisted state in localStorage:", err);
     }
 };
+
+// 요청 인터셉터 추가
+// todo : redux persist 에서 어세스 토큰 값 가져오는 코드 추가 + 테스트
+jwtAxios.interceptors.request.use(
+    (config) => {
+        // redux persist 에 MemberSlice - token 값 가져오기
+        let persistedState = getPersistedState();
+        let token = JSON.parse(persistedState.MemberSlice).token;
+        console.log(token);
+        if (token) {
+            config.headers["Authorization"] = token;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
 
 // 응답 인터셉터 - 리프레시 토큰 재발급 판단
 jwtAxios.interceptors.response.use(
