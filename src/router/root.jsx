@@ -48,6 +48,11 @@ const root = createBrowserRouter([
         // children:boardRouter()
     },
     {
+        path:"/recent",
+        element: <Suspense fallback={<Loading />}><BoardPage/></Suspense>,
+        // children:boardRouter()
+    },
+    {
         path: "/board/reportList",
         element: <Suspense fallback={<Loading/>}><ReportList/></Suspense>
     },

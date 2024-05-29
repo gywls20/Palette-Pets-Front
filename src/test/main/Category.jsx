@@ -21,7 +21,7 @@ const Category = () => {
                     </button>
                 </Link>
 
-                <Link to='#'>
+                <Link to='/recent'>
                     <button className={CategoryStyle.iconButtonColumn}>
                         <FontAwesomeIcon icon={faArrowUpRightDots} className={CategoryStyle.iconColumn} style={{ color: "#ff0000" }} />
                         <span>최신순</span>
