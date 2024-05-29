@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState} from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -14,11 +14,12 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width:  250
+     
     },
   },
 };
 
+// 태그 선택 어찌할지 생각해보자
 const names = [
  '고양이',
  '강아지',
@@ -28,7 +29,6 @@ const names = [
  '간식추천',
  '산책로',
  '어디갈까',
- 
 
 ];
 
@@ -43,7 +43,8 @@ function getStyles(name, personName, theme) {
 
 export default function SelectTags() {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [personName, setPersonName] = useState([]);
+
 
   const handleChange = (event) => {
     const {
@@ -60,12 +61,18 @@ export default function SelectTags() {
   }
   return (
     <>
+<<<<<<< HEAD
       <FormControl sx={{m:1 ,width:"90%"}}>
+=======
+    <div>
+      <FormControl sx={{m:1 ,width:"80%"}}>
+>>>>>>> 271f5608eae019f4778904c837da2d57cd1d21b8
         <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
+          inputProps={{MenuProps: {disableScrollLock: true}}}
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="태그 선택" />}
@@ -89,6 +96,7 @@ export default function SelectTags() {
           ))}
         </Select>
       </FormControl>
+      </div>
     </>
   );
 }
