@@ -4,8 +4,6 @@ import "../../styles/walking/WalkingPage.css";
 
 const WalkingComp = () => {
     const mapRef = useRef(null);
-    const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
     const [selectedAddress, setSelectedAddress] = useState(''); // 선택된 주소
 
@@ -26,16 +24,13 @@ const WalkingComp = () => {
                 const map = new window.naver.maps.Map(mapRef.current, mapOptions);
 
                 // 지도 크기 재조정
-                window.naver.maps.Event.once(map, 'init_stylemap', () => {
-                    setTimeout(() => {
-                        map.updateSize();
-                        map.setZoom(map.getZoom());
-                    }, 0);
-                });
+                setTimeout(() => {
+                    map.updateSize();
+                    map.setZoom(map.getZoom());
+                }, 0);
             };
         }
     }, [isModalOpen]); // isModalOpen 상태가 변경될 때마다 이 useEffect를 실행
-
 
     const handleSearch = () => {
         setIsModalOpen(true); // 검색 버튼 클릭 시 모달 열기
@@ -54,18 +49,10 @@ const WalkingComp = () => {
 
     return (
         <div>
-
             {isModalOpen && (
-                <div className="modal" style={{
-                    position: 'fixed',
-                    top: '20%',
-                    left: '32%',
-                    zIndex: 100,
-                    border: '1px solid #000',
-                    borderRadius: '10px',
-                }}>
-                    <div ref={mapRef} style={{width: '600px', height: '400px'}}></div>
-                    <button onClick={closeModal}>닫기</button>
+                <div className="modal">
+                    <div ref={mapRef} style={{width: '100%', height: '100%'}}></div>
+                    <button className={"closeButton"} onClick={closeModal}>X</button>
                 </div>
             )}
             <div className="search">
