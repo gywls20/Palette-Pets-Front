@@ -6,8 +6,8 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import {Button, FormHelperText, InputAdornment} from "@mui/material";
 import OutlinedInput from "@mui/material/OutlinedInput";
-// import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
-// import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 
 const PetRegisterForm = ({ closeModal }) => {
 
