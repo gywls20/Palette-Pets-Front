@@ -11,7 +11,7 @@ import {StyledEngineProvider} from "@mui/material/styles";
 export let persistor = persistStore(store);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <StyledEngineProvider injectFirst>
       <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
@@ -19,5 +19,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           </PersistGate>
       </Provider>
     </StyledEngineProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 )

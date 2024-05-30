@@ -1,7 +1,7 @@
 import {Button, Card, CardContent, CardMedia, Typography} from '@mui/material';
 import PetRegisterForm from "./PetRegisterForm.jsx";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {json, useNavigate} from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -151,9 +151,11 @@ const PetList = () => {
         const fetchData = async () => {
             try {
                 const data = await petListRequest(1);
+                console.log("data = " + JSON.stringify(data));
                 setPetList(data);
             } catch (error) {
                 console.log('Failed to fetch data = ' + error);
+                console.log(error);
             }
         }
         fetchData();

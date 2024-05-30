@@ -40,7 +40,7 @@ const PetDetails = () => {
     // };
 
     const {id} = useParams();
-    const [pet, setPet] = useState([]);
+    const [pet, setPet] = useState({});
 
     // pet details query
     useEffect(() => {
@@ -70,7 +70,7 @@ const PetDetails = () => {
         if (isDelete) {
             const result = await petDeleteRequest(pet.petId);
             console.log(result);
-            alert(result);
+            alert("반려동물 정보를 삭제했습니다.");``
             navigate('/pet/list');
         } else {
             alert("삭제안됨 flag=" + isDelete);

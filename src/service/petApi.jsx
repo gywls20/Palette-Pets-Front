@@ -149,6 +149,8 @@ export const petDetailRequest = (petId) => {
         .then(response => response.data)
         .catch((error) => {
             console.error(error);
+            console.error(error.response);
+            console.error(error.response.data);
             return error.response.data;
         });
 }

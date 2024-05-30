@@ -25,8 +25,28 @@ const PetRegisterForm = ({ closeModal }) => {
 
     const registerPet = async () => {
 
+        if (petName === undefined || petName === "") {
+            alert("Please enter petName");
+            return;
+        } else if (petCategory1 === undefined || petCategory1 === "") {
+            alert("Please enter petCategory1");
+            return;
+        } else if (petCategory2 === undefined || petCategory2 === "") {
+            alert("Please enter petCategory2");
+            return;
+        } else if (petBirth === undefined || petBirth === "") {
+            alert("Please enter petBirth");
+            return;
+        } else if (petGender === undefined || petGender === "") {
+            alert("Please enter petGender");
+            return;
+        }  else if (petWeight === undefined || petWeight === null) {
+            alert("Please enter petWeight");
+            return;
+        }
+
         const dto = {
-            createdWho: 1,
+            createdWho: 1, // 임시 테스트용 회원
             petName: petName,
             petImage: "after_fileUpload_you_need_to_save_s3_path",
             petCategory1: petCategory1,

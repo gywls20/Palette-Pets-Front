@@ -15,7 +15,7 @@ const PetUpdateForm = ({ closeModal, pet }) => {
 
     const [petName, setPetName] = useState(pet.petName);
     const [petImage, setPetImage] = useState(pet.petImage);
-    const [petImagePreview, setPetImagePreview] = useState(pet.petImage);
+    const [petImagePreview, setPetImagePreview] = useState("https://kr.object.ncloudstorage.com/palettepets/pet/" + pet.petImage);
     const [petCategory1, setPetCategory1] = useState(pet.petCategory1);
     const [petCategory2, setPetCategory2] = useState(pet.petCategory2);
     const [petGender, setPetGender] = useState(pet.petGender);
@@ -26,6 +26,27 @@ const PetUpdateForm = ({ closeModal, pet }) => {
     console.log(pet)
 
     const updatePet = async () => {
+
+        if (petName === undefined || petName === "") {
+            alert("Please enter petName");
+            return;
+        } else if (petCategory1 === undefined || petCategory1 === "") {
+            alert("Please enter petCategory1");
+            return;
+        } else if (petCategory2 === undefined || petCategory2 === "") {
+            alert("Please enter petCategory2");
+            return;
+        } else if (petBirth === undefined || petBirth === "") {
+            alert("Please enter petBirth");
+            return;
+        } else if (petGender === undefined || petGender === "") {
+            alert("Please enter petGender");
+            return;
+        }  else if (petWeight === undefined || petWeight === null) {
+            alert("Please enter petWeight");
+            return;
+        }
+
         const dto = {
             petId: pet.petId,
             createdWho: 1,
