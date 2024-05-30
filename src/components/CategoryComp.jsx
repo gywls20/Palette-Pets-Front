@@ -22,7 +22,7 @@ const CategoryComp = () => {
                     </button>
                 </Link>
 
-                <Link to='#'>
+                <Link to='/recent'>
                     <button className={CategoryStyle.iconButtonColumn}>
                         <FontAwesomeIcon icon={faArrowUpRightDots} className={CategoryStyle.iconColumn} style={{ color: "#ff0000" }} />
                         <span> 최신순</span>
@@ -43,7 +43,7 @@ const CategoryComp = () => {
                     </button>
                 </Link>
 
-                <Link to='#'>
+                <Link to='/walking'>
                     <button className={CategoryStyle.iconButtonColumn}>
                         <FontAwesomeIcon icon={faLocationDot} className={CategoryStyle.iconColumn} style={{color: "#002ee6",}} />
                         <span> 산책</span>

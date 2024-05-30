@@ -81,7 +81,7 @@ export default function Header() {
             {
                 token ? (
                     <MenuItem onClick={handleMenuClose}>
-                        <Link onClick={requestLogout}>로그아웃</Link>
+                        <Link onClick={requestLogout} >로그아웃</Link>
                     </MenuItem>
                 ) : (
                     <MenuItem onClick={handleMenuClose}>
