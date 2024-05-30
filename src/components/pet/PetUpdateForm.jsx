@@ -6,18 +6,23 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import {Button, FormHelperText, InputAdornment} from "@mui/material";
 import OutlinedInput from "@mui/material/OutlinedInput";
-// import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
-// import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import LoginImgComp from "../loginPage/LoginImgComp.jsx";
 
-const PetRegisterForm = ({ closeModal }) => {
+const PetRegisterForm = ({ closeModal, pet }) => {
 
-    const [petCategory1, setPetCategory1] = useState("");
-    const [petCategory2, setPetCategory2] = useState("");
-    const [petGender, setPetGender] = useState("");
+    const [petName, setPetName] = useState(pet.petName);
+    const [petImage, setPetImage] = useState(pet.petImage);
+    const [petCategory1, setPetCategory1] = useState(pet.petCategory1);
+    const [petCategory2, setPetCategory2] = useState(pet.petCategory2);
+    const [petGender, setPetGender] = useState(pet.petGender);
     const [petBirth, setPetBirth] = useState();
 
+    console.log(pet)
+
     const registerPet = () => {
-        alert("등록");
+        alert("수정 완료");
     };
 
     const handleChangePetCategory1 = (e) => {
@@ -33,13 +38,20 @@ const PetRegisterForm = ({ closeModal }) => {
     return (
         <>
             <div className="pet">
-                <h2>반려동물 등록</h2>
+                <h2>반려동물 정보 수정</h2>
             </div>
             <div className="register-form">
-                <TextField id="outlined-basic" fullWidth={true} label="petName" variant="outlined" required/>
+                <TextField id="outlined-basic" fullWidth={true} label="petName" variant="outlined"
+                           value={petName} required/>
                 <br/>
                 <br/>
-                <TextField id="outlined-basic" fullWidth={true} label="petImage" variant="outlined"/>
+                <img src={petImage} width="100" height="100" alt="펫 이미지" />
+                <TextField id="outlined-basic" fullWidth={true}
+                           value={petImage}
+                           onChange={(e) => {
+                               setPetImage(e.target.value);
+                           }}
+                           label="petImage" variant="outlined"/>
                 <br/>
                 <br/>
                 <FormControl fullWidth={true}>
@@ -87,9 +99,9 @@ const PetRegisterForm = ({ closeModal }) => {
                                 onChange={handleChangePetCategory2}
                             >
                                 <MenuItem value={''}>선택하세요</MenuItem>
-                                <MenuItem value={'cat1'}>길냥이</MenuItem>
-                                <MenuItem value={'cat2'}>침냥이</MenuItem>
-                                <MenuItem value={'cat3'}>ㅈ냥이</MenuItem>
+                                <MenuItem value={'koka'}>길냥이</MenuItem>
+                                <MenuItem value={'jindo'}>침냥이</MenuItem>
+                                <MenuItem value={'siba'}>ㅈ냥이</MenuItem>
                             </Select>
                         </FormControl>
                     )

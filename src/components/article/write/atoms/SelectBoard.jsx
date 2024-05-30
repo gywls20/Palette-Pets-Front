@@ -15,6 +15,7 @@ const boardList = [
     {idx:2,boardName:"미용",boardValue:'PETINTORODUCE'},
     {idx:2,boardName:"산책",boardValue:'PETINFO'},
     {idx:2,boardName:"반려동물 산책 추천",boardValue:'PET'},
+
 ]
 
 const SelectBoard = () => {
