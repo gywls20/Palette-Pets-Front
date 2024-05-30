@@ -9,6 +9,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {petUpdateRequest} from "../../service/petApi.jsx";
+import {useNavigate} from "react-router-dom";
 
 const PetUpdateForm = ({ closeModal, pet }) => {
 
@@ -20,6 +21,7 @@ const PetUpdateForm = ({ closeModal, pet }) => {
     const [petGender, setPetGender] = useState(pet.petGender);
     const [petBirth, setPetBirth] = useState();
     const [petWeight, setPetWeight] = useState();
+    const navigate = useNavigate();
 
     console.log(pet)
 
@@ -38,7 +40,7 @@ const PetUpdateForm = ({ closeModal, pet }) => {
 
         const result = await petUpdateRequest(dto, petImage);
         console.log(result);
-        alert(result);
+        window.location.reload();
     };
 
     const handleChangePetName = (e) => {
@@ -140,9 +142,9 @@ const PetUpdateForm = ({ closeModal, pet }) => {
                                 onChange={handleChangePetCategory2}
                             >
                                 <MenuItem value={''}>선택하세요</MenuItem>
-                                <MenuItem value={'koka'}>길냥이</MenuItem>
-                                <MenuItem value={'jindo'}>침냥이</MenuItem>
-                                <MenuItem value={'siba'}>ㅈ냥이</MenuItem>
+                                <MenuItem value={'Ragdoll'}>랙돌</MenuItem>
+                                <MenuItem value={'RussianBlue'}>러시안 블루</MenuItem>
+                                <MenuItem value={'NorwegianForestCat'}>노르웨이 숲 고양이</MenuItem>
                             </Select>
                         </FormControl>
                     )
