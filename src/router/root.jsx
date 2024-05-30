@@ -4,6 +4,7 @@ import testRouter from "./testRouter.jsx";
 import articleRouter from "./articleRouter.jsx";
 import BoardPage from "../pages/board/BoardPage.jsx";
 import HealthCalculatorPage from "../pages/HealthCalculatorPage.jsx";
+import ManagerPageComp from "../components/manager/ManagerPageComp.jsx";
 
 const Loading = () => <>Loading...</>;
 const MainPage = lazy(() => import('./../pages/MainPage'));
@@ -66,7 +67,11 @@ const root = createBrowserRouter([
     },
 
     {
-        path: "/manager/reportList",
+        path:"/recent",
+        element: <Suspense fallback={<Loading />}><ManagerPageComp/></Suspense>,
+    },
+    {
+        path: "/board/reportList",
         element: <Suspense fallback={<Loading/>}><ReportList/></Suspense>
     },
     
