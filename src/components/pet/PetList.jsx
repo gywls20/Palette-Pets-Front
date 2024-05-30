@@ -156,25 +156,23 @@ const PetList = () => {
 
     const NextArrow = ({ onClick }) => {
         return (
-            <Button
+            <div
                 className="slick-next"
                 onClick={onClick}
-                type="button"
             >
                 NEXT
-            </Button>
+            </div>
         );
     };
 
     const PrevArrow = ({ onClick }) => {
         return (
-            <Button
+            <div
                 className="slick-prev"
                 onClick={onClick}
-                type="button"
             >
                 PREV
-            </Button>
+            </div>
         );
     };
 
