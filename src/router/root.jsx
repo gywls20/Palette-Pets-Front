@@ -8,6 +8,7 @@ import ManagerPageComp from "../components/manager/ManagerPageComp.jsx";
 import petRouter from "./petRouter.jsx";
 
 
+
 const Loading = () => <>Loading...</>;
 const MainPage = lazy(() => import('./../pages/MainPage'));
 const LoginPage = lazy(() => import('./../pages/LoginPage'));
@@ -15,10 +16,9 @@ const JoinPage = lazy(() => import('./../pages/JoinPage'));
 const TestPage = lazy(() => import('../pages/test/TestPage.jsx'));
 const AriticlePage = lazy(()=>import('../pages/AriticlePage.jsx'));
 const ManagerPage = lazy(() => import('../pages/manager/ManagerPage'));
-const ReportList = lazy(() => import('../pages/manager/ReportList.jsx'))
-const HistoryList = lazy(() => import('../pages/manager/HistoryList.jsx'))
-const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'))
-const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'))
+const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'));
+const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
+const WalkingPage = lazy(() => import('../pages/walking/WalkingPage.jsx'));
 
 
 const root = createBrowserRouter([
@@ -72,15 +72,6 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading />}><ManagerPageComp/></Suspense>,
     },
     {
-        path: "/board/reportList",
-        element: <Suspense fallback={<Loading/>}><ReportList/></Suspense>
-    },
-    
-    {
-        path: "/manager/historyList",
-        element: <Suspense fallback={<Loading/>}><HistoryList/></Suspense>
-    },
-    {
         path: "/pet",
         element: <Suspense fallback={<Loading/>}><PetPage/></Suspense>,
         children: petRouter()
@@ -89,6 +80,10 @@ const root = createBrowserRouter([
     {
         path: "/updateList",
         element: <Suspense fallback={<Loading/>}><UpdateList/></Suspense>
+    },
+    {
+        path: "/walking",
+        element: <Suspense fallback={<Loading/>}><WalkingPage/></Suspense>
     },
 
 ]);
