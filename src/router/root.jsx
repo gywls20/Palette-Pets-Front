@@ -4,6 +4,9 @@ import testRouter from "./testRouter.jsx";
 import articleRouter from "./articleRouter.jsx";
 import BoardPage from "../pages/board/BoardPage.jsx";
 import HealthCalculatorPage from "../pages/HealthCalculatorPage.jsx";
+import ManagerPageComp from "../components/manager/ManagerPageComp.jsx";
+import petRouter from "./petRouter.jsx";
+
 
 const Loading = () => <>Loading...</>;
 const MainPage = lazy(() => import('./../pages/MainPage'));
@@ -29,7 +32,6 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading />}><TestPage/></Suspense>, // 여기엔 그 기능의 인덱스나 메인 페이지 넣는듯
         children: testRouter()
     },
-
     {
         path:"/login",
         element: <Suspense fallback={<Loading />}><LoginPage/></Suspense>, // 여기엔 그 기능의 인덱스나 메인 페이지 넣는듯
@@ -66,7 +68,11 @@ const root = createBrowserRouter([
     },
 
     {
-        path: "/manager/reportList",
+        path:"/recent",
+        element: <Suspense fallback={<Loading />}><ManagerPageComp/></Suspense>,
+    },
+    {
+        path: "/board/reportList",
         element: <Suspense fallback={<Loading/>}><ReportList/></Suspense>
     },
     
@@ -76,7 +82,8 @@ const root = createBrowserRouter([
     },
     {
         path: "/pet",
-        element: <Suspense fallback={<Loading/>}><PetPage/></Suspense>
+        element: <Suspense fallback={<Loading/>}><PetPage/></Suspense>,
+        children: petRouter()
     },
 
     {

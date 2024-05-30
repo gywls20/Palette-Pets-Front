@@ -3,8 +3,9 @@ import InputTitleContent from '../atoms/InputTitleContent';
 import SelectBoard from '../atoms/SelectBoard';
 import SelectTags from '../atoms/SelectTags';
 import ArticleImageUploadComp from '../atoms/ArticleImageUploadComp';
-import ArticleImagePreviewComp from '../atoms/ArticleImagePreviewComp';
 import ArticleWriteFooter from '../atoms/ArticleWriteFooter';
+import ArticleImageEdit from '../atoms/ArticleImageEdit';
+import UserMakeTags from '../atoms/UserMakeTags';
 
 
 const ArticleWriteBlock = () => {
@@ -14,13 +15,15 @@ const ArticleWriteBlock = () => {
 
 
         <div>
+            
             <SelectBoard/>
-            <SelectTags/>
+            <UserMakeTags/>
+            {/* <SelectTags/> */}
             <InputTitleContent/>
             <ArticleImageUploadComp/>
-            <ArticleImagePreviewComp/>
             <ArticleWriteFooter/>
-
+          
+           
         </div>
 
     );
