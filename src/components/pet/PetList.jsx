@@ -154,11 +154,12 @@ const PetList = () => {
 
     const navigate = useNavigate();
 
-    const NextArrow = ({ onClick }) => { // props로 onClick을 전달해줘야 한다.
+    const NextArrow = ({ onClick }) => {
         return (
             <Button
+                className="slick-next"
                 onClick={onClick}
-                type='button'
+                type="button"
             >
                 NEXT
             </Button>
@@ -168,8 +169,9 @@ const PetList = () => {
     const PrevArrow = ({ onClick }) => {
         return (
             <Button
+                className="slick-prev"
                 onClick={onClick}
-                type='button'
+                type="button"
             >
                 PREV
             </Button>
@@ -177,7 +179,7 @@ const PetList = () => {
     };
 
     const settings = {
-        dots: false,          // 캐러셀 밑에 ... 을 표시할지
+        dots: true,          // 캐러셀 밑에 ... 을 표시할지
         infinite: true,      // 슬라이드가 끝까지 가면 다시 처음으로 반복
         speed: 500,         // 속도
         autoplay: true,      // 자동 재생
