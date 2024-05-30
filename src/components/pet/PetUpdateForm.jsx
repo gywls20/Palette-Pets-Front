@@ -8,23 +8,42 @@ import {Button, FormHelperText, InputAdornment} from "@mui/material";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import LoginImgComp from "../loginPage/LoginImgComp.jsx";
+import {petUpdateRequest} from "../../service/petApi.jsx";
 
-const PetRegisterForm = ({ closeModal, pet }) => {
+const PetUpdateForm = ({ closeModal, pet }) => {
 
     const [petName, setPetName] = useState(pet.petName);
     const [petImage, setPetImage] = useState(pet.petImage);
+    const [petImagePreview, setPetImagePreview] = useState(pet.petImage);
     const [petCategory1, setPetCategory1] = useState(pet.petCategory1);
     const [petCategory2, setPetCategory2] = useState(pet.petCategory2);
     const [petGender, setPetGender] = useState(pet.petGender);
     const [petBirth, setPetBirth] = useState();
+    const [petWeight, setPetWeight] = useState();
 
     console.log(pet)
 
-    const registerPet = () => {
-        alert("수정 완료");
+    const updatePet = async () => {
+        const dto = {
+            petId: pet.petId,
+            createdWho: 1,
+            petName: petName,
+            petImage: pet.petImage,
+            petCategory1: petCategory1,
+            petCategory2: petCategory2,
+            petBirth: petBirth.toString(),
+            petGender: petGender,
+            petWeight: petWeight,
+        }
+
+        const result = await petUpdateRequest(dto, petImage);
+        console.log(result);
+        alert(result);
     };
 
+    const handleChangePetName = (e) => {
+        setPetName(e.target.value);
+    }
     const handleChangePetCategory1 = (e) => {
         setPetCategory1(e.target.value);
     }
@@ -34,6 +53,19 @@ const PetRegisterForm = ({ closeModal, pet }) => {
     const handleChangePetGender = (e) => {
         setPetGender(e.target.value);
     }
+    const handleChangePetWeight = (e) => {
+        setPetWeight(e.target.value);
+    }
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        setPetImage(file);
+        const reader = new FileReader();
+        reader.onload = () => {
+            setPetImagePreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+    }
 
     return (
         <>
@@ -42,16 +74,25 @@ const PetRegisterForm = ({ closeModal, pet }) => {
             </div>
             <div className="register-form">
                 <TextField id="outlined-basic" fullWidth={true} label="petName" variant="outlined"
-                           value={petName} required/>
+                           value={petName} onChange={handleChangePetName} required/>
                 <br/>
                 <br/>
-                <img src={petImage} width="100" height="100" alt="펫 이미지" />
-                <TextField id="outlined-basic" fullWidth={true}
-                           value={petImage}
-                           onChange={(e) => {
-                               setPetImage(e.target.value);
-                           }}
-                           label="petImage" variant="outlined"/>
+                {petImagePreview && (
+                    <img src={petImagePreview} width="100" height="100" alt="펫 이미지 미리보기" />
+                )}
+                <input
+                    accept="image/*"
+                    style={{display: 'none'}}
+                    id="raised-button-file"
+                    type="file"
+                    onChange={handleImageUpload}
+                />
+                <br/>
+                <label htmlFor="raised-button-file">
+                    <Button variant="contained" component="span">
+                        이미지 업로드
+                    </Button>
+                </label>
                 <br/>
                 <br/>
                 <FormControl fullWidth={true}>
@@ -137,6 +178,8 @@ const PetRegisterForm = ({ closeModal, pet }) => {
                 <br/>
                 <FormControl fullWidth={true} variant="outlined">
                     <OutlinedInput
+                        value={petWeight}
+                        onChange={handleChangePetWeight}
                         id="outlined-adornment-weight"
                         endAdornment={<InputAdornment position="end">kg</InputAdornment>}
                         aria-describedby="outlined-weight-helper-text"
@@ -147,7 +190,7 @@ const PetRegisterForm = ({ closeModal, pet }) => {
                     <FormHelperText id="outlined-weight-helper-text">Weight</FormHelperText>
                 </FormControl>
 
-                <Button variant="outlined" onClick={registerPet}>등록</Button>
+                <Button variant="outlined" onClick={updatePet}>등록</Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Button variant="outlined" onClick={closeModal}>취소</Button>
 
@@ -156,4 +199,4 @@ const PetRegisterForm = ({ closeModal, pet }) => {
     );
 }
 
-export default PetRegisterForm;
+export default PetUpdateForm;

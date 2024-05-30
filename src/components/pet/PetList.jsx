@@ -160,7 +160,6 @@ const PetList = () => {
                 className="slick-next"
                 onClick={onClick}
             >
-                NEXT
             </div>
         );
     };
@@ -171,7 +170,6 @@ const PetList = () => {
                 className="slick-prev"
                 onClick={onClick}
             >
-                PREV
             </div>
         );
     };

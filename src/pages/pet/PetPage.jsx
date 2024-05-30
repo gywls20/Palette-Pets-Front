@@ -8,11 +8,11 @@ import DefaultLayout from "../../layouts/DefaultLayout.jsx";
 const PetPage = () => {
     const token = useSelector((state) => state.MemberSlice.token);
 
-    const test = async () => {
-        const result = await jwtTestRequest();
-        console.log(result);
-        alert(result);
-    }
+    // const test = async () => {
+    //     const result = await jwtTestRequest();
+    //     console.log(result);
+    //     alert(result);
+    // }
 
     return (
         <>
