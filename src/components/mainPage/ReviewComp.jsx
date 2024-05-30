@@ -17,7 +17,9 @@ const NextArrow = ({ onClick }) => {
             className="slick-next"
             onClick={onClick}
             type="button"
+            ArrowLeft
         >
+            <ArrowRight/>
         </Button>
     );
 };
@@ -30,6 +32,7 @@ const PrevArrow = ({ onClick }) => {
             onClick={onClick}
             type="button"
         >
+            <ArrowLeft />
         </Button>
     );
 };
