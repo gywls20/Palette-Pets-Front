@@ -26,30 +26,27 @@ const CloseButton = styled(IconButton)({
 
 
 const PetDetails = () => {
-    // const pet = {
-    //     petId: 1,
-    //     createdWho: 1,
-    //     petName: "김승원",
-    //     petImage: "https://images.mypetlife.co.kr/content/uploads/2023/11/17133418/61fbb115-3845-4427-b72d-76c5e650cd3c.jpeg",
-    //     petCategory1: "dog",
-    //     petCategory2: "jindo",
-    //     petBirth: "2022-01-01",
-    //     petGender:'F',
-    //     petWeight: 20,
-    //     petImgList: {}
-    // };
-
     const {id} = useParams();
     const [pet, setPet] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     // pet details query
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await petDetailRequest(id);
-                setPet(data);
+                console.log("data = " + data);
+                if (data === 'REFRESH_TOKEN_EXPIRED_ERROR') {
+                    window.location.replace('/login');
+                } else {
+                    setPet(data);
+                    setIsLoading(false);
+                }
             } catch (error) {
                 console.log('Failed to fetch data = ' + error);
+                setError(error);
+                setIsLoading(false);
             }
         }
         fetchData();
@@ -70,7 +67,7 @@ const PetDetails = () => {
         if (isDelete) {
             const result = await petDeleteRequest(pet.petId);
             console.log(result);
-            alert("반려동물 정보를 삭제했습니다.");``
+            alert("반려동물 정보를 삭제했습니다.");
             navigate('/pet/list');
         } else {
             alert("삭제안됨 flag=" + isDelete);
@@ -78,6 +75,14 @@ const PetDetails = () => {
     };
 
     const navigate = useNavigate();
+
+    if (isLoading) {
+        return <div>로딩 중...</div>;
+    }
+
+    if (error) {
+        return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
+    }
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', p: 2 }}>
