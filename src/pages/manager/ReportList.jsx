@@ -1,4 +1,4 @@
-import ReportListComp from "../../components/manager/ReportListComp.jsx";
+import ReportListComp from "../../components/managerPage/ReportListComp.jsx";
 import DefaultLayout from "../../layouts/DefaultLayout.jsx";
 
 const ReportList = () => {

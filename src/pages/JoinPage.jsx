@@ -2,8 +2,8 @@
 import React from 'react';
 
 import HomeDefaultLayout from "../layouts/HomeDefaultLayout.jsx";
-import WelcomeImg from '../test/join/WelcomeImg.jsx';
-import JoinForm from '../test/join/JoinForm.jsx';
+import WelcomeImgComp from '../components/joinPage/WelcomeImgComp.jsx';
+import JoinFormComp from '../components/joinPage/JoinFormComp.jsx';
 
 const JoinPage = () => {
     return (
@@ -12,8 +12,8 @@ const JoinPage = () => {
                 <br/>
                 <br/>
                 <HomeDefaultLayout>
-                    <WelcomeImg/>
-                    <JoinForm/>
+                    <WelcomeImgComp/>
+                    <JoinFormComp/>
                 </HomeDefaultLayout>
                 <br/>
                 <br/>
