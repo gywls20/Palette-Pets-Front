@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreateIcon from "@mui/icons-material/Create";
 import {
   BottomNavigation,
@@ -18,6 +18,7 @@ import {
 } from "@mui/icons-material";
 
 const Footer = () => {
+  const navigate = useNavigate()
   const [value, setValue] = useState(0);
   const [showButton, setShowButton] = useState(false);
 
@@ -45,6 +46,11 @@ const Footer = () => {
     };
   }, []);
 
+  const onHome = () => navigate('/')
+  const onPetList = () => {
+    navigate('/pet/list');
+  }
+
   return (
     <>
       <CssBaseline />
@@ -56,8 +62,8 @@ const Footer = () => {
           showLabels
           value={value}
           onChange={handleNavigationChange}>
-          <BottomNavigationAction label="Recents" icon={<Home />} />
-          <BottomNavigationAction label="Favorites" icon={<Favorite />} />
+          <BottomNavigationAction label="Home" icon={<Home />} onClick={onHome} />
+          <BottomNavigationAction label="PetList" icon={<Favorite />} onClick={onPetList} />
           <BottomNavigationAction label="Archive" icon={<Archive />} />
           <BottomNavigationAction label="Location On" icon={<LocationOn />} />
         </BottomNavigation>

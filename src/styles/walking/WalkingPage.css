@@ -1,0 +1,19 @@
+
+.searchBar {
+    background-color: white;
+    color: black;
+}
+
+.search {
+    height: 790px;
+    padding-top: 2rem;
+}
+
+.modal{
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    background-color: white;
+    padding: 10px;
+    z-index: 100;
+}

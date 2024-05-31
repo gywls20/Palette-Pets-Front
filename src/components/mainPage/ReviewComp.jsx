@@ -1,22 +1,53 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import Slider from "react-slick";
-import { Container, Box, Typography, Avatar, Link, Badge } from '@mui/material';
+import {Container, Box, Typography, Avatar, Link, Badge, Button} from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import {ArrowLeft} from "@mui/icons-material";
+import {ArrowRight} from "@mui/icons-material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import "slick-carousel/slick/slick.css";
+import "../../styles/mainPage/review.css";
 
+// eslint-disable-next-line react/prop-types
+const NextArrow = ({ onClick }) => {
+    return (
+        <Button
+            className="slick-next"
+            onClick={onClick}
+            type="button"
+            ArrowLeft
+        >
+            <ArrowRight/>
+        </Button>
+    );
+};
+
+// eslint-disable-next-line react/prop-types
+const PrevArrow = ({ onClick }) => {
+    return (
+        <Button
+            className="slick-prev"
+            onClick={onClick}
+            type="button"
+        >
+            <ArrowLeft />
+        </Button>
+    );
+};
 
 export default function ReviewComp() {
     let settings = {
         dots: false,
-        arrows: false,
-        infinite: false,
+        arrows: true,
+        infinite: true,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         slidesPerRow: 1,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
     };
 
     return (

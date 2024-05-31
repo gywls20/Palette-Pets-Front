@@ -16,6 +16,8 @@ import { useState } from 'react';
 import {CssBaseline} from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import {logout} from "../service/api.jsx";
+import {deleteToken} from "../store/MemberSlice.js";
 
 
 
@@ -79,7 +81,7 @@ export default function Header() {
             {
                 token ? (
                     <MenuItem onClick={handleMenuClose}>
-                        <Link onClick={requestLogout}>로그아웃</Link>
+                        <Link onClick={requestLogout} >로그아웃</Link>
                     </MenuItem>
                 ) : (
                     <MenuItem onClick={handleMenuClose}>
