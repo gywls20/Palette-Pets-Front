@@ -8,11 +8,11 @@ const WalkingComp = () => {
 
     useEffect(() => {
         if (isModalOpen) {
-            const existingScript = document.querySelector(`script[src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}"]`);
+            const existingScript = document.querySelector(`script[src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=j1x9ap3dif"]`);
 
             if (!existingScript) {
                 const script = document.createElement('script');
-                script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`;
+                script.src = 'https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=j1x9ap3dif';
                 script.async = true;
                 document.head.appendChild(script);
 
@@ -55,18 +55,17 @@ const WalkingComp = () => {
         const tm128 = window.naver.maps.TransCoord.fromLatLngToTM128(position);
         fetch(`https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=${tm128.getX()},${tm128.getY()}&output=json&orders=roadaddr`, {
             headers: {
-                'X-NCP-APIGW-API-KEY-ID': process.env.REACT_APP_NAVER_API_KEY_ID,
-                'X-NCP-APIGW-API-KEY': process.env.REACT_APP_NAVER_API_KEY,
+                'X-NCP-APIGW-API-KEY-ID': 'j1x9ap3dif',
+                'X-NCP-APIGW-API-KEY': 'gMeqD0JYjzVHz4sWYkVS8cLgChnTIxm8ymnRe8xR',
             }
         })
             .then(response => response.json())
             .then(data => {
                 if (data.results.length > 0) { // 주소 정보를 가져와서 출력하는 부분
-                    const address = data.results[0].region.area1.name + ' ' +
-                        data.results[0].region.area2.name + ' ' +
-                        data.results[0].region.area3.name + ' ' +
-                        (data.results[0].land.number1 || '') + ' ' +
-                        (data.results[0].land.addition0 ? data.results[0].land.addition0.value : '');
+                    const address = data.results[0].region.area1.name + '서울 특별시' +
+                        data.results[0].region.area2.name + '관악구' +
+                        data.results[0].region.area3.name + '봉천동' +
+                        data.results[0].land.name;
 
                     // 마커 클릭 이벤트 리스너 추가
                     window.naver.maps.Event.addListener(marker, 'click', function() {
