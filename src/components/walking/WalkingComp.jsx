@@ -62,9 +62,9 @@ const WalkingComp = () => {
             .then(response => response.json())
             .then(data => {
                 if (data.results.length > 0) { // 주소 정보를 가져와서 출력하는 부분
-                    const address = data.results[0].region.area1.name + ' ' +
-                        data.results[0].region.area2.name + ' ' +
-                        data.results[0].region.area3.name + ' ' +
+                    const address = data.results[0].region.area1.name + '서울 특별시' +
+                        data.results[0].region.area2.name + '관악구' +
+                        data.results[0].region.area3.name + '봉천동' +
                         data.results[0].land.name;
 
                     // 마커 클릭 이벤트 리스너 추가
