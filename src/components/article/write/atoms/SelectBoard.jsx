@@ -12,17 +12,10 @@ const boardList = [
 
     {idx:1,boardName:"공지사항",boardValue:'NOTICE'},
     {idx:2,boardName:"자유게시판", boardValue:'FREEBOARD'},
-<<<<<<< HEAD
-    {idx:2,boardName:"병원",boardValue:'NOTICE'},
-    {idx:2,boardName:"미용",boardValue:'PETINTORODUCE'},
-    {idx:2,boardName:"산책",boardValue:'PETINFO'},
-    {idx:2,boardName:"반려동물 산책 추천",boardValue:'PET'},
-=======
     {idx:3,boardName:"반려동물 자랑",boardValue:'PETINTORODUCE'},
     {idx:4,boardName:"반려동물 관련 정보",boardValue:'PETINFO'},
     {idx:5,boardName:"반려동물 산책 추천",boardValue:'PETWALKING'},
     {idx:6,boardName:"장소 추천", boardValue:'PETPLACE'}
->>>>>>> 271f5608eae019f4778904c837da2d57cd1d21b8
 
 ]
 

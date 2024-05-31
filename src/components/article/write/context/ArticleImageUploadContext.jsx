@@ -2,6 +2,7 @@ import React,{createContext,useContext,useEffect,useState} from "react";
 import axios from "axios";
 
 
+
 //Create a Context 
 export const ArticleImageUploadContext = createContext();
 
@@ -19,12 +20,7 @@ export default function ArticleImageUploadProvider({children}){
     const [imgList, setImgList] = useState([]); //span에 미리보기로 뿌려줄 이미지 정보
     const [files, setFiles] = useState([]); // 파일 정보 Files -> 유사 객체 배열 -> 배열로 얕게 복사
 
-    const [articleBody,setArticleBody] =useState( {
-        articleId:0,
-        articleTags:'',
-        title:'',
-        content:''
-    })
+   
 
  
     //title,content handler
@@ -45,14 +41,14 @@ export default function ArticleImageUploadProvider({children}){
       
     };
 
-    const onSubmit=(e)=>{
-
-        setArticleBody({articleId:1,articleTags:boardName + ' ' + select.toString(),title:title,content:content})
-        console.log(articleBody)
+    const onSubmit= async (e)=>{
+        
         e.preventDefault();
-        axios.post('http://localhost:8080/Post/articleWrite',articleBody)
-             .then(response=>console.log(response))
-             .catch(error => console.log(error))
+        const articleBody = {articleId:1,articleTags:boardName+' '+select.toString(),title:title,content:content};
+        
+        
+      
+       
         reset();
     }
 
@@ -63,7 +59,6 @@ export default function ArticleImageUploadProvider({children}){
         setSelect([]);
         setImgList([]);
         setFiles([]);
-        setArticleBody({articleId:'',articleTags:'',title:'',content:''})
     }
 
     return (                    
