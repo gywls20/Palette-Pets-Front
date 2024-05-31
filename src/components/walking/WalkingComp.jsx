@@ -17,11 +17,30 @@ const WalkingComp = () => {
             script.onload = () => {
                 const mapOptions = {
                     center: new window.naver.maps.LatLng(37.3595704, 127.105399),
-                    zoom: 10
+                    zoom: 10,
+                    draggable: true,
+                    disableTwoFingerTapZoom: true,
                 };
 
                 // 모달이 열릴 때 지도 인스턴스 생성
                 const map = new window.naver.maps.Map(mapRef.current, mapOptions);
+
+                // 지도 클릭 이벤트 리스너 추가
+                window.naver.maps.Event.addListener(map, 'click', function(e) {
+                    // 클릭된 위치에 마커 생성
+                    const marker = new window.naver.maps.Marker({
+                        position: e.coord,
+                        map: map,
+                        animation: window.naver.maps.Animation.DROP, // 마커가 지도에 추가될 때 시작할 애니메이션
+                    });
+
+                    // 마커 클릭 이벤트 리스너 추가
+                    window.naver.maps.Event.addListener(marker, 'click', function() {
+                        // 마커 정보나 위치를 기반으로 selectPlace 함수 호출
+                        // 예시에서는 간단히 마커의 위치 정보를 문자열로 변환하여 전달
+                        selectPlace(`위도: ${marker.getPosition().lat()}, 경도: ${marker.getPosition().lng()}`);
+                    });
+                });
 
                 // 지도 크기 재조정
                 setTimeout(() => {
@@ -30,7 +49,7 @@ const WalkingComp = () => {
                 }, 0);
             };
         }
-    }, [isModalOpen]); // isModalOpen 상태가 변경될 때마다 이 useEffect를 실행
+    }, [isModalOpen]);
 
     const handleSearch = () => {
         setIsModalOpen(true); // 검색 버튼 클릭 시 모달 열기
