@@ -92,7 +92,7 @@ export default function SelectTags() {
           ))}
         </Select>
       </FormControl>
-      </div>
+    </div>
     </>
   );
 }
