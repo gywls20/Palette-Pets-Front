@@ -23,7 +23,7 @@
         top: 8%;
         left: 32%;
         width: 36%;
-        height: 50%;
+        height: 51%;
         background-color: white;
         padding: 10px;
         z-index: 100;
@@ -31,11 +31,11 @@
         border: 1px solid #000;
     }
     .closeButton{
+        height: 40px;
         display: flex;
         position: relative;
         background-color: black;
         left: 45%;
-        bottom: 9%;
     }
 }
 
@@ -44,7 +44,7 @@
         position: fixed;
         top: 10%;
         width: 99%;
-        height: 75%;
+        height: 56%;
         background-color: white;
         padding: 10px;
         z-index: 100;
@@ -57,7 +57,6 @@
         position: relative;
         background-color: black;
         left: 42%;
-        bottom: 7%;
     }
 
 }
