@@ -8,6 +8,7 @@
     
     /* 한 줄이 꽉 차면 다음 줄로 */
     flex-wrap: wrap;
+    padding-bottom: 1rem;
 }
 
 .iconButtonColumn {

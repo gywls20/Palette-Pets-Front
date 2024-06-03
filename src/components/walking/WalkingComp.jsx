@@ -63,6 +63,17 @@ const WalkingComp = () => {
         window.naver.maps.Event.addListener(map, 'click', function (e) {
             const position = e.coord;
             placeMarkerAndPanTo(position, map);
+        });
+    };
+
+    const placeMarkerAndPanTo = (position, map) => {
+        const marker = new window.naver.maps.Marker({
+            position: position,
+            map: map,
+            animation: window.naver.maps.Animation.DROP,
+        });
+
+        window.naver.maps.Event.addListener(marker, 'click', function () {
             setMapPoint({ x: position.x, y: position.y });
 
             // 좌표를 이용하여 주소 가져오기
@@ -70,11 +81,11 @@ const WalkingComp = () => {
                 window.naver.maps.Service.reverseGeocode({
                     coords: position,
                     orders: [
-                        naver.maps.Service.OrderType.ADDR,
-                        naver.maps.Service.OrderType.ROAD_ADDR
+                        window.naver.maps.Service.OrderType.ADDR,
+                        window.naver.maps.Service.OrderType.ROAD_ADDR,
                     ].join(',')
                 }, function(status, response) {
-                    if (status !== naver.maps.Service.Status.OK) {
+                    if (status !== window.naver.maps.Service.Status.OK) {
                         console.error('주소를 가져오는 데 에러가 발생했습니다.');
                         setSelectedAddress('주소를 찾을 수 없습니다.');
                         return;
@@ -87,15 +98,11 @@ const WalkingComp = () => {
             } else {
                 console.error('naver.maps.Service 객체를 찾을 수 없습니다.');
             }
-        });
-    };
 
-    const placeMarkerAndPanTo = (position, map) => {
-        new window.naver.maps.Marker({
-            position: position,
-            map: map,
-            animation: window.naver.maps.Animation.DROP,
+            // 마커를 클릭하면 모달을 닫기
+            closeModal();
         });
+
         map.panTo(position);
     };
 
@@ -118,6 +125,9 @@ const WalkingComp = () => {
             <div className="search">
                 <button onClick={handleSearch}>산책로 검색</button>
                 {selectedAddress && <p>선택된 주소: {selectedAddress}</p>}
+                <div>마커 클릭 좌표:</div>
+                <div>x: {mapPoint.x}</div>
+                <div>y: {mapPoint.y}</div>
             </div>
         </div>
     );

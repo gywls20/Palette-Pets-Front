@@ -28,7 +28,7 @@ a:hover {
 }
 
 body {
-  padding: 0.5rem 0 0 0;
+  padding-top: 0.5rem;
   margin: auto;
   place-items: center;
   justify-content: space-between;
@@ -36,9 +36,6 @@ body {
   max-width: 40rem;
   background-color: #f3f4f6;
   height: 100vh;
-  /* display: flex; */
-  /* margin: 0; */
-  /* min-width: 320px; */
 }
 
 h1 {
@@ -66,20 +63,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #000;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-
 /*reviewComp*/
 
 .slick-track {
@@ -89,6 +72,7 @@ button:focus-visible {
 .reviewSlider {
   display: flex !important;
   margin-bottom: 1rem;
+  padding-bottom: 5rem;
 }
 
 .MuiContainer-root,

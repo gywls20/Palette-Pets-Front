@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { styled } from '@mui/system';
 import "../../styles/managerPage/ManagerPage.css";
+import ArticleService from "../../service/ArticleService.jsx";
 
 const TabButton = styled('button')`
     border: none;
