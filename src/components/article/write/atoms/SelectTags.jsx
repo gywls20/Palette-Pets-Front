@@ -7,6 +7,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
+import { Button } from '@mui/material';
+import axios from 'axios';
+import ArticleService from '../../../../service/ArticleService';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -28,6 +31,8 @@ const names = [
  '간식추천',
  '산책로',
  '어디갈까',
+ '자유게시판',
+ '원근'
  
 
 ];
@@ -53,7 +58,26 @@ export default function SelectTags() {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
+    console.log("personName = " + personName);
+    console.log("event = "+ event);
   };
+
+  // axios get 요청 백에다 보내기
+  const tagSearchSubmit = () => {
+    const ARTICLE_API_BASE_URL = "http://localhost:8080/article/list";
+    axios.post(`${ARTICLE_API_BASE_URL}?where=${personName}`)
+    .then((res) => {
+      console.log(res.data)
+    })
+
+    console.log('selected tags = ' + personName);
+    alert(personName);
+  };
+
+  function tagSearchSubmit2(e) {
+    e.preventDefault();
+    <ArticleService value={personName}/>
+  }
 
   const onDelete = (e) =>{
     console.log(e.value.label)
@@ -82,6 +106,7 @@ export default function SelectTags() {
             <MenuItem
               key={name}
               value={name}
+              // onClick={changeTags(name)}
               style={getStyles(name, personName, theme)}
             >
               {name}
@@ -89,6 +114,9 @@ export default function SelectTags() {
           ))}
         </Select>
       </FormControl>
+      <Button type="submit" formMethod="get" onClick={tagSearchSubmit2}>
+        태그검색
+      </Button>
     </>
   );
 }
