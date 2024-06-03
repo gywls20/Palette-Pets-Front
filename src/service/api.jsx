@@ -7,6 +7,9 @@
 
 // const API_SERVER_HOST = `http://223.130.134.185:8080`;
 import axios from "axios";
+import { common } from "@mui/material/colors";
+import { deleteToken } from "../store/MemberSlice.js";
+import { useDispatch } from "react-redux";
 import jwtAxios from "./jwtAxios.js";
 
 const API_SERVER_HOST = `http://localhost:8080`;
@@ -28,7 +31,7 @@ axios.defaults.baseURL = API_SERVER_HOST;
 // test 조회 api -> 예시용 (쓰지마세요)
 export const memberTest = () => {
     return axios.get(`${API_SERVER_HOST}/member/test`, {
-        headers : {
+        headers: {
             jsonHeaders
         }
     })
@@ -44,7 +47,7 @@ export const memberTest = () => {
 // login 로직
 export const login = (dto) => {
     return axios.post(`${API_SERVER_HOST}/login`, {
-        username : dto.username,
+        username: dto.username,
         password: dto.password,
     }, {
         headers: jsonHeaders
@@ -62,7 +65,7 @@ export const login = (dto) => {
 
 // logout post 요청
 export const logout = () => {
-    return axios.post(`${API_SERVER_HOST}/logout`,{},{
+    return axios.post(`${API_SERVER_HOST}/logout`, {}, {
         headers: jsonHeaders
     })
         .then((response) => {

@@ -85,6 +85,7 @@ const root = createBrowserRouter([
         path: "/walking",
         element: <Suspense fallback={<Loading/>}><WalkingPage/></Suspense>
     },
+    
 
 ]);
 
