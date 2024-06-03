@@ -1,15 +1,13 @@
 import { Article } from "@mui/icons-material";
 import axios from "axios";
 
-//const ARTICLE_API_BASE_URL = "http://localhost:8080/article/test";
-
-const ARTICLE_API_BASE_URL = "http://localhost:8080/api/test/querydsl";
+const ARTICLE_API_BASE_URL = "http://localhost:8080/article/list";
 
 class ArticleService {
-    getArticleList(page, sort, asc) {
+    getArticleList(page, sort, dir, personName) {
         //return axios.get(ARTICLE_API_BASE_URL);
-        return axios.get(`${ARTICLE_API_BASE_URL}?page=${page}&sort=${sort}&asc=${asc}`)
+        return axios.get(`${ARTICLE_API_BASE_URL}?page=${page}&sort=${sort}&dir=${dir}&where=${personName}`)
     }
-
 }
+
 export default new ArticleService();
