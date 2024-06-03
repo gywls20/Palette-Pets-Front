@@ -15,14 +15,16 @@ const CategoryComp = () => {
             </div>
 
             <div className={CategoryStyle.iconsBar}>
-                <Link to='/board'>
+                {/* <Link to='/board'> */}
+                <Link to={{ pathname: '/board', search: '?sort=articleId' }}>
                     <button className={CategoryStyle.iconButtonColumn}>
                         <FontAwesomeIcon icon={faArrowUpRightDots} className={CategoryStyle.iconColumn} style={{ color: "#ff0000" }} />
                         <span> 인기</span>
                     </button>
                 </Link>
 
-                <Link to='/recent'>
+                {/* <Link to='/recent'> */}
+                <Link to={{ pathname: '/recent', search: '?sort=createdAt' }}>
                     <button className={CategoryStyle.iconButtonColumn}>
                         <FontAwesomeIcon icon={faArrowUpRightDots} className={CategoryStyle.iconColumn} style={{ color: "#ff0000" }} />
                         <span> 최신순</span>

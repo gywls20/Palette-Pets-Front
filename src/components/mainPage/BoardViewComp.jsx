@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Box, Modal } from '@mui/material';
 import AutoSlideImgComp from './AutoSlideImgComp';
+import Swal from 'sweetalert2'
 
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
 import Anhae from '../../image/anhae.jpg'
@@ -15,6 +16,14 @@ const BoardView = () => {
     const openModal = () => setModal(true)
 
     const closeModal = () => setModal(false)
+
+    const onLogin = () => {
+        Swal.fire({
+            title: '로그인이 필요합니다.',
+            text: '로그인 해주세요^^',
+            icon: 'false'
+        })
+    }
 
     const style = {
         position: 'absolute',
@@ -62,14 +71,14 @@ const BoardView = () => {
 
                         <p className={BoardViewStyle.postContent}>여기에 게시물 내용이 들어갑니다. 여기에 게시물 내용이 들어갑니다.</p>
                         <div className={BoardViewStyle.postActions}>
-                            <button className={BoardViewStyle.postActionButton}>
+                            <button className={BoardViewStyle.postActionButton} onClick={onLogin}>
                                 <FontAwesomeIcon icon={faHeart} className={BoardViewStyle.postAction} style={{ color: "#ffffff" }} />
-                                <span>좋아요</span>
+                                <span> 좋아요</span>
                             </button>
 
-                            <button className={BoardViewStyle.postActionButton}>
+                            <button className={BoardViewStyle.postActionButton} onClick={onLogin}>
                                 <FontAwesomeIcon icon={faCommentDots} className={BoardViewStyle.postAction} />
-                                <span>댓글</span>
+                                <span> 댓글</span>
                             </button>
                         </div>
                     </div>

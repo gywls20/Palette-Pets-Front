@@ -8,18 +8,62 @@ import {Button, FormHelperText, InputAdornment} from "@mui/material";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {petImgTest, petRegisterRequest} from "../../service/petApi.jsx";
+import {useNavigate} from "react-router-dom";
 
 const PetRegisterForm = ({ closeModal }) => {
 
+    const [petName, setPetName] = useState("");
+    const [petImage, setPetImage] = useState(null);
+    const [petImagePreview, setPetImagePreview] = useState(null);
     const [petCategory1, setPetCategory1] = useState("");
     const [petCategory2, setPetCategory2] = useState("");
     const [petGender, setPetGender] = useState("");
     const [petBirth, setPetBirth] = useState();
+    const [petWeight, setPetWeight] = useState(0);
+    const navigate = useNavigate();
 
-    const registerPet = () => {
-        alert("등록");
+    const registerPet = async () => {
+
+        if (petName === undefined || petName === "") {
+            alert("Please enter petName");
+            return;
+        } else if (petCategory1 === undefined || petCategory1 === "") {
+            alert("Please enter petCategory1");
+            return;
+        } else if (petCategory2 === undefined || petCategory2 === "") {
+            alert("Please enter petCategory2");
+            return;
+        } else if (petBirth === undefined || petBirth === "") {
+            alert("Please enter petBirth");
+            return;
+        } else if (petGender === undefined || petGender === "") {
+            alert("Please enter petGender");
+            return;
+        }  else if (petWeight === undefined || petWeight === null) {
+            alert("Please enter petWeight");
+            return;
+        }
+
+        const dto = {
+            createdWho: 1, // 임시 테스트용 회원
+            petName: petName,
+            petImage: "after_fileUpload_you_need_to_save_s3_path",
+            petCategory1: petCategory1,
+            petCategory2: petCategory2,
+            petBirth: petBirth.toString(),
+            petGender: petGender,
+            petWeight: petWeight,
+        }
+
+        const result = await petRegisterRequest(dto, petImage);
+        console.log(result);
+        window.location.reload();
     };
 
+    const handleChangePetName = (e) => {
+        setPetName(e.target.value);
+    }
     const handleChangePetCategory1 = (e) => {
         setPetCategory1(e.target.value);
     }
@@ -29,6 +73,19 @@ const PetRegisterForm = ({ closeModal }) => {
     const handleChangePetGender = (e) => {
         setPetGender(e.target.value);
     }
+    const handleChangePetWeight = (e) => {
+        setPetWeight(e.target.value);
+    }
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        setPetImage(file);
+        const reader = new FileReader();
+        reader.onload = () => {
+            setPetImagePreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+    }
 
     return (
         <>
@@ -36,10 +93,26 @@ const PetRegisterForm = ({ closeModal }) => {
                 <h2>반려동물 등록</h2>
             </div>
             <div className="register-form">
-                <TextField id="outlined-basic" fullWidth={true} label="petName" variant="outlined" required/>
+                <TextField id="outlined-basic" fullWidth={true} label="petName" variant="outlined"
+                           value={petName} onChange={handleChangePetName} required/>
                 <br/>
                 <br/>
-                <TextField id="outlined-basic" fullWidth={true} label="petImage" variant="outlined"/>
+                {petImagePreview && (
+                    <img src={petImagePreview} width="100" height="100" alt="펫 이미지 미리보기" />
+                )}
+                <input
+                    accept="image/*"
+                    style={{display: 'none'}}
+                    id="raised-button-file"
+                    type="file"
+                    onChange={handleImageUpload}
+                />
+                <br/>
+                <label htmlFor="raised-button-file">
+                    <Button variant="contained" component="span">
+                        이미지 업로드
+                    </Button>
+                </label>
                 <br/>
                 <br/>
                 <FormControl fullWidth={true}>
@@ -87,9 +160,9 @@ const PetRegisterForm = ({ closeModal }) => {
                                 onChange={handleChangePetCategory2}
                             >
                                 <MenuItem value={''}>선택하세요</MenuItem>
-                                <MenuItem value={'cat1'}>길냥이</MenuItem>
-                                <MenuItem value={'cat2'}>침냥이</MenuItem>
-                                <MenuItem value={'cat3'}>ㅈ냥이</MenuItem>
+                                <MenuItem value={'Ragdoll'}>랙돌</MenuItem>
+                                <MenuItem value={'RussianBlue'}>러시안 블루</MenuItem>
+                                <MenuItem value={'NorwegianForestCat'}>노르웨이 숲 고양이</MenuItem>
                             </Select>
                         </FormControl>
                     )
@@ -125,6 +198,8 @@ const PetRegisterForm = ({ closeModal }) => {
                 <br/>
                 <FormControl fullWidth={true} variant="outlined">
                     <OutlinedInput
+                        value={petWeight}
+                        onChange={handleChangePetWeight}
                         id="outlined-adornment-weight"
                         endAdornment={<InputAdornment position="end">kg</InputAdornment>}
                         aria-describedby="outlined-weight-helper-text"

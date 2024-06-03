@@ -1,5 +1,6 @@
 import {lazy, Suspense} from "react";
 import {Navigate} from "react-router-dom";
+import IsLogin from "./IsLogin.jsx";
 // import {Navigate} from "react-router-dom";
 
 const Loading = <div>Loading....</div>
@@ -16,11 +17,11 @@ const petRouter = () => {
         },
         {
             path: "list",
-            element: <Suspense fallback={Loading}><PetList/></Suspense>
+            element: <Suspense fallback={Loading}><IsLogin Component={<PetList/>} /></Suspense>
         },
         {
             path: "details/:id",
-            element: <Suspense fallback={Loading}><PetDetails/></Suspense>
+            element: <Suspense fallback={Loading}><IsLogin Component={<PetDetails/>} /></Suspense>
         },
     ]
 }

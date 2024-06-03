@@ -2,10 +2,11 @@ import {Box, Button, Card, CardContent, CardMedia, IconButton, Typography} from 
 import ListIcon from '@mui/icons-material/List';
 import SendIcon from '@mui/icons-material/Send';
 import CloseIcon from '@mui/icons-material/Close';
-import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 import PetUpdateForm from "./PetUpdateForm.jsx";
 import { styled } from '@mui/system';
+import {petDeleteRequest, petDetailRequest, petListRequest} from "../../service/petApi.jsx";
 
 const RoundedCardMedia = styled(CardMedia)({
     borderRadius: '50%',
@@ -25,18 +26,31 @@ const CloseButton = styled(IconButton)({
 
 
 const PetDetails = () => {
-    const pet = {
-        petId: 1,
-        createdWho: 1,
-        petName: "김승원",
-        petImage: "https://images.mypetlife.co.kr/content/uploads/2023/11/17133418/61fbb115-3845-4427-b72d-76c5e650cd3c.jpeg",
-        petCategory1: "dog",
-        petCategory2: "jindo",
-        petBirth: "2022-01-01",
-        petGender:'F',
-        petWeight: 20,
-        petImgList: {}
-    };
+    const {id} = useParams();
+    const [pet, setPet] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // pet details query
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await petDetailRequest(id);
+                console.log("data = " + data);
+                if (data === 'REFRESH_TOKEN_EXPIRED_ERROR') {
+                    window.location.replace('/login');
+                } else {
+                    setPet(data);
+                    setIsLoading(false);
+                }
+            } catch (error) {
+                console.log('Failed to fetch data = ' + error);
+                setError(error);
+                setIsLoading(false);
+            }
+        }
+        fetchData();
+    }, []);
 
     // 펫 등록 폼 -> 모달 처럼 관리
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,18 +61,28 @@ const PetDetails = () => {
         setIsModalOpen(false);
     };
 
-    const handleCloseClick = () => {
+    const handleCloseClick =  async () => {
         // X 버튼 클릭 시 수행할 동작을 여기에 작성합니다.
         const isDelete = confirm("정말로 삭제 하시겠습니까?");
         if (isDelete) {
-            alert("삭제됨 flag=" + isDelete);
+            const result = await petDeleteRequest(pet.petId);
+            console.log(result);
+            alert("반려동물 정보를 삭제했습니다.");
+            navigate('/pet/list');
         } else {
             alert("삭제안됨 flag=" + isDelete);
         }
-        // navigate('/pet');
     };
 
     const navigate = useNavigate();
+
+    if (isLoading) {
+        return <div>로딩 중...</div>;
+    }
+
+    if (error) {
+        return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
+    }
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', p: 2 }}>
@@ -69,7 +93,7 @@ const PetDetails = () => {
                 <RoundedCardMedia
                     component="img"
                     height="300"
-                    image={pet.petImage}
+                    image={"https://kr.object.ncloudstorage.com/palettepets/pet/" + pet.petImage}
                     alt={pet.petName}
                 />
                 <CardContent sx={{ p: 3 }}>

@@ -1,5 +1,5 @@
 import {lazy, Suspense} from "react";
-import { createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import testRouter from "./testRouter.jsx";
 import articleRouter from "./articleRouter.jsx";
 import BoardPage from "../pages/board/BoardPage.jsx";
@@ -85,6 +85,7 @@ const root = createBrowserRouter([
         path: "/walking",
         element: <Suspense fallback={<Loading/>}><WalkingPage/></Suspense>
     },
+    
 
 ]);
 
