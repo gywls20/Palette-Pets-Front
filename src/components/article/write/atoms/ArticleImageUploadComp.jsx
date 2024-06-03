@@ -117,7 +117,7 @@ const ArticleImageUploadComp = () => {
                     {
 
                         imgList.map((item, index) =>
-                            <div className='image-container '>
+                            <div className='image-container ' key={index}>
                                 <img src={item} alt={index} className="image" width='80' height='80' />
 
                             </div>

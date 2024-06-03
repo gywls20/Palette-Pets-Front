@@ -61,7 +61,8 @@ export default function SelectTags() {
   }
   return (
     <>
-      <FormControl sx={{m:1 ,width:"90%"}}>
+    <div>
+      <FormControl sx={{m:1 ,width:"80%"}}>
         <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
@@ -91,7 +92,7 @@ export default function SelectTags() {
           ))}
         </Select>
       </FormControl>
-    
+    </div>
     </>
   );
 }

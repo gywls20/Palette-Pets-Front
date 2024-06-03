@@ -6,24 +6,26 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import {Button, FormHelperText, InputAdornment} from "@mui/material";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
+import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {petImgTest, petRegisterRequest} from "../../service/petApi.jsx";
+import {petUpdateRequest} from "../../service/petApi.jsx";
 import {useNavigate} from "react-router-dom";
 
-const PetRegisterForm = ({ closeModal }) => {
+const PetUpdateForm = ({ closeModal, pet }) => {
 
-    const [petName, setPetName] = useState("");
-    const [petImage, setPetImage] = useState(null);
-    const [petImagePreview, setPetImagePreview] = useState(null);
-    const [petCategory1, setPetCategory1] = useState("");
-    const [petCategory2, setPetCategory2] = useState("");
-    const [petGender, setPetGender] = useState("");
+    const [petName, setPetName] = useState(pet.petName);
+    const [petImage, setPetImage] = useState(pet.petImage);
+    const [petImagePreview, setPetImagePreview] = useState("https://kr.object.ncloudstorage.com/palettepets/pet/" + pet.petImage);
+    const [petCategory1, setPetCategory1] = useState(pet.petCategory1);
+    const [petCategory2, setPetCategory2] = useState(pet.petCategory2);
+    const [petGender, setPetGender] = useState(pet.petGender);
     const [petBirth, setPetBirth] = useState();
-    const [petWeight, setPetWeight] = useState(0);
+    const [petWeight, setPetWeight] = useState();
     const navigate = useNavigate();
 
-    const registerPet = async () => {
+    console.log(pet)
+
+    const updatePet = async () => {
 
         if (petName === undefined || petName === "") {
             alert("Please enter petName");
@@ -46,9 +48,10 @@ const PetRegisterForm = ({ closeModal }) => {
         }
 
         const dto = {
-            createdWho: 1, // 임시 테스트용 회원
+            petId: pet.petId,
+            createdWho: 1,
             petName: petName,
-            petImage: "after_fileUpload_you_need_to_save_s3_path",
+            petImage: pet.petImage,
             petCategory1: petCategory1,
             petCategory2: petCategory2,
             petBirth: petBirth.toString(),
@@ -56,7 +59,7 @@ const PetRegisterForm = ({ closeModal }) => {
             petWeight: petWeight,
         }
 
-        const result = await petRegisterRequest(dto, petImage);
+        const result = await petUpdateRequest(dto, petImage);
         console.log(result);
         window.location.reload();
     };
@@ -90,7 +93,7 @@ const PetRegisterForm = ({ closeModal }) => {
     return (
         <>
             <div className="pet">
-                <h2>반려동물 등록</h2>
+                <h2>반려동물 정보 수정</h2>
             </div>
             <div className="register-form">
                 <TextField id="outlined-basic" fullWidth={true} label="petName" variant="outlined"
@@ -210,7 +213,7 @@ const PetRegisterForm = ({ closeModal }) => {
                     <FormHelperText id="outlined-weight-helper-text">Weight</FormHelperText>
                 </FormControl>
 
-                <Button variant="outlined" onClick={registerPet}>등록</Button>
+                <Button variant="outlined" onClick={updatePet}>등록</Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Button variant="outlined" onClick={closeModal}>취소</Button>
 
@@ -219,4 +222,4 @@ const PetRegisterForm = ({ closeModal }) => {
     );
 }
 
-export default PetRegisterForm;
+export default PetUpdateForm;

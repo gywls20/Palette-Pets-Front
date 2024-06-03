@@ -58,8 +58,6 @@ const PetAgeComp = () => {
             
             if (description === '')
                 alert('날짜를 입력하세요.')
-            else if (daysOld < 30)
-                alert('1개월 미만입니다.')
             else{
             setHumanAge(`사람 나이로는 ${calculatedAge}살 입니다.`);
             setAgeDescription(`태어난 지 ${daysOld}일\n${description} 되었습니다.`);
