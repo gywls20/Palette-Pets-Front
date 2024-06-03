@@ -73,12 +73,12 @@ const BoardView = () => {
                         <div className={BoardViewStyle.postActions}>
                             <button className={BoardViewStyle.postActionButton} onClick={onLogin}>
                                 <FontAwesomeIcon icon={faHeart} className={BoardViewStyle.postAction} style={{ color: "#ffffff" }} />
-                                <span>좋아요</span>
+                                <span> 좋아요</span>
                             </button>
 
                             <button className={BoardViewStyle.postActionButton} onClick={onLogin}>
                                 <FontAwesomeIcon icon={faCommentDots} className={BoardViewStyle.postAction} />
-                                <span>댓글</span>
+                                <span> 댓글</span>
                             </button>
                         </div>
                     </div>
