@@ -14,7 +14,6 @@ import { useSelector } from 'react-redux';
 
 const BoardViewComp = () => {
     const [modal, setModal] = useState(false);
-    const [isLogin, setIsLogin] = useState('');
     const [like, setLike] = useState(false);
     const [showCommentBox, setShowCommentBox] = useState(false);
     const [comment, setComment] = useState('');
