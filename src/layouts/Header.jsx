@@ -77,7 +77,9 @@ export default function Header() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>프로필</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                <Link to='/pet/list'>프로필</Link>
+            </MenuItem>
             {
                 token ? (
                     <MenuItem onClick={handleMenuClose}>

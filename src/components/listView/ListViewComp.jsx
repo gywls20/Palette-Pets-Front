@@ -1,6 +1,5 @@
 import React, {useEffect, createContext, useReducer, useMemo} from 'react';
 import "../../styles/board/BoardList.css"
-import Category from "../CategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
 import url from '../../utils/single.js';
 import PageButton from './PageBtnComp.jsx';
@@ -143,7 +142,6 @@ function ListViewComp() {
     return (
     <ArticleListStates.Provider value={value}>
         <div className='header'>
-            <Category/>
         </div>
         <hr/>
         <main className="container mx-auto px-4 py-4">
