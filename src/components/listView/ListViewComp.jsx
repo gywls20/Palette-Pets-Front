@@ -4,6 +4,7 @@ import Category from "../CategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
 import PageButton from './PageBtnComp.jsx';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 export const ArticleListStates = createContext({ 
   // 페이지 번호와 상태 공유
@@ -38,7 +39,6 @@ const getLenArray = (e,countArticle) =>{
   return [e-2, e-1, e, e+1, e+2];
 }
 export const ClickBtn = 'ClickBtn';
-export const GetArticles = 'GetArticles';
 export const CountList = 'CountList';
 export const SetSort = 'SetSort';
 export const SetList = 'SetList';
@@ -55,13 +55,6 @@ const reducer = (state,action) => {
               page : e,
               len : getLenArray(e,countArticle),
           }
-      case GetArticles :
-          console.log("GetArticles : ",action.articles);
-          console.log("gegege : ",articles);
-          return{
-              ...state,
-              articles : action.articles, 
-          };
       case CountList:
           return{
               ...state,
@@ -101,22 +94,23 @@ function ListViewComp() {
 
     //초기화 설정
     useEffect(() => {
-      console.log("useEffect, Page");
-      console.log("dir UseEffect : ", dir)
+      axios.get(`http://localhost:8080/article/listCount?where=${where}`).then((res) => {
+        console.log("length : ",res)
+        dispatch({type: CountList, countArticle: Math.ceil(res.data/MaxLen)});
+    }).catch(error => {
+        console.error("Error fetching articles:", error);
+    });
       fetchArticles();
     }, [page]); // 페이지가 로드될 때 한 번만 실행
 
     useEffect(() => {
         dispatch({type: SetSort, sort: sortParam, articles: []}); // 초기화
-        // setSort(sortParam); // 쿼리 파라미터에서 sort 값을 읽어 설정
-        // setArticles([]);
-        // setPage(1);
-        // setHasMore(true);
     }, [sortParam]);
   
     const fetchArticles = () => {
       ArticleService.getArticleList(page, sort, dir, where).then((res) => {
         dispatch({type: SetList, articles: res.data, countArticle: Math.ceil(res.data/MaxLen)});
+  
         // setArticles(prevArticles => [...prevArticles, ...res.data]);  기존 배열에 값을 더해 추가  
         console.log("articles : ",articles);
         console.log("countArticle : ",countArticle);
