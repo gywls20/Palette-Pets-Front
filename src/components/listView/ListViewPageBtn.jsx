@@ -3,7 +3,7 @@ import "../../styles/board/BoardList.css"
 import Category from "../CategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
 import url from '../../utils/single.js';
-import PageButton from './PageBtnComp.jsx';
+// import PageButton from './PageBtnComp.jsx';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,7 +11,6 @@ export const ArticleListStates = createContext({
   // 페이지 번호와 상태 공유
   len : [1,2,3,4,5],
   pages : 1,
-  countArticle : -1,
   dispatch : () =>{},
 })
 
@@ -44,7 +43,6 @@ export const ClickBtn = 'ClickBtn';
 export const CountList = 'CountList';
 export const SetSort = 'SetSort';
 export const SetList = 'SetList';
-export const SetLast = 'SetLast';
 
 const reducer = (state,action) => {
   const {countArticle, articles} = state;
@@ -77,13 +75,6 @@ const reducer = (state,action) => {
             len : getLenArray(1,countArticle),
             countArticle : action.countArticle,
           };
-      case SetLast:
-          return{
-              ...state,
-              page : countArticle,
-              len : [countArticle - 2, countArticle - 1, countArticle],
-          };
-  
       default:
           return;
   }
@@ -161,9 +152,9 @@ function ListViewComp() {
                     )
                 }
         </main>
-        <PageButton />
+        {/* <PageButton /> */}
       </ArticleListStates.Provider>
     );
 };
 
-export default ListViewComp;
+// export default ListViewComp;
