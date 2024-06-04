@@ -7,7 +7,7 @@ import { faArrowUpRightDots, faBone, faDog, faHouseMedical, faLocationDot } from
 import SelectTags from './article/write/atoms/SelectTags';
 import { Link } from 'react-router-dom';
 
-const CategoryComp = () => {
+const PetCategoryComp = () => {
     return (
         <>
             <div>
@@ -70,4 +70,4 @@ const CategoryComp = () => {
     );
 };
 
-export default CategoryComp;
+export default PetCategoryComp;

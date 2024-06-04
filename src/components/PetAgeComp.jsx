@@ -90,9 +90,10 @@ const PetAgeComp = () => {
                             onChange={(e) => setBirthDate(e.target.value)}
                             placeholder="반려동물의 생년월일을 입력하세요"
                         />
-                        <button onClick={handleCalculate}>계산하기</button>
                     </div>
                 )}
+                <br/>
+                <button onClick={handleCalculate}>계산하기</button>
                 <p>{humanAge}</p>
                 <p>
                     {ageDescription.split('\n').map((line, index) => (

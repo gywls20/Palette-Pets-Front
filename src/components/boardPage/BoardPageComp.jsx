@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import "../../styles/board/BoardList.css";
-import Category from "../CategoryComp.jsx";
+import PetCategoryComp from "../PetCategoryComp.jsx";
 
 const BoardPageComp = () => {
   return (
     <>
       <div className="header">
-        <Category />
+        <PetCategoryComp />
       </div>
       <hr />
       <main className="container mx-auto px-4 py-4">
