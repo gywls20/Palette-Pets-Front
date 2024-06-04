@@ -1,7 +1,8 @@
-import React, {useState, useEffect, createContext, useReducer, useMemo} from 'react';
+import React, {useEffect, createContext, useReducer, useMemo} from 'react';
 import "../../styles/board/BoardList.css"
 import Category from "../CategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
+import url from '../../utils/single.js';
 import PageButton from './PageBtnComp.jsx';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -94,7 +95,7 @@ function ListViewComp() {
 
     //초기화 설정
     useEffect(() => {
-      axios.get(`http://localhost:8080/article/listCount?where=${where}`).then((res) => {
+      axios.get(`${url}/article/listCount?where=${where}`).then((res) => {
         console.log("length : ",res)
         dispatch({type: CountList, countArticle: Math.ceil(res.data/MaxLen)});
     }).catch(error => {

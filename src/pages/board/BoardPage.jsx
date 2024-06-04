@@ -1,10 +1,10 @@
-import BoardPageComp from "../../components/boardPage/BoardPageComp.jsx";
+import ListVIewComp from "../../components/listView/ListViewComp.jsx";
 import DefaultLayout from "../../layouts/DefaultLayout.jsx";
 
 const BoardPage = () => {
     return (
         <DefaultLayout>
-            <BoardPageComp/>
+            <ListVIewComp/>
         </DefaultLayout>
     );
 };

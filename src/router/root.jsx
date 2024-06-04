@@ -4,7 +4,6 @@ import testRouter from "./testRouter.jsx";
 import articleRouter from "./articleRouter.jsx";
 import BoardPage from "../pages/board/BoardPage.jsx";
 import HealthCalculatorPage from "../pages/HealthCalculatorPage.jsx";
-import ListViewComp from "../components/listView/ListViewComp.jsx";
 import petRouter from "./petRouter.jsx";
 
 
@@ -69,7 +68,7 @@ const root = createBrowserRouter([
 
     {
         path:"/recent",
-        element: <Suspense fallback={<Loading />}><ListViewComp/></Suspense>,
+        element: <Suspense fallback={<Loading />}><BoardPage/></Suspense>,
     },
     {
         path: "/pet",

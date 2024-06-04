@@ -1,7 +1,8 @@
 import { Article } from "@mui/icons-material";
 import axios from "axios";
+import url from "../utils/single.js";
 
-const ARTICLE_API_BASE_URL = "http://localhost:8080/article/list";
+const ARTICLE_API_BASE_URL = `${url}/article/list`;
 
 class ArticleService {
     getArticleList(page, sort, dir, where) {
