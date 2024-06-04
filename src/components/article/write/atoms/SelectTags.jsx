@@ -47,10 +47,14 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function SelectTags() {
+export default function SelectTags({ search, setSearch }) {
   const theme = useTheme();
   const [personName, setPersonName] = useState([]);
 
+  const handleSearchParam = () => {
+    setSearch(document.querySelector(".where").value);
+    console.log("search = " + search);
+  }
 
   const handleChange = (event) => {
     const {
@@ -80,7 +84,7 @@ export default function SelectTags() {
     <div>
       <FormControl sx={{m:1 ,width:"80%"}}>
         {/* <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel> */}
-        <input type='text'></input>
+        <input type='text' className='where'></input>
         {/* <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
@@ -110,7 +114,7 @@ export default function SelectTags() {
           ))}
         </Select> */}
       </FormControl>
-      <Button type="submit" formMethod="get" onClick={tagSearchSubmit}>
+      <Button type="submit" formMethod="get" onClick={handleSearchParam}>
         검색
       </Button >
     </div>

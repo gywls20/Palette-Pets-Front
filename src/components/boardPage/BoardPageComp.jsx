@@ -7,7 +7,7 @@ import ArticleService from '../../service/ArticleService.jsx';
 import { useLocation } from 'react-router-dom';
 
 
-function ManagerPageComp() {
+function BoardPageComp({ search }) {
     //URL에서 sort 값 가져오기
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -22,6 +22,13 @@ function ManagerPageComp() {
     const [where, setWhere] = useState('');
     const [hasMore, setHasMore] = useState(true); // 추가 데이터를 불러올 수 있는지 여부(스크롤 사용)
     const [ref, inView] = useInView();
+ 
+    useEffect(() => {
+      console.log("board page search changed = "+ search);
+      setWhere(search);
+      console.log("search :::::",search)
+      fetchArticles();
+    }, [search])
 
     useEffect(() => {
       if (sortParam) {
@@ -59,7 +66,7 @@ function ManagerPageComp() {
         <main className="container mx-auto px-4 py-4">
             {
                 articles.map(articles =>
-                         <div className="post" key= {articles.articleId}>
+                         <div className="post" >
                             <div className="flex justify-between items-center">
                                 <div>
                                     <div className="post-title text-red-500">{articles.title}</div>
@@ -77,4 +84,4 @@ function ManagerPageComp() {
     );
 };
 
-export default ManagerPageComp;
+export default BoardPageComp;

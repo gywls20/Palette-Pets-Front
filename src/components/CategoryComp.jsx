@@ -10,9 +10,9 @@ import { Link } from 'react-router-dom';
 const CategoryComp = () => {
     return (
         <>
-            <div>
+            {/* <div>
                 <SelectTags/>
-            </div>
+            </div> */}
 
             <div className={CategoryStyle.iconsBar}>
                 {/* <Link to='/board'> */}
