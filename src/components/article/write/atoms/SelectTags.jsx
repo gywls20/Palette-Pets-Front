@@ -64,31 +64,24 @@ export default function SelectTags() {
     console.log("event = "+ event);
   };
 
-  // axios get 요청 백에다 보내기
-  const tagSearchSubmit = () => {
-    const ARTICLE_API_BASE_URL = "http://localhost:8080/article/list";
-    axios.post(`${ARTICLE_API_BASE_URL}?where=${personName}`)
-    .then((res) => {
-      console.log(res.data)
-    })
-
-    console.log('selected tags = ' + personName);
-    alert(personName);
-  };
-
-  function tagSearchSubmit2(e) {
+  function tagSearchSubmit(e) {
     e.preventDefault();
     <ArticleService value={personName}/>
+    console.log(personName);
   }
 
+  const textSearchSubmit =(e) =>{
+    
+  }
   const onDelete = (e) =>{
     console.log(e.value.label)
   }
   return (
     <div>
       <FormControl sx={{m:1 ,width:"80%"}}>
-        <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel>
-        <Select
+        {/* <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel> */}
+        <input type='text'></input>
+        {/* <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
@@ -115,11 +108,11 @@ export default function SelectTags() {
               {name}
             </MenuItem>
           ))}
-        </Select>
+        </Select> */}
       </FormControl>
-      <Button type="submit" formMethod="get" onClick={tagSearchSubmit2}>
-        태그검색
-      </Button>
+      <Button type="submit" formMethod="get" onClick={tagSearchSubmit}>
+        검색
+      </Button >
     </div>
   );
 }
