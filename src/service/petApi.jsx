@@ -108,14 +108,22 @@ export const petDeleteRequest = (petId) => {
 }
 
 // 펫 이미지 등록 POST
-export const petImgRegisterRequest = (dto, file) => {
+export const petImgRegisterRequest = (dto, files) => {
 
     const formData = new FormData();
-    formData.append('file', file);
+
+    // 파일을 배열로 처리하여 FormData에 추가
+    files.forEach(file => {
+        formData.append('files', file);
+    });
     const blob = new Blob([JSON.stringify(dto)], {type: "application/json"});
     formData.append('dto', blob);
 
-    return jwtAxios.post(`${API_SERVER_HOST}/pet/img`, formData)
+    return jwtAxios.post(`${API_SERVER_HOST}/pet/img`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
         .then(response => response.data)
         .catch((error) => {
             console.error(error);
@@ -151,6 +159,16 @@ export const petDetailRequest = (petId) => {
             console.error(error);
             console.error(error.response);
             console.error(error.response.data);
+            return error.response.data;
+        });
+}
+
+// 펫 이미지 리스트 GET 요청 -> 회원이 소유한 반려 동물 리스트
+export const petImgListRequest = (petId) => {
+    return jwtAxios.get(`${API_SERVER_HOST}/pet/list/${petId}`)
+        .then(response => response.data)
+        .catch((error) => {
+            console.error(error);
             return error.response.data;
         });
 }
