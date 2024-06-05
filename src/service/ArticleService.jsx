@@ -43,17 +43,10 @@ export const updateArticle = (formData,articleId)=> {
 
 
 class ArticleService {
-<<<<<<< HEAD
-    getArticleList(page, sort, dir, where) {
-        console.log("dir 호출 : ", dir);
-        //return axios.get(ARTICLE_API_BASE_URL);
-        return axios.get(`${ARTICLE_API_BASE_URL}?page=${page}&sort=${sort}&dir=${dir}&where=${where}`)
-=======
-   getArticleList(page, sort, dir, search) {
+    getArticleList(page, sort, dir, search) {
         //return axios.get(ARTICLE_API_BASE_URL);
         return axios.get(`${ARTICLE_API_BASE_URL}?page=${page}&sort=${sort}&dir=${dir}&where=${search}`)
         //return axios.get(`${ARTICLE_API_BASE_URL2}?articleTags=${where}`)
->>>>>>> 0cca4c35b1f28140f1f328e3b22bcf25d07f2251
     }
 }
 

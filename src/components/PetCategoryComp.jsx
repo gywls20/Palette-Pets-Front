@@ -10,9 +10,9 @@ import { Link } from 'react-router-dom';
 const PetCategoryComp = () => {
     return (
         <>
-            {/* <div>
-                <SelectTags/>
-            </div> */}
+            <div>
+                {/* <SelectTags/> */}
+            </div>
 
             <div className={CategoryStyle.iconsBar}>
                 {/* <Link to='/board'> */}

@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import {useInView} from 'react-intersection-observer';
 import "../../styles/board/BoardList.css"
-import Category from "../CategoryComp.jsx";
+import Category from "../PetCategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
 import { useLocation } from 'react-router-dom';
 

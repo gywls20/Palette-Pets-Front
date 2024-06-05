@@ -1,46 +1,22 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { Box, Modal } from '@mui/material';
+import React from 'react';
 import AutoSlideImgComp from './AutoSlideImgComp';
+<<<<<<< HEAD
 import Swal from 'sweetalert2'
 import connectChat from './connectChat';
 
+=======
+>>>>>>> 63e4694e83b34063697bdbddb307c6f6e9b0e050
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
-import Anhae from '../../image/anhae.jpg'
 import PetCategoryComp from '../PetCategoryComp'
+import BoardView from './BoardView';
 
-const BoardView = () => {
-    const [modal, setModal] = useState(false)
-
-    const openModal = () => setModal(true)
-
-    const closeModal = () => setModal(false)
-
-    const onLogin = () => {
-        Swal.fire({
-            title: '로그인이 필요합니다.',
-            text: '로그인 해주세요^^',
-            icon: 'false'
-        })
-    }
-
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
-    };
+const BoardViewComp = () => {
     
     return (
         <>
             <AutoSlideImgComp/>
-
+            <br/>
             <PetCategoryComp/>            
             
             <div className={BoardViewStyle.postsSection}>
@@ -48,7 +24,9 @@ const BoardView = () => {
                     <span className={BoardViewStyle.postsTitle}>오늘의 인기글</span>
                     <button className={BoardViewStyle.postsMore}>더보기</button>
                 </div>
+                <BoardView/>
 
+<<<<<<< HEAD
                 <div className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
                         <div className={BoardViewStyle.postHeader}>
@@ -189,9 +167,18 @@ const BoardView = () => {
                         </div>
                     </div>
                 </div>
+=======
+                <BoardView/>
+                
+                <BoardView/>
+                
+                <BoardView/>
+                
+                <BoardView/>
+>>>>>>> 63e4694e83b34063697bdbddb307c6f6e9b0e050
             </div>
         </>
     );
 };
 
-export default BoardView;
+export default BoardViewComp;
