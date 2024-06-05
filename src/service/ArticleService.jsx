@@ -15,13 +15,15 @@ export const writeArticle = (formData) => {
         }
     }
     )
-        .then(response => console.log(response.data))
-        .catch(error => console.log(error.data))
+        .then(response => response.data)
+        .catch(error => error.data)
 }
+
 //글 하나만 가져오기 
-export const getArticle =(articleId) =>{
-    return axios.get(`${API_SERVER_HOST}/Get/article/${articleId}`)
-                
+export const getUpdateArticle =(articleId) =>{
+    return axios.get(`${API_SERVER_HOST}/Get/${articleId}`)
+                .then(response => response.data.result.data)
+                .catch(error => error.data)
 }
 
 //글 업데이트

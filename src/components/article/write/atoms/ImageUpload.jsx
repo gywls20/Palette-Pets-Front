@@ -21,6 +21,7 @@ const style = {
 const ImageUpload = ({ imgFiles, setImgFiles }) => {
     //imgfiles -> Object Storage 및 DB 저장용 , 배열
     //previewList -> 미리보기 및 편집용 , 배열
+    
     const [previewList, setPreviewList] = useState([]);
 
     //trigger 사용을 대체할 ref -> icon 클릭시 파일 열림
