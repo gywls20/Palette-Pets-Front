@@ -4,11 +4,12 @@ import {login} from "../../service/api.jsx";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {saveToken} from "../../store/MemberSlice.js";
+import Swal from 'sweetalert2';
 
 const LoginFormComp = () => {
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -20,9 +21,18 @@ const LoginFormComp = () => {
         console.log(token);
 
         if (token === false) {
-            alert(`Login failed`);
-            window.location.reload();
+            Swal.fire({
+                title: '로그인 실패',
+                text: '다시 입력 해주세요.^^',
+                icon: 'warning'
+            });
+           
         } else {
+            Swal.fire({
+                title: '로그인 성공',
+                text: '환영합니다.^^',
+                icon: 'secces'
+            });
             console.log('로그인 성공');
             dispatch(saveToken(token));
             navigate({pathname: '/'}, {replace: true});
