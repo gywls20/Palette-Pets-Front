@@ -18,6 +18,24 @@ export const writeArticle = (formData) => {
         .then(response => console.log(response.data))
         .catch(error => console.log(error.data))
 }
+//글 하나만 가져오기 
+export const getArticle =(articleId) =>{
+    return axios.get(`${API_SERVER_HOST}/Get/article/${articleId}`)
+                
+}
+
+//글 업데이트
+export const updateArticle = (formData,articleId)=> {
+    return jwtAxios.post(`${API_SERVER_HOST}/Patch/${articleId}`,formData,{
+        headers: {
+            "Access-Control-Allow-Origin": `http://localhost:3000`,
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+        .then(response=> console.log(response.data))
+        .catch(error => console.log(error.data))
+}
+
 
 
 class ArticleService {

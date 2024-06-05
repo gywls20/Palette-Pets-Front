@@ -7,6 +7,7 @@ import InputTitle from './atoms/InputTitle';
 import InputContent from './atoms/InputContent';
 import ImageUpload from './atoms/ImageUpload';
 import { Button } from '@mui/material';
+import { writeArticle } from '../../../service/ArticleService';
 
 
 const initialForm = {
@@ -16,20 +17,25 @@ const initialForm = {
     content: ''
 }
 
+
 const ArticleWriteForm = () => {
 
     const [form, onChange, onInput, reset] = useForm(initialForm);
     const [imgFiles, setImgFiles] = useState([]);
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
 
         const formData = new FormData();
-        formData.append('file', imgFiles);
-        const blob = new Blob([JSON.stringify(form)], {type: "application/json"});
+        Object.values(imgFiles).map((item, index) => {
+            formData.append('files', item);
+        })
+
+        const blob = new Blob([JSON.stringify(form)], { type: "application/json" });
         formData.append('dto', blob);
 
-        
-        console.log(form)
+        await writeArticle(formData)        
+
+       
     }
 
     return (
