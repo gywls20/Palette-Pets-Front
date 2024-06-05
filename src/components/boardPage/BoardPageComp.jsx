@@ -19,40 +19,42 @@ function BoardPageComp({ search }) {
     const [sort, setSort] = useState(sortParam); 
     //const [sort, setSort] = useState(sortParam || 'articleId'); 
     const [dir, setDir] = useState(true); //오름차순
-    const [where, setWhere] = useState('');
-    const [hasMore, setHasMore] = useState(true); // 추가 데이터를 불러올 수 있는지 여부(스크롤 사용)
+    const [where, setWhere] = useState(""); //검색
     const [ref, inView] = useInView();
  
     useEffect(() => {
       console.log("board page search changed = "+ search);
       setWhere(search);
-      console.log("search :::::",search)
-      fetchArticles();
-    }, [search])
+      setPage(1); // search 값이 들어오면 페이지를 1로 초기화(Page = 1일 때만 조회가 되기 때문)
+      setArticles([]); // articles를 초기화
+      fetchArticles(true);
+    }, [search, sort])
 
     useEffect(() => {
       if (sortParam) {
             setSort(sortParam); // 쿼리 파라미터에서 sort 값을 읽어 설정
             setArticles([]);
             setPage(1);
-            setHasMore(true);
         };
     }, [sortParam]);
 
-    const fetchArticles = () => {
-      ArticleService.getArticleList(page, sort, dir, where).then((res) => {
-        console.log("where =" + where);
-          setArticles(articles => [...articles, ...(res.data)]);
-          setPage(page => page + 1);
+    const fetchArticles = (reset = false) => {
+      const pageToFetch = reset ? 1 : page;
+      ArticleService.getArticleList(pageToFetch, sort, dir, search).then((res) => {
+        console.log("where =@!@!@!@!@" + search);
+        console.log(res);
+          setArticles(articles => reset ? res.data : [...articles, ...(res.data)]);
+          //setPage(page => page + 1);
+          setPage(page => pageToFetch + 1);
       })
         .catch((err) => {console.log(err)});
     };
 
+    //무한 페이징
     useEffect(() => {
       // inView가 true 일때만 실행한다.
-      if (inView) {
+      if (inView && page > 1) {
       console.log(inView)
-      
       fetchArticles();
         }
       }, [inView]);
@@ -78,7 +80,7 @@ function BoardPageComp({ search }) {
                         </div>
                     )
                 }
-                <div ref={ref}>dnn</div>
+                <div ref={ref}>끝</div>
         </main>
       </>
     );

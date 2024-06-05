@@ -24,7 +24,7 @@ const CategoryComp = () => {
                 </Link>
 
                 {/* <Link to='/recent'> */}
-                <Link to={{ pathname: '/recent', search: '?sort=createdAt' }}>
+                <Link to={{ pathname: '/board', search: '?sort=createdAt' }}>
                     <button className={CategoryStyle.iconButtonColumn}>
                         <FontAwesomeIcon icon={faArrowUpRightDots} className={CategoryStyle.iconColumn} style={{ color: "#ff0000" }} />
                         <span> 최신순</span>
