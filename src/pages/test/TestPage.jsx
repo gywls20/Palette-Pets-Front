@@ -5,6 +5,7 @@ import {useCallback} from "react";
 import Box from "@mui/material/Box";
 import CommentResisterForm from "../../components/comment/CommentResisterForm.jsx";
 import CommentList from "../../components/comment/CommentList.jsx";
+import ImageTest from "../../components/article/write/atoms/ImageTest.jsx";
 
 const TestPage = () => {
 
@@ -18,8 +19,7 @@ const TestPage = () => {
         <>
             <DefaultLayout>
                 <>
-                    
-                    <CommentList/>
+                   
                 </>
             </DefaultLayout>
         </>
