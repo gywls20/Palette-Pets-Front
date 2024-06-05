@@ -2,11 +2,14 @@ import {Box, Button, Card, CardContent, CardMedia, IconButton, Typography} from 
 import ListIcon from '@mui/icons-material/List';
 import SendIcon from '@mui/icons-material/Send';
 import CloseIcon from '@mui/icons-material/Close';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import PetUpdateForm from "./PetUpdateForm.jsx";
 import { styled } from '@mui/system';
 import {petDeleteRequest, petDetailRequest, petListRequest} from "../../service/petApi.jsx";
+import PetImgForm from "./PetImgForm.jsx";
 
 const RoundedCardMedia = styled(CardMedia)({
     borderRadius: '50%',
@@ -54,11 +57,18 @@ const PetDetails = () => {
 
     // 펫 등록 폼 -> 모달 처럼 관리
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isPicturesOpen, setIsPicturesOpen] = useState(false);
     const openModal = () => {
         setIsModalOpen(true);
     };
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+    const openPictures = () => {
+        setIsPicturesOpen(true);
+    };
+    const closePictures = () => {
+        setIsPicturesOpen(false);
     };
 
     const handleCloseClick =  async () => {
@@ -85,10 +95,10 @@ const PetDetails = () => {
     }
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', p: 2 }}>
-            <Card sx={{ maxWidth: '100%', width: '100%', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)' }}>
+        <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', p: 2}}>
+            <Card sx={{maxWidth: '100%', width: '100%', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)'}}>
                 <CloseButton onClick={handleCloseClick}>
-                    <CloseIcon />
+                    <CloseIcon/>
                 </CloseButton>
                 <RoundedCardMedia
                     component="img"
@@ -96,12 +106,12 @@ const PetDetails = () => {
                     image={"https://kr.object.ncloudstorage.com/palettepets/pet/" + pet.petImage}
                     alt={pet.petName}
                 />
-                <CardContent sx={{ p: 3 }}>
+                <CardContent sx={{p: 3}}>
                     <Typography variant="h4" component="div" gutterBottom>
                         {pet.petName}
                     </Typography>
                     <Typography variant="h6" color="text.secondary" gutterBottom>
-                        생일 : {pet.petBirth} (24년 4개월)
+                        생일 : {pet.petBirth}
                     </Typography>
                     <Typography variant="h6" color="text.secondary" gutterBottom>
                         품종 : {pet.petCategory1}
@@ -109,9 +119,9 @@ const PetDetails = () => {
                     <Typography variant="h6" color="text.secondary" gutterBottom>
                         몸무게 : {pet.petWeight} kg
                     </Typography>
-                    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-                        <Button variant="contained" color="primary" startIcon={<ListIcon />} size="large"
-                            onClick={() => navigate('/pet')}
+                    <Box sx={{display: 'flex', justifyContent: 'center', mt: 3}}>
+                        <Button variant="contained" color="primary" startIcon={<ListIcon/>} size="large"
+                                onClick={() => navigate('/pet')}
                         >
                             목록으로
                         </Button>
@@ -119,10 +129,19 @@ const PetDetails = () => {
                         <Button onClick={openModal}
                                 variant="contained"
                                 color={"inherit"}
-                                startIcon={<SendIcon />}
+                                startIcon={<SendIcon/>}
                                 size="large"
                         >
                             수정하기
+                        </Button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <Button onClick={openPictures}
+                                variant="contained"
+                                color={"inherit"}
+                                startIcon={<CameraAltIcon/>}
+                                size="large"
+                        >
+                            사진첩
                         </Button>
                     </Box>
                 </CardContent>
@@ -131,7 +150,16 @@ const PetDetails = () => {
             {isModalOpen && (
                 <div className="modal-overlay" onClick={closeModal}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <PetUpdateForm closeModal={closeModal} pet={pet} />
+                        <PetUpdateForm closeModal={closeModal} pet={pet}/>
+                    </div>
+                </div>
+            )}
+
+            {isPicturesOpen && (
+                <div className="modal-overlay" onClick={closePictures}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        {/* 여기에 사진첩 추가 및 사진첩 */}
+                        <PetImgForm closePictures={closePictures} petId={pet.id}/>
                     </div>
                 </div>
             )}

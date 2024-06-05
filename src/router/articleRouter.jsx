@@ -1,34 +1,36 @@
-import {lazy, Suspense} from "react";
-import ArticleWriteBlock from "../components/article/write/block/ArticleWriteBlock";
-import ArticleImageUploadProvider from "../components/article/write/context/ArticleImageUploadContext";
-import ArticleDelete from "../components/article/delete/ArticleDelete";
-// import {Navigate} from "react-router-dom";
+import { lazy, Suspense } from "react";
 
-const articleRouter = ({Loading}) => {
+import ArticleDelete from "../components/article/delete/ArticleDelete";
+import ArticleUpdateForm from "../components/article/update/ArticleUpdateForm";
+// import {Navigate} from "react-router-dom";
+const ArticleWriteForm = lazy(() => import('../components/article/write/ArticleWriteForm'));
+
+
+const articleRouter = ({ Loading }) => {
 
     return [
-      
+
         {
             path: "write",
             element: <Suspense fallback={Loading}>
-                        <ArticleImageUploadProvider>
-                            <ArticleWriteBlock/>
-                        </ArticleImageUploadProvider>
-                    </Suspense>
+               
+                    <ArticleWriteForm />
+                
+            </Suspense>
         },
         {
-            path: "update",
+            path: "update/:articleId",
             element: <Suspense fallback={Loading}>
 
-                
-                
-                </Suspense>
+                    <ArticleUpdateForm/>
+
+            </Suspense>
         },
         {
-            path:"delete/:articleId",
-            element:<Suspense fallback={Loading}>
+            path: "delete/:articleId",
+            element: <Suspense fallback={Loading}>
 
-                <ArticleDelete/>
+                <ArticleDelete />
 
             </Suspense>
         }

@@ -4,8 +4,9 @@ import testRouter from "./testRouter.jsx";
 import articleRouter from "./articleRouter.jsx";
 import BoardPage from "../pages/board/BoardPage.jsx";
 import HealthCalculatorPage from "../pages/HealthCalculatorPage.jsx";
-import ManagerPageComp from "../components/manager/ManagerPageComp.jsx";
 import petRouter from "./petRouter.jsx";
+import hotSpotRouter from "./hotSpotRouter.jsx";
+
 
 
 
@@ -19,7 +20,7 @@ const ManagerPage = lazy(() => import('../pages/manager/ManagerPage'));
 const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'));
 const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
 const WalkingPage = lazy(() => import('../pages/walking/WalkingPage.jsx'));
-
+const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
 
 const root = createBrowserRouter([
     {
@@ -69,12 +70,17 @@ const root = createBrowserRouter([
 
     {
         path:"/recent",
-        element: <Suspense fallback={<Loading />}><ManagerPageComp/></Suspense>,
+        element: <Suspense fallback={<Loading />}><BoardPage/></Suspense>,
     },
     {
         path: "/pet",
         element: <Suspense fallback={<Loading/>}><PetPage/></Suspense>,
         children: petRouter()
+    },
+    {
+        path: "/hotspot",
+        element: <Suspense fallback={<Loading/>}><HotSpotPage/></Suspense>,
+        children: hotSpotRouter()
     },
 
     {
@@ -85,7 +91,7 @@ const root = createBrowserRouter([
         path: "/walking",
         element: <Suspense fallback={<Loading/>}><WalkingPage/></Suspense>
     },
-    
+
 
 ]);
 

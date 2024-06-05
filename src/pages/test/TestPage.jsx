@@ -6,20 +6,15 @@ import Box from "@mui/material/Box";
 import CommentResisterForm from "../../components/comment/CommentResisterForm.jsx";
 import CommentList from "../../components/comment/CommentList.jsx";
 
+
 const TestPage = () => {
 
-    let navigate = useNavigate();
-
-    const handleClickList = useCallback(() => {
-        navigate({pathname: 'list'})
-    })
 
     return (
         <>
             <DefaultLayout>
                 <>
-                    
-                    <CommentList/>
+                   <CommentList/>
                 </>
             </DefaultLayout>
         </>

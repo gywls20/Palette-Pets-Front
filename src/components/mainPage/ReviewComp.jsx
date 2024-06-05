@@ -47,8 +47,6 @@ export default function ReviewComp() {
         slidesToShow: 1,
         slidesToScroll: 1,
         slidesPerRow: 1,
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
     };
 
     const [modal, setModal] = useState(false)

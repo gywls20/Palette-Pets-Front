@@ -49,7 +49,12 @@ const Footer = () => {
 
   const onHome = () => navigate('/')
 
-  const onMyRomm = () => navigate('/pet/list')
+  const onPetList = () => {
+    navigate('/pet/list');
+  }
+  const onHotSpot = () => {
+    navigate('/hotspot');
+  }
 
   return (
     <>
@@ -63,9 +68,9 @@ const Footer = () => {
           value={value}
           onChange={handleNavigationChange}>
           <BottomNavigationAction label="Home" icon={<Home />} onClick={onHome} />
-          <BottomNavigationAction label="MyRoom" icon={<Favorite />} onClick={onMyRomm} />
-          <BottomNavigationAction label="Transaction" icon={<CurrencyExchangeIcon />} />
-          <BottomNavigationAction label="Location On" icon={<LocationOn />} />
+          <BottomNavigationAction label="PetList" icon={<Favorite />} onClick={onPetList} />
+          <BottomNavigationAction label="Archive" icon={<Archive />} />
+          <BottomNavigationAction label="Location On" icon={<LocationOn />} onClick={onHotSpot} />
         </BottomNavigation>
         <Link to="/article/write">
           <button className="floating-button">

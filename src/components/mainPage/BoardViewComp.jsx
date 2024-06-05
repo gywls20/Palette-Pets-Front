@@ -27,6 +27,7 @@ const BoardViewComp = () => {
                 <BoardView/>
                 
                 <BoardView/>
+
             </div>
         </>
     );
