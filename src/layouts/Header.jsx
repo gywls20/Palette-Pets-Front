@@ -161,14 +161,14 @@ export default function Header() {
                 <CssBaseline/>
                 <AppBar position="fixed">
                     <Toolbar>
-                        <Typography
+                        {/* <Typography
                             variant="h6"
                             noWrap
                             component="div"
                             sx={{display: 'block'}}
-                        >
+                        > */}
                             <Link to="/" style={{color: '#fff'}}>냥가왈부</Link>
-                        </Typography>
+                        {/* </Typography> */}
                         <Box sx={{flexGrow: 1}}/>
                         <Box sx={{display: {xs: 'none', md: 'flex'}}}>
                             <IconButton size="large" color="inherit">

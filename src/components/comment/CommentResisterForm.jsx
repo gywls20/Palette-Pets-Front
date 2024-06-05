@@ -1,10 +1,8 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Box, borderRadius, fontSize } from '@mui/system';
+import { Article } from '@mui/icons-material';
 import React, { useState } from 'react';
-import CommentItem from './CommentItem';
-
-
+import { addComment } from '../../service/commentApi';
 
 const style = {
     width: '80%',
@@ -18,19 +16,24 @@ const style = {
 
 }
 
-const CommentResisterForm = () => {
+const CommentResisterForm = ({commentRef,articleId,parentId}) => {
 
     const [comment, setComment] = useState('');
-
+    
     const commentInput = (e) => {
         setComment(e.target.value)
     }
 
     const onSubmit = async () => {
-
-        
+       const dto = {
+            articleId :articleId,
+            ref :commentRef,
+            content:comment,
+            parentId:parentId,
+       }
+       await addComment(dto)
+       
     }
-    
 
     return (
 

@@ -19,13 +19,14 @@ import CommentResisterForm from './CommentResisterForm';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
 import { Menu, MenuItem } from '@mui/material';
 
-export default function CommentItem({ content, create_who, created_At, pref }) {
+export default function CommentItem({ parentId, commentRef, articleId, content, create_who, created_At  }) {
 
-    const padding = pref === 1 ? 7 : pref === 2 ? 12 : 0
+    const padding = commentRef === 1 ? 7 : commentRef >= 2 ? 12 : 0
 
     const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = () => {
+
         setExpanded(!expanded);
     };
 
@@ -38,6 +39,7 @@ export default function CommentItem({ content, create_who, created_At, pref }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    
 
     return (
         <>
@@ -51,7 +53,7 @@ export default function CommentItem({ content, create_who, created_At, pref }) {
                             <MoreVertIcon />
                         </IconButton>
                     }
-                    title={create_who}
+                    title={commentRef > 2 ? `@대댓글 ${create_who}` : create_who}
                     subheader={created_At}
 
                     sx={{ textAlign: 'left', marginLeft: padding }}
@@ -62,13 +64,15 @@ export default function CommentItem({ content, create_who, created_At, pref }) {
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing sx={{ marginLeft: padding }}>
-                    <IconButton aria-label="comment" onClick={handleExpandClick}>
-                        {expanded ? <InsertCommentIcon /> : <CommentOutlinedIcon />}
-                    </IconButton>
+                   
+                        <IconButton aria-label="comment" onClick={handleExpandClick}  >
+                            {expanded ? <InsertCommentIcon /> : <CommentOutlinedIcon />}
+                        </IconButton>
+                    
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <CommentResisterForm />
+                        <CommentResisterForm commentRef={commentRef + 1} articleId={articleId} parentId={parentId} />
                     </CardContent>
                 </Collapse>
             </Card>
@@ -77,7 +81,6 @@ export default function CommentItem({ content, create_who, created_At, pref }) {
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
-
                 MenuListProps={{
                     'aria-labelledby': 'basic-button',
 
