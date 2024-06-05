@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import {useInView} from 'react-intersection-observer';
 import "../../styles/board/BoardList.css"
-import Category from "../PetCategoryComp.jsx";
+import PetCategory from "../PetCategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
 import { useLocation } from 'react-router-dom';
 
@@ -62,7 +62,7 @@ function BoardPageComp({ search }) {
     return (
     <>
         <div className='header'>
-            <Category/>
+            <PetCategory/>
         </div>
         <hr/>
         <main className="container mx-auto px-4 py-4">

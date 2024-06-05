@@ -48,18 +48,13 @@ const Footer = () => {
   }, []);
 
   const onHome = () => navigate('/')
-<<<<<<< HEAD
 
-  const onMyRomm = () => navigate('/pet/list')
-=======
   const onPetList = () => {
     navigate('/pet/list');
   }
   const onHotSpot = () => {
     navigate('/hotspot');
   }
-
->>>>>>> 7f6c81185dbd3510e42a0c724126e7afd84d06bc
 
   return (
     <>
@@ -73,15 +68,9 @@ const Footer = () => {
           value={value}
           onChange={handleNavigationChange}>
           <BottomNavigationAction label="Home" icon={<Home />} onClick={onHome} />
-<<<<<<< HEAD
-          <BottomNavigationAction label="MyRoom" icon={<Favorite />} onClick={onMyRomm} />
-          <BottomNavigationAction label="Transaction" icon={<CurrencyExchangeIcon />} />
-          <BottomNavigationAction label="Location On" icon={<LocationOn />} />
-=======
           <BottomNavigationAction label="PetList" icon={<Favorite />} onClick={onPetList} />
           <BottomNavigationAction label="Archive" icon={<Archive />} />
           <BottomNavigationAction label="Location On" icon={<LocationOn />} onClick={onHotSpot} />
->>>>>>> 7f6c81185dbd3510e42a0c724126e7afd84d06bc
         </BottomNavigation>
         <Link to="/article/write">
           <button className="floating-button">

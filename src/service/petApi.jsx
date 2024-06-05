@@ -119,15 +119,11 @@ export const petImgRegisterRequest = (dto, files) => {
     const blob = new Blob([JSON.stringify(dto)], {type: "application/json"});
     formData.append('dto', blob);
 
-<<<<<<< HEAD
-    return jwtAxios.post(`${url}/pet/img`, formData)
-=======
     return jwtAxios.post(`${API_SERVER_HOST}/pet/img`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
     })
->>>>>>> 7f6c81185dbd3510e42a0c724126e7afd84d06bc
         .then(response => response.data)
         .catch((error) => {
             console.error(error);
