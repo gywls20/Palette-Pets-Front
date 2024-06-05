@@ -31,7 +31,7 @@ const LoginFormComp = () => {
             Swal.fire({
                 title: '로그인 성공',
                 text: '환영합니다.^^',
-                icon: 'secces'
+                icon: 'success'
             });
             console.log('로그인 성공');
             dispatch(saveToken(token));

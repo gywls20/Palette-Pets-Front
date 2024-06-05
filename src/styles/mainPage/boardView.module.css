@@ -95,6 +95,8 @@
 }
 
 .commentBox {
+    color: black;
+    font-size: 0.875rem;
     width: 100%;
     height: 100px;
     margin-bottom: 10px;
@@ -102,6 +104,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: none;
+    background-color: white;
 }
 
 .commentForm {

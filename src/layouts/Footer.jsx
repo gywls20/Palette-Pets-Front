@@ -49,7 +49,7 @@ const Footer = () => {
 
   const onHome = () => navigate('/')
 
-  const onPetList = () => navigate('/pet/list')
+  const onMyRomm = () => navigate('/pet/list')
 
   return (
     <>
@@ -63,7 +63,7 @@ const Footer = () => {
           value={value}
           onChange={handleNavigationChange}>
           <BottomNavigationAction label="Home" icon={<Home />} onClick={onHome} />
-          <BottomNavigationAction label="PetList" icon={<Favorite />} onClick={onPetList} />
+          <BottomNavigationAction label="MyRoom" icon={<Favorite />} onClick={onMyRomm} />
           <BottomNavigationAction label="Transaction" icon={<CurrencyExchangeIcon />} />
           <BottomNavigationAction label="Location On" icon={<LocationOn />} />
         </BottomNavigation>
