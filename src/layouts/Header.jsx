@@ -37,7 +37,10 @@ export default function Header() {
             title: '로그아웃',
             text: '로그아웃 하였습니다.^^',
             icon: 'success'
-        });
+        }).then((Res) => {
+            if(Res.value)
+                window.location.reload()
+        })
     }
 
     // 이거 메뉴 닫을 때 쓰는 변수

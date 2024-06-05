@@ -11,7 +11,7 @@ const PetCategoryComp = () => {
     return (
         <>
             <div>
-                <SelectTags/>
+                {/* <SelectTags/> */}
             </div>
 
             <div className={CategoryStyle.iconsBar}>

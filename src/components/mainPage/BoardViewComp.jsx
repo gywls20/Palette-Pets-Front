@@ -2,15 +2,14 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { Box, Modal } from '@mui/material';
 import AutoSlideImgComp from './AutoSlideImgComp';
 import Swal from 'sweetalert2'
 
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
 import Anhae from '../../image/anhae.jpg'
 import PetCategoryComp from '../PetCategoryComp'
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import BoardView from './BoardView';
 
 const BoardViewComp = () => {
     const [modal, setModal] = useState(false);
@@ -69,7 +68,7 @@ const BoardViewComp = () => {
     return (
         <>
             <AutoSlideImgComp/>
-
+            <br/>
             <PetCategoryComp/>            
             
             <div className={BoardViewStyle.postsSection}>
@@ -77,217 +76,15 @@ const BoardViewComp = () => {
                     <span className={BoardViewStyle.postsTitle}>오늘의 인기글</span>
                     <button className={BoardViewStyle.postsMore}>더보기</button>
                 </div>
+                <BoardView/>
 
-                <div className={BoardViewStyle.postsList}>
-                    <div className={BoardViewStyle.post}>
-                        <div className={BoardViewStyle.postHeader}>
-                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={openModal} />
-                            <div>
-                                <p className={BoardViewStyle.postUserName}>사용자 닉내임</p>
-                                <p className={BoardViewStyle.postTime}>2시간 전</p>
-                            </div>
-                        </div>
-
-                        <p className={BoardViewStyle.postContent}>여기에 게시물 내용이 들어갑니다. 여기에 게시물 내용이 들어갑니다.</p>
-                        <div className={BoardViewStyle.postActions}>
-                            <button className={BoardViewStyle.postActionButton} onClick={ToggleLike}>
-                                <FontAwesomeIcon icon={faHeart} className={BoardViewStyle.postAction} style={{ color: like ? "#ff0000" : "#ffffff" }} />
-                                <span> 좋아요</span>
-                            </button>
-
-                            <button className={BoardViewStyle.postActionButton} onClick={toggleCommentBox}>
-                                <FontAwesomeIcon icon={faCommentDots} className={BoardViewStyle.postAction} />
-                                <span> 댓글</span>
-                            </button>
-                        </div>
-
-                        <div>
-                            {showCommentBox && (
-                                <form onSubmit={handleCommentSubmit} className={BoardViewStyle.commentForm}>
-                                    <textarea
-                                        value={comment}
-                                        onChange={handleCommentChange}
-                                        placeholder="댓글을 입력하세요"
-                                        className={BoardViewStyle.commentBox}
-                                    />
-                                    <button type="submit" className={BoardViewStyle.postActionButton}>제출</button>
-                                </form>
-                            )}
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <div className={BoardViewStyle.postsList}>
-                    <div className={BoardViewStyle.post}>
-                        <div className={BoardViewStyle.postHeader}>
-                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={openModal} />
-                            <div>
-                                <p className={BoardViewStyle.postUserName}>사용자 닉내임</p>
-                                <p className={BoardViewStyle.postTime}>2시간 전</p>
-                            </div>
-                        </div>
-
-                        <p className={BoardViewStyle.postContent}>여기에 게시물 내용이 들어갑니다. 여기에 게시물 내용이 들어갑니다.</p>
-                        <div className={BoardViewStyle.postActions}>
-                            <button className={BoardViewStyle.postActionButton} onClick={ToggleLike}>
-                                <FontAwesomeIcon icon={faHeart} className={BoardViewStyle.postAction} style={{ color: like ? "#ff0000" : "#ffffff" }} />
-                                <span> 좋아요</span>
-                            </button>
-
-                            <button className={BoardViewStyle.postActionButton} onClick={toggleCommentBox}>
-                                <FontAwesomeIcon icon={faCommentDots} className={BoardViewStyle.postAction} />
-                                <span> 댓글</span>
-                            </button>
-                        </div>
-
-                        <div>
-                            {showCommentBox && (
-                                <form onSubmit={handleCommentSubmit} className={BoardViewStyle.commentForm}>
-                                    <textarea
-                                        value={comment}
-                                        onChange={handleCommentChange}
-                                        placeholder="댓글을 입력하세요"
-                                        className={BoardViewStyle.commentBox}
-                                    />
-                                    <button type="submit" className={BoardViewStyle.postActionButton}>제출</button>
-                                </form>
-                            )}
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <div className={BoardViewStyle.postsList}>
-                    <div className={BoardViewStyle.post}>
-                        <div className={BoardViewStyle.postHeader}>
-                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={openModal} />
-                            <div>
-                                <p className={BoardViewStyle.postUserName}>사용자 닉내임</p>
-                                <p className={BoardViewStyle.postTime}>2시간 전</p>
-                            </div>
-                        </div>
-
-                        <p className={BoardViewStyle.postContent}>여기에 게시물 내용이 들어갑니다. 여기에 게시물 내용이 들어갑니다.</p>
-                        <div className={BoardViewStyle.postActions}>
-                            <button className={BoardViewStyle.postActionButton} onClick={ToggleLike}>
-                                <FontAwesomeIcon icon={faHeart} className={BoardViewStyle.postAction} style={{ color: like ? "#ff0000" : "#ffffff" }} />
-                                <span> 좋아요</span>
-                            </button>
-
-                            <button className={BoardViewStyle.postActionButton} onClick={toggleCommentBox}>
-                                <FontAwesomeIcon icon={faCommentDots} className={BoardViewStyle.postAction} />
-                                <span> 댓글</span>
-                            </button>
-                        </div>
-
-                        <div>
-                            {showCommentBox && (
-                                <form onSubmit={handleCommentSubmit} className={BoardViewStyle.commentForm}>
-                                    <textarea
-                                        value={comment}
-                                        onChange={handleCommentChange}
-                                        placeholder="댓글을 입력하세요"
-                                        className={BoardViewStyle.commentBox}
-                                    />
-                                    <button type="submit" className={BoardViewStyle.postActionButton}>제출</button>
-                                </form>
-                            )}
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <div className={BoardViewStyle.postsList}>
-                    <div className={BoardViewStyle.post}>
-                        <div className={BoardViewStyle.postHeader}>
-                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={openModal} />
-                            <div>
-                                <p className={BoardViewStyle.postUserName}>사용자 닉내임</p>
-                                <p className={BoardViewStyle.postTime}>2시간 전</p>
-                            </div>
-                        </div>
-
-                        <p className={BoardViewStyle.postContent}>여기에 게시물 내용이 들어갑니다. 여기에 게시물 내용이 들어갑니다.</p>
-                        <div className={BoardViewStyle.postActions}>
-                            <button className={BoardViewStyle.postActionButton} onClick={ToggleLike}>
-                                <FontAwesomeIcon icon={faHeart} className={BoardViewStyle.postAction} style={{ color: like ? "#ff0000" : "#ffffff" }} />
-                                <span> 좋아요</span>
-                            </button>
-
-                            <button className={BoardViewStyle.postActionButton} onClick={toggleCommentBox}>
-                                <FontAwesomeIcon icon={faCommentDots} className={BoardViewStyle.postAction} />
-                                <span> 댓글</span>
-                            </button>
-                        </div>
-
-                        <div>
-                            {showCommentBox && (
-                                <form onSubmit={handleCommentSubmit} className={BoardViewStyle.commentForm}>
-                                    <textarea
-                                        value={comment}
-                                        onChange={handleCommentChange}
-                                        placeholder="댓글을 입력하세요"
-                                        className={BoardViewStyle.commentBox}
-                                    />
-                                    <button type="submit" className={BoardViewStyle.postActionButton}>제출</button>
-                                </form>
-                            )}
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <div className={BoardViewStyle.postsList}>
-                    <div className={BoardViewStyle.post}>
-                        <div className={BoardViewStyle.postHeader}>
-                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={openModal} />
-                            <div>
-                                <p className={BoardViewStyle.postUserName}>사용자 닉네임</p>
-                                <p className={BoardViewStyle.postTime}>2시간 전</p>
-                            </div>
-                        </div>
-
-                        <Modal
-                            open={modal}
-                            onClose={closeModal}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                        >
-                            <Box sx={style}>
-                                <p className={BoardViewStyle.postUserName}>사용자 닉네임</p>
-                                <img src={Anhae} alt="User" />
-                                <div className={BoardViewStyle.ModalContainer}>
-                                    <button>팔로우</button>
-                                    <button>
-                                        <Link to='http://175.45.200.47:3000/chat/a' style={{ color: '#ffffff' }}>1:1 대화</Link>
-                                    </button>
-                                </div>
-                            </Box>
-                        </Modal>
-
-                        <p className={BoardViewStyle.postContent}>여기에 게시물 내용이 들어갑니다.</p>
-                        <div className={BoardViewStyle.postActions}>
-                            <button className={BoardViewStyle.postActionButton} onClick={ToggleLike}>
-                                <FontAwesomeIcon icon={faHeart} className={BoardViewStyle.postAction} style={{ color: like ? "#ff0000" : "#ffffff" }} />
-                                <span> 좋아요</span>
-                            </button>
-
-                            <button className={BoardViewStyle.postActionButton} onClick={toggleCommentBox}>
-                                <FontAwesomeIcon icon={faCommentDots} className={BoardViewStyle.postAction} />
-                                <span> 댓글</span>
-                            </button>
-                        </div>
-
-                        {showCommentBox && (
-                            <form onSubmit={handleCommentSubmit} className={BoardViewStyle.commentForm}>
-                                <textarea
-                                    value={comment}
-                                    onChange={handleCommentChange}
-                                    placeholder="댓글을 입력하세요"
-                                    className={BoardViewStyle.commentBox}
-                                />
-                                <button type="submit" className={BoardViewStyle.postActionButton}>제출</button>
-                            </form>
-                        )}
-                    </div>
-                </div>
+                <BoardView/>
+                
+                <BoardView/>
+                
+                <BoardView/>
+                
+                <BoardView/>
             </div>
         </>
     );
