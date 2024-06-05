@@ -23,6 +23,13 @@ const TransactionCategoryComp = () => {
                         <span> 판다</span>
                     </button>
                 </Link>
+
+                <Link to='*'>
+                    <button className={CategoryStyle.iconButtonColumn}>
+                        <FontAwesomeIcon icon={faArrowUpRightDots} className={CategoryStyle.iconColumn} style={{ color: "#ff0000" }} />
+                        <span> 나눔</span>
+                    </button>
+                </Link>
             </div>
         </>
     );
