@@ -1,93 +1,89 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
-import "../../styles/board/BoardList.css";
-import PetCategoryComp from "../PetCategoryComp.jsx";
+import React, {useState, useEffect} from 'react';
+import {useInView} from 'react-intersection-observer';
+import "../../styles/board/BoardList.css"
+import Category from "../CategoryComp.jsx";
+import ArticleService from '../../service/ArticleService.jsx';
+import { useLocation } from 'react-router-dom';
 
-const BoardPageComp = () => {
-  return (
+
+function BoardPageComp({ search }) {
+    //URL에서 sort 값 가져오기
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const sortParam = queryParams.get("sort");
+
+    //초기화 설정
+    const [articles, setArticles] = useState([]);
+    const [page, setPage] = useState(1);
+    const [sort, setSort] = useState(sortParam); 
+    //const [sort, setSort] = useState(sortParam || 'articleId'); 
+    const [dir, setDir] = useState(true); //오름차순
+    const [where, setWhere] = useState(""); //검색
+    const [ref, inView] = useInView();
+ 
+    useEffect(() => {
+      console.log("board page search changed = "+ search);
+      setWhere(search);
+      setPage(1); // search 값이 들어오면 페이지를 1로 초기화(Page = 1일 때만 조회가 되기 때문)
+      setArticles([]); // articles를 초기화
+      fetchArticles(true);
+    }, [search, sort])
+
+    useEffect(() => {
+      if (sortParam) {
+            setSort(sortParam); // 쿼리 파라미터에서 sort 값을 읽어 설정
+            setArticles([]);
+            setPage(1);
+        };
+    }, [sortParam]);
+
+    const fetchArticles = (reset = false) => {
+      const pageToFetch = reset ? 1 : page;
+      ArticleService.getArticleList(pageToFetch, sort, dir, search).then((res) => {
+        console.log("where =@!@!@!@!@" + search);
+        console.log(res);
+          setArticles(articles => reset ? res.data : [...articles, ...(res.data)]);
+          //setPage(page => page + 1);
+          setPage(page => pageToFetch + 1);
+      })
+        .catch((err) => {console.log(err)});
+    };
+
+    //무한 페이징
+    useEffect(() => {
+      // inView가 true 일때만 실행한다.
+      if (inView && page > 1) {
+      console.log(inView)
+      fetchArticles();
+        }
+      }, [inView]);
+
+    return (
     <>
-      <div className="header">
-        <PetCategoryComp />
-      </div>
-      <hr />
-      <main className="container mx-auto px-4 py-4">
-        <div className="post">
-          <div className="flex justify-between items-center">
-            <div>
-              <div className="post-title text-red-500">포동소식 ❤️ 싱긋성</div>
-              <div className="post-meta">포동리포터 • 3일 전 • 738 • 12</div>
-            </div>
-            <div className="post-comments">8</div>
-          </div>
+        <div className='header'>
+            <Category/>
         </div>
-        <div className="post">
-          <div className="flex justify-between items-center">
-            <div>
-              <div className="post-title text-red-500">
-                진행 중 🐝 포동 X U+우리집들불이
-              </div>
-              <div className="post-meta">포동리포터 • 24.05.17 • 2.6K • 17</div>
-            </div>
-            <div className="post-comments">5</div>
-          </div>
-        </div>
-        <div className="post">
-          <div className="flex justify-between items-center">
-            <div>
-              <div className="post-title text-blue-500">댓글부탁해</div>
-              <div className="post-meta">익명보호자 • 9분 전 • 3 • 0</div>
-            </div>
-            <div className="post-comments">0</div>
-          </div>
-        </div>
-        <div className="post">
-          <div className="flex justify-between items-center">
-            <div>
-              <div className="post-title text-blue-500">사건사고</div>
-              <div className="post-meta">익명보호자 • 14분 전 • 3 • 0</div>
-            </div>
-            <div className="post-comments">0</div>
-          </div>
-        </div>
-        <div className="post">
-          <div className="flex justify-between items-center">
-            <div>
-              <div className="post-title text-blue-500">정보공유</div>
-              <div className="post-meta">발플레터 • 41분 전 • 17 • 1</div>
-            </div>
-            <div className="post-comments">0</div>
-          </div>
-        </div>
-        <div className="post">
-          <div className="flex justify-between items-center">
-            <div>
-              <div className="post-title text-blue-500">오산완</div>
-              <div className="post-meta">밤이맘 • 42분 전 • 7 • 0</div>
-            </div>
-            <div className="post-comments">0</div>
-          </div>
-        </div>
-        <div className="post">
-          <div className="flex justify-between items-center">
-            <div>
-              <div className="post-title text-blue-500">펫팁</div>
-              <div className="post-meta">멍이공 • 1시간 전 • 20 • 1</div>
-            </div>
-            <div className="post-comments">1</div>
-          </div>
-        </div>
-        <div className="post">
-          <div className="flex justify-between items-center">
-            <div>
-              <div className="post-title text-blue-500">공지</div>
-              <div className="post-meta">츄맘 • 1시간 전 • 23 • 0</div>
-            </div>
-            <div className="post-comments">1</div>
-          </div>
-        </div>
-      </main>
-    </>
-  );
+        <hr/>
+        <main className="container mx-auto px-4 py-4">
+            {
+                articles.map(articles =>
+                         <div className="post" >
+                            <div className="flex justify-between items-center">
+                                <div>
+                                    <div className="post-title text-red-500">{articles.title}</div>
+                                    <div>{articles.content}</div>
+                                    <div className="post-meta">{articles.createdWho} • {articles.createdAt} • {articles.countLoves} • {articles.countViews}</div>
+                                </div>
+                                <div className="post-comments">{articles.articleId}</div>
+                            </div>
+                        </div>
+                    )
+                }
+                <div ref={ref}>끝</div>
+        </main>
+      </>
+    );
 };
 
 export default BoardPageComp;
