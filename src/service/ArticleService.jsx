@@ -4,6 +4,8 @@ import jwtAxios from "./jwtAxios";
 
 
 const ARTICLE_API_BASE_URL = "http://localhost:8080/article/list";
+const ARTICLE_API_BASE_URL2 = "http://localhost:8080/article/listTest";
+
 
 //글 쓰기
 const API_SERVER_HOST = "http://localhost:8080";
@@ -41,9 +43,10 @@ export const updateArticle = (formData,articleId)=> {
 
 
 class ArticleService {
-    getArticleList(page, sort, dir, personName) {
+    getArticleList(page, sort, dir, search) {
         //return axios.get(ARTICLE_API_BASE_URL);
-        return axios.get(`${ARTICLE_API_BASE_URL}?page=${page}&sort=${sort}&dir=${dir}&where=${personName}`)
+        return axios.get(`${ARTICLE_API_BASE_URL}?page=${page}&sort=${sort}&dir=${dir}&where=${search}`)
+        //return axios.get(`${ARTICLE_API_BASE_URL2}?articleTags=${where}`)
     }
 }
 

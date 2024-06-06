@@ -51,6 +51,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1976d2;
+  color: white;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -63,31 +64,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #000;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
 
-
-/*reviewComp*/
-
-.slick-track {
-  display: block !important;
-}
-
-.reviewSlider {
-  display: flex !important;
-  margin-bottom: 1rem;
-  padding-bottom: 5rem;
-}
 
 .MuiContainer-root,
 .MuiContainer-maxWidthSm,

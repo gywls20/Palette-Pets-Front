@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, {useState, useEffect} from 'react';
 import "../../styles/board/BoardList.css"
-import Category from "../CategoryComp.jsx";
+import Category from "../PetCategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
 import { useLocation } from 'react-router-dom';
 
@@ -15,8 +15,8 @@ function ManagerPageComp() {
     //초기화 설정
     const [articles, setArticles] = useState([]);
     const [page, setPage] = useState(1);
-    const [sort, setSort] = useState(sortParam); 
-    //const [sort, setSort] = useState(sortParam || 'articleId'); 
+    //const [sort, setSort] = useState(sortParam); 
+    const [sort, setSort] = useState(sortParam || 'articleId'); 
     const [dir, setDir] = useState(true); //오름차순
     const [where, setWhere] = useState('');
     const [hasMore, setHasMore] = useState(true); // 추가 데이터를 불러올 수 있는지 여부(스크롤 사용)
@@ -30,7 +30,7 @@ function ManagerPageComp() {
         window.removeEventListener('scroll', handleScroll);
       };
       
-    }, [page, sort, dir, where]); // 페이지가 로드될 때 한 번만 실행
+    }, []); // 페이지가 로드될 때 한 번만 실행
 
     useEffect(() => {
       if (sortParam) {
@@ -44,11 +44,11 @@ function ManagerPageComp() {
     const fetchArticles = () => {
       if (!hasMore) return;
       ArticleService.getArticleList(page, sort, dir, where).then((res) => {
-        console.log("where =" + where);
+        //console.log("where =" + where);
         if (res.data.length > 0) {
           setArticles(prevArticles => [...prevArticles, ...res.data]);
           setPage(prevPage => prevPage + 1);
-          console.log("where =" + where);
+          //console.log("where =" + where);
         } else {
           setHasMore(false);
         }

@@ -7,16 +7,16 @@ import { faArrowUpRightDots, faBone, faDog, faHouseMedical, faLocationDot } from
 import SelectTags from './article/write/atoms/SelectTags';
 import { Link } from 'react-router-dom';
 
-const CategoryComp = () => {
+const PetCategoryComp = () => {
     return (
         <>
             <div>
-                <SelectTags/>
+                {/* <SelectTags/> */}
             </div>
 
             <div className={CategoryStyle.iconsBar}>
                 {/* <Link to='/board'> */}
-                <Link to={{ pathname: '/board', search: '?sort=articleId' }}>
+                <Link to={{ pathname: '/recent', search: '?sort=articleId' }}>
                     <button className={CategoryStyle.iconButtonColumn}>
                         <FontAwesomeIcon icon={faArrowUpRightDots} className={CategoryStyle.iconColumn} style={{ color: "#ff0000" }} />
                         <span> 인기</span>
@@ -24,7 +24,7 @@ const CategoryComp = () => {
                 </Link>
 
                 {/* <Link to='/recent'> */}
-                <Link to={{ pathname: '/recent', search: '?sort=createdAt' }}>
+                <Link to={{ pathname: '/board', search: '?sort=createdAt' }}>
                     <button className={CategoryStyle.iconButtonColumn}>
                         <FontAwesomeIcon icon={faArrowUpRightDots} className={CategoryStyle.iconColumn} style={{ color: "#ff0000" }} />
                         <span> 최신순</span>
@@ -70,4 +70,4 @@ const CategoryComp = () => {
     );
 };
 
-export default CategoryComp;
+export default PetCategoryComp;

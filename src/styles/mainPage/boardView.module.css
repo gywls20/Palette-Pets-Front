@@ -51,7 +51,6 @@
 
 .postTime {
     font-size: 0.75rem;
-    color: #6b7280;
 }
 
 .postContent {
@@ -68,7 +67,6 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: #6b7280;
 }
 
 .postActionButton {
@@ -77,10 +75,38 @@
 
     /* 버튼 크기 줄이기 */
     padding: 0.3rem 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 }
 
 
 .postAction {
     /* 아이콘 크기 줄이기 */
     font-size: 0.75rem;
+}
+
+.ModalContainer {
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center;    /* 수직 중앙 정렬 */
+    padding-top: 1rem;
+    gap: 1rem;
+}
+
+.commentBox {
+    color: black;
+    font-size: 0.875rem;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    background-color: white;
+}
+
+.commentForm {
+    margin-top: 10px;
 }

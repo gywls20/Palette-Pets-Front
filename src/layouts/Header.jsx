@@ -18,13 +18,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {logout} from "../service/api.jsx";
 import {deleteToken} from "../store/MemberSlice.js";
+import Swal from 'sweetalert2';
 
 
 
 export default function Header() {
     const navigate = useNavigate
     const Login = () => navigate("/login")
-    const Home = () => navigate("/")
     const token = useSelector((state) => state.MemberSlice.token);
     const dispatch = useDispatch();
 
@@ -33,6 +33,14 @@ export default function Header() {
         const result = await logout();
         dispatch(deleteToken());
         console.log(result);
+        Swal.fire({
+            title: '로그아웃',
+            text: '로그아웃 하였습니다.^^',
+            icon: 'success'
+        }).then((Res) => {
+            if(Res.value)
+                window.location.reload()
+        })
     }
 
     // 이거 메뉴 닫을 때 쓰는 변수
@@ -77,7 +85,9 @@ export default function Header() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>프로필</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                <Link to='/pet/list'>프로필</Link>
+            </MenuItem>
             {
                 token ? (
                     <MenuItem onClick={handleMenuClose}>
