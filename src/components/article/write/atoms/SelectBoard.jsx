@@ -17,14 +17,6 @@ const communityBoardList = [
 
 ]
 
-const storeBoardList =[
-
-    { idx: 1, boardName: '구매 등록', boardValue: 'BUY' },
-    { idx: 2, boardName: '판매 등록', boardValue: 'SELL' },
-    { idx: 3, boardName: '나눔 등록', boardValue: 'SHARE' },
-    { idx: 4, boardName: '산책 등록', boardValue: 'WALKING' }
-
-]
 
 const SelectBoard = memo(({boardName,onChange}) => {
    

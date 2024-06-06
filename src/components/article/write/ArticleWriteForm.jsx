@@ -12,11 +12,10 @@ import { writeArticle } from '../../../service/ArticleService';
 
 const initialForm = {
     boardName: 'FREEBOARD',
-    tags: [],
+    head : '',
     title: '',
     content: ''
 }
-
 
 const ArticleWriteForm = () => {
     
@@ -49,7 +48,8 @@ const ArticleWriteForm = () => {
         <div>
 
             <SelectBoard boardName={form.boardName} onChange={onChange} />
-            <UserMakeTags tags={form.tags} onInput={onInput} />
+
+            {/* <UserMakeTags tags={form.tags} onInput={onInput} /> */}
             <InputTitle title={form.title} onChange={onChange} />
             <InputContent content={form.content} onChange={onChange} />
             <ImageUpload imgFiles={imgFiles} setImgFiles={setImgFiles} />
