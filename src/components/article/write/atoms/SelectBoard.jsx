@@ -34,15 +34,17 @@ const SelectBoard = memo(({boardName,onChange}) => {
                         inputProps={{ MenuProps: { disableScrollLock: true } }}
                         label="게시판 선택"
                         onChange={onChange}
+                        
                     >
                         {
                             communityBoardList.map(item =>
                                 <MenuItem key={item.idx} value={item.boardValue}>{item.boardName}</MenuItem>
                             )
                         }
-
                     </Select>
                 </FormControl>
+               
+                
            
         </>
     );

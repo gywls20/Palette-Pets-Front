@@ -1,6 +1,6 @@
 import { Article } from "@mui/icons-material";
 import axios from "axios";
-import jwtAxios from "./jwtAxios";
+import jwtAxios from "./jwtAxios.js";
 
 
 const ARTICLE_API_BASE_URL = "http://localhost:8080/article/list";
@@ -10,7 +10,7 @@ const ARTICLE_API_BASE_URL2 = "http://localhost:8080/article/listTest";
 //글 쓰기
 const API_SERVER_HOST = "http://localhost:8080";
 export const writeArticle = (formData) => {
-    return jwtAxios.post(`${API_SERVER_HOST}/Post/article`, formData, {
+    return axios.post(`${API_SERVER_HOST}/Post/article`, formData, {
         headers: {
             "Access-Control-Allow-Origin": `http://localhost:3000`,
             'Content-Type': 'multipart/form-data'

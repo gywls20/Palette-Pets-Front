@@ -11,8 +11,10 @@ import { writeArticle } from '../../../service/ArticleService';
 
 
 const initialForm = {
+    
     boardName: 'FREEBOARD',
-    head : '',
+    articleHead : '',
+    articleTags:[],
     title: '',
     content: ''
 }
@@ -28,29 +30,20 @@ const ArticleWriteForm = () => {
         Object.values(imgFiles).map((item, index) => {
             formData.append('files', item);
         })
-
-        const form = {
-            articleTags:`${form.boardName}`,
-            title:form.title,
-            content:form.content
-        }
         const blob = new Blob([JSON.stringify(form)], { type: "application/json" });
         formData.append('dto', blob);
 
         await writeArticle(formData)        
-
-       
     }
-
+    
     return (
 
 
         <div>
 
             <SelectBoard boardName={form.boardName} onChange={onChange} />
-
-            {/* <UserMakeTags tags={form.tags} onInput={onInput} /> */}
-            <InputTitle title={form.title} onChange={onChange} />
+            <UserMakeTags articleTags={form.articleTags} onInput={onInput} />
+            <InputTitle boardName={form.boardName} articleHead={form.articleHead} title={form.title} onChange={onChange} />
             <InputContent content={form.content} onChange={onChange} />
             <ImageUpload imgFiles={imgFiles} setImgFiles={setImgFiles} />
 
