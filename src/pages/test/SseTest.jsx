@@ -11,7 +11,7 @@ const SseTest = () => {
 
     const Toast = Swal.mixin({
         toast: true,
-        position: 'center-center',
+        position: 'top-end',
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
@@ -23,6 +23,10 @@ const SseTest = () => {
 
     useEffect(() => {
 
+        if (authToken === undefined || authToken === '') {
+            return;
+        }
+
         //SSE연결 로직
         const connectSSE = () => {
             const source = new EventSourcePolyfill("http://localhost:8080/connect", {
@@ -30,6 +34,7 @@ const SseTest = () => {
                     authorization: authToken,
                 },
                 withCredentials: true,
+                timeout : 60 * 60 * 1000
             });
 
             source.addEventListener('notification', (e) => {
