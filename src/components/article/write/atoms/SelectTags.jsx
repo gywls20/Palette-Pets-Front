@@ -82,11 +82,23 @@ export default function SelectTags({ search, setSearch }) {
     console.log(e.value.label)
   }
   return (
+<<<<<<< HEAD
     <div>
       <FormControl sx={{m:1 ,width:"80%"}}>
         {/* <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel> */}
         <input type='text' className='where'></input>
         {/* <Select
+=======
+    <>
+<<<<<<< HEAD
+      <FormControl sx={{m:1 ,width:"90%"}}>
+=======
+    <div>
+      <FormControl sx={{m:1 ,width:"80%"}}>
+>>>>>>> 271f5608eae019f4778904c837da2d57cd1d21b8
+        <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel>
+        <Select
+>>>>>>> 7741d1edd5bffadc5d28da534dcab231ac46bc82
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
