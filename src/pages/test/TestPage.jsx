@@ -1,13 +1,6 @@
 
 import DefaultLayout from "../../layouts/DefaultLayout.jsx";
-import {Outlet, useNavigate} from "react-router-dom";
-import {useCallback} from "react";
-import Box from "@mui/material/Box";
-import CommentResisterForm from "../../components/comment/CommentResisterForm.jsx";
-import CommentList from "../../components/comment/CommentList.jsx";
-import ArticleView from "../../components/article/view/ArticleView.jsx";
-
-
+i
 const TestPage = () => {
 
 
@@ -15,8 +8,7 @@ const TestPage = () => {
         <>
             <DefaultLayout>
                 <>
-                   {/* <CommentList/> */}
-                   <ArticleView/>
+                  <TestPage/>
 
                 </>
             </DefaultLayout>

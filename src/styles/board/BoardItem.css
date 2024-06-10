@@ -1,0 +1,90 @@
+.Item-container {
+   
+    margin: auto;
+    padding: 10px;
+    width: 90%;
+    height: 170px; /* 원하는 너비로 조정 */
+    cursor: pointer;  
+   
+  }
+  
+  .Item-header {
+    margin-bottom: 10px;
+  }
+  
+  .Item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+  
+  .Item-text {
+    flex: 1;
+  }
+  
+  .Item-title {
+    margin-bottom: 10px;
+    text-align: left;
+    margin-top: 15px;
+    margin-left: 10px;
+    font-size: 19pt;
+  }
+  
+  .Item-info {
+    display: flex;
+   
+    font-size: 0.9em; /* 글자 크기 조정 */
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 11pt;
+  }
+  .Item-tags {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em; /* 글자 크기 조정 */
+    margin-top: 10px;
+    margin-left: 12px;
+    font-size: 13pt;
+  }
+  
+  .Item-image {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+    align-items: center;
+  }
+
+  
+/* 0607 헤더 버튼 */
+.round-button {
+    background-color: #1976D2; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    width: 100px;
+    height: 100px;
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 50%; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin : 20px
+}
+
+.round-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.Item-icon{
+  margin-left: 15px;
+  font-size: 11pt;
+  
+}

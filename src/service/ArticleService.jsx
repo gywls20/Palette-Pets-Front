@@ -10,10 +10,9 @@ const ARTICLE_API_BASE_URL2 = "http://localhost:8080/article/listTest";
 //글 쓰기
 const API_SERVER_HOST = "http://localhost:8080";
 export const writeArticle = (formData) => {
-    return axios.post(`${API_SERVER_HOST}/Post/article`, formData, {
+    return jwtAxios.post(`${API_SERVER_HOST}/Post/article`, formData, {
         headers: {
-            "Access-Control-Allow-Origin": `http://localhost:3000`,
-            'Content-Type': 'multipart/form-data'
+            "Content-Type": 'multipart/form-data'
         }
     }
     )
@@ -23,7 +22,7 @@ export const writeArticle = (formData) => {
 
 //글 하나만 가져오기 
 export const getUpdateArticle =(articleId) =>{
-    return axios.get(`${API_SERVER_HOST}/Get/${articleId}`)
+    return axios.get(`${API_SERVER_HOST}/articles/${articleId}`)
                 .then(response => response.data.result.data)
                 .catch(error => error.data)
 }

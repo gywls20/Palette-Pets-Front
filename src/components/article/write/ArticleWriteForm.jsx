@@ -7,7 +7,8 @@ import InputTitle from './atoms/InputTitle';
 import InputContent from './atoms/InputContent';
 import ImageUpload from './atoms/ImageUpload';
 import { Button } from '@mui/material';
-import { writeArticle } from '../../../service/ArticleService';
+import {writeArticle} from '../../../service/ArticleService.jsx'
+import { useSelector } from 'react-redux';
 
 
 const initialForm = {
@@ -20,20 +21,20 @@ const initialForm = {
 }
 
 const ArticleWriteForm = () => {
-    
+
     const [form, onChange, onInput, reset] = useForm(initialForm);
     const [imgFiles, setImgFiles] = useState([]);
-
+    
     const onSubmit = async () => {
 
         const formData = new FormData();
         Object.values(imgFiles).map((item, index) => {
             formData.append('files', item);
-        })
+        });
         const blob = new Blob([JSON.stringify(form)], { type: "application/json" });
         formData.append('dto', blob);
-
-        await writeArticle(formData)        
+       
+        await writeArticle(formData);
     }
     
     return (
