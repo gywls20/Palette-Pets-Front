@@ -9,6 +9,7 @@ import ImageUpload from './atoms/ImageUpload';
 import { Button } from '@mui/material';
 import {writeArticle} from '../../../service/ArticleService.jsx'
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const initialForm = {
@@ -25,6 +26,7 @@ const ArticleWriteForm = () => {
     const [form, onChange, onInput, reset] = useForm(initialForm);
     const [imgFiles, setImgFiles] = useState([]);
     
+    const navigate = useNavigate();
     const onSubmit = async () => {
 
         const formData = new FormData();
@@ -35,6 +37,7 @@ const ArticleWriteForm = () => {
         formData.append('dto', blob);
        
         await writeArticle(formData);
+        navigate(-1);
     }
     
     return (

@@ -9,9 +9,9 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 const BoardPageItem = (articles) => {
     const { article } = articles
-    const { title, content, articleHead, articleId, articleTags, boardName, countLoves, countViews, countReview, createdAt, memberNickname } = article
+    const { title, content, articleHead, articleId, articleTags, boardName, countLoves, countViews, countReview, createdAt,memberNickname } = article
     const [formattedDateTime, setFormattedDateTime] = useState('');
-    
+    console.log(articles)
     const dateTime = new Date(createdAt);
     const nowTime = new Date();
 

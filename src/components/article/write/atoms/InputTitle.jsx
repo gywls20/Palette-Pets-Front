@@ -47,6 +47,8 @@ const InputTitle = memo(({ boardName, title, articleHead, onChange }) => {
 
     }, [boardName])
 
+   
+
     return (
         <>
             <div style={{ margin: "3px 0" }}>

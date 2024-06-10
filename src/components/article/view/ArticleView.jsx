@@ -4,10 +4,24 @@ import CommentResisterForm from '../../comment/CommentResisterForm';
 import { getUpdateArticle } from '../../../service/ArticleService';
 import { getComment } from '../../../service/commentApi';
 import CommentItem from '../../comment/CommentItem';
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Menu, MenuItem, Typography } from '@mui/material';
+import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Menu, MenuItem, Modal, Typography,Box } from '@mui/material';
 import { FavoriteOutlined } from '@mui/icons-material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ArticleDelete from '../delete/ArticleDelete';
+
+
+//모달창 css
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const ArticleView = () => {
 
@@ -64,6 +78,17 @@ const ArticleView = () => {
     setAnchorEl(null);
   };
 
+  //모달창 handler
+  const [openModal, setOpenModal] = useState(false);
+  const modalHandleOpen = () => {
+    setOpenModal(!openModal)
+  };
+  const modalHandleClose = () => {
+    console.log('aa')
+    setOpenModal(false);
+  }
+
+
 
   const navigate = useNavigate();
 
@@ -118,11 +143,12 @@ const ArticleView = () => {
           />)
         }
 
-        <CardActions disableSpacing sx={{ marginLeft: '50px', marginBottom: '20px' }}>
+        <CardActions disableSpacing sx={{ marginLeft: '20px', marginBottom: '20px' }}>
           <IconButton aria-label="add to favorites">
             <FavoriteOutlined />
             {countLoves}
           </IconButton>
+
         </CardActions>
 
         <Menu
@@ -133,25 +159,42 @@ const ArticleView = () => {
           disableScrollLock
           MenuListProps={{
             'aria-labelledby': 'basic-button',
-          
+
           }}
         >
           <MenuItem onClick={handleClose}>수정하기</MenuItem>
-          <MenuItem onClick={handleClose}>삭제하기</MenuItem>
-         
+          <MenuItem onClick={modalHandleOpen}>삭제하기</MenuItem>
+
         </Menu>
       </Card>
-          
 
 
 
-      <div style={{ marginBottom: '10px', padding: '10px', textAlign: 'left', borderBottom: '0.5px solid rgba(0,0,0, 0.12)', boxShadow: '0' }}>&emsp; 댓글 {countReview}</div>
+      <div style={{ marginBottom: '10px', padding: '10px', textAlign: 'left' }}>&emsp; 댓글 {countReview}</div>
       {
         commentDto && commentDto.map((item) =>
 
           <CommentItem key={item.articleCommentId} item={item} articleId={articleId} setIsArticleSubmitted={setIsArticleSubmitted} isArticleSubmitted={isArticleSubmitted} />
         )
       }
+
+
+
+      {/* 모달창 */}
+      <Modal
+        open={openModal}
+        onClose={modalHandleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          
+          <div style={{ textAlign: 'center' }}>
+            <ArticleDelete articleId = {articleId} modalHandleClose={modalHandleClose}/>
+          </div>
+        </Box>
+      </Modal>
+
 
       <footer>
 
