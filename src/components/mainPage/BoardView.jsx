@@ -8,6 +8,7 @@ import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
 import Anhae from '../../image/anhae.jpg'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import connectChat from './connectChat';
 
 const BoardView = () => {
     const [modal, setModal] = useState(false);
@@ -85,8 +86,8 @@ const BoardView = () => {
                         <img src={Anhae} alt="User" />
                         <div className={BoardViewStyle.ModalContainer}>
                             <button>팔로우</button>
-                            <button>
-                                <Link to='http://175.45.200.47:3000/chat/a' style={{ color: '#ffffff' }}>1:1 대화</Link>
+                            <button onClick={connectChat}>
+                                <span style={{ color: '#ffffff' }}>1:1 대화</span>
                             </button>
                         </div>
                     </Box>
