@@ -6,6 +6,8 @@ import BoardPage from "../pages/board/BoardPage.jsx";
 import HealthCalculatorPage from "../pages/HealthCalculatorPage.jsx";
 import petRouter from "./petRouter.jsx";
 import hotSpotRouter from "./hotSpotRouter.jsx";
+import SseTest from "../pages/test/SseTest.jsx";
+import IsLogin from "./IsLogin.jsx";
 
 
 
@@ -90,6 +92,10 @@ const root = createBrowserRouter([
     {
         path: "/walking",
         element: <Suspense fallback={<Loading/>}><WalkingPage/></Suspense>
+    },
+    {
+        path: "/sseTest",
+        element: <Suspense fallback={<Loading/>}><IsLogin Component={<SseTest/>} /></Suspense>
     },
 
 

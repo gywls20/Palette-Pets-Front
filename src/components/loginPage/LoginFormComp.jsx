@@ -73,6 +73,7 @@ const LoginFormComp = () => {
                 <div className={LoginStyle.links}>
                     <Link to="forgot-password" className={LoginStyle.link}>비밀번호를 잊으셨나요?</Link>
                     <Link to="/join" className={LoginStyle.link}>회원가입</Link>
+                    <Link to="http://localhost:8080/oauth2/authorization/naver" className={LoginStyle.link}>네이버</Link>
                 </div>
             </div>
         </div>
