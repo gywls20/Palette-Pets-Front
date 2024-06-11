@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CreateIcon from "@mui/icons-material/Create";
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import {
   BottomNavigation,
   BottomNavigationAction,
@@ -47,13 +48,13 @@ const Footer = () => {
   }, []);
 
   const onHome = () => navigate('/')
+
   const onPetList = () => {
     navigate('/pet/list');
   }
   const onHotSpot = () => {
     navigate('/hotspot');
   }
-
 
   return (
     <>

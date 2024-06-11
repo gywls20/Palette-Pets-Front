@@ -1,6 +1,7 @@
 import React from 'react';
 
-const ArticleUpdateComp = () => {
+const ArticleHead = () => {
+    
     return (
         <div>
             
@@ -8,4 +9,4 @@ const ArticleUpdateComp = () => {
     );
 };
 
-export default ArticleUpdateComp;
+export default ArticleHead;

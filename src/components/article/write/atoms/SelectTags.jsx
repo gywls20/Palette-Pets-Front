@@ -1,14 +1,7 @@
 import React,{useState} from 'react';
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
 import { Button } from '@mui/material';
-import axios from 'axios';
 import ArticleService from '../../../../service/ArticleService';
 
 const ITEM_HEIGHT = 48;
@@ -47,10 +40,14 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function SelectTags() {
+export default function SelectTags({ search, setSearch }) {
   const theme = useTheme();
   const [personName, setPersonName] = useState([]);
 
+  const handleSearchParam = () => {
+    setSearch(document.querySelector(".where").value);
+    console.log("search = " + search);
+  }
 
   const handleChange = (event) => {
     const {
@@ -64,62 +61,27 @@ export default function SelectTags() {
     console.log("event = "+ event);
   };
 
-  // axios get 요청 백에다 보내기
-  const tagSearchSubmit = () => {
-    const ARTICLE_API_BASE_URL = "http://localhost:8080/article/list";
-    axios.post(`${ARTICLE_API_BASE_URL}?where=${personName}`)
-    .then((res) => {
-      console.log(res.data)
-    })
-
-    console.log('selected tags = ' + personName);
-    alert(personName);
-  };
-
-  function tagSearchSubmit2(e) {
+  function tagSearchSubmit(e) {
     e.preventDefault();
     <ArticleService value={personName}/>
+    console.log(personName);
   }
 
+  const textSearchSubmit =(e) =>{
+    
+  }
   const onDelete = (e) =>{
     console.log(e.value.label)
   }
   return (
     <div>
       <FormControl sx={{m:1 ,width:"80%"}}>
-        <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel>
-        <Select
-          labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
-          multiple
-          inputProps={{MenuProps: {disableScrollLock: true}}}
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label="태그 선택" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} onClick={onDelete} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              // onClick={changeTags(name)}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
+        {/* <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel> */}
+        <input type='text' className='where'></input>
       </FormControl>
-      <Button type="submit" formMethod="get" onClick={tagSearchSubmit2}>
-        태그검색
-      </Button>
+      <Button type="submit" formMethod="get" onClick={handleSearchParam}>
+        검색
+      </Button >
     </div>
   );
 }

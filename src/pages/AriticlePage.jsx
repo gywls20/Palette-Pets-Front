@@ -3,7 +3,6 @@ import React from 'react';
 import DefaultLayout from '../layouts/DefaultLayout';
 import { Outlet } from "react-router-dom";
 
-import Box from "@mui/material/Box";
 
 const AriticlePage = () => {
 
@@ -13,15 +12,11 @@ const AriticlePage = () => {
           <>              
               <DefaultLayout>
                 
-              <>
-
-                <Box>
+             
 
                     <Outlet />
 
-                </Box>
-                
-              </>
+               
 
               </DefaultLayout>
                

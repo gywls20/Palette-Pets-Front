@@ -13,6 +13,7 @@ const MainPage = () => {
                 <UpdateComp/>
                 <br/>
                 <BoardViewComp/>
+                <hr/>
                 <ReviewComp/>
                 <br/>
             </DefaultLayout>
