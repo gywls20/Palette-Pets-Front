@@ -1,11 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import Slider from "react-slick";
-import {Container, Box, Typography, Avatar, Badge, Button, Modal} from '@mui/material';
+import {Container, Box, Typography, Avatar, Badge, Modal, Button} from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import {ArrowLeft} from "@mui/icons-material";
-import {ArrowRight} from "@mui/icons-material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import "slick-carousel/slick/slick.css";
 import "../../styles/mainPage/review.css";
@@ -17,10 +15,8 @@ const NextArrow = ({ onClick }) => {
         <Button
             className="slick-next"
             onClick={onClick}
-            type="button"
-            ArrowLeft
+            type="slick-next-button"
         >
-            <ArrowRight/>
         </Button>
     );
 };
@@ -31,9 +27,8 @@ const PrevArrow = ({ onClick }) => {
         <Button
             className="slick-prev"
             onClick={onClick}
-            type="button"
+            type="slick-prev-button"
         >
-            <ArrowLeft />
         </Button>
     );
 };
@@ -47,6 +42,8 @@ export default function ReviewComp() {
         slidesToShow: 1,
         slidesToScroll: 1,
         slidesPerRow: 1,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
     };
 
     const [modal, setModal] = useState(false)
@@ -63,7 +60,7 @@ export default function ReviewComp() {
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
-        p: 4
+        p: 4,
     };
 
     return (
