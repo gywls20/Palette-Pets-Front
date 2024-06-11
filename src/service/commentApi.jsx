@@ -8,3 +8,9 @@ export const addComment = (dto) => {
         .then(response => console.log(response.data))
         .catch(error => console.log(error.data))
 }
+
+export const getComment = (articleId) =>{
+    return axios.get(`${API_SERVER_HOST}/Get/comments/${articleId}`)
+        .then(response => response.data)
+        .catch(response => console.log(response.data))
+}

@@ -20,14 +20,6 @@ const communityBoardList = [
     {idx:6,boardName:"장소 추천", boardValue:'PETPLACE'}
 ]
 
-const storeBoardList =[
-
-    { idx: 1, boardName: '구매 등록', boardValue: 'BUY' },
-    { idx: 2, boardName: '판매 등록', boardValue: 'SELL' },
-    { idx: 3, boardName: '나눔 등록', boardValue: 'SHARE' },
-    { idx: 4, boardName: '산책 등록', boardValue: 'WALKING' }
-
-]
 
 const SelectBoard = memo(({boardName,onChange}) => {
    
@@ -45,15 +37,17 @@ const SelectBoard = memo(({boardName,onChange}) => {
                         inputProps={{ MenuProps: { disableScrollLock: true } }}
                         label="게시판 선택"
                         onChange={onChange}
+                        
                     >
                         {
                             communityBoardList.map(item =>
                                 <MenuItem key={item.idx} value={item.boardValue}>{item.boardName}</MenuItem>
                             )
                         }
-
                     </Select>
                 </FormControl>
+               
+                
            
         </>
     );

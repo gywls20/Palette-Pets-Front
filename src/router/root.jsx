@@ -12,6 +12,7 @@ import IsLogin from "./IsLogin.jsx";
 
 
 
+
 const Loading = () => <>Loading...</>;
 const MainPage = lazy(() => import('./../pages/MainPage'));
 const LoginPage = lazy(() => import('./../pages/LoginPage'));
@@ -31,7 +32,7 @@ const root = createBrowserRouter([
     },
     // 계층형으로 경로를 쿼리할 떄는 이렇게 나눠서 하기
     {
-        path:"test",
+        path:"/test",
         element: <Suspense fallback={<Loading />}><TestPage/></Suspense>, // 여기엔 그 기능의 인덱스나 메인 페이지 넣는듯
         children: testRouter()
     },
@@ -52,7 +53,11 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading />}><AriticlePage/></Suspense>, 
         children: articleRouter({Loading : Loading() })
     },
-
+    // {
+    //     path:"/view/:articleId",
+    //     element: <Suspense fallback={<Loading />}><ArticleView/></Suspense>, 
+     
+    // },
     {
         path:"/healthCalculatorPage",
         element: <Suspense fallback={<Loading />}><HealthCalculatorPage/></Suspense>,
@@ -63,7 +68,7 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading />}><BoardPage/></Suspense>,
         // children:boardRouter()
     },
-
+    
     {
         path:"/manager",
         element: <Suspense fallback={<Loading />}><ManagerPage/></Suspense>,

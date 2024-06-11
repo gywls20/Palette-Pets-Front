@@ -16,14 +16,14 @@ const style = {
     p: 4,
   };
 
-const ArticleDelete = () => {
-    const articleId = useParams();
+const ArticleDelete = (props) => {
+    const {articleId,modalHandleClose} =props
     const navigate = useNavigate();
 
     const  onDelete = () =>{
         console.log(articleId)
-         axios.delete(`http://localhost:8080/Delete/articleWrite/${articleId.articleId}`)
-         .then(response => navigate(-1))
+         axios.delete(`http://localhost:8080/Delete/${articleId}`)
+         .then(response => navigate('/board?sort=createdAt'))
          .catch(error => console.log(error))
     }
 
@@ -33,7 +33,7 @@ const ArticleDelete = () => {
                         <div>선택한 글을 삭제하시겠습니까?</div>
                         <br/>
                         <Button variant="outlined" color="error" onClick={ onDelete}>삭제</Button>
-                        <Button>취소</Button>
+                        <Button onClick={modalHandleClose}>취소</Button>
             </Box>
         </>
     );

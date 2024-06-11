@@ -1,15 +1,12 @@
 import React from 'react';
 
-const CommentDetail = () => {
-    
+const ArticleHead = () => {
     
     return (
-
         <div>
             
         </div>
-        
     );
 };
 
-export default CommentDetail;
+export default ArticleHead;
