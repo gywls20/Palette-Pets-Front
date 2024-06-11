@@ -5,9 +5,13 @@ const DefaultLayout = ({ children }) => {
 
     return (
         <>
-            <Header/>
+            <br/>
+            <br/>
+            <Header />
             {children}
             <Footer/>
+            <br/>
+            <br/>
         </>
     );
 }

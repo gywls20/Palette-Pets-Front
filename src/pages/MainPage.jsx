@@ -1,12 +1,21 @@
-import TestComp from "../components/TestComp.jsx";
 import DefaultLayout from "../layouts/DefaultLayout.jsx";
+import VideoComp from "../components/mainPage/VideoComp.jsx";
+import UpdateComp from "../components/mainPage/UpdateComp.jsx";
+import BoardViewComp from "../components/mainPage/BoardViewComp.jsx";
+import ReviewComp from "../components/mainPage/ReviewComp.jsx";
+
 
 const MainPage = () => {
-
     return (
         <>
             <DefaultLayout>
-                <TestComp/>
+                <VideoComp/>
+                <UpdateComp/>
+                <br/>
+                <BoardViewComp/>
+                <hr/>
+                <ReviewComp/>
+                <br/>
             </DefaultLayout>
         </>
     )

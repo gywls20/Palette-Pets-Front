@@ -1,12 +1,16 @@
-import TestComp from "../../components/TestComp.jsx";
-import DefaultLayout from "../../layouts/DefaultLayout.jsx";
 
+import DefaultLayout from "../../layouts/DefaultLayout.jsx";
+i
 const TestPage = () => {
+
 
     return (
         <>
             <DefaultLayout>
-                <TestComp/>
+                <>
+                  <TestPage/>
+
+                </>
             </DefaultLayout>
         </>
     )
