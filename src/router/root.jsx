@@ -1,11 +1,12 @@
 import {lazy, Suspense} from "react";
-import { createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import testRouter from "./testRouter.jsx";
 import articleRouter from "./articleRouter.jsx";
 import BoardPage from "../pages/board/BoardPage.jsx";
 import HealthCalculatorPage from "../pages/HealthCalculatorPage.jsx";
 import ManagerPageComp from "../components/manager/ManagerPageComp.jsx";
 import petRouter from "./petRouter.jsx";
+import hotSpotRouter from "./hotSpotRouter.jsx";
 
 
 
@@ -19,7 +20,7 @@ const ManagerPage = lazy(() => import('../pages/manager/ManagerPage'));
 const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'));
 const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
 const WalkingPage = lazy(() => import('../pages/walking/WalkingPage.jsx'));
-
+const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
 
 const root = createBrowserRouter([
     {
@@ -76,6 +77,11 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading/>}><PetPage/></Suspense>,
         children: petRouter()
     },
+    {
+        path: "/hotspot",
+        element: <Suspense fallback={<Loading/>}><HotSpotPage/></Suspense>,
+        children: hotSpotRouter()
+    },
 
     {
         path: "/updateList",
@@ -85,6 +91,7 @@ const root = createBrowserRouter([
         path: "/walking",
         element: <Suspense fallback={<Loading/>}><WalkingPage/></Suspense>
     },
+
 
 ]);
 

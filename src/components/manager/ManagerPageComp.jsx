@@ -1,86 +1,97 @@
 // eslint-disable-next-line no-unused-vars
-import React, {useEffect, useState} from 'react';
-import { styled } from '@mui/system';
-import "../../styles/managerPage/ManagerPage.css";
+import React, { useState, useEffect } from "react";
+import "../../styles/board/BoardList.css";
+import Category from "../CategoryComp.jsx";
 import ArticleService from "../../service/ArticleService.jsx";
+import { useLocation } from "react-router-dom";
 
-const TabButton = styled('button')`
-    border: none;
-    padding: 10px 20px;
-    background-color: ${({ isActive }) => (isActive ? '#f0ece3' : 'transparent')};
-    color: ${({ isActive }) => (isActive ? 'grey' : 'black')};
-    cursor: pointer;
-`;
+function ManagerPageComp() {
+  //URL에서 sort 값 가져오기
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const sortParam = queryParams.get("sort");
 
-const BoardContent = styled('div')`
-    padding: 20px;
-    border: 1px solid #ccc;
-`;
+  //초기화 설정
+  const [articles, setArticles] = useState([]);
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState(sortParam);
+  //const [sort, setSort] = useState(sortParam || 'articleId');
+  const [dir, setDir] = useState(true); //오름차순
+  const [where, setWhere] = useState("");
+  const [hasMore, setHasMore] = useState(true); // 추가 데이터를 불러올 수 있는지 여부(스크롤 사용)
 
-const ManagerPageComp = () => {
-    const TabData = [
-        { button: '신고내역', content: '여기에 신고 내용이 표시됩니다.' },
-        { button: '조치현황', content: '여기에 조치 내용이 표시됩니다.' },
-    ];
+  useEffect(() => {
+    fetchArticles();
+    // 스크롤 이벤트 리스너 등록
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      // 컴포넌트 언마운트 시 스크롤 이벤트 리스너 제거
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [page, sort, dir, where]); // 페이지가 로드될 때 한 번만 실행
 
-    const [activeTab, setActiveTab] = useState(0);
+  useEffect(() => {
+    if (sortParam) {
+      setSort(sortParam); // 쿼리 파라미터에서 sort 값을 읽어 설정
+      setArticles([]);
+      setPage(1);
+      setHasMore(true);
+    }
+  }, [sortParam]);
 
-    //초기화 설정
-    const [articles, setArticles] = useState([]);
-    const [page, setPage] = useState(1);
-    const [sort, setSort] = useState('articleId'); 
-    const [asc, setAsc] = useState(true); //오름차준
-    const [hasMore, setHasMore] = useState(true); // 추가 데이터를 불러올 수 있는지 여부(스크롤 사용)
-  
-    useEffect(() => {
-      fetchArticles();
-      // 스크롤 이벤트 리스너 등록
-      window.addEventListener('scroll', handleScroll);
-      return () => {
-        // 컴포넌트 언마운트 시 스크롤 이벤트 리스너 제거
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, []); // 페이지가 로드될 때 한 번만 실행
-  
-    const fetchArticles = () => {
-      if (!hasMore) return;
-  
-      ArticleService.getArticleList(page, sort, asc).then((res) => {
+  const fetchArticles = () => {
+    if (!hasMore) return;
+    ArticleService.getArticleList(page, sort, dir, where)
+      .then((res) => {
+        console.log("where =" + where);
         if (res.data.length > 0) {
-          setArticles(Articles => [...Articles, ...res.data]);
-          setPage(Page => Page + 1);
+          setArticles((prevArticles) => [...prevArticles, ...res.data]);
+          setPage((prevPage) => prevPage + 1);
+          console.log("where =" + where);
         } else {
           setHasMore(false);
         }
-      }).catch(error => {
+      })
+      .catch((error) => {
         console.error("Error fetching articles:", error);
       });
-    };
-  
-    const handleScroll = () => {
-      if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMore) return;
-      fetchArticles();
-    };
+  };
 
-  
-    return (
-        <>
-            <div className={"notice"}>
-                {TabData.map((tab, index) => (
-                    <TabButton
-                        key={index}
-                        isActive={activeTab === index}
-                        onClick={() => setActiveTab(index)}
-                    >
-                        {tab.button}
-                    </TabButton>
-                ))}
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight ||
+      !hasMore
+    )
+      return;
+    fetchArticles();
+  };
+
+  return (
+    <>
+      <div className="header">
+        <Category />
+      </div>
+      <hr />
+      <main className="container mx-auto px-4 py-4">
+        {articles.map((articles) => (
+          <div className="post" key={articles.articleId}>
+            <div className="flex justify-between items-center">
+              <div>
+                <div className="post-title text-red-500">{articles.title}</div>
+                <div>{articles.content}</div>
+                <div className="post-meta">
+                  {articles.createdWho} • {articles.createdAt} •{" "}
+                  {articles.countLoves} • {articles.countViews}
+                </div>
+              </div>
+              <div className="post-comments">{articles.articleId}</div>
             </div>
-            <BoardContent>
-                {TabData[activeTab].content}
-            </BoardContent>
-        </>
-    );
-};
+          </div>
+        ))}
+      </main>
+    </>
+  );
+}
 
 export default ManagerPageComp;
