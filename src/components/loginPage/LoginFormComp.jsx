@@ -73,7 +73,9 @@ const LoginFormComp = () => {
                 <div className={LoginStyle.links}>
                     <Link to="forgot-password" className={LoginStyle.link}>비밀번호를 잊으셨나요?</Link>
                     <Link to="/join" className={LoginStyle.link}>회원가입</Link>
-                    <Link to="http://localhost:8080/oauth2/authorization/naver" className={LoginStyle.link}>네이버</Link>
+                    <Link to="http://localhost:8080/oauth2/authorization/naver" className={LoginStyle.link}>
+                        <img src='https://clova-phinf.pstatic.net/MjAxODAzMjlfOTIg/MDAxNTIyMjg3MzM3OTAy.WkiZikYhauL1hnpLWmCUBJvKjr6xnkmzP99rZPFXVwgg.mNH66A47eL0Mf8G34mPlwBFKP0nZBf2ZJn5D4Rvs8Vwg.PNG/image.png'className={LoginStyle.naverImg}/>
+                    </Link>
                 </div>
             </div>
         </div>

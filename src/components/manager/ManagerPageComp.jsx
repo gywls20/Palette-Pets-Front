@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import React, {useState, useEffect} from 'react';
 import "../../styles/board/BoardList.css"
-import Category from "../PetCategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
 import { useLocation } from 'react-router-dom';
+import PetCategoryComp from '../PetCategoryComp.jsx';
 
 
 function ManagerPageComp() {
@@ -66,7 +66,7 @@ function ManagerPageComp() {
     return (
     <>
         <div className='header'>
-            <Category/>
+            <PetCategoryComp/>
         </div>
         <hr/>
         <main className="container mx-auto px-4 py-4">
