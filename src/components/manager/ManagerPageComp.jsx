@@ -4,6 +4,9 @@ import "../../styles/board/BoardList.css"
 import Category from "../PetCategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
 import { useLocation } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import "../../styles/managerPage/ManagerPage.css";
+import ArticleService from "../../service/ArticleService.jsx";
 
 
 function ManagerPageComp() {
