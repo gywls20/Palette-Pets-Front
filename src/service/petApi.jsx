@@ -11,7 +11,7 @@
 
 import axios from "axios";
 import jwtAxios from "./jwtAxios.js";
-
+import url from "../utils/single";
 const API_SERVER_HOST = `http://localhost:8080`;
 
 const jsonHeaders = {
@@ -25,7 +25,7 @@ const defaultHeaders = {
 }
 
 axios.defaults.withCredentials = true; // withCredentials 전역 설정
-axios.defaults.baseURL = API_SERVER_HOST;
+axios.defaults.baseURL = url;
 
 // 펫 등록 POST
 export const petRegisterRequest = (dto, file) => {
@@ -49,7 +49,7 @@ export const petRegisterRequest = (dto, file) => {
     const blob = new Blob([JSON.stringify(data)], {type: "application/json"});
     formData.append('dto', blob);
 
-    return jwtAxios.post(`${API_SERVER_HOST}/pet`, formData, {
+    return jwtAxios.post(`${url}/pet`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
@@ -85,7 +85,7 @@ export const petUpdateRequest = (dto, file) => {
     const blob = new Blob([JSON.stringify(data)], {type: "application/json"});
     formData.append('dto', blob);
 
-    return jwtAxios.put(`${API_SERVER_HOST}/pet/${dto.petId}`, formData, {
+    return jwtAxios.put(`${url}/pet/${dto.petId}`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
@@ -99,7 +99,7 @@ export const petUpdateRequest = (dto, file) => {
 
 // 펫 삭제 DELETE
 export const petDeleteRequest = (petId) => {
-    return jwtAxios.delete(`${API_SERVER_HOST}/pet/${petId}`)
+    return jwtAxios.delete(`${url}/pet/${petId}`)
         .then(response => response.data)
         .catch((error) => {
             console.error(error);
@@ -108,14 +108,22 @@ export const petDeleteRequest = (petId) => {
 }
 
 // 펫 이미지 등록 POST
-export const petImgRegisterRequest = (dto, file) => {
+export const petImgRegisterRequest = (dto, files) => {
 
     const formData = new FormData();
-    formData.append('file', file);
+
+    // 파일을 배열로 처리하여 FormData에 추가
+    files.forEach(file => {
+        formData.append('files', file);
+    });
     const blob = new Blob([JSON.stringify(dto)], {type: "application/json"});
     formData.append('dto', blob);
 
-    return jwtAxios.post(`${API_SERVER_HOST}/pet/img`, formData)
+    return jwtAxios.post(`${API_SERVER_HOST}/pet/img`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
         .then(response => response.data)
         .catch((error) => {
             console.error(error);
@@ -125,7 +133,7 @@ export const petImgRegisterRequest = (dto, file) => {
 
 // 펫 이미지 삭제 DELETE
 export const petImgDeleteRequest = (imgId) => {
-    return jwtAxios.delete(`${API_SERVER_HOST}/pet/img/${imgId}`)
+    return jwtAxios.delete(`${url}/pet/img/${imgId}`)
         .then(response => response.data)
         .catch((error) => {
             console.error(error);
@@ -135,7 +143,7 @@ export const petImgDeleteRequest = (imgId) => {
 
 // 펫 리스트 GET 요청 -> 회원이 소유한 반려 동물 리스트
 export const petListRequest = (memberId) => {
-    return jwtAxios.get(`${API_SERVER_HOST}/pet/list/${memberId}`)
+    return jwtAxios.get(`${url}/pet/list/${memberId}`)
         .then(response => response.data)
         .catch((error) => {
             console.error(error);
@@ -145,12 +153,22 @@ export const petListRequest = (memberId) => {
 
 // 펫 상세 정보 한 건 GET 요청
 export const petDetailRequest = (petId) => {
-    return jwtAxios.get(`${API_SERVER_HOST}/pet/${petId}`)
+    return jwtAxios.get(`${url}/pet/${petId}`)
         .then(response => response.data)
         .catch((error) => {
             console.error(error);
             console.error(error.response);
             console.error(error.response.data);
+            return error.response.data;
+        });
+}
+
+// 펫 이미지 리스트 GET 요청 -> 회원이 소유한 반려 동물 리스트
+export const petImgListRequest = (petId) => {
+    return jwtAxios.get(`${API_SERVER_HOST}/pet/list/${petId}`)
+        .then(response => response.data)
+        .catch((error) => {
+            console.error(error);
             return error.response.data;
         });
 }
@@ -163,7 +181,7 @@ export const petImgTest = async (file, dto) => {
     formData.append('dto', blob);
 
     try {
-        const response = await axios.post(`${API_SERVER_HOST}/pet/img/test`, formData, {
+        const response = await axios.post(`${url}/pet/img/test`, formData, {
             headers: {
             },
         });

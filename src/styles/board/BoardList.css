@@ -43,3 +43,8 @@
 .container {
     background-color: #f9fafb;
 }
+
+/* 0604 페이지 버튼 페이징 */
+.pagingBtn {
+    padding-bottom: 7rem;
+}

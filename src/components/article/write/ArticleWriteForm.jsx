@@ -19,7 +19,7 @@ const initialForm = {
 
 
 const ArticleWriteForm = () => {
-
+    
     const [form, onChange, onInput, reset] = useForm(initialForm);
     const [imgFiles, setImgFiles] = useState([]);
 
@@ -30,6 +30,11 @@ const ArticleWriteForm = () => {
             formData.append('files', item);
         })
 
+        const form = {
+            articleTags:`${form.boardName}`,
+            title:form.title,
+            content:form.content
+        }
         const blob = new Blob([JSON.stringify(form)], { type: "application/json" });
         formData.append('dto', blob);
 

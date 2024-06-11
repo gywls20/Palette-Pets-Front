@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CreateIcon from "@mui/icons-material/Create";
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import {
   BottomNavigation,
   BottomNavigationAction,
@@ -47,8 +48,12 @@ const Footer = () => {
   }, []);
 
   const onHome = () => navigate('/')
+
   const onPetList = () => {
     navigate('/pet/list');
+  }
+  const onHotSpot = () => {
+    navigate('/hotspot');
   }
 
   return (
@@ -65,7 +70,7 @@ const Footer = () => {
           <BottomNavigationAction label="Home" icon={<Home />} onClick={onHome} />
           <BottomNavigationAction label="PetList" icon={<Favorite />} onClick={onPetList} />
           <BottomNavigationAction label="Archive" icon={<Archive />} />
-          <BottomNavigationAction label="Location On" icon={<LocationOn />} />
+          <BottomNavigationAction label="Location On" icon={<LocationOn />} onClick={onHotSpot} />
         </BottomNavigation>
         <Link to="/article/write">
           <button className="floating-button">

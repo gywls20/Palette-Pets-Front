@@ -60,7 +60,7 @@ const UserMakeTags = memo(({ tags, onInput }) => {
 
                 <Chip label='ex) #고양이' variant="outlined" sx={{ marginTop: 2, marginBottom: 2 }} />
 
-                {tags.map((item, index) => (
+                {tags && tags.map((item, index) => (
 
                     <div key={index}>
 
