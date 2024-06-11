@@ -165,7 +165,7 @@ export const petDetailRequest = (petId) => {
 
 // 펫 이미지 리스트 GET 요청 -> 회원이 소유한 반려 동물 리스트
 export const petImgListRequest = (petId) => {
-    return jwtAxios.get(`${API_SERVER_HOST}/pet/list/${petId}`)
+    return jwtAxios.get(`${API_SERVER_HOST}/pet/img/list/${petId}`)
         .then(response => response.data)
         .catch((error) => {
             console.error(error);

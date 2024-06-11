@@ -159,7 +159,7 @@ const PetDetails = () => {
                 <div className="modal-overlay" onClick={closePictures}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                         {/* 여기에 사진첩 추가 및 사진첩 */}
-                        <PetImgForm closePictures={closePictures} petId={pet.id}/>
+                        <PetImgForm closePictures={closePictures} petId={pet.petId}/>
                     </div>
                 </div>
             )}
