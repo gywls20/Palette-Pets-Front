@@ -1,43 +1,45 @@
-import {Link, useNavigate} from 'react-router-dom';
-import LoginStyle from '../../styles/loginPage/login.module.css'
-import {login} from "../../service/api.jsx";
-import {useState} from "react";
-import {useDispatch} from "react-redux";
-import {saveToken} from "../../store/MemberSlice.js";
-import Swal from 'sweetalert2';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import LoginStyle from '../../styles/loginPage/login.module.css';
+import { login } from "../../service/api.jsx";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { saveToken } from "../../store/MemberSlice.js";
 
 const LoginFormComp = () => {
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        // URL에 error=true가 있는지 확인
+        const queryParams = new URLSearchParams(location.search);
+        if (queryParams.get('error') === 'true') {
+            alert('로그인에 실패했습니다. 다른 로그인 방법을 시도해 주세요.');
+        }
+    }, [location]);
 
     const requestLogin = async (e) => {
         e.preventDefault();
-        console.log(username);
-        console.log(password);
-        const token = await login({username, password});
-        console.log(token);
-
-        if (token === false) {
-            Swal.fire({
-                title: '로그인 실패',
-                text: '다시 입력 해주세요.^^',
-                icon: 'warning'
-            });
-           
-        } else {
-            Swal.fire({
-                title: '로그인 성공',
-                text: '환영합니다.^^',
-                icon: 'success'
-            });
-            console.log('로그인 성공');
-            dispatch(saveToken(token));
-            navigate({pathname: '/'}, {replace: true});
+        try {
+            const token = await login({ username, password });
+            if (token === false) {
+                alert('Login failed');
+                window.location.reload();
+            } else {
+                console.log('로그인 성공');
+                dispatch(saveToken(token));
+                navigate({ pathname: '/' }, { replace: true });
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert('An unexpected error occurred.');
+            }
         }
-    }
+    };
 
     return (
         <div>
@@ -46,27 +48,27 @@ const LoginFormComp = () => {
                     <div className={LoginStyle.formGroup}>
                         <label htmlFor="email" className={LoginStyle.label}>이메일</label>
                         <input type="email"
-                                name="email"
-                                className={LoginStyle.input}
-                                placeholder="이메일 입력"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                required />
+                            name="email"
+                            className={LoginStyle.input}
+                            placeholder="이메일 입력"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required />
                     </div>
 
                     <div className={LoginStyle.formGroup}>
                         <label htmlFor="password" className={LoginStyle.label}>비밀번호</label>
                         <input type="password"
-                                name="pwd"
-                                className={LoginStyle.input}
-                                placeholder="비밀번호 입력"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required />
+                            name="pwd"
+                            className={LoginStyle.input}
+                            placeholder="비밀번호 입력"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required />
                     </div>
 
                     <button className={LoginStyle.submitButton}
-                            onClick={requestLogin}
+                        onClick={requestLogin}
                     >로그인</button>
                 </form>
 
