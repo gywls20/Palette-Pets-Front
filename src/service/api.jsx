@@ -91,3 +91,14 @@ export const jwtTestRequest = () => {
             return error.response.data;
         });
 }
+
+export const getAllUnreadNotifications = () => {
+    return jwtAxios.get(`${API_SERVER_HOST}/api/issues`, {})
+        .then(response => response.data)
+        .catch((error) => {
+            console.error("error 발생 - [jwtAxios get 요청 /api/issues]");
+            console.error(error);
+            console.error(error.response.data);
+            return error.response.data;
+        })
+}
