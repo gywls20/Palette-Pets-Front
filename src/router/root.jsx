@@ -49,7 +49,11 @@ const root = createBrowserRouter([
 
     {
         path:"/article",
-        element: <Suspense fallback={<Loading />}><AriticlePage/></Suspense>, 
+        element: <Suspense fallback={<Loading />}>
+           
+            <AriticlePage/>
+            
+        </Suspense>, 
         children: articleRouter({Loading : Loading() })
     },
     // {
