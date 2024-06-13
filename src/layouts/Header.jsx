@@ -50,6 +50,7 @@ export default function Header() {
             if (result === "스프링 시큐리티 세션에서 가져올 정보가 존재하지 않음") {
                 fetchData();
             }
+            // console.log(result);
             setNotification(result);
         } catch (e) {
             console.log(e);
