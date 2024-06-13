@@ -14,6 +14,7 @@
     cursor: pointer;
     min-width: 10px;
     opacity: 100%;
+    padding-top: 1rem;
 }
 
 .slick-prev {
@@ -22,16 +23,6 @@
 
 .slick-next {
     right: 10px;
-}
-/* Icons */
-@font-face
-{
-    font-family: 'slick';
-    font-weight: normal;
-    font-style: normal;
-
-    src: url('./fonts/slick.eot');
-    src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');
 }
 
 .slick-prev:hover,
@@ -165,4 +156,9 @@
 .reviewSlider {
     display: flex !important;
     margin-bottom: 1rem;
+    margin-top: -1rem;
+}
+
+.MuiBox-root{
+    padding-bottom: 1rem;
 }
