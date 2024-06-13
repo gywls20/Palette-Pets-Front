@@ -14,7 +14,7 @@ import {useEffect, useState} from 'react';
 import {CssBaseline} from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {getAllUnreadNotifications, logout} from "../service/api.jsx";
+import {changeIsReadNotification, getAllUnreadNotifications, logout} from "../service/api.jsx";
 import {deleteToken} from "../store/MemberSlice.js";
 import Swal from 'sweetalert2';
 import {EventSourcePolyfill} from "event-source-polyfill";
@@ -156,6 +156,33 @@ export default function Header() {
         setNotificationAnchorEl(null);
     };
 
+    // 안 읽은 알림들 읽음 표시하기
+    const changeUnReadToRead = async (memberIssueId) => {
+        try {
+            const result = await changeIsReadNotification(memberIssueId);
+
+            if (result === true) {
+                setNotification((prevNotification) =>
+                    prevNotification.filter((item) => item.memberIssueId !== memberIssueId)
+                );
+                // Toast.fire({
+                //     icon: 'success',
+                //     title: "알림 읽음 성공",
+                //     width: 450
+                // })
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: "알림 읽음 오류",
+                    width: 450
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            alert(error);
+        }
+    }
+
     // 알림 메뉴 컴포넌트
     const renderNotificationMenu = (
         <Menu
@@ -180,7 +207,7 @@ export default function Header() {
                             <div style={{ marginRight: '10px' }}>
                                 <CheckCircleOutlineIcon
                                     style={{ width: '25px', height: '25px', borderRadius: '50%' }}
-                                    onClick={() => alert("체크했음")}
+                                    onClick={() => changeUnReadToRead(item.memberIssueId)}
                                 />
                                 <br/>
                                 <LinkIcon
