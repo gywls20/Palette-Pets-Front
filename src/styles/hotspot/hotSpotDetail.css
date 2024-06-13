@@ -2,6 +2,10 @@ root {
     height: auto !important;
 }
 
+* {
+    list-style: none;
+}
+
 .toList{
     padding: 4px;
     font-size: 18px;
@@ -19,6 +23,8 @@ root {
     position: relative;
     margin-bottom: 4rem;
     border-radius: 5px;
+    margin-top: 0 !important;
+    z-index: 0;
 }
 
 /*슬라이드*/
@@ -51,6 +57,7 @@ root {
 
 @media only screen and (max-width: 600px) {
     .centered-image {
+        display: block;
         position: relative;
         width: 380px;
         height: 300px;
@@ -60,6 +67,7 @@ root {
 
 @media only screen and (min-width: 600px) {
     .centered-image {
+        display: block;
         position: relative;
         width: 639px;
         height: 539px;
