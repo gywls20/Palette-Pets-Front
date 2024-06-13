@@ -7,25 +7,22 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 
-const UserMakeTags = memo(({ tags, onInput }) => {
+const UserMakeTags = memo(({ articleTags, onInput }) => {
 
     const [tagName, setTagName] = useState('');
     
-    
-   
-
     const onAddList= ()=>{
         if(tagName === ''){
             return alert('태그를 입력해 주세요')
         }
         
-        onInput({name:'tags',value:[...tags,tagName]}); 
+        onInput({name:'articleTags',value:[...articleTags,tagName]}); 
         setTagName('');
     }   
 
     const onDelList = (tag)=>{
         
-        onInput({name:'tags',value:tags.filter(item => item != tag)});
+        onInput({name:'articleTags',value:articleTags.filter(item => item != tag)});
     }
 
     return (
@@ -60,7 +57,7 @@ const UserMakeTags = memo(({ tags, onInput }) => {
 
                 <Chip label='ex) #고양이' variant="outlined" sx={{ marginTop: 2, marginBottom: 2 }} />
 
-                {tags && tags.map((item, index) => (
+                {articleTags && articleTags.map((item, index) => (
 
                     <div key={index}>
 

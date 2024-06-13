@@ -7,50 +7,47 @@ import InputTitle from './atoms/InputTitle';
 import InputContent from './atoms/InputContent';
 import ImageUpload from './atoms/ImageUpload';
 import { Button } from '@mui/material';
-import { writeArticle } from '../../../service/ArticleService';
+import {writeArticle} from '../../../service/ArticleService.jsx'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const initialForm = {
+    
     boardName: 'FREEBOARD',
-    tags: [],
+    articleHead : '',
+    articleTags:[],
     title: '',
     content: ''
 }
 
-
 const ArticleWriteForm = () => {
-    
+
     const [form, onChange, onInput, reset] = useForm(initialForm);
     const [imgFiles, setImgFiles] = useState([]);
-
+    
+    const navigate = useNavigate();
     const onSubmit = async () => {
 
         const formData = new FormData();
         Object.values(imgFiles).map((item, index) => {
             formData.append('files', item);
-        })
-
-        const form = {
-            articleTags:`${form.boardName}`,
-            title:form.title,
-            content:form.content
-        }
+        });
         const blob = new Blob([JSON.stringify(form)], { type: "application/json" });
         formData.append('dto', blob);
-
-        await writeArticle(formData)        
-
        
+        await writeArticle(formData);
+        navigate(-1);
     }
-
+    
     return (
 
 
         <div>
 
             <SelectBoard boardName={form.boardName} onChange={onChange} />
-            <UserMakeTags tags={form.tags} onInput={onInput} />
-            <InputTitle title={form.title} onChange={onChange} />
+            <UserMakeTags articleTags={form.articleTags} onInput={onInput} />
+            <InputTitle boardName={form.boardName} articleHead={form.articleHead} title={form.title} onChange={onChange} />
             <InputContent content={form.content} onChange={onChange} />
             <ImageUpload imgFiles={imgFiles} setImgFiles={setImgFiles} />
 

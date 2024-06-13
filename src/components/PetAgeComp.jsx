@@ -6,6 +6,7 @@ import PetStyle from '../styles/petAge.module.css'
 import ImgStyle from '../styles/img.module.css'
 
 import Age from '../image/age.jpg'
+import Swal from 'sweetalert2';
 
 const PetAgeComp = () => {
     function calculatePetAge(petType, actualAge) {
@@ -57,7 +58,11 @@ const PetAgeComp = () => {
             const calculatedAge = calculatePetAge(petType === 'dog' ? dogSize : petType, actualAge);
             
             if (description === '')
-                alert('날짜를 입력하세요.')
+                Swal.fire({
+                    title: '날짜 입력',
+                    text: '날짜를 입력하세요.^^',
+                    icon: 'warning'
+                });
             else{
             setHumanAge(`사람 나이로는 ${calculatedAge}살 입니다.`);
             setAgeDescription(`태어난 지 ${daysOld}일\n${description} 되었습니다.`);

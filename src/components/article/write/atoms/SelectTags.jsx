@@ -1,15 +1,7 @@
 import React,{useState} from 'react';
-import CssBaseline from "@mui/material/CssBaseline";
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
 import { Button } from '@mui/material';
-import axios from 'axios';
 import ArticleService from '../../../../service/ArticleService';
 
 const ITEM_HEIGHT = 48;
@@ -86,34 +78,6 @@ export default function SelectTags({ search, setSearch }) {
       <FormControl sx={{m:1 ,width:"80%"}}>
         {/* <InputLabel id="demo-multiple-chip-label">태그 선택</InputLabel> */}
         <input type='text' className='where'></input>
-        {/* <Select
-          labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
-          multiple
-          inputProps={{MenuProps: {disableScrollLock: true}}}
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label="태그 선택" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} onClick={onDelete} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              // onClick={changeTags(name)}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select> */}
       </FormControl>
       <Button type="submit" formMethod="get" onClick={handleSearchParam}>
         검색

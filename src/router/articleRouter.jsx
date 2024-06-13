@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 
 import ArticleDelete from "../components/article/delete/ArticleDelete";
 import ArticleUpdateForm from "../components/article/update/ArticleUpdateForm";
+import ArticleView from "../components/article/view/ArticleView";
 // import {Navigate} from "react-router-dom";
 const ArticleWriteForm = lazy(() => import('../components/article/write/ArticleWriteForm'));
 
@@ -16,6 +17,14 @@ const articleRouter = ({ Loading }) => {
                
                     <ArticleWriteForm />
                 
+            </Suspense>
+        },
+        {
+            path: "view/:articleId",
+            element: <Suspense fallback={Loading}>
+
+                <ArticleView />
+
             </Suspense>
         },
         {
@@ -34,6 +43,7 @@ const articleRouter = ({ Loading }) => {
 
             </Suspense>
         }
+     
 
     ]
 

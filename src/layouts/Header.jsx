@@ -3,7 +3,6 @@ import IconButton from '@mui/material/IconButton';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
@@ -20,8 +19,6 @@ import {logout} from "../service/api.jsx";
 import {deleteToken} from "../store/MemberSlice.js";
 import Swal from 'sweetalert2';
 import {EventSourcePolyfill} from "event-source-polyfill";
-
-
 
 export default function Header() {
     const navigate = useNavigate
@@ -150,6 +147,7 @@ export default function Header() {
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <Menu
+            style={{font: '#000'}}
             anchorEl={anchorEl}
             anchorOrigin={{
                 vertical: 'top',
@@ -248,14 +246,8 @@ export default function Header() {
                 <CssBaseline/>
                 <AppBar position="fixed">
                     <Toolbar>
-                        {/* <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{display: 'block'}}
-                        > */}
-                            <Link to="/" style={{color: '#fff'}}>냥가왈부</Link>
-                        {/* </Typography> */}
+                        <Link to="/" style={{color: '#fff'}}>냥가왈부</Link>
+
                         <Box sx={{flexGrow: 1}}/>
                         <Box sx={{display: {xs: 'none', md: 'flex'}}}>
                             <IconButton size="large" color="inherit">
