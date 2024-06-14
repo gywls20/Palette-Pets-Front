@@ -3,13 +3,10 @@ import React, {useState, useEffect} from 'react';
 import "../../styles/board/BoardList.css"
 import ArticleService from '../../service/ArticleService.jsx';
 import { useLocation } from 'react-router-dom';
-<<<<<<< HEAD
 import React, {useEffect, useState} from 'react';
 import "../../styles/managerPage/ManagerPage.css";
 import ArticleService from "../../service/ArticleService.jsx";
-=======
 import PetCategoryComp from '../PetCategoryComp.jsx';
->>>>>>> 9112a41073f76e717e613a625aae5eda8def21f8
 
 
 function ManagerPageComp() {
