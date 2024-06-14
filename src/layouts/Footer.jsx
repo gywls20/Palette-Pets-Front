@@ -16,6 +16,7 @@ import {
   LocationOn,
   Home,
   KeyboardArrowUp,
+  VolunteerActivism
 } from "@mui/icons-material";
 
 const Footer = () => {
@@ -55,6 +56,9 @@ const Footer = () => {
   const onHotSpot = () => {
     navigate('/hotspot');
   }
+  const onCarrot = () => {
+    navigate('/carrot');
+  }
 
   return (
     <>
@@ -67,9 +71,10 @@ const Footer = () => {
           showLabels
           value={value}
           onChange={handleNavigationChange}>
-          <BottomNavigationAction label="Home" icon={<Home />} onClick={onHome} />
-          <BottomNavigationAction label="PetList" icon={<Favorite />} onClick={onPetList} />
           <BottomNavigationAction label="Archive" icon={<Archive />} />
+          <BottomNavigationAction label="PetList" icon={<Favorite />} onClick={onPetList} />
+          <BottomNavigationAction label="Home" icon={<Home />} onClick={onHome} />
+          <BottomNavigationAction label="Market" icon={<VolunteerActivism/>} onClick={onCarrot}/>
           <BottomNavigationAction label="Location On" icon={<LocationOn />} onClick={onHotSpot} />
         </BottomNavigation>
         <Link to="/article/write">

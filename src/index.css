@@ -64,9 +64,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-<<<<<<< HEAD
-
-=======
 /*reviewComp*/
 
 .slick-track {
@@ -78,7 +75,6 @@ button:focus-visible {
   margin-bottom: 1rem;
   padding-bottom: 5rem;
 }
->>>>>>> 936fb23f45a6aaa1659919bd7f95f262e1439927
 
 .MuiContainer-root,
 .MuiContainer-maxWidthSm,
