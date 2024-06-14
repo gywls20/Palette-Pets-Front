@@ -45,7 +45,11 @@ export const resistUpdateArticle = (formData,articleId)=> {
         .catch(error => console.log(error.data))
 }
 //글 좋아요
-
+export const increaseLikeCount = (body) =>{
+    return jwtAxios.post(`${API_SERVER_HOST}/like`,body)
+    .then(response => response.data)
+    .catch(response => console.log(response.data))
+}
 
 class ArticleService {
     getArticleList(page, sort, dir, search,boardName) {

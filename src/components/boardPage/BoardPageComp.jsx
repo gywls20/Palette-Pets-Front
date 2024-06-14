@@ -61,6 +61,7 @@ function BoardPageComp() {
 
       setTagList(tagList => reset ? arrayWithoutDuplicateFromResult : [...tagList, ...(arrayWithoutDuplicateFromResult)]);
       setArticles(articles => reset ? res.data : [...articles, ...(res.data)]);
+      
       //setPage(page => page + 1);
       setPage(page => pageToFetch + 1);
     })
@@ -79,8 +80,15 @@ function BoardPageComp() {
   const addBoardName = (event) => {
     event.preventDefault();
     const { value } = event.target
+    console.log(boardName)
+    console.log(value)
+
+    if(boardName === value){
+      setBoardName('');
+    }
+    else{
     setBoardName(value)
-    
+    }
   }
 
   const addSearch = (tag) => {
