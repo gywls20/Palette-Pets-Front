@@ -88,7 +88,7 @@ const reducer = (state,action) => {
   }
 }
 
-function ListViewComp() {
+const ListViewComp = () => {
     //URL에서 sort 값 가져오기
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
