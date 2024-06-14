@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
+import {url} from '../../utils/single';
 
 const ArticleTest = () => {
     const [userDTO, setUserDTO] = useState({
@@ -14,7 +15,7 @@ const ArticleTest = () => {
     const onSubmit = (e)=>{
         e.preventDefault()
 
-        axios.post('http://localhost:8080/articleWriteTest',userDTO)
+        axios.post(`${url}/articleWriteTest`,userDTO)
         .then(res=>
             console.log(res.data)
         )

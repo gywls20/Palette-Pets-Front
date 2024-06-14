@@ -1,8 +1,8 @@
-
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import {url} from '../../../utils/single.js';
 
 const style = {
     position: 'absolute',
@@ -22,7 +22,7 @@ const ArticleDelete = (props) => {
 
     const  onDelete = () =>{
         console.log(articleId)
-         axios.delete(`http://localhost:8080/Delete/${articleId}`)
+         axios.delete(`${url}/Delete/${articleId}`)
          .then(response => navigate('/board?sort=createdAt'))
          .catch(error => console.log(error))
     }

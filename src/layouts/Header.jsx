@@ -20,6 +20,7 @@ import Swal from 'sweetalert2';
 import {EventSourcePolyfill} from "event-source-polyfill";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import LinkIcon from '@mui/icons-material/Link';
+import {url} from "../utils/single.js";
 
 export default function Header() {
     const navigate = useNavigate
@@ -67,7 +68,7 @@ export default function Header() {
 
         //SSE 연결 로직
         const connectSSE = () => {
-            const source = new EventSourcePolyfill("http://localhost:8080/connect", {
+            const source = new EventSourcePolyfill(`${url}/connect`, {
                 headers: {
                     authorization: token,
                 },

@@ -1,7 +1,7 @@
 import React, {useEffect, createContext, useReducer, useMemo} from 'react';
 import "../../styles/board/BoardList.css"
 import ArticleService from '../../service/ArticleService.jsx';
-import url from '../../utils/single.js';
+import {url} from '../../utils/single.js';
 import PageButton from './PageBtnComp.jsx';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';

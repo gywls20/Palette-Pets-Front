@@ -11,18 +11,15 @@ import { common } from "@mui/material/colors";
 import { deleteToken } from "../store/MemberSlice.js";
 import { useDispatch } from "react-redux";
 import jwtAxios from "./jwtAxios.js";
+import {url, urlNoPort} from "../utils/single.js";
 
-const API_SERVER_HOST = `http://localhost:8080`;
+const API_SERVER_HOST = `${url}`;
 
 const jsonHeaders = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": `http://localhost:3000`,
+    "Access-Control-Allow-Origin": `${urlNoPort}:3000`,
 }
 
-// new FormData() 로 파일 보낼때는 json 헤더말고 이 헤더를 쓰기
-const defaultHeaders = {
-    "Access-Control-Allow-Origin": `http://localhost:3000`,
-}
 
 axios.defaults.withCredentials = true; // withCredentials 전역 설정
 axios.defaults.baseURL = API_SERVER_HOST;
