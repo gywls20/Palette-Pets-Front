@@ -3,7 +3,7 @@ import { Box, List, ListItem, ListItemText, Card, CardMedia, Typography, Rating,
 import {useNavigate} from "react-router-dom";
 import "../../styles/hotspot/hotSpot.css";
 import VisibilityIcon from "@mui/icons-material/Visibility.js";
-import {getAllHostSpotList} from "../../service/hotSpotApi.jsx";
+import {createHotSpot, getAllHostSpotList} from "../../service/hotSpotApi.jsx";
 
 
 // const hotSpotList = [
@@ -41,6 +41,22 @@ import {getAllHostSpotList} from "../../service/hotSpotApi.jsx";
 //     },
 // ];
 
+const HotSpotComponent = () => {
+    const [hotSpot, setHotSpot] = useState(null);
+    const [hotSpotList, setHotSpotList] = useState([]);
+    const [hotSpotId, setHotSpotId] = useState(null); // 수정 또는 삭제할 명소 ID
+
+// 명소 글 작성 요청
+const handleCreateHotSpot = async (hotSpotData) => {
+    try {
+        const result = await createHotSpot(hotSpotData);
+        console.log("Created:", result);
+        setHotSpot(result);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 const HotSpotList = () => {
 
     const navigate = useNavigate();
@@ -56,6 +72,13 @@ const HotSpotList = () => {
 
         fetchData();
     }, []);
+
+    // 명소 글 작성 예제
+    const newHotSpotData = {
+        name: '명소 이름',
+        description: '명소 위치'
+    };
+    handleCreateHotSpot(newHotSpotData);
 
     return (
         <Box sx={{ padding: 2 }}>
