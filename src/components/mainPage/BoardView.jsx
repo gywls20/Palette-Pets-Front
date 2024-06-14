@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import connectChat from './connectChat';
 import axios from 'axios';
 import { ar } from 'date-fns/locale';
+import {url} from '../../utils/single';
 
 const BoardView = () => {
     const [modal, setModal] = useState({});
@@ -83,7 +84,7 @@ const BoardView = () => {
 
     const fetchData = async () => {
         try {
-            const result = await axios.get('http://localhost:8080/popular')
+            const result = await axios.get(`${url}/popular`)
             .then(res => res.data)
             .catch(err => {
                 console.error(err);

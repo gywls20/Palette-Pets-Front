@@ -1,14 +1,12 @@
 import { Article } from "@mui/icons-material";
 import axios from "axios";
 import jwtAxios from "./jwtAxios.js";
+import {url} from "../utils/single.js";
 
-
-const ARTICLE_API_BASE_URL = "http://localhost:8080/article/list";
-const ARTICLE_API_BASE_URL2 = "http://localhost:8080/article/listTest";
-
-
+const ARTICLE_API_BASE_URL = `${url}/article/list`;
 //글 쓰기
-const API_SERVER_HOST = "http://localhost:8080";
+const API_SERVER_HOST = url;
+
 export const writeArticle = (formData) => {
     return jwtAxios.post(`${API_SERVER_HOST}/Post/article`, formData, {
         headers: {
