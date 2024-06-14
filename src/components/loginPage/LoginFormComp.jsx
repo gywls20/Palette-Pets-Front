@@ -4,6 +4,7 @@ import { login } from "../../service/api.jsx";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { saveToken } from "../../store/MemberSlice.js";
+import Swal from 'sweetalert2';
 
 const LoginFormComp = () => {
     const [username, setUsername] = useState("");
@@ -16,7 +17,11 @@ const LoginFormComp = () => {
         // URL에 error=true가 있는지 확인
         const queryParams = new URLSearchParams(location.search);
         if (queryParams.get('error') === 'true') {
-            alert('로그인에 실패했습니다. 다른 로그인 방법을 시도해 주세요.');
+            Swal.fire({
+                title: '로그인 실패',
+                text: '다른 로그인 방법을 시도해 주세요.^^',
+                icon: 'warning'
+            });
         }
     }, [location]);
 
@@ -25,10 +30,19 @@ const LoginFormComp = () => {
         try {
             const token = await login({ username, password });
             if (token === false) {
-                alert('Login failed');
-                window.location.reload();
+                Swal.fire({
+                    title: '로그인 실패',
+                    text: '다른 로그인 방법을 시도해 주세요.^^',
+                    icon: 'warning'
+                });
+                // window.location.reload();
             } else {
                 console.log('로그인 성공');
+                Swal.fire({
+                    title: '로그인 성공',
+                    text: '환영합니다.^^',
+                    icon: 'success'
+                });
                 dispatch(saveToken(token));
                 navigate({ pathname: '/' }, { replace: true });
             }
