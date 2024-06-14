@@ -1,6 +1,7 @@
-
+ import TestComp from "../../components/TestComp.jsx";
 import DefaultLayout from "../../layouts/DefaultLayout.jsx";
-i
+import ArticleTest from "../article/ArticleTest.jsx";
+
 const TestPage = () => {
 
 
@@ -11,6 +12,8 @@ const TestPage = () => {
                   <TestPage/>
 
                 </>
+                <ArticleTest/>
+                
             </DefaultLayout>
         </>
     )

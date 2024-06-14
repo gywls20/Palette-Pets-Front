@@ -22,8 +22,8 @@ const AriticlePage = lazy(()=>import('../pages/AriticlePage.jsx'));
 const ManagerPage = lazy(() => import('../pages/manager/ManagerPage'));
 const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'));
 const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
-const WalkingPage = lazy(() => import('../pages/walking/WalkingPage.jsx'));
 const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
+const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
 
 const root = createBrowserRouter([
     {
@@ -50,7 +50,11 @@ const root = createBrowserRouter([
 
     {
         path:"/article",
-        element: <Suspense fallback={<Loading />}><AriticlePage/></Suspense>, 
+        element: <Suspense fallback={<Loading />}>
+           
+            <AriticlePage/>
+            
+        </Suspense>, 
         children: articleRouter({Loading : Loading() })
     },
     // {
@@ -95,15 +99,17 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading/>}><UpdateList/></Suspense>
     },
     {
-        path: "/walking",
-        element: <Suspense fallback={<Loading/>}><WalkingPage/></Suspense>
-    },
-    {
         path: "/sseTest",
         element: <Suspense fallback={<Loading/>}><IsLogin Component={<SseTest/>} /></Suspense>
     },
 
 
+    
+    {
+        path:"article",
+        element: <Suspense fallback={<Loading />}><ArticlePage/></Suspense>,
+
+    }
 ]);
 
 export default root;
