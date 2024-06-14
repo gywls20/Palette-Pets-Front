@@ -23,6 +23,7 @@ const ManagerPage = lazy(() => import('../pages/manager/ManagerPage'));
 const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'));
 const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
 const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
+const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
 
 const root = createBrowserRouter([
     {
@@ -103,6 +104,12 @@ const root = createBrowserRouter([
     },
 
 
+    
+    {
+        path:"article",
+        element: <Suspense fallback={<Loading />}><ArticlePage/></Suspense>,
+
+    }
 ]);
 
 export default root;

@@ -158,5 +158,6 @@ const HotSpotDetails = () => {
             <Link to="/hotspot/" className="toList">목록으로</Link>
         </>
     );
+};
 
 export default HotSpotDetails;

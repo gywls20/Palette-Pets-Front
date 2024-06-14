@@ -45,6 +45,7 @@ const HotSpotComponent = () => {
     const [hotSpot, setHotSpot] = useState(null);
     const [hotSpotList, setHotSpotList] = useState([]);
     const [hotSpotId, setHotSpotId] = useState(null); // 수정 또는 삭제할 명소 ID
+}
 
 // 명소 글 작성 요청
 const handleCreateHotSpot = async (hotSpotData) => {
