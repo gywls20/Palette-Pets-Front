@@ -63,7 +63,6 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-<<<<<<< HEAD
 
 
 /*reviewComp*/
@@ -78,8 +77,6 @@ button:focus-visible {
   padding-bottom: 5rem;
 }
 
-=======
->>>>>>> acb9d2c6d782a47640cc8a8b505f2bef54eb6676
 .MuiContainer-root,
 .MuiContainer-maxWidthSm,
 .css-o31nrr-MuiContainer-root {
