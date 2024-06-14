@@ -1,9 +1,10 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { Box, Button, Container, Modal } from '@mui/material';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import './ImageWithCloseIcon.css';
 import ImageEdit from './ImageEdit';
+import { useParams } from "react-router-dom";
 
 //모달창 css
 const style = {
@@ -18,11 +19,9 @@ const style = {
 };
 
 
-const ImageUpload = ({ imgFiles, setImgFiles }) => {
+const ImageUpload = ({ previewList,setPreviewList,imgFiles, setImgFiles }) => {
     //imgfiles -> Object Storage 및 DB 저장용 , 배열
     //previewList -> 미리보기 및 편집용 , 배열
-    
-    const [previewList, setPreviewList] = useState([]);
 
     //trigger 사용을 대체할 ref -> icon 클릭시 파일 열림
     const imgRef = useRef();
@@ -86,7 +85,7 @@ const ImageUpload = ({ imgFiles, setImgFiles }) => {
           const deleteUrl = previewList[choiceIndex]
           const newImgList = previewList.filter((item, index) => index !== choiceIndex);
           const newFiles = imgFiles.filter((item, index) => index !== choiceIndex);
-
+        
           setPreviewList(newImgList)
           setImgFiles(newFiles)
         

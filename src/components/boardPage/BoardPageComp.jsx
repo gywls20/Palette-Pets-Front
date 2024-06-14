@@ -6,11 +6,15 @@ import PetCategory from "../PetCategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
 import { useLocation } from 'react-router-dom';
 import BoardPageItem from './BoardPageItem.jsx';
+import { Stack } from '@mui/system';
+import { Chip } from '@mui/material';
 
 
 function BoardPageComp() {
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState([]);
+  const [tagList, setTagList] = useState([]);
+  const [boardName, setBoardName] = useState('');
 
   //URL에서 sort 값 가져오기
   const location = useLocation();
@@ -32,7 +36,7 @@ function BoardPageComp() {
     setPage(1); // search 값이 들어오면 페이지를 1로 초기화(Page = 1일 때만 조회가 되기 때문)
     setArticles([]); // articles를 초기화
     fetchArticles(true);
-  }, [search, sort])
+  }, [search, sort, boardName])
 
   useEffect(() => {
     if (sortParam) {
@@ -42,11 +46,20 @@ function BoardPageComp() {
     };
   }, [sortParam]);
 
+
   const fetchArticles = (reset = false) => {
+
+    const searchString = search.map(item => item).join(',');
+
     const pageToFetch = reset ? 1 : page;
-    ArticleService.getArticleList(pageToFetch, sort, dir, search).then((res) => {
+    ArticleService.getArticleList(pageToFetch, sort, dir, searchString, boardName).then((res) => {
       console.log("where =@!@!@!@!@" + search);
-      console.log(res);
+      // console.log(res);
+
+      const resultString = res.data.map(obj => obj.articleTags).join(',')
+      const arrayWithoutDuplicateFromResult = [...new Set(resultString.split(','))];
+
+      setTagList(tagList => reset ? arrayWithoutDuplicateFromResult : [...tagList, ...(arrayWithoutDuplicateFromResult)]);
       setArticles(articles => reset ? res.data : [...articles, ...(res.data)]);
       //setPage(page => page + 1);
       setPage(page => pageToFetch + 1);
@@ -63,26 +76,70 @@ function BoardPageComp() {
     }
   }, [inView]);
 
-  const onSearch = (event) => {
+  const addBoardName = (event) => {
     event.preventDefault();
-    setSearch(event.target.value)
+    const { value } = event.target
+    setBoardName(value)
+    
   }
 
+  const addSearch = (tag) => {
+
+    if (!search.includes(tag)) {
+      console.log('aaaaaa')
+      setSearch([...search, tag])
+    }
+
+  }
+
+  const delSearch = (tag) => {
+    setSearch(search.filter(item => item !== tag))
+  }
+
+  const onReset = ()=>{
+    setBoardName('')
+    setSearch([])
+    setTagList([])
+  }
   return (
     <>
       <div className='header'>
         <div className='searchInput'>
-          <input type='text' value={search} onChange={onSearch} />
+          {/* <input type='text' value={search} /> */}
         </div>
         <div className='boardSelectBtn'>
-          <button className="round-button" value="FREEBOARD" onClick={onSearch}>자유</button>
-          <button className="round-button" value="INFORMATION" onClick={onSearch}>정보</button>
-          <button className="round-button" value="SHOW" onClick={onSearch}>자랑</button>
-          <button className="round-button" value="QNA" onClick={onSearch}>QNA</button>
+          <button className='round-button' onClick={onReset}>전체</button>
+          <button className={boardName === "FREEBOARD" ? "round-button active" : "round-button"} value="FREEBOARD" onClick={addBoardName}>자유</button>
+          <button className={boardName === "INFORMATION" ? "round-button active" : "round-button"} value="INFORMATION" onClick={addBoardName}>정보</button>
+          <button className={boardName === "SHOW" ? "round-button active" : "round-button"} value="SHOW" onClick={addBoardName}>자랑</button>
+          <button className={boardName === "QNA" ? "round-button active" : "round-button"} value="QNA" onClick={addBoardName}>QNA</button>
         </div>
 
-        <div className='tagSelectBtn'>
-            
+        <div className='tagList'>
+
+          {
+
+            tagList.map((item, index) =>
+              item !== '' ?
+                <Stack direction="row" spacing={1} key={index} sx={{ display: 'inline-block', margin: '10px' }}>
+                  <Chip label={item} variant="outlined" onClick={() => addSearch(item)} />
+                </Stack>
+                : null
+
+            )
+          }
+        </div>
+        <div className='selectedTagList'>
+          {
+            search && search.map((item, index) =>
+
+              <Stack direction="row" spacing={1} sx={{ display: 'inline-block', margin: '10px' }} key={index}>
+
+                <Chip label={item} variant="outlined" onDelete={() => delSearch(item)} />
+
+              </Stack>
+            )
+          }
 
         </div>
       </div>

@@ -2,6 +2,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { addComment } from '../../service/commentApi';
+import { useSelector } from 'react-redux';
 
 const style = {
     width: '80%',
@@ -18,7 +19,7 @@ const style = {
 const CommentResisterForm = ({ commentRef, articleId, parentId,setIsArticleSubmitted,isArticleSubmitted}) => {
     
     const [comment, setComment] = useState('');
-
+    
     const commentInput = (e) => {
         setComment(e.target.value)
     }
@@ -41,7 +42,7 @@ const CommentResisterForm = ({ commentRef, articleId, parentId,setIsArticleSubmi
 
 
         <>
-            <textarea style={style} value={comment} rows={1} onChange={commentInput} placeholder='댓글을 입력해 주세요' />
+            <textarea style={style} value={comment} rows={1} onChange={commentInput} placeholder='댓글을 입력해 주세요'/>
             <FontAwesomeIcon icon={faPaperPlane} style={{ width: 40, height: 40 }} onClick={onSubmit} />
         </>
 
