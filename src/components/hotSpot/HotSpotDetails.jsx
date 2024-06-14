@@ -8,11 +8,12 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import {Button, Rating} from "@mui/material";
 import ReactQuill from "react-quill";
-import {getHotSpotDetail} from "../../service/hotSpotApi.jsx";
+import {deleteHotSpot, getHotSpotDetail, updateHotSpot} from "../../service/hotSpotApi.jsx";
 
 const HotSpotDetails = () => {
 
     const [hotspot, setHotspot] = useState({ rating: 0 });
+
 
     const { id } = useParams();
 
@@ -25,6 +26,25 @@ const HotSpotDetails = () => {
         }
         fetchData();
     },[]);
+
+    const [hotSpot, setHotSpot] = useState(null);
+    const [hotSpotList, setHotSpotList] = useState([]);
+    const [hotSpotId, setHotSpotId] = useState(null); // 수정 또는 삭제할 명소 ID
+
+    // 명소 글 수정 예제
+    const updatedHotSpotData = {
+        name: 'Updated HotSpot',
+        description: 'Updated description of the hotspot'
+    };
+    if (hotSpotId) {
+        handleUpdateHotSpot(hotSpotId, updatedHotSpotData);
+    }
+
+//     // 명소 글 삭제 예제
+//     if (hotSpotId) {
+//         handleDeleteHotSpot(hotSpotId);
+//     }
+// }, [hotSpotId]);
 
     // eslint-disable-next-line react/prop-types
     const NextArrow = ({ onClick }) => {
@@ -49,6 +69,28 @@ const HotSpotDetails = () => {
             </Button>
         );
     };
+
+    // 명소 글 수정 요청
+    const handleUpdateHotSpot = async (hotSpotId, hotSpotData) => {
+        try {
+            const result = await updateHotSpot(hotSpotId, hotSpotData);
+            console.log("Updated:", result);
+            setHotSpot(result);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    // 명소 글 삭제 요청
+    const handleDeleteHotSpot = async (hotSpotId) => {
+        try {
+            const result = await deleteHotSpot(hotSpotId);
+            console.log("Deleted:", result);
+            setHotSpot(null);
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
     const settings = {
         dots: false,
@@ -116,6 +158,5 @@ const HotSpotDetails = () => {
             <Link to="/hotspot/" className="toList">목록으로</Link>
         </>
     );
-}
 
 export default HotSpotDetails;
