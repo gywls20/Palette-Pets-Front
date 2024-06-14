@@ -19,7 +19,6 @@ const LoginPage = lazy(() => import('./../pages/LoginPage'));
 const JoinPage = lazy(() => import('./../pages/JoinPage'));
 const TestPage = lazy(() => import('../pages/test/TestPage.jsx'));
 const AriticlePage = lazy(()=>import('../pages/AriticlePage.jsx'));
-const ManagerPage = lazy(() => import('../pages/manager/ManagerPage'));
 const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'));
 const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
 const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
@@ -70,12 +69,6 @@ const root = createBrowserRouter([
     {
         path:"/board",
         element: <Suspense fallback={<Loading />}><BoardPage/></Suspense>,
-        // children:boardRouter()
-    },
-    
-    {
-        path:"/manager",
-        element: <Suspense fallback={<Loading />}><ManagerPage/></Suspense>,
         // children:boardRouter()
     },
 
