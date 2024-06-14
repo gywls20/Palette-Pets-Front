@@ -31,7 +31,7 @@ const ArticleView = () => {
   const [commentDto, setCommentDto] = useState([]);
 
 
-  const { articleTags, content, countLoves, countReview, created_who, memberImage, title, images } = articleDto
+  const { articleTags, content, countLoves, countReview, created_who, memberImage, title, images,isLike } = articleDto
 
 
   //댓글 등록시 리렌더링
@@ -165,7 +165,7 @@ const ArticleView = () => {
 
         <CardActions disableSpacing sx={{ marginLeft: '20px', marginBottom: '20px' }}>
           <IconButton aria-label="add to favorites" onClick={increaseLike}>
-            <FavoriteOutlined sx={{ color: 'red' }} />
+            <FavoriteOutlined sx={{ color: isLike ? 'red' : 'black' }} />
 
           </IconButton>
           {countLoves}
