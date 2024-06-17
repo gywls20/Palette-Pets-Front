@@ -21,11 +21,11 @@ const carrotRouter = () => {
             element: <Suspense fallback={Loading}><CarrotList/></Suspense>
         },
         {
-            path: "details/:id",
+            path: "details",
             element: <Suspense fallback={Loading}><CarrotDetails/></Suspense>
         },
         {
-            path: "from",
+            path: "post",
             element: <Suspense fallback={Loading}><IsLogin Component={<CarrotPostForm/>} /></Suspense>
         },
         {
