@@ -103,7 +103,7 @@ const HotSpotDetails = () => {
                                     {hotspot.imgList.map((imgSrc, index) => (
                                         <div key={imgSrc.imgHotSpotId}>
                                             <img
-                                                src={imgSrc.imgUrl}
+                                                src={"https://kr.object.ncloudstorage.com/palettepets/hotspot/" + imgSrc.imgUrl}
                                                 alt={`Hotspot image ${index + 1}`}
                                                 className="centered-image"
                                             />
@@ -114,7 +114,7 @@ const HotSpotDetails = () => {
                                 hotspot.imgList.map((imgSrc, index) => (
                                     <div key={imgSrc.imgHotSpotId}>
                                         <img
-                                            src={imgSrc.imgUrl}
+                                            src={"https://kr.object.ncloudstorage.com/palettepets/hotspot/" + imgSrc.imgUrl}
                                             alt={`Hotspot image ${index + 1}`}
                                             className="centered-image"
                                         />

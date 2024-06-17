@@ -7,6 +7,7 @@ import "../../styles/hotspot/hotSpotWrite.css";
 import useForm from "../../hooks/useForm.jsx";
 import {useNavigate} from "react-router-dom";
 import {writeArticle} from "../../service/ArticleService.jsx";
+import {createHotSpot} from "../../service/hotSpotApi.jsx";
 
 
 const HotSpotWrite = () => {
@@ -47,11 +48,13 @@ const HotSpotWrite = () => {
             formData.append('files', item);
         });
         const blob = new Blob([JSON.stringify(dto)], { type: "application/json" });
-        formData.append('dto', blob);
+        formData.append('request', blob);
+        console.log(dto);
 
         // 글 등록 api 연결
-        console.log(dto);
-        alert("등록성공");
+        const result = await createHotSpot(formData);
+        console.log("result =", result);
+        alert("result = ", result);
         // await writeArticle(formData);
         // navigate("/hotspot", {replace: true});
 
