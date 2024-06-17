@@ -1,12 +1,8 @@
 import axios from "axios";
 import jwtAxios from "./jwtAxios.js";
+import {url} from "../utils/single";
 
-const API_SERVER_HOST = `http://localhost:8080`;
-
-const jsonHeaders = {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": `http://localhost:3000`,
-}
+const API_SERVER_HOST = `${url}`;
 
 
 

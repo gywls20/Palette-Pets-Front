@@ -161,6 +161,5 @@ const HotSpotDetails = () => {
             }
         </>
     );
-}
-
+};
 export default HotSpotDetails;

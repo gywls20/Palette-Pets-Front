@@ -1,12 +1,12 @@
-import ListViewComp from "../../components/listview/ListViewComp.jsx";
-import DefaultLayout from "../../layouts/DefaultLayout.jsx";
+// import ListViewComp from "../../components/listview/ListViewComp.jsx";
+// import DefaultLayout from "../../layouts/DefaultLayout.jsx";
 
-const BoardPage = () => {
-    return (
-        <DefaultLayout>
-            <ListViewComp/>
-        </DefaultLayout>
-    );
-};
+// const BoardPage = () => {
+//     return (
+//         <DefaultLayout>
+//             <ListViewComp/>
+//         </DefaultLayout>
+//     );
+// };
 
-export default BoardPage;
+// export default BoardPage;

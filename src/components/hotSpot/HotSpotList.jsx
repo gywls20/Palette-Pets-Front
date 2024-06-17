@@ -6,7 +6,6 @@ import VisibilityIcon from "@mui/icons-material/Visibility.js";
 import {getAllHostSpotList} from "../../service/hotSpotApi.jsx";
 import BuildIcon from '@mui/icons-material/Build';
 
-
 const HotSpotList = () => {
 
     const navigate = useNavigate();

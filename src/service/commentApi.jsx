@@ -1,7 +1,8 @@
 import axios from "axios";
 import jwtAxios from "./jwtAxios";
+import {url} from "../utils/single";
 
-const API_SERVER_HOST= "http://localhost:8080";
+const API_SERVER_HOST= `${url}`;
 
 export const addComment = (dto) => {
     return jwtAxios.post(`${API_SERVER_HOST}/Post/comments`, dto)
