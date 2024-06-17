@@ -40,7 +40,10 @@ const CarrotPostForm = () => {
 
     try {
         
-        await carrotService.postCarrotWrite(formData);
+        const result = await carrotService.postCarrotWrite(formData);
+        if (result === "글 등록 완료") {
+            alert('안댄거임')
+        }
         console.log("폼데이터2@= ", Object.fromEntries(formData.entries()));
         alert('글 등록에 성공했습니다.');
         navigate(-1); // 이전 페이지로 이동

@@ -3,7 +3,6 @@ import { useInView } from 'react-intersection-observer';
 import Dropdown from 'react-bootstrap/Dropdown';
 import '../../styles/carrot/CarrotList.css';
 import carrotService from '../../service/carrotService';
-import CarrotSearch from './CarrotSearch';
 import { useNavigate } from 'react-router-dom';
 
 
