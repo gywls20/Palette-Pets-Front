@@ -1,13 +1,10 @@
 import React, {useState} from 'react';
-import InputTitle from "../article/write/atoms/InputTitle.jsx";
-import InputContent from "../article/write/atoms/InputContent.jsx";
 import ImageUpload from "../article/write/atoms/ImageUpload.jsx";
 import {Button} from "@mui/material";
 import "../../styles/hotspot/hotSpotWrite.css";
-import useForm from "../../hooks/useForm.jsx";
 import {useNavigate} from "react-router-dom";
-import {writeArticle} from "../../service/ArticleService.jsx";
 import {createHotSpot} from "../../service/hotSpotApi.jsx";
+import Swal from "sweetalert2";
 
 
 const HotSpotWrite = () => {
@@ -49,14 +46,19 @@ const HotSpotWrite = () => {
         });
         const blob = new Blob([JSON.stringify(dto)], { type: "application/json" });
         formData.append('request', blob);
-        console.log(dto);
 
         // 글 등록 api 연결
         const result = await createHotSpot(formData);
-        console.log("result =", result);
-        alert("result = ", result);
-        // await writeArticle(formData);
-        // navigate("/hotspot", {replace: true});
+
+        if (result === true) {
+            navigate("/hotspot", {replace: true});
+        } else {
+            await Swal.fire({
+                title: '명소 추천 글 등록 실패',
+                text: '알 수 없는 이유로 실패했습니다. 관리자에게 문의해주세요',
+                icon: 'warning'
+            });
+        }
 
     }
 

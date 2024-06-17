@@ -10,14 +10,13 @@ import {Button, Rating} from "@mui/material";
 import ReactQuill from "react-quill";
 import {checkIsManager, deleteHotSpot, getHotSpotDetail} from "../../service/hotSpotApi.jsx";
 import BuildIcon from "@mui/icons-material/Build.js";
+import Swal from "sweetalert2";
 
 const HotSpotDetails = () => {
 
     const [hotspot, setHotspot] = useState({rating: 0});
     const [isManager, setIsManager] = useState(false);
     const navigate = useNavigate();
-
-
     const {id} = useParams();
 
     useEffect(() => {
@@ -57,25 +56,25 @@ const HotSpotDetails = () => {
         );
     };
 
-    // // 명소 글 수정 요청
-    // const handleUpdateHotSpot = async (hotSpotId, hotSpotData) => {
-    //     try {
-    //         const result = await updateHotSpot(hotSpotId, hotSpotData);
-    //         console.log("Updated:", result);
-    //         setHotSpot(result);
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // }
-
     // 명소 글 삭제 요청
     const handleDeleteHotSpot = async (hotSpotId) => {
         try {
             const result = await deleteHotSpot(hotSpotId);
-            console.log("Deleted:", result);
-            alert(result);
-            navigate("/hotspot/list", {replace: true});
+            if (result === true) {
+                navigate("/hotspot/list", {replace: true});
+            } else {
+                await Swal.fire({
+                    title: '명소 추천 글 삭제 실패',
+                    text: '알 수 없는 이유로 실패했습니다. 관리자에게 문의해주세요',
+                    icon: 'warning'
+                });
+            }
         } catch (err) {
+            await Swal.fire({
+                title: '명소 추천 글 삭제 실패',
+                text: '알 수 없는 이유로 실패했습니다. 관리자에게 문의해주세요',
+                icon: 'warning'
+            });
             console.error(err);
         }
     }
@@ -131,7 +130,7 @@ const HotSpotDetails = () => {
                             >
                                 게시물 삭제
                             </Button>
-                            <Link to="/hotspot/update">
+                            <Link to={`/hotspot/update/${hotspot.hotSpotId}`}>
                                 <button className="update-button">
                                     <BuildIcon />
                                 </button>
