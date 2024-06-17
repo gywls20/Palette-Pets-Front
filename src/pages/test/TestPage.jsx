@@ -1,5 +1,5 @@
 import DefaultLayout from "../../layouts/DefaultLayout.jsx";
-import ArticleTest from "../article/ArticleTest.jsx";
+
 
 const TestPage = () => {
 
@@ -8,11 +8,11 @@ const TestPage = () => {
         <>
             <DefaultLayout>
                 <>
-                  <TestPage/>
+                  
 
                 </>
-                <ArticleTest/>
-                
+
+
             </DefaultLayout>
         </>
     )

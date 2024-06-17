@@ -15,20 +15,33 @@ import InsertCommentIcon from '@mui/icons-material/InsertComment';
 import { Menu, MenuItem } from '@mui/material';
 import { set } from 'date-fns';
 
-export default function CommentItem({item,articleId,setIsArticleSubmitted,isArticleSubmitted}) {
-    
-    const { articleCommentId, children, content, memberImage, memberNickname, updateAt} = item
-   
+export default function CommentItem({ item, articleId, setIsArticleSubmitted, isArticleSubmitted }) {
+
+    const { articleCommentId, children, content, memberImage, memberNickname, updateAt } = item
+
     const [formattedDateTime, setFormattedDateTime] = useState('');
 
     const dateTime = new Date(updateAt);
     const nowTime = new Date();
 
+    //대댓글 등록창 handler
     const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = () => {
-      setExpanded(!expanded);
+        setExpanded(!expanded);
     };
+
+    //수정 삭제 메뉴 handler
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
   
     useEffect(() => {
         let time = "";
@@ -46,18 +59,18 @@ export default function CommentItem({item,articleId,setIsArticleSubmitted,isArti
         setExpanded(false)
     }, [item])
 
-   
+
 
     return (
         <>
 
-            <Card sx={{ maxWidth: 620, margin:'auto' ,borderBottom: '0.5px solid rgba(0,0,0, 0.12)', boxShadow: '0' }}>
+            <Card sx={{ maxWidth: 620, margin: 'auto', borderBottom: '0.5px solid rgba(0,0,0, 0.12)', boxShadow: '0' }}>
                 <CardHeader
                     avatar={
                         <Avatar aria-label="memberImage" src={memberImage} />
                     }
                     action={
-                        <IconButton id="basic-button" aria-label="settings" >
+                        <IconButton id="basic-button" aria-label="settings" onClick={handleClick} >
                             <MoreVertIcon />
                         </IconButton>
                     }
@@ -80,22 +93,37 @@ export default function CommentItem({item,articleId,setIsArticleSubmitted,isArti
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <CommentResisterForm commentRef={articleCommentId} articleId={articleId} parentId={articleCommentId} setIsArticleSubmitted={setIsArticleSubmitted} isArticleSubmitted={isArticleSubmitted} />
+                        <CommentResisterForm memberNickname={memberNickname} commentRef={articleCommentId} articleId={articleId} parentId={articleCommentId} setIsArticleSubmitted={setIsArticleSubmitted} isArticleSubmitted={isArticleSubmitted} />
                     </CardContent>
                 </Collapse>
+                <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    disableScrollLock
+                    MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+
+                    }}
+                >
+                    <MenuItem>수정하기</MenuItem>
+                    <MenuItem>삭제하기</MenuItem>
+
+                </Menu>
             </Card>
-          
-            <div style={{marginLeft:20}}>
+
+            <div style={{ marginLeft: 20 }}>
                 {
                     children && children.length > 0 &&
-                        <div style ={{marginLeft:20}}>
-                            {   
-                                children.map((childItem,index) =>(
-                                    <CommentItem key={index} item={childItem} articleId={articleId} setIsArticleSubmitted={setIsArticleSubmitted} isArticleSubmitted={isArticleSubmitted} />
-                                ))
-                            }
-                        </div>
-                } 
+                    <div style={{ marginLeft: 20 }}>
+                        {
+                            children.map((childItem, index) => (
+                                <CommentItem key={index} item={childItem} articleId={articleId} setIsArticleSubmitted={setIsArticleSubmitted} isArticleSubmitted={isArticleSubmitted} />
+                            ))
+                        }
+                    </div>
+                }
             </div>
         </>
     );

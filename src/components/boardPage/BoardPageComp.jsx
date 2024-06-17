@@ -35,8 +35,8 @@ function BoardPageComp() {
     setWhere(search);
     setPage(1); // search 값이 들어오면 페이지를 1로 초기화(Page = 1일 때만 조회가 되기 때문)
     setArticles([]); // articles를 초기화
-    fetchArticles(true);
-  }, [search, sort, boardName])
+    fetchArticles(dir);
+  }, [search, sort, boardName,dir])
 
   useEffect(() => {
     if (sortParam) {
@@ -61,6 +61,7 @@ function BoardPageComp() {
 
       setTagList(tagList => reset ? arrayWithoutDuplicateFromResult : [...tagList, ...(arrayWithoutDuplicateFromResult)]);
       setArticles(articles => reset ? res.data : [...articles, ...(res.data)]);
+      
       //setPage(page => page + 1);
       setPage(page => pageToFetch + 1);
     })
@@ -79,8 +80,15 @@ function BoardPageComp() {
   const addBoardName = (event) => {
     event.preventDefault();
     const { value } = event.target
+    console.log(boardName)
+    console.log(value)
+
+    if(boardName === value){
+      setBoardName('');
+    }
+    else{
     setBoardName(value)
-    
+    }
   }
 
   const addSearch = (tag) => {
@@ -147,6 +155,7 @@ function BoardPageComp() {
 
       <hr />
       <main className="container mx-auto px-4 py-4">
+        <div style={{textAlign:'right'}}><button onClick={()=>setDir(true)}>최신순</button> / <button onClick={()=>setDir(false)}>오래된순</button></div>
         {
           articles.map(articles =>
             <BoardPageItem key={articles.articleId} article={articles} />

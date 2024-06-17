@@ -37,6 +37,7 @@ const getPersistedState = () => {
         if (serializedState === null) {
             return undefined;
         }
+        console.log("tototo ",JSON.parse(serializedState));
         return JSON.parse(serializedState);
     } catch (err) {
         console.error("Failed to retrieve persisted state from localStorage:", err);
