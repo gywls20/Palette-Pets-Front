@@ -15,7 +15,6 @@ const MainPage = () => {
                 <BoardViewComp/>
                 <hr/>
                 <ReviewComp/>
-                <br/>
             </DefaultLayout>
         </>
     )
