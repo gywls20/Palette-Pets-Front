@@ -9,9 +9,11 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 const BoardPageItem = (articles) => {
     const { article } = articles
-    const { title, content, articleHead, articleId, articleTags, boardName, countLoves, countViews, countReview, createdAt,memberNickname } = article
+    const { title, content, images,articleHead, articleId, articleTags, boardName, countLoves, countViews, countReview, createdAt,memberNickname } = article
     const [formattedDateTime, setFormattedDateTime] = useState('');
-    console.log(articles)
+
+    
+    
     const dateTime = new Date(createdAt);
     const nowTime = new Date();
 
@@ -28,6 +30,7 @@ const BoardPageItem = (articles) => {
 
         // 연.월.일 시 분 형식으로 포맷
         setFormattedDateTime(time);
+
     }, [])
 
     const navigate = useNavigate();
@@ -37,7 +40,11 @@ const BoardPageItem = (articles) => {
         navigate(`/article/view/${articleId}`)
     }
 
-
+    const formattedString = articleTags.split(',')
+    .map(item => `#${item}`)
+    .join(' ');
+    
+    
     return (
         <>
             <div className="Item-container" onClick={articlePage}>
@@ -67,11 +74,14 @@ const BoardPageItem = (articles) => {
 
                         </div>
                         {
-                            articleTags && <div className="Item-tags">#{articleTags}</div>
+                            articleTags && <div className="Item-tags">{formattedString}</div>
                         }
 
                     </div>
-                    <div className="Item-image">사진</div>
+                    {
+                        images.length > 0  && 
+                        <div className="Item-image"><img src={`https://kr.object.ncloudstorage.com/palettepets/article/img/${images[0].imgUrl}`} alt='image'/></div>
+                    }
                 </div>
 
             </div>

@@ -10,19 +10,20 @@ const KEYWORD_LIST = [
     { id: 3, value: '애견호텔', emoji: '🏨' },
 ];
 
-const Kakao = () => {
+const Kakao = ({ lat, lng }) => {
 
     // 기본 위치 설정 지정
     const [state, setState] = useState({
         center: {
-            lat: 39.01935385275867,
-            lng: 125.75090408114178,
+            lat: lat,
+            lng: lng,
         },
         errMsg: null,
         isLoading: true,
+        draggable:true,
     });
 
-    // 현재 사용자 위치 받아오기 (geolocation)
+    // // 현재 사용자 위치 받아오기 (geolocation)
     // useEffect(() => {
     //     if (navigator.geolocation) {
     //         navigator.geolocation.getCurrentPosition(
@@ -75,20 +76,7 @@ const Kakao = () => {
                     }}
                 />
 
-                {/* 검색된 장소 마커 표시 */}
-                {/*{search.map((data) => (*/}
-                {/*    <MapMarker*/}
-                {/*        key={data.id}*/}
-                {/*        position={{ lat: data.y, lng: data.x }}*/}
-                {/*        image={{*/}
-                {/*            src: 'https://cdn-icons-png.flaticon.com/128/2098/2098567.png',*/}
-                {/*            size: {*/}
-                {/*                width: 35,*/}
-                {/*                height: 35,*/}
-                {/*            },*/}
-                {/*        }}*/}
-                {/*    />*/}
-                {/*))}*/}
+
             </Map>
         </>
     );

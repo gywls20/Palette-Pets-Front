@@ -8,7 +8,6 @@ import petRouter from "./petRouter.jsx";
 import hotSpotRouter from "./hotSpotRouter.jsx";
 import SseTest from "../pages/test/SseTest.jsx";
 import IsLogin from "./IsLogin.jsx";
-import carrotRouter from "./carrotRouter.jsx";
 
 
 
@@ -20,12 +19,11 @@ const LoginPage = lazy(() => import('./../pages/LoginPage'));
 const JoinPage = lazy(() => import('./../pages/JoinPage'));
 const TestPage = lazy(() => import('../pages/test/TestPage.jsx'));
 const AriticlePage = lazy(()=>import('../pages/AriticlePage.jsx'));
-const ManagerPage = lazy(() => import('../pages/manager/ManagerPage'));
 const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'));
 const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
-const WalkingPage = lazy(() => import('../pages/walking/WalkingPage.jsx'));
 const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
 const CarrotPage = lazy(() => import('../pages/carrot/CarrotPage.jsx'));
+const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
 
 const root = createBrowserRouter([
     {
@@ -91,12 +89,7 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading/>}><HotSpotPage/></Suspense>,
         children: hotSpotRouter()
     },
-    {
-        path: "/carrot",
-        element: <Suspense fallback={<Loading/>}><CarrotPage/></Suspense>,
-        children: carrotRouter()
 
-    },
     {
         path: "/updateList",
         element: <Suspense fallback={<Loading/>}><UpdateList/></Suspense>

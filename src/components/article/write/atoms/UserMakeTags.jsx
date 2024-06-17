@@ -47,8 +47,8 @@ const UserMakeTags = memo(({ articleTags, onInput }) => {
                 />
 
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-                <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-                    <AddIcon onClick={()=>onAddList()}/>
+                <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={()=>onAddList()}>
+                    <AddIcon />
                 </IconButton>
 
             </Paper>

@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {EventSourcePolyfill} from "event-source-polyfill";
 import Swal from "sweetalert2";
+import {url} from "../../utils/single";
 
 const SseTest = () => {
 
@@ -29,7 +30,7 @@ const SseTest = () => {
 
         //SSE연결 로직
         const connectSSE = () => {
-            const source = new EventSourcePolyfill("http://localhost:8080/connect", {
+            const source = new EventSourcePolyfill(`${url}/connect`, {
                 headers: {
                     authorization: authToken,
                 },

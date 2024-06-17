@@ -29,12 +29,12 @@ const DEFAULT_HEAD_LIST = [
 ]
 
 const InputTitle = memo(({ boardName, title, articleHead, onChange }) => {
-
+    
     const [headList, setHeadList] = useState([]);
 
     useEffect(() => {
-
-        switch (boardName) {
+        
+        switch (boardName) {    
             case 'FREEBOARD':
                 return setHeadList(DEFAULT_HEAD_LIST[0])
             case 'INFORMATION':
@@ -53,14 +53,14 @@ const InputTitle = memo(({ boardName, title, articleHead, onChange }) => {
         <>
             <div style={{ margin: "3px 0" }}>
 
+
                 <FormControl sx={{ m: 1, width: "19%" }}>
                     <InputLabel id="select-head">머리말 선택</InputLabel>
                     <Select
                         labelId="select-head"
                         id="select-head"
-                        defaultValue={articleHead}
                         name="articleHead"
-                        value={articleHead}
+                        value={`${articleHead}`}
                         inputProps={{ MenuProps: { disableScrollLock: true } }}
                         label="머리말 선택"
                         onChange={onChange}
