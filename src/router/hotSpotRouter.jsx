@@ -5,6 +5,8 @@ import IsLogin from "./IsLogin.jsx";
 const Loading = <div>Loading....</div>
 const HotSpotList = lazy(() => import("../components/hotSpot/HotSpotList.jsx"))
 const HotSpotDetails = lazy(() => import("../components/hotSpot/HotSpotDetails.jsx"))
+const HotSpotWrite = lazy(() => import("../components/hotSpot/HotSpotWrite.jsx"))
+const HotSpotUpdate =lazy(() => import("../components/hotSpot/HotSpotUpdate.jsx"))
 
 
 const hotSpotRouter = () => {
@@ -20,6 +22,14 @@ const hotSpotRouter = () => {
         {
             path: "details/:id",
             element: <Suspense fallback={Loading}><IsLogin Component={<HotSpotDetails/>} /></Suspense>
+        },
+        {
+            path: "write",
+            element: <Suspense fallback={Loading}><IsLogin Component={<HotSpotWrite/>} /></Suspense>
+        },
+        {
+            path: "update",
+            element: <Suspense fallback={Loading}><IsLogin Component={<HotSpotUpdate/>} /></Suspense>
         },
     ]
 }

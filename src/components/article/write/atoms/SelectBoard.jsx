@@ -1,10 +1,9 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import CssBaseline from "@mui/material/CssBaseline";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
 
 
 const communityBoardList = [
@@ -20,30 +19,27 @@ const communityBoardList = [
     {idx:6,boardName:"장소 추천", boardValue:'PETPLACE'}
 ]
 
-
 const SelectBoard = memo(({boardName,onChange}) => {
-   
    
     return (
         <>
+      
                 <FormControl sx={{ m: 2, width: "80%" }}>
                     <InputLabel id="select-board">게시판 선택</InputLabel>
                     <Select
                         labelId="select-board"
                         id="select-board"
-                        defaultValue={boardName}
                         name="boardName"
-                        value={boardName}
+                        value={`${boardName}`}
                         inputProps={{ MenuProps: { disableScrollLock: true } }}
                         label="게시판 선택"
                         onChange={onChange}
-                        
                     >
-                        {
-                            communityBoardList.map(item =>
-                                <MenuItem key={item.idx} value={item.boardValue}>{item.boardName}</MenuItem>
-                            )
-                        }
+                        <MenuItem value='FREEBOARD'>자유게시판</MenuItem>
+                        <MenuItem value='INFORMATION'>정보게시판</MenuItem>
+                        <MenuItem value='SHOW'>자랑게시판</MenuItem>
+                        <MenuItem value='QNA'>질문게시판</MenuItem>
+                        
                     </Select>
                 </FormControl>
                

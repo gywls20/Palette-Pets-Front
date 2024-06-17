@@ -51,7 +51,7 @@
   .Item-image {
     width: 100px;
     height: 100px;
-    background-color: #ccc;
+    background-color: white;
     display: flex;
     justify-content: center;
     margin-right: 10px;
@@ -64,8 +64,8 @@
     background-color: #1976D2; /* Green background */
     border: none; /* Remove borders */
     color: white; /* White text */
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     text-align: center; /* Centered text */
     text-decoration: none; /* Remove underline */
     display: inline-block;
@@ -88,3 +88,5 @@
   font-size: 11pt;
   
 }
+
+.round-button.active { background-color: red; color: #fff; }

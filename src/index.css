@@ -126,3 +126,7 @@ button:focus-visible {
 .css-0{
   background-color: #f3f4f6;
 }
+
+.MuiBottomNavigation-root{
+  position: relative;
+}

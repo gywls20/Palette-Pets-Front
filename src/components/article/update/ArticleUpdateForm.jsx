@@ -8,70 +8,100 @@ import UserMakeTags from '../write/atoms/UserMakeTags';
 import InputTitle from '../write/atoms/InputTitle';
 import InputContent from '../write/atoms/InputContent';
 import ImageUpload from '../write/atoms/ImageUpload';
-import { useParams } from 'react-router-dom';
-import { getUpdateArticle } from '../../../service/ArticleService';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getUpdateArticle, resistUpdateArticle } from '../../../service/ArticleService';
 
 
 
+const initialForm = {
 
+    boardName: '',
+    articleHead: '',
+    articleTags: [],
+    title: '',
+    content: '',
+
+}
+
+
+const imageAsFile = (url) => {
+    const fullUrl = `https://kr.object.ncloudstorage.com/palettepets/article/img/${url}`
+    const blob = new Blob([JSON.stringify(fullUrl)], { type: "application/json" });
+    const file = new File([blob],url, { type: blob.type });
+    return file
+};
 
 const ArticleUpdateForm = () => {
-
+    
     const { articleId } = useParams();
-    console.log("1번")
-    const [initailState,setInitailState] = useState({})
-    console.log("2번")
-    console.log(initailState)
-    const [form, onChange, onInput, reset] = useForm(initialState);
-    console.log("3번")
-    console.log(form)
-    const [imgFiles, setImgFiles] = useState(null);
-    console.log(imgFiles)
-    useEffect( () => {
-        console.log("useEffect")
+
+    const [form, onChange, onInput ,reset, setForm] = useForm(initialForm);
+
+    const [resetSwitch,setResetSwitch]  =useState(false);
+
+    const [imgFiles, setImgFiles] = useState([]);
+    const [previewList,setPreviewList] = useState([]);
+
+ 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
         async function fetchData() {
             // You can await here
             const response = await getUpdateArticle(articleId);
             // ...
-            console.log(response)
-            setInitailState({
-                boardName:'FREEBOARD',
-                tags:[],
-                title:response.title,
-                content:response.content,
+            const tagArray = response.articleTags.split(',');
+
+            setForm({
+                articleHead: response.articleHead,
+                articleTags: tagArray,
+                boardName: response.boardName,
+                content: response.content,
+                title: response.title
             })
-            setImgFiles(response.images)
+            const imgArray = response.images &&  response.images.map(image => `https://kr.object.ncloudstorage.com/palettepets/article/img/${image.imgUrl}`);
+            
+            const files = response.images && response.images.map((item) =>
+                imageAsFile(item.imgUrl)
+            )
+
+            setImgFiles(files);
+            setPreviewList(imgArray);
         }
+
         fetchData();
-    }, [articleId]);
+        
+    }, [resetSwitch]);
 
-    
-    
-
-
-
-
+   
     const onSubmit = async () => {
 
+        const formData = new FormData();
+        Object.values(imgFiles).map((item, index) => {
+            formData.append('files', item);
+        });
+        const blob = new Blob([JSON.stringify(form)], { type: "application/json" });
+        formData.append('dto', blob);
+        await resistUpdateArticle(formData,articleId);
 
-
-
+        
+        navigate(-1);
+        
     }
 
-
     return (
-
 
         <div>
 
             <SelectBoard boardName={form.boardName} onChange={onChange} />
-            <UserMakeTags tags={form.tags} onInput={onInput} />
-            <InputTitle title={form.title} onChange={onChange} />
+            <UserMakeTags articleTags={form.articleTags} onInput={onInput} />
+            <InputTitle boardName={form.boardName} articleHead={form.articleHead} title={form.title} onChange={onChange} />
             <InputContent content={form.content} onChange={onChange} />
-            <ImageUpload imgFiles={imgFiles} setImgFiles={setImgFiles} />
+            <ImageUpload previewList={previewList} setPreviewList={setPreviewList} imgFiles={imgFiles} setImgFiles={setImgFiles} />
 
             <Button onClick={() => onSubmit()}>작성 완료</Button>
-            <Button onClick={() => reset(initialForm)}>다시 쓰기</Button>
+            <Button onClick={() => setResetSwitch(!resetSwitch)}>다시 쓰기</Button>
 
         </div>
 

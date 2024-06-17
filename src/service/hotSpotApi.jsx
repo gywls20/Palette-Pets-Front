@@ -62,3 +62,13 @@ export const deleteHotSpot = (hotSpotId) => {
             return err.response.data;
         });
 }
+
+// 매니저인지 확인 요청 -> true / false
+export const checkIsManager = () => {
+    return jwtAxios.get(`${API_SERVER_HOST}/api/hotspot/checkManager`)
+        .then(res => res.data)
+        .catch(err => {
+            console.log(err);
+            return err.response.data;
+        });
+}
