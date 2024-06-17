@@ -1,16 +1,19 @@
 // eslint-disable-next-line no-unused-vars
 import React, {useState, useEffect} from 'react';
 import "../../styles/board/BoardList.css"
-import Category from "../PetCategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
 import { useLocation } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import "../../styles/managerPage/ManagerPage.css";
+import ArticleService from "../../service/ArticleService.jsx";
+import PetCategoryComp from '../PetCategoryComp.jsx';
 
 
 function ManagerPageComp() {
-    //URL에서 sort 값 가져오기
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const sortParam = queryParams.get("sort");
+  //URL에서 sort 값 가져오기
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const sortParam = queryParams.get("sort");
 
     //초기화 설정
     const [articles, setArticles] = useState([]);
@@ -52,21 +55,26 @@ function ManagerPageComp() {
         } else {
           setHasMore(false);
         }
-      }).catch(error => {
+      })
+      .catch((error) => {
         console.error("Error fetching articles:", error);
       });
-    };
-  
-    const handleScroll = () => {
-      if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMore) return;
-      fetchArticles();
-    };
+  };
 
-  
-    return (
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight ||
+      !hasMore
+    )
+      return;
+    fetchArticles();
+  };
+
+  return (
     <>
         <div className='header'>
-            <Category/>
+            <PetCategoryComp/>
         </div>
         <hr/>
         <main className="container mx-auto px-4 py-4">

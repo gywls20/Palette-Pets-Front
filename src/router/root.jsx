@@ -6,7 +6,8 @@ import BoardPage from "../pages/board/BoardPage.jsx";
 import HealthCalculatorPage from "../pages/HealthCalculatorPage.jsx";
 import petRouter from "./petRouter.jsx";
 import hotSpotRouter from "./hotSpotRouter.jsx";
-import ArticleView from "../components/article/view/ArticleView.jsx";
+import SseTest from "../pages/test/SseTest.jsx";
+import IsLogin from "./IsLogin.jsx";
 
 
 
@@ -18,11 +19,10 @@ const LoginPage = lazy(() => import('./../pages/LoginPage'));
 const JoinPage = lazy(() => import('./../pages/JoinPage'));
 const TestPage = lazy(() => import('../pages/test/TestPage.jsx'));
 const AriticlePage = lazy(()=>import('../pages/AriticlePage.jsx'));
-const ManagerPage = lazy(() => import('../pages/manager/ManagerPage'));
 const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'));
 const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
-const WalkingPage = lazy(() => import('../pages/walking/WalkingPage.jsx'));
 const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
+const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
 
 const root = createBrowserRouter([
     {
@@ -71,12 +71,6 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading />}><BoardPage/></Suspense>,
         // children:boardRouter()
     },
-    
-    {
-        path:"/manager",
-        element: <Suspense fallback={<Loading />}><ManagerPage/></Suspense>,
-        // children:boardRouter()
-    },
 
     {
         path:"/recent",
@@ -98,11 +92,17 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading/>}><UpdateList/></Suspense>
     },
     {
-        path: "/walking",
-        element: <Suspense fallback={<Loading/>}><WalkingPage/></Suspense>
+        path: "/sseTest",
+        element: <Suspense fallback={<Loading/>}><IsLogin Component={<SseTest/>} /></Suspense>
     },
 
 
+    
+    {
+        path:"article",
+        element: <Suspense fallback={<Loading />}><ArticlePage/></Suspense>,
+
+    }
 ]);
 
 export default root;

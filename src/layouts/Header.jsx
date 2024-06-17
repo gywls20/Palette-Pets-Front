@@ -1,9 +1,7 @@
-import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
@@ -12,21 +10,122 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import SearchIcon from '@mui/icons-material/Search';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import {CssBaseline} from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {logout} from "../service/api.jsx";
+import {changeIsReadNotification, getAllUnreadNotifications, logout} from "../service/api.jsx";
 import {deleteToken} from "../store/MemberSlice.js";
 import Swal from 'sweetalert2';
-
-
+import {EventSourcePolyfill} from "event-source-polyfill";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import LinkIcon from '@mui/icons-material/Link';
+import {url} from "../utils/single.js";
 
 export default function Header() {
     const navigate = useNavigate
     const Login = () => navigate("/login")
     const token = useSelector((state) => state.MemberSlice.token);
     const dispatch = useDispatch();
+
+    const [notification, setNotification] = useState([]);
+    const [eventSource, setEventSource] = useState(null);
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    // 읽지 않은 알림들 가져오기
+    const fetchData = async () => {
+        console.log("token = ", token)
+        try {
+            const result = await getAllUnreadNotifications();
+            if (result === "스프링 시큐리티 세션에서 가져올 정보가 존재하지 않음") {
+                fetchData();
+            }
+            // console.log(result);
+            setNotification(result);
+        } catch (e) {
+            console.log(e);
+            alert("error 발생!! = ", e);
+        }
+    }
+
+    // 실시간 알림 SSE 요청
+    useEffect(() => {
+
+        if (token === undefined || token === '' || !token) {
+            return;
+        }
+
+        //SSE 연결 로직
+        const connectSSE = () => {
+            const source = new EventSourcePolyfill(`${url}/connect`, {
+                headers: {
+                    authorization: token,
+                },
+                withCredentials: true,
+                timeout : 60 * 60 * 1000
+            });
+
+            source.addEventListener('notification', (e) => {
+                //'notification' 이벤트가 오면 할 동작
+                // console.log("event", e);
+                setEventSource(source);
+                console.log("event data", e.data);
+                if (e.data === "NOTIFICATION_CONNECT_SUCCESS") {
+                    return;
+                }
+                setNotification(e.data);
+                Toast.fire({
+                    icon: 'success',
+                    title: e.data,
+                    width: 450
+                })
+                fetchData();
+            });
+
+            return () => {
+                source.close();
+            };
+        };
+
+        connectSSE();
+
+        const intervalId = setInterval(() => {
+            if (eventSource && eventSource.readyState === EventSource.CLOSED) {
+                console.log('SSE connection closed, reconnecting...');
+                connectSSE();
+            }
+        }, 5000);
+
+        return () => {
+            clearInterval(intervalId);
+            if (eventSource) {
+                eventSource.close();
+            }
+        };
+
+    }, []);
+
+    // 기본 알림 기능
+    useEffect(() => {
+
+        if (token === undefined || token === '' || !token) {
+            return;
+        }
+
+        fetchData();
+
+    }, []);
 
     // 로그아웃 요청 api
     const requestLogout = async () => {
@@ -42,6 +141,105 @@ export default function Header() {
                 window.location.reload()
         })
     }
+
+    /**
+     * 알림 메뉴
+     */
+    // 알림 메뉴 상태 변수 추가
+    const [notificationAnchorEl, setNotificationAnchorEl] = useState(null);
+    const isNotificationMenuOpen = Boolean(notificationAnchorEl);
+
+    // 알림 메뉴 열기/닫기 이벤트 핸들러
+    const handleNotificationMenuOpen = (event) => {
+        setNotificationAnchorEl(event.currentTarget);
+    };
+
+    const handleNotificationMenuClose = () => {
+        setNotificationAnchorEl(null);
+    };
+
+    // 안 읽은 알림들 읽음 표시하기
+    const changeUnReadToRead = async (memberIssueId) => {
+        try {
+            const result = await changeIsReadNotification(memberIssueId);
+
+            if (result === true) {
+                setNotification((prevNotification) =>
+                    prevNotification.filter((item) => item.memberIssueId !== memberIssueId)
+                );
+                // Toast.fire({
+                //     icon: 'success',
+                //     title: "알림 읽음 성공",
+                //     width: 450
+                // })
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: "알림 읽음 오류",
+                    width: 450
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            alert(error);
+        }
+    }
+
+    // 알림 메뉴 컴포넌트
+    const renderNotificationMenu = (
+        <Menu
+            anchorEl={notificationAnchorEl}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            open={isNotificationMenuOpen}
+            onClose={handleNotificationMenuClose}
+            style={{ maxHeight: '600px', overflowY: 'auto' }}
+        >
+            {notification.length > 0 && Array.isArray(notification) ? (
+                notification.map((item, index) => (
+                    <MenuItem key={index} onClick={handleNotificationMenuClose}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <div style={{ marginRight: '10px' }}>
+                                <CheckCircleOutlineIcon
+                                    style={{ width: '25px', height: '25px', borderRadius: '50%' }}
+                                    onClick={() => changeUnReadToRead(item.memberIssueId)}
+                                />
+                                <br/>
+                                <LinkIcon
+                                    style={{ width: '25px', height: '25px', borderRadius: '50%' }}
+                                    onClick={() => alert("링크가기")}
+                                />
+                            </div>
+                            <div>
+                                <div style={{ fontWeight: 'bold' }}>{item.receiverNickName}</div>
+                                <div>{item.issueContent}</div>
+                                <div style={{ fontSize: '12px', color: 'gray' }}>
+                                    {new Date(item.createdAt).toLocaleString('ko-KR', {
+                                        year: 'numeric',
+                                        month: '2-digit',
+                                        day: '2-digit',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    </MenuItem>
+                ))
+            ) : (
+                <MenuItem onClick={handleNotificationMenuClose}>
+                    알림이 없습니다.
+                </MenuItem>
+            )}
+        </Menu>
+    );
 
     // 이거 메뉴 닫을 때 쓰는 변수
     const [anchorEl, setAnchorEl] = useState(null);
@@ -71,6 +269,7 @@ export default function Header() {
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <Menu
+            style={{font: '#000'}}
             anchorEl={anchorEl}
             anchorOrigin={{
                 vertical: 'top',
@@ -138,10 +337,11 @@ export default function Header() {
             <MenuItem>
                 <IconButton
                     size="large"
-                    aria-label="show 17 new notifications"
+                    aria-label="show new notifications"
                     color="inherit"
+                    onClick={handleNotificationMenuOpen}
                 >
-                    <Badge badgeContent={17} color="error">
+                    <Badge badgeContent={notification.length} color="error">
                         <NotificationsIcon />
                     </Badge>
                 </IconButton>
@@ -169,14 +369,8 @@ export default function Header() {
                 <CssBaseline/>
                 <AppBar position="fixed">
                     <Toolbar>
-                        {/* <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{display: 'block'}}
-                        > */}
-                            <Link to="/" style={{color: '#fff'}}>냥가왈부</Link>
-                        {/* </Typography> */}
+                        <Link to="/" style={{color: '#fff'}}>냥가왈부</Link>
+
                         <Box sx={{flexGrow: 1}}/>
                         <Box sx={{display: {xs: 'none', md: 'flex'}}}>
                             <IconButton size="large" color="inherit">
@@ -191,11 +385,12 @@ export default function Header() {
                             </IconButton>
                             <IconButton
                                 size="large"
-                                aria-label="show 17 new notifications"
+                                aria-label="show new notifications"
                                 color="inherit"
+                                onClick={handleNotificationMenuOpen}
                             >
-                                <Badge badgeContent={17} color="error">
-                                    <NotificationsIcon/>
+                                <Badge badgeContent={notification.length} color="error">
+                                    <NotificationsIcon />
                                 </Badge>
                             </IconButton>
                             <IconButton
@@ -226,6 +421,7 @@ export default function Header() {
                 </AppBar>
                 {renderMobileMenu}
                 {renderMenu}
+                {renderNotificationMenu}
             </Box>
 
         );

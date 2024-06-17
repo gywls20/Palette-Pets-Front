@@ -13,25 +13,25 @@ const BoardPageItem = (articles) => {
     const [formattedDateTime, setFormattedDateTime] = useState('');
 
     
-    
-    const dateTime = new Date(createdAt);
-    const nowTime = new Date();
 
-    useEffect(() => {
-        let time = "";
-        if (dateTime.getDate !== nowTime.getDate) {
-            time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} 
-                                  ${dateTime.getHours().toString().padStart(2, '0')}시
-                                  ${dateTime.getMinutes().toString().padStart(2, '0')}분`;
-        }
-        else {
-            time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} `;
-        }
+    // const dateTime = new Date(createdAt);
+    // const nowTime = new Date();
 
-        // 연.월.일 시 분 형식으로 포맷
-        setFormattedDateTime(time);
+    // useEffect(() => {
+    //     let time = "";
+    //     if (dateTime.getDate !== nowTime.getDate) {
+    //         time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} 
+    //                               ${dateTime.getHours().toString().padStart(2, '0')}시
+    //                               ${dateTime.getMinutes().toString().padStart(2, '0')}분`;
+    //     }
+    //     else {
+    //         time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} `;
+    //     }
 
-    }, [])
+    //     // 연.월.일 시 분 형식으로 포맷
+    //     setFormattedDateTime(time);
+
+    // }, [])
 
     const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ const BoardPageItem = (articles) => {
                         </Stack>
                         <div className="Item-title">{title}</div>
                         <div className="Item-info">
-                            {memberNickname}  &emsp; {formattedDateTime}
+                            {memberNickname}  &emsp; {createdAt[0] }.{createdAt[1] }.{createdAt[2] }
                             <span className='Item-icon'>
                                 <FavoriteBorderIcon sx={{fontSize:'16pt'}}/>
 

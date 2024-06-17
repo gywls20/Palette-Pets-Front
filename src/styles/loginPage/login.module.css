@@ -110,3 +110,7 @@
 .link:hover {
     text-decoration: underline;
 }
+
+.naverImg {
+    height: 2.5rem;
+}

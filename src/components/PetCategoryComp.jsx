@@ -4,7 +4,6 @@ import React from 'react';
 import CategoryStyle from '../styles/category.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightDots, faBone, faDog, faHouseMedical, faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import SelectTags from './article/write/atoms/SelectTags';
 import { Link } from 'react-router-dom';
 
 const PetCategoryComp = () => {

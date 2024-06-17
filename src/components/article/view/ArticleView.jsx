@@ -31,7 +31,7 @@ const ArticleView = () => {
   const [commentDto, setCommentDto] = useState([]);
 
 
-  const { articleTags, content, countLoves, countReview, created_who, memberImage, title, images,isLike } = articleDto
+  const { articleTags, content, countLoves, countReview, created_who, memberImage, title, images,isLike ,createdAt} = articleDto
 
 
   //댓글 등록시 리렌더링
@@ -60,22 +60,22 @@ const ArticleView = () => {
       
       setArticleDto(articleData);
       setCommentDto(commentData);
+      
+      // const dateTime = new Date(articleData.createdAt);
+      // const nowTime = new Date();
 
-      const dateTime = new Date(articleData.createdAt);
-      const nowTime = new Date();
-
-      let time = "";
-      if (dateTime.getDate !== nowTime.getDate) {
-        time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} 
-                                ${dateTime.getHours().toString().padStart(2, '0')}시
-                                ${dateTime.getMinutes().toString().padStart(2, '0')}분`;
-      }
-      else {
-        time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} `;
-      }
+      // let time = "";
+      // if (dateTime.getDate !== nowTime.getDate) {
+      //   time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} 
+      //                           ${dateTime.getHours().toString().padStart(2, '0')}시
+      //                           ${dateTime.getMinutes().toString().padStart(2, '0')}분`;
+      // }
+      // else {
+      //   time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} `;
+      // }
 
       // 연.월.일 시 분 형식으로 포맷
-      setFormattedDateTime(time);
+      // setFormattedDateTime(time);
     }
     fetchData();
 
@@ -135,7 +135,7 @@ const ArticleView = () => {
             </IconButton>
           }
           title={created_who}
-          subheader={formattedDateTime}
+          subheader={createdAt}
           sx={{ textAlign: 'left', margin: '10px 20px' }}
         />
 

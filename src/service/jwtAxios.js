@@ -1,14 +1,14 @@
 import axios from "axios";
-
+import {url, urlNoPort} from "../utils/single.js";
 /**
  * jwt 토큰을 활용 해서 회원 권한이나 인가에 대한 인증이 필요한 요청과 응답들은 이 인스턴스를 사용해서 axios 요청 ㄱㄱ.
  */
 
-const API_SERVER_HOST = `http://localhost:8080`;
+const API_SERVER_HOST = `${url}`;
 
 const jsonHeaders = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": `http://localhost:3000`,
+    "Access-Control-Allow-Origin": `${urlNoPort}:3000`,
 }
 
 // jwt가 필요한 요청은 이 인스턴스를 사용해서 요청
