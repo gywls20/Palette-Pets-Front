@@ -1,0 +1,67 @@
+root {
+    height: auto !important;
+}
+
+.toList{
+    padding: 4px;
+    font-size: 18px;
+    color: white;
+    background-color: dodgerblue;
+    border-radius: 4px;
+}
+
+.toList :hover {
+    background-color: red;
+}
+
+#__react-kakao-maps-sdk___Map {
+    display: block;
+    position: relative;
+    margin-bottom: 4rem;
+    border-radius: 5px;
+}
+
+/*슬라이드*/
+.slick-prev,
+.slick-next {
+    width: 100px;
+    position: absolute;
+    top: 60%;
+    transform: translateY(-50%);
+    z-index: 1;
+    border-radius: 50%;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    min-width: 10px;
+    opacity: 100%;
+    padding-top: 1rem;
+}
+
+.image-list {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+    .centered-image {
+        position: relative;
+        width: 380px;
+        height: 300px;
+    }
+}
+
+
+@media only screen and (min-width: 600px) {
+    .centered-image {
+        position: relative;
+        width: 639px;
+        height: 539px;
+    }
+}

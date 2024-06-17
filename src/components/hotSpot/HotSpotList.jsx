@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, List, ListItem, ListItemText, Card, CardMedia, Typography, Rating, Divider } from '@mui/material';
 import {useNavigate} from "react-router-dom";
+import "../../styles/hotspot/hotSpot.css";
 
 const hotSpotList = [
     {
