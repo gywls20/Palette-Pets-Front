@@ -59,6 +59,9 @@ const Footer = () => {
   const onCarrot = () => {
     navigate('/carrot');
   }
+  const onChat = () => {
+    navigate('/chat');
+  }
 
   return (
     <>
@@ -71,7 +74,7 @@ const Footer = () => {
           showLabels
           value={value}
           onChange={handleNavigationChange}>
-          <BottomNavigationAction label="Archive" icon={<Archive />} />
+          <BottomNavigationAction label="Archive" icon={<Archive />} onClick={onChat}/>
           <BottomNavigationAction label="PetList" icon={<Favorite />} onClick={onPetList} />
           <BottomNavigationAction label="Home" icon={<Home />} onClick={onHome} />
           <BottomNavigationAction label="Market" icon={<VolunteerActivism/>} onClick={onCarrot}/>

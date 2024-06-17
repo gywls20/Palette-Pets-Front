@@ -37,7 +37,6 @@ const getPersistedState = () => {
         if (serializedState === null) {
             return undefined;
         }
-        alert(JSON.parse(serializedState));
         console.log("tototo ",JSON.parse(serializedState));
         return JSON.parse(serializedState);
     } catch (err) {
