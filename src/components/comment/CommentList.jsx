@@ -9,7 +9,7 @@ const CommentList = () => {
     
     
 
-    console.log(list)
+    
     return (
         
         <>

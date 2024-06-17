@@ -90,3 +90,8 @@
 }
 
 .round-button.active { background-color: red; color: #fff; }
+
+hr {
+  color: 	#D3D3D3;
+  opacity: 0.3;
+}
