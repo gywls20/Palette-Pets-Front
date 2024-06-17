@@ -64,22 +64,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 3f8e556f1e4291c53dd8d249973a1ea889109291
-/*reviewComp*/
-
-.slick-track {
-  display: block !important;
-}
-
-.reviewSlider {
-  display: flex !important;
-  margin-bottom: 1rem;
-  padding-bottom: 5rem;
-}
-
 .MuiContainer-root,
 .MuiContainer-maxWidthSm,
 .css-o31nrr-MuiContainer-root {
