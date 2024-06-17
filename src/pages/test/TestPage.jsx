@@ -1,6 +1,7 @@
 
+import ArticleReport from "../../components/article/view/ArticleReport.jsx";
 import DefaultLayout from "../../layouts/DefaultLayout.jsx";
-i
+
 const TestPage = () => {
 
 
@@ -8,7 +9,7 @@ const TestPage = () => {
         <>
             <DefaultLayout>
                 <>
-                  <TestPage/>
+                    <ArticleReport />
 
                 </>
             </DefaultLayout>

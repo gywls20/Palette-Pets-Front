@@ -57,6 +57,7 @@ const ArticleView = () => {
 
       const articleData = await getArticleView(articleId)
       const commentData = await getComment(articleId)
+      
       setArticleDto(articleData);
       setCommentDto(commentData);
 
