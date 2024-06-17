@@ -14,12 +14,13 @@ import {useEffect, useState} from 'react';
 import {CssBaseline} from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {getAllUnreadNotifications, logout} from "../service/api.jsx";
+import {changeIsReadNotification, getAllUnreadNotifications, logout} from "../service/api.jsx";
 import {deleteToken} from "../store/MemberSlice.js";
 import Swal from 'sweetalert2';
 import {EventSourcePolyfill} from "event-source-polyfill";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import LinkIcon from '@mui/icons-material/Link';
+import {url} from "../utils/single.js";
 
 export default function Header() {
     const navigate = useNavigate
@@ -50,6 +51,7 @@ export default function Header() {
             if (result === "스프링 시큐리티 세션에서 가져올 정보가 존재하지 않음") {
                 fetchData();
             }
+            // console.log(result);
             setNotification(result);
         } catch (e) {
             console.log(e);
@@ -66,7 +68,7 @@ export default function Header() {
 
         //SSE 연결 로직
         const connectSSE = () => {
-            const source = new EventSourcePolyfill("http://localhost:8080/connect", {
+            const source = new EventSourcePolyfill(`${url}/connect`, {
                 headers: {
                     authorization: token,
                 },
@@ -156,6 +158,33 @@ export default function Header() {
         setNotificationAnchorEl(null);
     };
 
+    // 안 읽은 알림들 읽음 표시하기
+    const changeUnReadToRead = async (memberIssueId) => {
+        try {
+            const result = await changeIsReadNotification(memberIssueId);
+
+            if (result === true) {
+                setNotification((prevNotification) =>
+                    prevNotification.filter((item) => item.memberIssueId !== memberIssueId)
+                );
+                // Toast.fire({
+                //     icon: 'success',
+                //     title: "알림 읽음 성공",
+                //     width: 450
+                // })
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: "알림 읽음 오류",
+                    width: 450
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            alert(error);
+        }
+    }
+
     // 알림 메뉴 컴포넌트
     const renderNotificationMenu = (
         <Menu
@@ -180,7 +209,7 @@ export default function Header() {
                             <div style={{ marginRight: '10px' }}>
                                 <CheckCircleOutlineIcon
                                     style={{ width: '25px', height: '25px', borderRadius: '50%' }}
-                                    onClick={() => alert("체크했음")}
+                                    onClick={() => changeUnReadToRead(item.memberIssueId)}
                                 />
                                 <br/>
                                 <LinkIcon
