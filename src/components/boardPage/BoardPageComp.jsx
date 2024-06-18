@@ -35,7 +35,7 @@ function BoardPageComp() {
     setWhere(search);
     setPage(1); // search 값이 들어오면 페이지를 1로 초기화(Page = 1일 때만 조회가 되기 때문)
     setArticles([]); // articles를 초기화
-    fetchArticles(dir);
+    fetchArticles(true);
   }, [search, sort, boardName,dir])
 
   useEffect(() => {
@@ -52,6 +52,7 @@ function BoardPageComp() {
     const searchString = search.map(item => item).join(',');
 
     const pageToFetch = reset ? 1 : page;
+
     ArticleService.getArticleList(pageToFetch, sort, dir, searchString, boardName).then((res) => {
       console.log("where =@!@!@!@!@" + search);
       // console.log(res);

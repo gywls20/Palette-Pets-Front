@@ -9,6 +9,7 @@ import { FavoriteOutlined } from '@mui/icons-material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ArticleDelete from '../delete/ArticleDelete';
+import ArticleReport from './ArticleReport';
 
 
 //모달창 css
@@ -92,15 +93,25 @@ const ArticleView = () => {
     setAnchorEl(null);
   };
 
-  //모달창 handler
+  //글 삭제 모달창 handler
   const [openModal, setOpenModal] = useState(false);
   const modalHandleOpen = () => {
     setOpenModal(!openModal)
   };
   const modalHandleClose = () => {
-    console.log('aa')
+   
     setOpenModal(false);
   }
+  // 신고 모달창 handler
+  const [openReport, setOpenReport] = useState(false);
+  const reportHandleOpen = () => {
+    setOpenReport(!openReport)
+  };
+  const reportHandleClose = () => {
+    
+    setOpenReport(false);
+  }
+
 
 
 
@@ -183,6 +194,7 @@ const ArticleView = () => {
 
           }}
         >
+          <MenuItem onClick={reportHandleOpen}>신고하기</MenuItem>
           <MenuItem onClick={() => navigate(`/article/update/${articleId}`)}>수정하기</MenuItem>
           <MenuItem onClick={modalHandleOpen}>삭제하기</MenuItem>
 
@@ -201,7 +213,7 @@ const ArticleView = () => {
 
 
 
-      {/* 모달창 */}
+      {/* 모달창 삭제 */}
       <Modal
         open={openModal}
         onClose={modalHandleClose}
@@ -216,6 +228,20 @@ const ArticleView = () => {
         </Box>
       </Modal>
 
+      {/* 모달 창 신고 */}
+      <Modal
+        open={openReport}
+        onClose={reportHandleClose}
+        aria-labelledby="modal-modal-report"
+        aria-describedby="modal-modal-reportdescription"
+      >
+        <Box sx={style}>
+
+          <div style={{ textAlign: 'center' }}>
+            <ArticleReport articleId={articleId} reportedId={created_who} reportHandleClose={reportHandleClose} />
+          </div>
+        </Box>
+      </Modal>
 
       <footer>
 

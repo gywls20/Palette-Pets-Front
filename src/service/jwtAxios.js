@@ -8,7 +8,7 @@ const API_SERVER_HOST = `${url}`;
 
 const jsonHeaders = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": `${urlNoPort}:3000`,
+    "Access-Control-Allow-Origin": `${urlNoPort}:80`,
 }
 
 // jwt가 필요한 요청은 이 인스턴스를 사용해서 요청
