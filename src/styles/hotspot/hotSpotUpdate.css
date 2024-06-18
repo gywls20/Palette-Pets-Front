@@ -1,0 +1,68 @@
+#root {
+    height: 1000px !important;
+    background-color: yellowgreen;
+    text-align: center;
+}
+
+.update-title{
+    color: black;
+    background-color: white;
+    width: 500px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.update-simpleContent{
+    color: black;
+    background-color: white;
+    width: 500px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.update-content{
+    color: black;
+    background-color: white;
+    width: 500px;
+    height: 200px;
+}
+
+.update-address{
+    right: 50px;
+    position: relative;
+    color: black;
+    background-color: white;
+    width: 400px;
+}
+
+.update-lat{
+    right: 150px;
+    position: relative;
+    color: black;
+    background-color: white;
+    width: 200px;
+}
+
+.update-lng{
+    right: 150px;
+    position: relative;
+    color: black;
+    background-color: white;
+    width: 200px;
+}
+
+.update-onSubmit{
+    background-color: #1976d2;
+    color: white;
+}
+
+.update-onReset{
+    margin-left: 10px;
+    background-color: #1976d2;
+    color: white;
+}
+
+
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root:hover {
+    background-color: #45a049;
+}

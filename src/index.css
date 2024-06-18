@@ -64,7 +64,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-
 .MuiContainer-root,
 .MuiContainer-maxWidthSm,
 .css-o31nrr-MuiContainer-root {
@@ -127,4 +126,8 @@ button:focus-visible {
 
 .css-0{
   background-color: #f3f4f6;
+}
+
+.MuiBottomNavigation-root{
+  position: relative;
 }
