@@ -1,9 +1,13 @@
 import React, { useCallback, useState } from 'react';
 
 
-const useForm = (initialForm) => {
-    const [form,setForm] = useState(initialForm);
 
+
+const useForm = (initialForm) => {
+
+    const [form,setForm] = useState(initialForm);
+    
+    
     //<input> 태그의 onChange를 이용할 때
     const onChange = useCallback( e => {
 
@@ -24,7 +28,7 @@ const useForm = (initialForm) => {
 
     const reset = useCallback(()=>setForm(initialForm),[initialForm]);
 
-    return [form,onChange,onInput,reset];
+    return [form,onChange,onInput,reset,setForm];
   
 };
 

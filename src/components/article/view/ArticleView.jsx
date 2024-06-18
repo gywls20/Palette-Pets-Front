@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import CommentResisterForm from '../../comment/CommentResisterForm';
-import { getUpdateArticle } from '../../../service/ArticleService';
+import { getArticleView } from '../../../service/ArticleService';
 import { getComment } from '../../../service/commentApi';
 import CommentItem from '../../comment/CommentItem';
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Menu, MenuItem, Modal, Typography,Box } from '@mui/material';
@@ -30,6 +30,7 @@ const ArticleView = () => {
   const [articleDto, setArticleDto] = useState({});
   const [commentDto, setCommentDto] = useState([]);
 
+
   const { articleTags, content, countLoves, countReview, created_who, memberImage, title, images } = articleDto
   console.log(articleDto)
   const [isArticleSubmitted, setIsArticleSubmitted] = useState(false);
@@ -40,10 +41,13 @@ const ArticleView = () => {
   //articleId 글 정보, 이미지 정보, 댓글 정보 받아오기
   const [formattedDateTime, setFormattedDateTime] = useState('');
 
+
+ 
+
   useEffect(() => {
     const fetchData = async () => {
 
-      const articleData = await getUpdateArticle(articleId)
+      const articleData = await getArticleView(articleId)
       const commentData = await getComment(articleId)
       setArticleDto(articleData);
       setCommentDto(commentData);
@@ -74,6 +78,7 @@ const ArticleView = () => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -118,22 +123,23 @@ const ArticleView = () => {
           }
           title={created_who}
           subheader={formattedDateTime}
-          sx={{ textAlign: 'left', marginLeft: '50px', marginTop: '20px' }}
+          sx={{ textAlign: 'left', margin:'10px 20px' }}
         />
 
         <CardContent >
-          <Typography variant="body2" color="text.secondary" fontSize="20pt" textAlign='left' marginLeft='50px'>
+          <Typography variant="body2" color="text.secondary" fontSize="20pt" textAlign='left' sx={{margin:'0 20px'}}>
             {title}
           </Typography>
         </CardContent>
 
         <CardContent>
-          <Typography variant="body2" color="text.secondary" fontSize='15pt' textAlign='left' marginLeft='50px' >
+          <Typography variant="body2" color="text.secondary" fontSize='15pt' textAlign='left'  sx={{margin:'0 20px'}}>
             {content}
           </Typography>
         </CardContent>
         {
           images && images.map((item, index) => <CardMedia
+            key={index}
             component="img"
 
             height="250px"
@@ -144,11 +150,11 @@ const ArticleView = () => {
         }
 
         <CardActions disableSpacing sx={{ marginLeft: '20px', marginBottom: '20px' }}>
-          <IconButton aria-label="add to favorites">
-            <FavoriteOutlined />
-            {countLoves}
+          <IconButton aria-label="add to favorites" >
+            <FavoriteOutlined sx={{color:'red'}}/>
+            
           </IconButton>
-
+          {countLoves}
         </CardActions>
 
         <Menu
@@ -162,7 +168,7 @@ const ArticleView = () => {
 
           }}
         >
-          <MenuItem onClick={handleClose}>수정하기</MenuItem>
+          <MenuItem onClick={() => navigate(`/article/update/${articleId}`)}>수정하기</MenuItem>
           <MenuItem onClick={modalHandleOpen}>삭제하기</MenuItem>
 
         </Menu>
