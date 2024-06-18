@@ -4,8 +4,8 @@ import { login } from "../../service/api.jsx";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { saveToken } from "../../store/MemberSlice.js";
-import Swal from 'sweetalert2';
 import {url} from '../../utils/single.js';
+import Swal from 'sweetalert2';
 
 const LoginFormComp = () => {
     const [username, setUsername] = useState("");

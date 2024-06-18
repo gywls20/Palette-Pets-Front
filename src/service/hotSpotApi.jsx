@@ -31,7 +31,11 @@ export const getHotSpotDetail = (hotSpotId) => {
 
 // 명소 글 작성 요청
 export const createHotSpot = (hotSpotData) => {
-    return jwtAxios.post(`${API_SERVER_HOST}/api/hotspot`, hotSpotData)
+    return jwtAxios.post(`${API_SERVER_HOST}/api/hotspot`, hotSpotData,{
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        }
+    })
         .then(res => res.data)
         .catch(err => {
             console.log(err);
@@ -41,7 +45,11 @@ export const createHotSpot = (hotSpotData) => {
 
 // 명소 글 수정 요청
 export const updateHotSpot = (hotSpotId, hotSpotData) => {
-    return jwtAxios.put(`${API_SERVER_HOST}/api/hotspot/${hotSpotId}`, hotSpotData)
+    return jwtAxios.put(`${API_SERVER_HOST}/api/hotspot/${hotSpotId}`, hotSpotData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        })
         .then(res => res.data)
         .catch(err => {
             console.log(err);
@@ -58,3 +66,25 @@ export const deleteHotSpot = (hotSpotId) => {
             return err.response.data;
         });
 }
+
+// 매니저인지 확인 요청 -> true / false
+export const checkIsManager = () => {
+    return jwtAxios.get(`${API_SERVER_HOST}/api/hotspot/checkManager`)
+        .then(res => res.data)
+        .catch(err => {
+            console.log(err);
+            return err.response.data;
+        });
+}
+
+// 게시물에 별점 평가
+export const sendStarRating = (dto) => {
+    return jwtAxios.post(`${API_SERVER_HOST}/api/hotspot/rating`, dto)
+        .then(res => res.data)
+        .catch(err => {
+            console.log(err);
+            return err.response.data;
+        });
+}
+
+// 평가한 게시물이라면 별점 가져오기

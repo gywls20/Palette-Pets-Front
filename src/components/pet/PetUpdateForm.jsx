@@ -10,6 +10,7 @@ import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {petUpdateRequest} from "../../service/petApi.jsx";
 import {useNavigate} from "react-router-dom";
+import Swal from "sweetalert2";
 
 const PetUpdateForm = ({ closeModal, pet }) => {
 
@@ -49,7 +50,7 @@ const PetUpdateForm = ({ closeModal, pet }) => {
 
         const dto = {
             petId: pet.petId,
-            createdWho: 1,
+            createdWho: null,
             petName: petName,
             petImage: pet.petImage,
             petCategory1: petCategory1,
@@ -61,7 +62,15 @@ const PetUpdateForm = ({ closeModal, pet }) => {
 
         const result = await petUpdateRequest(dto, petImage);
         console.log(result);
-        window.location.reload();
+        if (result === true) {
+            window.location.reload();
+        } else {
+            await Swal.fire({
+                title: '펫 등록 실패',
+                text: '정보를 다시 입력해주세요',
+                icon: 'warning'
+            });
+        }
     };
 
     const handleChangePetName = (e) => {

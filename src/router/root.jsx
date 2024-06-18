@@ -21,6 +21,7 @@ const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
 const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
 const CarrotPage = lazy(() => import('../pages/carrot/CarrotPage.jsx'));
 const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
+const ChatPage = lazy(() => import('../pages/chat/ChatPage.jsx'));
 
 const root = createBrowserRouter([
     {
@@ -101,6 +102,11 @@ const root = createBrowserRouter([
         path:"article",
         element: <Suspense fallback={<Loading />}><ArticlePage/></Suspense>,
 
+    },
+
+    {
+        path:"/chat",
+        element: <Suspense fallback={<Loading />}><IsLogin Component={<ChatPage/>} /></Suspense>
     }
 ]);
 

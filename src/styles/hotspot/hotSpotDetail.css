@@ -3,6 +3,7 @@ root {
 }
 
 * {
+
     list-style: none;
 }
 
@@ -12,6 +13,7 @@ root {
     color: white;
     background-color: dodgerblue;
     border-radius: 4px;
+    margin-bottom: 4rem !important;
 }
 
 .toList :hover {
@@ -23,7 +25,6 @@ root {
     position: relative;
     margin-bottom: 4rem;
     border-radius: 5px;
-    margin-top: 0 !important;
     z-index: 0;
 }
 
@@ -72,4 +73,19 @@ root {
         width: 639px;
         height: 539px;
     }
+}
+
+.update-button{
+    left: 32%;
+    bottom: 4.4rem;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background-color: darkgoldenrod;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

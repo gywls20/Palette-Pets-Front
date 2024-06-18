@@ -7,7 +7,6 @@
     width: 20px;
     height: 30px;
     border-radius: 50%;
-    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,7 +153,8 @@
 }
 
 .reviewSlider {
+    margin-top: 0;
+    border-radius: 5px !important;
+    background-color: white;
     display: flex !important;
-    margin-bottom: 1rem;
-    margin-top: -1rem;
 }

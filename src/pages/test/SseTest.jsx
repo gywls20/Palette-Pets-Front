@@ -35,7 +35,7 @@ const SseTest = () => {
                     authorization: authToken,
                 },
                 withCredentials: true,
-                timeout : 60 * 60 * 1000
+                timeout : 45 * 1000
             });
 
             source.addEventListener('notification', (e) => {
