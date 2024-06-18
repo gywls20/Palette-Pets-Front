@@ -76,3 +76,15 @@ export const checkIsManager = () => {
             return err.response.data;
         });
 }
+
+// 게시물에 별점 평가
+export const sendStarRating = (dto) => {
+    return jwtAxios.post(`${API_SERVER_HOST}/api/hotspot/rating`, dto)
+        .then(res => res.data)
+        .catch(err => {
+            console.log(err);
+            return err.response.data;
+        });
+}
+
+// 평가한 게시물이라면 별점 가져오기
