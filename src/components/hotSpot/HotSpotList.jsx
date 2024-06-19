@@ -29,50 +29,55 @@ const HotSpotList = () => {
 
 
     return (
-        <Box sx={{ padding: 2 }}>
+        <Box sx={{padding: 2}}>
             <Typography variant="h6" align="center" gutterBottom>
                 반려동물와 명소를 방문해보세요
             </Typography>
             <List>
                 {hotSpotList.map((hotSpot, index) => (
                     <React.Fragment key={hotSpot.hotSpotId}>
-                        <ListItem sx={{ flexDirection: 'column', alignItems: 'center', paddingTop: 3, paddingBottom: 3 }}>
-                            <Card sx={{ width: '100%', marginBottom: 2 }}
-                                onClick={() => navigate(`/hotspot/details/${hotSpot.hotSpotId}`)}
+                        <ListItem sx={{flexDirection: 'column', alignItems: 'center', paddingTop: 3, paddingBottom: 3}}>
+                            <Card sx={{width: '100%', marginBottom: 2}}
+                                  onClick={() => navigate(`/hotspot/details/${hotSpot.hotSpotId}`)}
                             >
-                                <CardMedia component="img" height="200" image={"https://kr.object.ncloudstorage.com/palettepets/hotspot/" + hotSpot.imgUrl} alt={hotSpot.placeName} />
+                                <CardMedia component="img" height="200"
+                                           image={"https://kr.object.ncloudstorage.com/palettepets/hotspot/" + hotSpot.imgUrl}
+                                           alt={hotSpot.placeName}/>
                             </Card>
                             <ListItemText
                                 primary={hotSpot.placeName}
                                 secondary={
                                     <>
-                                        <Rating value={hotSpot.rating} precision={0.5} readOnly size="small" />
+                                        <Rating value={hotSpot.rating} precision={0.5} readOnly size="small"/>
                                         <Typography variant="body2" color="textSecondary" component="p">
                                             {hotSpot.simpleContent}
                                         </Typography>
                                         <Typography variant="" color="text.secondary">
-                                            <VisibilityIcon sx={{verticalAlign: 'middle', mr: 0.5}}/> {hotSpot.countViews}
+                                            <VisibilityIcon
+                                                sx={{verticalAlign: 'middle', mr: 0.5}}/> {hotSpot.countViews}
                                         </Typography>
                                     </>
                                 }
                                 align="center"
                             />
+                            <hr/>
                         </ListItem>
-                        {index !== hotSpotList.length - 1 && <Divider variant="middle" />}
+                        {index !== hotSpotList.length - 1 && <Divider variant="middle"/>}
                     </React.Fragment>
                 ))}
                 {isManager && (
                     <>
                         <Link to="/hotspot/write">
                             <button className="write-button">
-                                <BuildIcon />
+                                <BuildIcon/>
                             </button>
                         </Link>
                     </>
                 )}
-            </List>
 
+            </List>
         </Box>
+
     );
 };
 
