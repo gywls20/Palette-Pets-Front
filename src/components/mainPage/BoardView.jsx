@@ -13,8 +13,8 @@ import {url} from '../../utils/single';
 
 const BoardView = () => {
     const [modal, setModal] = useState({});
-    const [like, setLike] = useState(false);
-    const [showCommentBox, setShowCommentBox] = useState(false);
+    const [like, setLike] = useState({});
+    const [showCommentBox, setShowCommentBox] = useState({});
     const [comment, setComment] = useState('');
     const token = useSelector((state) => state).MemberSlice.token;
 
@@ -27,12 +27,14 @@ const BoardView = () => {
             [articleId]: true
         }));
     }
+
     const closeModal = (articleId) => {
         setModal((prevState) => ({
             ...prevState,
             [articleId]: false
         }));
     }
+
 
     const alarm = () => {
         console.log("alarm")
@@ -43,11 +45,14 @@ const BoardView = () => {
         });
     }
 
-    const ToggleLike = () => {
+    const ToggleLike = (articleId) => {
         if (token === '') {
             alarm();
         } else {
-            setLike(!like);
+            setLike((prevState) => ({
+                ...prevState,
+                [articleId]: !prevState[articleId]
+            }));
         }
     };
 
@@ -61,23 +66,6 @@ const BoardView = () => {
             connectChat(e);
         }
     }
-
-    const toggleCommentBox = () => {
-        if (token === '') {
-            alarm();
-        } else {
-            setShowCommentBox(!showCommentBox);
-        }
-    };
-
-    const handleCommentChange = (e) => setComment(e.target.value);
-
-    const handleCommentSubmit = (e) => {
-        e.preventDefault();
-        console.log("댓글 제출", comment);
-        setComment('');
-        setShowCommentBox(false);
-    };
 
     const fetchData = async () => {
         try {
@@ -143,30 +131,7 @@ const BoardView = () => {
                             </Box>
                         </Modal>
 
-                        <p className={BoardViewStyle.postContent}>{article.content}</p>
-                        <div className={BoardViewStyle.postActions}>
-                            <button className={BoardViewStyle.postActionButton} onClick={ToggleLike}>
-                                <FontAwesomeIcon icon={faHeart} className={BoardViewStyle.postAction} style={{ color: like ? "#ff0000" : "#ffffff" }} />
-                                <span> 좋아요</span>
-                            </button>
 
-                            <button className={BoardViewStyle.postActionButton} onClick={toggleCommentBox}>
-                                <FontAwesomeIcon icon={faCommentDots} className={BoardViewStyle.postAction} />
-                                <span> 댓글</span>
-                            </button>
-                        </div>
-
-                        {showCommentBox && (
-                            <form onSubmit={handleCommentSubmit} className={BoardViewStyle.commentForm}>
-                                <textarea
-                                    value={comment}
-                                    onChange={handleCommentChange}
-                                    placeholder="댓글을 입력하세요"
-                                    className={BoardViewStyle.commentBox}
-                                />
-                                <button type="submit" className={BoardViewStyle.postActionButton}>제출</button>
-                            </form>
-                        )}
                     </div>
                 </div>
             ))}
