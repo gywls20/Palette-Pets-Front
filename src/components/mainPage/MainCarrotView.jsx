@@ -15,13 +15,13 @@ import connectChat from './connectChat';
 import axios from 'axios';
 import {url} from '../../utils/single';
 
-const BoardView = () => {
+const MainCarrotView = () => {
     const [modal, setModal] = useState({});
     const [like, setLike] = useState({});
     const token = useSelector((state) => state).MemberSlice.token;
 
 
-    const [articles, setArticles] = useState([]);
+    const [carrots, setCarrots] = useState([]);
 
     const openModal = (articleId) => {
         setModal((prevState) => ({
@@ -71,7 +71,7 @@ const BoardView = () => {
 
     const fetchData = async () => {
         try {
-            const result = await axios.get(`${url}/popular`)
+            const result = await axios.get(`${url}/carrot/recent`)
             .then(res => res.data 
             )
             .catch(err => {
@@ -79,7 +79,7 @@ const BoardView = () => {
                 return err.response.data;
             });
             console.log("List result :: ",result);
-            setArticles(result);
+            setCarrots(result);
         } catch (e) {
             console.error(e);
         }
@@ -103,29 +103,29 @@ const BoardView = () => {
 
     return (
         <>
-            {articles && articles.map((article) => (
-                <div key={article.articleId} className={BoardViewStyle.postsList}>
+            {carrots && carrots.map((carrot) => (
+                <div key={carrot.carrotId} className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
                         <div className={BoardViewStyle.postHeader}>
-                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(article.articleId)} />
+                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(carrot.articleId)} />
                             <div>
-                                <p className={BoardViewStyle.postUserName}>{article.memberNickname}님</p>
-                                <p className={BoardViewStyle.postContent}>{article.title}</p>
+                                {/* <p className={BoardViewStyle.postUserName}>{carrot.memberNickname}님</p> */}
+                                <p className={BoardViewStyle.postContent}>{carrot.carrotTitle}</p>
                                 <p className={BoardViewStyle.postTime}>                             <span className='Item-icon'>
                                 <FavoriteBorderIcon sx={{fontSize:'16pt'}}/>
-                            </span> {article.countLoves}                                 <span className='Item-icon'>
-                                <ChatBubbleOutlineIcon sx={{fontSize:'16pt'}} /> </span> {article.countComments}</p>
+                            </span> {carrot.carrotLike}                                 <span className='Item-icon'>
+                                <ChatBubbleOutlineIcon sx={{fontSize:'16pt'}} /> </span> {carrot.carrotView}</p>
                             </div>
                         </div>
 
 
-                        <Modal
-                            open={modal[article.articleId]}
-                            onClose={() => closeModal(article.articleId)}
+                        {/* <Modal
+                            open={modal[carrot.carrotId]}
+                            onClose={() => closeModal(carrot.carrotId)}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description">
                             <Box sx={style}>
-                                <p className={BoardViewStyle.postUserName}>{article.memberNickname}</p>
+                                <p className={BoardViewStyle.postUserName}>{article.memberNickname}</p>/
                                 <img src={Anhae} alt="User" />
                                 <div className={BoardViewStyle.ModalCopontainer}>
                                     <button>팔로우</button>
@@ -134,7 +134,7 @@ const BoardView = () => {
                                     </button>
                                 </div>
                             </Box>
-                        </Modal>
+                        </Modal> */}
 
 
                     </div>
@@ -145,9 +145,8 @@ const BoardView = () => {
                     <button className={BoardViewStyle.moreplz}>더보기</button>
             </Link>
             </div>
-            
         </>
     );
 };
 
-export default BoardView;
+export default MainCarrotView;

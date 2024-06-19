@@ -8,7 +8,7 @@ const MainPage = () => {
     return (
         <>
             <DefaultLayout>
-                <UpdateComp/>
+                {/* <UpdateComp/> */}
                 <br/>
                 <BoardViewComp/>
                 <hr/>
