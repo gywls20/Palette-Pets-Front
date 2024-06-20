@@ -39,7 +39,7 @@
 
 /* 0607 헤더 버튼 */
 .round-button {
-    background-color: #747f8a; /* Green background */
+    background-color: #b2b7bd; /* Green background */
     border: none; /* Remove borders */
     color: white; /* White text */
     width: 80px;
@@ -59,7 +59,7 @@
 
 
 .round-button:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #6a6f6a; /* Darker green on hover */
     transform: scale(1.05); /* Hover 시 크기 증가 */
 }
 
@@ -69,7 +69,7 @@
   
 }
 
-.round-button.active { background-color: red; color: #fff; }
+.round-button.active { background-color: rgb(28, 27, 27); color: #fff; }
 
 hr {
   color: 	#D3D3D3;
@@ -131,7 +131,7 @@ hr {
   }
   
   .toggleButton:hover {
-    background-color: #0056b3;
+    background-color: #515355;
     transform: scale(1.05); /* Hover 시 크기 증가 */
   }
   
