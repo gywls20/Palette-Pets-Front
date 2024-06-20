@@ -22,7 +22,7 @@ body {
 }
 
 .css-ag0gh4-MuiListItem-root {
-    padding-bottom: 10px;
+    padding-bottom: 7px;
 }
 
 .MuiDivider-root {
@@ -42,4 +42,13 @@ body {
 
 .cardCapter{
     display: flex;
+}
+
+.css-1t8w031-MuiPaper-root-MuiCard-root {
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+
+#root {
+    background-color: #f1f3f5;
 }

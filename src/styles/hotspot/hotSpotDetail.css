@@ -3,29 +3,17 @@ root {
 }
 
 * {
-
     list-style: none;
 }
 
-.toList{
-    padding: 4px;
-    font-size: 18px;
-    color: white;
-    background-color: dodgerblue;
-    border-radius: 4px;
-    margin-bottom: 4rem !important;
-}
-
-.toList :hover {
-    background-color: red;
-}
-
 #__react-kakao-maps-sdk___Map {
-    display: block;
+    display: inline-block;
     position: relative;
-    margin-bottom: 4rem;
-    border-radius: 5px;
+    border-radius: 10px;
     z-index: 0;
+    width: 95% !important;
+    margin-top: 0 !important;
+    margin-bottom: 2% !important;
 }
 
 /*슬라이드*/
@@ -55,23 +43,57 @@ root {
 
 
 
-
+/* 모바일 */
 @media only screen and (max-width: 600px) {
     .centered-image {
-        display: block;
+        display: inline-block;
         position: relative;
-        width: 380px;
+        width: 360px;
         height: 300px;
+        margin-top: 10px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #root {
+        background-color: #f1f3f5;
+    }
+
+    #ratingAverage {
+        display: flex;
+        margin-left: 31%;
+    }
+
+    #sliderDiv {
+        width: 86%;
+        display: inline-block;
     }
 }
 
-
+/* 일반 웹 */
 @media only screen and (min-width: 600px) {
     .centered-image {
-        display: block;
+        display: inline-block;
         position: relative;
-        width: 639px;
+        width: 610px;
         height: 539px;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #root {
+        background-color: #f1f3f5;
+    }
+
+    #ratingAverage {
+        display: flex;
+        margin-left: 39%;
+    }
+
+    #sliderDiv {
+        width: 96%;
+        display: inline-block;
     }
 }
 
@@ -88,4 +110,8 @@ root {
     justify-content: center;
     color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ql-clipboard {
+    display: none;
 }

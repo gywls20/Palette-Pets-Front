@@ -19,8 +19,9 @@ import "./../styles/toast/toast.css"
 import {useTheme} from "@mui/material/styles";
 import LoginIcon from '@mui/icons-material/Login';
 import * as React from "react";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-export default function Header() {
+export default function BackBtnHeader() {
     const navigate = useNavigate();
     const token = useSelector((state) => state.MemberSlice.token);
     const dispatch = useDispatch();
@@ -189,29 +190,15 @@ export default function Header() {
                 }}
             >
                 <Toolbar>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            mr: 2,
-                            flexShrink: 0,
-                            display: 'flex',
-                            justifyContent: isMobileView ? 'flex-start' : 'flex-start',
-                            alignItems: 'center',
-                        }}
+                    <IconButton
+                        size={isMobileView ? 'small' : 'large'}
+                        aria-label="go back"
+                        onClick={() => navigate(-1)}
+                        color="inherit"
+                        sx={{ ml: isMobileView ? 0.5 : 1, color: 'black' }}
                     >
-                        <Box
-                            component="img"
-                            alt="logo"
-                            src="/src/image/header/logo.png"
-                            onClick={goToMain}
-                            sx={{
-                                width: isMobileView ? '30%' : '40%',
-                                height: 'auto',
-                                cursor: 'pointer',
-                            }}
-                        />
-                    </Typography>
+                        <ArrowBackIosNewIcon />
+                    </IconButton>
 
                     <Box sx={{ flexGrow: 1 }} />
                     <Box

@@ -8,11 +8,10 @@ html {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  margin-top: 25px;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   font-size: 1rem;
 
 
@@ -21,6 +20,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
 
 body {
   padding-top: 0.5rem;
@@ -31,4 +32,12 @@ body {
   max-width: 40rem;
   background-color: #ffffff;
   height: 100vh;
+}
+
+  background-color: white;
+  height: 100vh;
+}
+
+.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected {
+  color: black !important;
 }
