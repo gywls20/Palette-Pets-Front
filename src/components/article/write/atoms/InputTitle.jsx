@@ -34,6 +34,7 @@ const InputTitle = memo(({ boardName, title, articleHead, onChange,onInput }) =>
     
 
     useEffect(() => {
+        
         onInput({
             name:"articleHead",
             value:''

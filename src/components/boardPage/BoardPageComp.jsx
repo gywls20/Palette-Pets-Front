@@ -112,9 +112,7 @@ function BoardPageComp() {
   return (
     <>
       <div className='header'>
-        <div className='searchInput'>
-          {/* <input type='text' value={search} /> */}
-        </div>
+      
         <div className='boardSelectBtn'>
           <button className='round-button' onClick={onReset}>전체</button>
           <button className={boardName === "FREEBOARD" ? "round-button active" : "round-button"} value="FREEBOARD" onClick={addBoardName}>자유</button>
@@ -138,6 +136,7 @@ function BoardPageComp() {
           }
         </div>
         <div className='selectedTagList'>
+          aaaaaaa
           {
             search && search.map((item, index) =>
 
