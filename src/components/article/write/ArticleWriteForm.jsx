@@ -12,9 +12,6 @@ import { writeArticle, spamCheck } from '../../../service/ArticleService.jsx'
 import { useNavigate } from 'react-router-dom';
 
 
-
-
-
 const initialForm = {
 
     boardName: 'FREEBOARD',
@@ -26,14 +23,27 @@ const initialForm = {
 
 const ArticleWriteForm = () => {
 
-    const [form, onChange, onInput, reset, setForm] = useForm(initialForm);
+    const [form, onChange, onInput, reset] = useForm(initialForm);
     const [imgFiles, setImgFiles] = useState([]);
     const [previewList, setPreviewList] = useState([]);
-
+    
     const navigate = useNavigate();
-
+    
+    const validate = (form) =>{
+        const {articleHead,title,content} = form
+        
+        if(articleHead === '' || articleHead === null){
+            return false
+        }else if(title === '' || title === null){
+            return false
+        }else if(content === '' || content === null){
+            return false
+        }
+    }
 
     const onSubmit = async () => {
+
+        validate(form);
 
         const response = await spamCheck();
 
@@ -70,7 +80,7 @@ const ArticleWriteForm = () => {
 
             <SelectBoard boardName={form.boardName} onChange={onChange} />
             <UserMakeTags articleTags={form.articleTags} onInput={onInput} />
-            <InputTitle boardName={form.boardName} articleHead={form.articleHead} title={form.title} onChange={onChange} />
+            <InputTitle boardName={form.boardName} articleHead={form.articleHead} title={form.title} onChange={onChange} onInput={onInput}/>
             <InputContent content={form.content} onChange={onChange} />
             <ImageUpload previewList={previewList} setPreviewList={setPreviewList} imgFiles={imgFiles} setImgFiles={setImgFiles} />
 
