@@ -9,6 +9,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import carrotService from '../../service/carrotService';
 import '../../styles/carrot/CarrotDetail.css';
 import CarrotMenu from './CarrotMenu';
+import kakaoAPI from './kakaoAPI';
+
 
 const CarrotDetail = () => {
   const navigate = useNavigate();
@@ -60,9 +62,57 @@ const CarrotDetail = () => {
     }
   }
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://developers.kakao.com/sdk/js/kakao.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
+
+  useEffect(() => {
+    // 카카오 SDK 초기화
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init('19b10ccc3aa2bc5c3522f67de2c996da');
+    }
+  }, []);
+
+  const shareToKakao = () => {
+     // 카카오 공유 API 호출
+     window.Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '공유할 제목',
+        description: '공유할 내용',
+        imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ48C4J0UyxfI5uRwOokboNaqQAQlTn5Qbgmg&s',
+        link: {
+          webUrl: 'http://localhost:3000',
+          mobileWebUrl: 'http://localhost:3000',
+        },
+      },
+      social: {
+        likeCount: 10,
+        commentCount: 20,
+        sharedCount: 30,
+      },
+      buttons: [
+        {
+          title: '웹으로 이동',
+          link: {
+            webUrl: 'https://example.com',
+            mobileWebUrl: 'https://example.com',
+          },
+        },
+      ],
+    });
+  };
+
 
     return (
       <>
+    <button onClick={shareToKakao}>
+      카카오톡으로 공유하기
+    </button>
       {visible && <CarrotMenu />}
       <IconButton aria-label="history back" sx={{ marginLeft: '20px', marginTop: '20px', display: 'flex', fontSize: '15pt' }} onClick={() => navigate(-1)}>
         <ArrowBackIcon />
