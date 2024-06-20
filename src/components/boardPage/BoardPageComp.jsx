@@ -14,6 +14,7 @@ function BoardPageComp() {
   const [search, setSearch] = useState([]);
   const [tagList, setTagList] = useState([]);
   const [boardName, setBoardName] = useState('');
+  const [isExpanded, setIsExpanded] = useState(false);
 
   //URL에서 sort 값 가져오기
   const location = useLocation();
@@ -121,7 +122,10 @@ function BoardPageComp() {
           <button className={boardName === "QNA" ? "round-button active" : "round-button"} value="QNA" onClick={addBoardName}>QNA</button>
         </div>
 
-        <div className='tagList'>
+    
+
+
+        <div className={`tagList ${isExpanded ? 'expanded' : ''}`}>
 
           {
 
@@ -135,6 +139,11 @@ function BoardPageComp() {
             )
           }
         </div>
+         {tagList.length > 10 && (
+          <button onClick={() => setIsExpanded(!isExpanded)} className='toggleButton'>
+            {isExpanded ? '접기' : '펼치기'}
+          </button>
+        )}
         <div className='selectedTagList'>
           aaaaaaa
           {
