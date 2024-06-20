@@ -21,11 +21,25 @@ body {
     border-radius: 5px;
 }
 
-hr {
-    height: 2px;
-    background-color: black;
-}
-
 .css-ag0gh4-MuiListItem-root {
     padding-bottom: 10px;
+}
+
+.MuiDivider-root {
+    display: none;
+}
+
+/*이미지 사이즈*/
+.MuiCardMedia-root {
+    width: 50%;
+}
+
+/*제목 내용 별점*/
+.MuiListItemText-root {
+    position: relative;
+    margin-top: 5%;
+}
+
+.cardCapter{
+    display: flex;
 }

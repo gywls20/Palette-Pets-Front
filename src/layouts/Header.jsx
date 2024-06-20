@@ -267,7 +267,7 @@ export default function Header() {
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <Menu
-            style={{font: '#000'}}
+            style={{font: '#000',}}
             anchorEl={anchorEl}
             anchorOrigin={{
                 vertical: 'top',
@@ -365,6 +365,7 @@ export default function Header() {
 
             <Box sx={{flexGrow: 1}}>
                 <CssBaseline/>
+
                 <AppBar position="fixed">
                     <Toolbar>
                         <Link to="/" style={{color: '#fff'}}>냥가왈부</Link>
@@ -380,6 +381,7 @@ export default function Header() {
                                 <Badge badgeContent={4} color="error">
                                     <MailIcon/>
                                 </Badge>
+
                             </IconButton>
                             <IconButton
                                 size="large"
@@ -417,9 +419,7 @@ export default function Header() {
                         </Box>
                     </Toolbar>
                 </AppBar>
-                {renderMobileMenu}
-                {renderMenu}
-                {renderNotificationMenu}
+
             </Box>
 
         );
