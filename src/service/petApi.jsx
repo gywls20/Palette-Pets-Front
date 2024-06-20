@@ -132,11 +132,23 @@ export const petImgDeleteRequest = (imgId) => {
 }
 
 // 펫 리스트 GET 요청 -> 회원이 소유한 반려 동물 리스트
-export const petListRequest = (memberId) => {
-    return jwtAxios.get(`${url}/pet/list/${memberId}`)
+export const petListRequest = () => {
+    return jwtAxios.get(`${url}/pet/list`)
         .then(response => response.data)
         .catch((error) => {
             console.error(error);
+            return error.response.data;
+        });
+}
+
+// 펫 상세 정보 진입 시 -> 방문 회원이 해당 펫의 주인이 맞는 지 확인 (true / false)
+export const checkIsMaster = (petId) => {
+    return jwtAxios.get(`${url}/pet/${petId}/checkMaster`)
+        .then(response => response.data)
+        .catch((error) => {
+            console.error(error);
+            console.error(error.response);
+            console.error(error.response.data);
             return error.response.data;
         });
 }

@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { styled } from '@mui/system';
 import "./../../styles/pet/slickArrows.css"
 import {petListRequest} from "../../service/petApi.jsx";
+import {CardImg} from "react-bootstrap";
 
 const RoundedCardMedia = styled(CardMedia)({
     borderRadius: '50%',
@@ -28,7 +29,7 @@ const PetList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await petListRequest(1);
+                const data = await petListRequest();
                 console.log("data = " + data);
                 if (data === 'REFRESH_TOKEN_EXPIRED_ERROR') {
                     window.location.replace('/login');
@@ -100,33 +101,47 @@ const PetList = () => {
     return (
         <>
             <h1>반려 동물 목록</h1>
-            <Slider {...settings}>
-                {
-                    petList.map((pet) => (
-                        <div key={pet.petId}>
-                            <Card onClick={() => navigate(`/pet/details/${pet.petId}`)}>
-                                <RoundedCardMedia component="img" height="200"
-                                           image={"https://kr.object.ncloudstorage.com/palettepets/pet/" + pet.petImage} alt={pet.petName}
-                                />
-                                <CardContent>
-                                    <Typography variant="h5" component="div">
-                                        {pet.petName}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {pet.petCategory1} - {pet.petCategory2}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        생일: {pet.petBirth}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        체중: {pet.petWeight}kg
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    ))
-                }
-            </Slider>
+            {
+                petList.length === 0 ?
+                    (
+                        <Card>
+                            <CardImg
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMAnGv9ThfxJ0b0vVQ3zcT114cT6C-675rmg&s"
+                            />
+                            <CardContent>
+                                등록된 반려동물이 없습니다! 반려 동물을 등록해주세요
+                            </CardContent>
+                        </Card>
+                    ) : (
+                    <Slider {...settings}>
+                        {
+                            petList.map((pet) => (
+                                <div key={pet.petId}>
+                                    <Card onClick={() => navigate(`/pet/details/${pet.petId}`)}>
+                                        <RoundedCardMedia component="img" height="200"
+                                                          image={"https://kr.object.ncloudstorage.com/palettepets/pet/" + pet.petImage} alt={pet.petName}
+                                        />
+                                        <CardContent>
+                                            <Typography variant="h5" component="div">
+                                                {pet.petName}
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                {pet.petCategory1} - {pet.petCategory2}
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                생일: {pet.petBirth}
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                체중: {pet.petWeight}kg
+                                            </Typography>
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                            ))
+                        }
+                    </Slider>
+                )
+            }
             <br />
             <br />
             <Button onClick={openModal}>펫 등록하기</Button>
