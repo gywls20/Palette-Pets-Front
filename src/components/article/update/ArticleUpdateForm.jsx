@@ -112,7 +112,7 @@ const ArticleUpdateForm = () => {
 
             <SelectBoard boardName={form.boardName} onChange={onChange} />
             <UserMakeTags articleTags={form.articleTags} onInput={onInput} />
-            <InputTitle boardName={form.boardName} articleHead={form.articleHead} title={form.title} onChange={onChange} />
+            <InputTitle boardName={form.boardName} articleHead={form.articleHead} title={form.title} onChange={onChange} onInput={onInput}/>
             <InputContent content={form.content} onChange={onChange} />
             <ImageUpload previewList={previewList} setPreviewList={setPreviewList} imgFiles={imgFiles} setImgFiles={setImgFiles} />
 
