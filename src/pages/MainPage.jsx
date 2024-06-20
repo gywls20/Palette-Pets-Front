@@ -12,7 +12,7 @@ const MainPage = () => {
                 <br/>
                 <BoardViewComp/>
                 <hr/>
-                <ReviewComp/>
+                {/* <ReviewComp/> */}
                 <br/>
             </DefaultLayout>
         </>
