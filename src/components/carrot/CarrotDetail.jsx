@@ -121,7 +121,7 @@ const CarrotDetail = () => {
       </IconButton>
       <div className="carrot-detail-container">
       <Carousel slide={false}>
-      {/* {carrot.imgList.map((img, index) => (
+      {carrot.imgList.map((img, index) => (
         <Carousel.Item key={index}>
           <img
             src={`https://kr.object.ncloudstorage.com/palettepets/carrot/img/${img}`}
@@ -130,7 +130,7 @@ const CarrotDetail = () => {
             width="280"
           />
         </Carousel.Item>
-      ))} */}
+      ))}
     </Carousel>
         <div className="content-container">
           <div className="seller-info">
