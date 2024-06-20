@@ -14,7 +14,14 @@ import carrotRouter from "./carrotRouter.jsx";
 
 
 
-const Loading = () => <>Loading...</>;
+const Loading = () => (
+    <>
+        <br/>
+        <br/>
+        <br/>
+        <div>Loading...</div>
+    </>
+);
 const MainPage = lazy(() => import('./../pages/MainPage'));
 const LoginPage = lazy(() => import('./../pages/LoginPage'));
 const JoinPage = lazy(() => import('./../pages/JoinPage'));

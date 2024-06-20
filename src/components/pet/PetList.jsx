@@ -91,7 +91,14 @@ const PetList = () => {
     };
 
     if (isLoading) {
-        return <div>로딩 중...</div>;
+        return (
+            <>
+                <br/>
+                <br/>
+                <br/>
+                <div>로딩 중...</div>
+            </>
+        );
     }
 
     if (error) {
