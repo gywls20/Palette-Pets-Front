@@ -18,6 +18,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import "./../styles/toast/toast.css"
 import {useTheme} from "@mui/material/styles";
 import LoginIcon from '@mui/icons-material/Login';
+import * as React from "react";
 
 export default function Header() {
     const navigate = useNavigate();
@@ -170,6 +171,9 @@ export default function Header() {
     // 모바일 메뉴 관련 기능
     const theme = useTheme();
     const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
+    const goToMain = () => {
+        navigate("/");
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -191,13 +195,22 @@ export default function Header() {
                         sx={{
                             mr: 2,
                             flexShrink: 0,
-                            fontSize: isMobileView ? '1rem' : '1.25rem',
-                            color: 'black',
+                            display: 'flex',
+                            justifyContent: isMobileView ? 'flex-start' : 'flex-start',
+                            alignItems: 'center',
                         }}
                     >
-                        <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
-                            냥가왈부
-                        </Link>
+                        <Box
+                            component="img"
+                            alt="logo"
+                            src="/src/image/header/logo.png"
+                            onClick={goToMain}
+                            sx={{
+                                width: isMobileView ? '30%' : '40%',
+                                height: 'auto',
+                                cursor: 'pointer',
+                            }}
+                        />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1 }} />
