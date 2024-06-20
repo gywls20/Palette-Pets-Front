@@ -4,8 +4,6 @@ import "../../styles/manager/BoardList.css"
 import Category from "../../test/main/Category.jsx";
 import axios from 'axios';
 
-const ManagerPageComp = () => {
-    const [articleList, setArticleList] = useState([]);
 
 function ManagerPageComp() {
   //URL에서 sort 값 가져오기

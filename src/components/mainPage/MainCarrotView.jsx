@@ -11,7 +11,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility.js";
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
 import Anhae from '../../image/anhae.jpg'
 import { useSelector } from 'react-redux';
-import connectChat from './connectChat';
+import connectChat from '../../utils/connectChat';
 import axios from 'axios';
 import {url} from '../../utils/single';
 
