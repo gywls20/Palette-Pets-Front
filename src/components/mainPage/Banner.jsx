@@ -33,7 +33,7 @@ const PrevArrow = ({ onClick }) => {
     );
 };
 
-export default function ReviewComp() {
+export default function Banner() {
     let settings = {
         dots: false,
         arrows: true,
@@ -113,31 +113,7 @@ export default function ReviewComp() {
                 <div className={"reviewSlider"}>
                     <Container maxWidth="sm" sx={{mt: 4}}>
                             <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
-                                <Avatar
-                                    src="https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG"
-                                    sx={{width: 48, height: 48, mr: 2}}
-                                />
-                                <Box sx={{flexGrow: 0}}>
-                                    <Typography variant="body2" color="text.secondary">
-                                        <AccessTimeIcon sx={{verticalAlign: 'middle', mr: 0.5}}/>몇 시간 전
-                                    </Typography>
-                                    <Typography variant="subtitle1" color="text.primary">
-                                        두번째 후기 글입니다.
-                                    </Typography>
-                                </Box>
-                            </Box>
-                            <Box sx={{display: 'flex', alignItems: 'center'}}>
-                                <Typography variant="" color="text.secondary"
-                                            sx={{display: 'flex', alignItems: 'center', mr: 1}}>
-                                    <VisibilityIcon sx={{verticalAlign: 'middle', mr: 0.5}}/>조회수
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary"
-                                            sx={{display: 'flex', alignItems: 'center', mr: 1}}>
-                                    <FavoriteBorderIcon sx={{verticalAlign: 'middle', mr: 0.5}}/>좋아요
-                                </Typography>
-                                <Badge badgeContent={999} color="primary">
-                                    <Typography variant="body2" color="text.secondary">댓글</Typography>
-                                </Badge>
+                                <img src="https://res.heraldm.com/content/image/2022/06/17/20220617000554_0.jpg"></img>
                             </Box>
                     </Container>
                 </div>
