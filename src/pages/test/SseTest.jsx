@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {EventSourcePolyfill} from "event-source-polyfill";
 import Swal from "sweetalert2";
 import {url} from "../../utils/single";
+import "./../../styles/toast/toast.css"
 
 const SseTest = () => {
 
@@ -12,13 +13,16 @@ const SseTest = () => {
 
     const Toast = Swal.mixin({
         toast: true,
-        position: 'top-end',
+        position: 'top',
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
             toast.addEventListener('mouseenter', Swal.stopTimer)
             toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+        customClass: {
+            container: 'toastContainer',
         }
     })
 
@@ -35,7 +39,7 @@ const SseTest = () => {
                     authorization: authToken,
                 },
                 withCredentials: true,
-                timeout : 60 * 60 * 1000
+                timeout : 45 * 1000
             });
 
             source.addEventListener('notification', (e) => {

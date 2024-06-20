@@ -10,6 +10,7 @@ import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {petImgTest, petRegisterRequest} from "../../service/petApi.jsx";
 import {useNavigate} from "react-router-dom";
+import Swal from "sweetalert2";
 
 const PetRegisterForm = ({ closeModal }) => {
 
@@ -46,7 +47,7 @@ const PetRegisterForm = ({ closeModal }) => {
         }
 
         const dto = {
-            createdWho: 1, // 임시 테스트용 회원
+            createdWho: null, // 임시 테스트용 회원
             petName: petName,
             petImage: "after_fileUpload_you_need_to_save_s3_path",
             petCategory1: petCategory1,
@@ -58,7 +59,15 @@ const PetRegisterForm = ({ closeModal }) => {
 
         const result = await petRegisterRequest(dto, petImage);
         console.log(result);
-        window.location.reload();
+        if (result === true) {
+            window.location.reload();
+        } else {
+            await Swal.fire({
+                title: '펫 등록 실패',
+                text: '정보를 다시 입력해주세요',
+                icon: 'warning'
+            });
+        }
     };
 
     const handleChangePetName = (e) => {

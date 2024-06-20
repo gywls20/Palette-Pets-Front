@@ -14,7 +14,14 @@ import carrotRouter from "./carrotRouter.jsx";
 
 
 
-const Loading = () => <>Loading...</>;
+const Loading = () => (
+    <>
+        <br/>
+        <br/>
+        <br/>
+        <div>Loading...</div>
+    </>
+);
 const MainPage = lazy(() => import('./../pages/MainPage'));
 const LoginPage = lazy(() => import('./../pages/LoginPage'));
 const JoinPage = lazy(() => import('./../pages/JoinPage'));
@@ -26,6 +33,7 @@ const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
 const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
 const CarrotPage = lazy(() => import('../pages/carrot/CarrotPage.jsx'));
 const ChatPage = lazy(() => import('../pages/chat/ChatPage.jsx'));
+const Notification = lazy(() => import('../pages/notification/Notification.jsx'));
 
 const root = createBrowserRouter([
     {
@@ -103,18 +111,18 @@ const root = createBrowserRouter([
         path: "/sseTest",
         element: <Suspense fallback={<Loading/>}><IsLogin Component={<SseTest/>} /></Suspense>
     },
-
-
-    
     {
         path:"article",
         element: <Suspense fallback={<Loading />}><ArticlePage/></Suspense>,
 
     },
-
     {
         path:"/chat",
         element: <Suspense fallback={<Loading />}><IsLogin Component={<ChatPage/>} /></Suspense>
+    },
+    {
+        path:"/notification",
+        element: <Suspense fallback={<Loading />}><IsLogin Component={<Notification/>} /></Suspense>
     }
 ]);
 

@@ -1,6 +1,9 @@
-html{
-  height: 100%
+html {
+  height: 100%;
+  padding-right: 0 !important;
+  overflow-y: scroll !important;
 }
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -18,14 +21,7 @@ html{
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+
 
 body {
   padding-top: 0.5rem;
@@ -34,7 +30,7 @@ body {
   justify-content: space-between;
   align-items: center;
   max-width: 40rem;
-  background-color: #b0b4bd;
+  background-color: white;
   height: 100vh;
 }
 
@@ -62,6 +58,18 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/*reviewComp*/
+
+.slick-track {
+  display: block !important;
+}
+
+.reviewSlider {
+  display: flex !important;
+  margin-bottom: 1rem;
+  padding-bottom: 5rem;
 }
 
 .MuiContainer-root,
@@ -128,6 +136,39 @@ button:focus-visible {
   background-color: #f3f4f6;
 }
 
-.MuiBottomNavigation-root{
-  position: relative;
+html{
+  height: 100%
 }
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #ffffff;
+  font-size: 1rem;
+
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  padding-top: 0.5rem;
+  margin: auto;
+  place-items: center;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 40rem;
+  background-color: #ffffff;
+  height: 100vh;
+}
+
+.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected {
+  color: black !important;
+}
+

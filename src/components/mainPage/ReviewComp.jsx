@@ -65,7 +65,7 @@ export default function ReviewComp() {
 
     return (
         <>
-            <TransactionCategoryComp/>
+            {/* <TransactionCategoryComp/> */}
 
             <Slider {...settings}>
                 <div className='reviewSlider'>
