@@ -30,8 +30,11 @@ const HotSpotList = () => {
 
     return (
         <Box sx={{padding: 2}}>
-            <Typography variant="h6" align="center" gutterBottom>
-                반려동물와 명소를 방문해보세요
+            <br/>
+            <Typography variant="h6" align="center"
+                        sx={{ fontWeight: 'bold' }}
+                        gutterBottom>
+                🐕반려동물와 명소를 방문해보세요🐕‍🦺
             </Typography>
             <List>
                 {hotSpotList.map((hotSpot, index) => (
