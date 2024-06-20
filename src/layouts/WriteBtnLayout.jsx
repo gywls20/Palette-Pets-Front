@@ -1,18 +1,18 @@
 import Header from "./Header.jsx";
-import FooterNoCreateIcon from "./FooterNoCreateIcon.jsx";
+import Footer from "./Footer.jsx";
 
-const DefaultLayout = ({ children }) => {
+const WriteBtnLayout = ({ children }) => {
     return (
         <>
             <br/>
             <br/>
             <Header />
             {children}
-            <FooterNoCreateIcon />
+            <Footer />
             <br/>
             <br/>
         </>
     );
 }
 
-export default DefaultLayout;
+export default WriteBtnLayout;

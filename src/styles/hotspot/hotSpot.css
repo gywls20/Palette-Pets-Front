@@ -43,3 +43,20 @@ body {
 .cardCapter{
     display: flex;
 }
+
+@media only screen and (max-width: 600px) {
+    .MuiCardMedia-root {
+        width: 50%;
+        height: 50%;
+    }
+
+    .MuiCard-root {
+        height: 200px;
+        padding: 5%;
+    }
+
+    .MuiListItemText-root {
+        position: relative;
+        margin-top: 12%;
+    }
+}

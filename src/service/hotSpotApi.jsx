@@ -88,3 +88,11 @@ export const sendStarRating = (dto) => {
 }
 
 // 평가한 게시물이라면 별점 가져오기
+export const getStarRate = (id) => {
+    return jwtAxios.get(`${API_SERVER_HOST}/api/hotspot/rating/${id}`)
+        .then(res => res.data)
+        .catch(err => {
+            console.log(err);
+            return err.response.data;
+        });
+}

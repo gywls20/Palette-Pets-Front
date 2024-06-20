@@ -8,7 +8,13 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import {Button, Rating} from "@mui/material";
 import ReactQuill from "react-quill";
-import {checkIsManager, deleteHotSpot, getHotSpotDetail, sendStarRating} from "../../service/hotSpotApi.jsx";
+import {
+    checkIsManager,
+    deleteHotSpot,
+    getHotSpotDetail,
+    getStarRate,
+    sendStarRating
+} from "../../service/hotSpotApi.jsx";
 import BuildIcon from "@mui/icons-material/Build.js";
 import Swal from "sweetalert2";
 import { Row, Col } from 'react-bootstrap';
@@ -19,6 +25,26 @@ const HotSpotDetails = () => {
     const [isManager, setIsManager] = useState(false);
     const navigate = useNavigate();
     const {id} = useParams();
+
+    // 이미 별점 평가를 했는 지 -> 했다면 얼마인지
+    const [starRated, setStarRated] = useState(0);
+
+    // 별점 수정 버튼 관련
+    const [starRatedTemp, setStarRatedTemp] = useState(0);
+
+    const handleUpdateRating = () => {
+        // 임시 저장
+        setStarRatedTemp(starRated);
+        // 등록 버튼 다시 보이기 -> 0
+        setStarRated(0);
+    }
+
+    const handleRatingCancel = () => {
+        // 임시 저장했던 거 다시 원상복구하기
+        setStarRated(starRatedTemp);
+        setStarRatedTemp(0);
+        setUserRating(0);
+    }
 
     // 별점 평가 수행 여부 + 몇개 인지 가져오기 -> 무조건 1점부터 5점까지만 사용 (0은 평가 아직 안함을 나타냄)
     const [userRating, setUserRating] = useState(0);
@@ -43,6 +69,7 @@ const HotSpotDetails = () => {
                     icon: 'success',
                     timer: 1500,
                 });
+                window.location.reload();
             } else {
                 await Swal.fire({
                     title: '별점 평가 실패',
@@ -70,6 +97,10 @@ const HotSpotDetails = () => {
             // 회원 정보 가 role이 ADMIN인지 확인하는 요청
             const checkManager = await checkIsManager();
             setIsManager(checkManager);
+            // 열람 중인 회원이 이미 별점 평가를 했는 지 여부 확인
+            const isAlreadyRated = await getStarRate(id);
+            console.log("isAlreadyRated = ", isAlreadyRated);
+            setStarRated(isAlreadyRated);
         }
         fetchData();
     }, []);
@@ -201,27 +232,53 @@ const HotSpotDetails = () => {
                 )
             }
             <br/>
-            <Row className="mt-4">
-                <Col>
-                    <h4>이 명소에 대한 별점을 남겨주세요!</h4>
-                    <Rating
-                        name="user-rating"
-                        value={userRating}
-                        onChange={handleRatingChange}
-                        size="large"
-                    />
-                    <br/>
-                    <Button
-                        variant="contained"
-                        color="success"
-                        onClick={handleRatingSubmit}
-                        disabled={userRating === 0}
-                        className="ml-2"
-                    >
-                        평가 제출
-                    </Button>
-                </Col>
-            </Row>
+            {
+                starRated === 0 ? (
+                    <Row className="mt-4">
+                        <Col>
+                            <h4>이 명소에 대한 별점을 남겨주세요!</h4>
+                            <Rating
+                                name="user-rating"
+                                value={userRating}
+                                onChange={handleRatingChange}
+                                size="large"
+                            />
+                            <br/>
+                            <Button
+                                variant="contained"
+                                color="success"
+                                onClick={handleRatingSubmit}
+                                disabled={userRating === 0}
+                                className="ml-2"
+                            >
+                                평가 제출
+                            </Button>
+                            &nbsp;
+                            <Button
+                                variant="contained"
+                                color="warning"
+                                onClick={handleRatingCancel}
+                                className="ml-2"
+                            >
+                                취소
+                            </Button>
+                        </Col>
+                    </Row>
+                ) : (
+                    <Row className="mt-4" onClick={handleUpdateRating}>
+                        <Col>
+                            <h4>회원님의 평가</h4>
+                            <Rating
+                                name="user-rating"
+                                value={starRated}
+                                precision={1}
+                                readOnly
+                                size="large"
+                            />
+                        </Col>
+                    </Row>
+                )
+            }
             <br/>
             <br/>
             <br/>

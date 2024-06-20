@@ -1,0 +1,12 @@
+.topButton {
+    border-radius: 10px;
+    height: 30px;
+    width: 50px;
+    background-color: #e9ecef;
+    bottom: 70px;
+    position: fixed;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+
+}
