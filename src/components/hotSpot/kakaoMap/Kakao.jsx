@@ -15,8 +15,10 @@ const Kakao = ({ lat, lng }) => {
     // 기본 위치 설정 지정
     const [state, setState] = useState({
         center: {
-            lat: lat,
-            lng: lng,
+            // lat: lat,
+            // lng: lng,
+            lat: 37.528073,
+            lng: 126.934038,
         },
         errMsg: null,
         isLoading: true,

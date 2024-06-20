@@ -23,7 +23,9 @@ export default function Header() {
                         component="div"
                         sx={{ display: 'block' }}
                     >
-                        <Link to="/" style={{color: '#fff'}}>냥가왈부</Link>
+                        <Link to="/" style={{color: '#fff'}}>
+                            <img src="./../image/header/logo.png" alt="logo" />
+                        </Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { md: 'flex' } }}>

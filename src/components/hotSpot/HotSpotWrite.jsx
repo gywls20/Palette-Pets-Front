@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 
 const HotSpotWrite = () => {
 
-
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [simpleContent, setSimpleContent] = useState("");
@@ -18,7 +17,7 @@ const HotSpotWrite = () => {
     const [lng, setLng] = useState(0);
 
     const [imgFiles, setImgFiles] = useState([]);
-    const [previewList,setPreviewList] = useState([]);
+    const [previewList, setPreviewList] = useState([]);
 
     const navigate = useNavigate();
 
@@ -26,14 +25,38 @@ const HotSpotWrite = () => {
         setTitle(e.target.value);
     }
 
+    const validateInputs = () => {
+        if (title.trim() === "" || simpleContent.trim() === "" || content.trim() === "" || address.trim() === "") {
+            Swal.fire({
+                title: '입력 오류',
+                text: '모든 필드를 채워주세요.',
+                icon: 'error'
+            });
+            return false;
+        }
+
+        if (isNaN(lat) || isNaN(lng)) {
+            Swal.fire({
+                title: '입력 오류',
+                text: '위도와 경도는 숫자여야 합니다.',
+                icon: 'error'
+            });
+            return false;
+        }
+
+        return true;
+    }
+
     const onSubmit = async () => {
 
-        // 간단한 검증
-        
+        if (!validateInputs()) {
+            return;
+        }
+
         const dto = {
             memberId: null,
             placeName: title,
-            simpleContent:simpleContent,
+            simpleContent: simpleContent,
             content: content,
             address: address,
             lat: lat,
@@ -59,19 +82,18 @@ const HotSpotWrite = () => {
                 icon: 'warning'
             });
         }
-
     }
 
-    const onReset = () =>{
-
+    const onReset = () => {
         setTitle("");
         setSimpleContent("");
         setContent("");
+        setAddress("");
+        setLat(0);
+        setLng(0);
         setImgFiles([]);
         setPreviewList([]);
-
     }
-
 
     return (
         <>
@@ -125,10 +147,9 @@ const HotSpotWrite = () => {
             />
             <br/>
             <br/>
-            <ImageUpload previewList={previewList} setPreviewList={setPreviewList} imgFiles={imgFiles}
-                         setImgFiles={setImgFiles}/>
+            <ImageUpload previewList={previewList} setPreviewList={setPreviewList} imgFiles={imgFiles} setImgFiles={setImgFiles}/>
 
-            <Button className="write-onSubmit" onClick={() => onSubmit()}>작성 완료</Button>
+            <Button className="write-onSubmit" onClick={onSubmit}>작성 완료</Button>
             <Button className="write-onReset" onClick={onReset}>다시 쓰기</Button>
         </>
     );
