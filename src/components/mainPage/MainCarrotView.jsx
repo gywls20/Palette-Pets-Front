@@ -7,9 +7,8 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
 
-
+import Anhae from '../../image/UP.png'
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
-import Anhae from '../../image/anhae.jpg'
 import { useSelector } from 'react-redux';
 import connectChat from './connectChat';
 import axios from 'axios';
@@ -107,7 +106,7 @@ const MainCarrotView = () => {
                 <div key={carrot.carrotId} className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
                         <div className={BoardViewStyle.postHeader}>
-                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(carrot.articleId)} />
+                        <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(carrot.articleId)} />
                             <div>
                                 {/* <p className={BoardViewStyle.postUserName}>{carrot.memberNickname}님</p> */}
                                 <p className={BoardViewStyle.postContent}>{carrot.carrotTitle}</p>

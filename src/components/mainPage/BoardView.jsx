@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
-import Anhae from '../../image/anhae.jpg'
+
 import { useSelector } from 'react-redux';
 import connectChat from './connectChat';
 import axios from 'axios';
@@ -107,7 +107,7 @@ const BoardView = () => {
                 <div key={article.articleId} className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
                         <div className={BoardViewStyle.postHeader}>
-                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(article.articleId)} />
+                            {/* <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(article.articleId)} /> */}
                             <div>
                                 <p className={BoardViewStyle.postUserName}>{article.memberNickname}님</p>
                                 <p className={BoardViewStyle.postContent}>{article.title}</p>
@@ -126,7 +126,7 @@ const BoardView = () => {
                             aria-describedby="modal-modal-description">
                             <Box sx={style}>
                                 <p className={BoardViewStyle.postUserName}>{article.memberNickname}</p>
-                                <img src={Anhae} alt="User" />
+                                {/* <img src={Anhae} alt="User" /> */}
                                 <div className={BoardViewStyle.ModalCopontainer}>
                                     <button>팔로우</button>
                                     <button onClick={requestChat(article.memberId)}>

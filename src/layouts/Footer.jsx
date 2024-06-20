@@ -1,74 +1,54 @@
 // eslint-disable-next-line no-unused-vars
-import React, {useEffect, useState} from "react";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import CreateIcon from "@mui/icons-material/Create";
-import {BottomNavigation, BottomNavigationAction, CssBaseline, IconButton, Paper,} from "@mui/material";
-import {Home, KeyboardArrowUp, VolunteerActivism} from "@mui/icons-material";
-import ForumIcon from "@mui/icons-material/Forum.js";
-import PeopleIcon from "@mui/icons-material/People.js";
-import PetsIcon from "@mui/icons-material/Pets.js";
-import "./../styles/layout/footer.css"
+import { useDispatch, useSelector } from 'react-redux';
+
+import base64 from 'base-64';
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  CssBaseline,
+  Paper,
+  IconButton,
+} from "@mui/material";
+import {
+  Archive,
+  Favorite,
+  LocationOn,
+  Home,
+  KeyboardArrowUp,
+  VolunteerActivism
+} from "@mui/icons-material";
+
+
 
 const Footer = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [value, setValue] = useState();
+  const token = useSelector((state) => state.MemberSlice.token);
+  const navigate = useNavigate()
+  const [value, setValue] = useState(0);
   const [showButton, setShowButton] = useState(false);
-
-  useEffect(() => {
-    // 현재 경로에 따라 value 설정
-    switch (true) {
-      case location.pathname === "/":
-        setValue(0);
-        break;
-      case location.pathname === "/chat":
-        setValue(1);
-        break;
-      case location.pathname === "/board":
-        setValue(2);
-        break;
-      case /^\/carrot(\/.*)?$/.test(location.pathname):
-        setValue(3);
-        break;
-      case /^\/hotspot(\/.*)?$/.test(location.pathname):
-        setValue(4);
-        break;
-      default:
-        setValue();
-    }
-  }, [location.pathname]);
 
   const handleNavigationChange = (event, newValue) => {
     setValue(newValue);
-
-    // 새로운 값에 따른 경로로 이동
-    switch (newValue) {
-      case 0:
-        navigate('/');
-        break;
-      case 1:
-        navigate('/chat');
-        break;
-      case 2:
-        navigate('/board');
-        break;
-      case 3:
-        navigate('/carrot');
-        break;
-      case 4:
-        navigate('/hotspot/list');
-        break;
-      default:
-        break;
-    }
   };
 
   const moveToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
+// JWT 토큰에서 닉네임을 추출하는 함수
+const getNicknameFromToken = () => {
+  let payload = token.substring(token.indexOf('.')+1,token.lastIndexOf('.'));
+  let dec = base64.decode(payload)
+  
+  let nickname = JSON.parse(dec).memberNickname;
+  console.log("dec="+nickname);
+  return nickname;
+  // navigate(`/member/${nickname}}`);
+};
   useEffect(() => {
     const handleScroll = () => {
+      
       if (window.scrollY > 100) {
         setShowButton(true);
       } else {
@@ -83,38 +63,57 @@ const Footer = () => {
     };
   }, []);
 
+  const onHome = () => navigate('/')
+
+  const onPetList = () => {
+    navigate('/pet/list');
+  }
+  const onHotSpot = () => {
+    navigate('/hotspot');
+  }
+  const onCarrot = () => {
+    navigate('/carrot');
+  }
+  const onMypage = () => {
+    let nickname = getNicknameFromToken();
+    if (nickname) {
+      navigate(`/member/${nickname}`);
+    } else {
+      console.error('닉네임을 추출할 수 없습니다.');
+    }
+  };
   return (
-      <>
-        <CssBaseline />
-        <Paper
-            sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-            elevation={3}>
-          <button className="floating-button"></button>
-          <BottomNavigation
-              showLabels
-              value={value}
-              onChange={handleNavigationChange}>
-            <BottomNavigationAction label="Home" icon={<Home />}/>
-            <BottomNavigationAction label="채팅" icon={<ForumIcon />}/>
-            <BottomNavigationAction label="커뮤니티" icon={<PeopleIcon />} />
-            <BottomNavigationAction label="거래" icon={<VolunteerActivism/>}/>
-            <BottomNavigationAction label="플레이스" icon={<PetsIcon />} />
-          </BottomNavigation>
-          <Link to="/article/write">
-            <button className="floating-button">
-              <CreateIcon />
-            </button>
-          </Link>
-        </Paper>
-        {showButton && (
-            <IconButton
-                className={"topButton"}
-                onClick={moveToTop}
-                aria-label="move to top">
-              <KeyboardArrowUp />
-            </IconButton>
-        )}
-      </>
+    <>
+      <CssBaseline />
+      <Paper
+        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+        elevation={3}>
+        <button className="floating-button"></button>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={handleNavigationChange}>
+          <BottomNavigationAction label="mypage" onClick={onMypage}/>
+          <BottomNavigationAction label="PetList" icon={<Favorite />} onClick={onPetList} />
+          <BottomNavigationAction label="Home" icon={<Home />} onClick={onHome} />
+          <BottomNavigationAction label="Market" icon={<VolunteerActivism/>} onClick={onCarrot}/>
+          <BottomNavigationAction label="Location On" icon={<LocationOn />} onClick={onHotSpot} />
+        </BottomNavigation>
+        <Link to="/article/write">
+          <button className="floating-button">
+            <CreateIcon />
+          </button>
+        </Link>
+      </Paper>
+      {showButton && (
+        <IconButton
+          className={"topButton"}
+          onClick={moveToTop}
+          aria-label="move to top">
+          <KeyboardArrowUp />
+        </IconButton>
+      )}
+    </>
   );
 };
 

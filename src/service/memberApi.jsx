@@ -1,0 +1,120 @@
+
+import axios from "axios";
+import jwtAxios from "./jwtAxios.js";
+import {url} from "../utils/single";
+const API_SERVER_HOST = `http://localhost:8080`;
+
+const jsonHeaders = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": `http://localhost:3000`,
+}
+
+// new FormData() 로 파일 보낼때는 json 헤더말고 이 헤더를 쓰기
+const defaultHeaders = {
+    "Access-Control-Allow-Origin": `http://localhost:3000`,
+}
+
+axios.defaults.withCredentials = true; // withCredentials 전역 설정
+axios.defaults.baseURL = API_SERVER_HOST;
+
+    //mypage
+    export const myPageProfile = (nickname) => {
+        return jwtAxios.get(`${API_SERVER_HOST}/member/${nickname}`)
+        .then(response => response.data)
+        .catch((error) => {
+            console.error(error);
+            console.error(error.response);
+            console.error(error.response.data);
+            return error.response.data;
+        });
+    }
+
+// 피드 보기
+export const myPageFeed = async (nickname) => {
+    try {
+        console.log(nickname)
+        const response = await jwtAxios.get(`${API_SERVER_HOST}/feed/${nickname}`);
+        console.log('API 응답 데이터: === feed', response.data); // API 응답 데이터 확인
+        return response.data;
+    } catch (error) {
+        console.error('API 요청 중 오류 발생:', error);
+        if (error.response) {
+            console.error('서버 응답 에러 데이터:', error.response.data); // 서버에서 반환한 에러 데이터 확인
+            return error.response.data;
+        }
+        return { error: '네트워크 오류 또는 서버가 응답하지 않습니다.' };
+    }
+};
+
+
+//피드 올리기
+export const PostFeed = (dto, files) => {
+    const formData = new FormData();
+
+    // 파일을 배열로 처리하여 FormData에 추가
+    files.forEach(file => {
+        formData.append('files', file);
+    });
+
+    // 텍스트 데이터를 JSON 형태로 변환 후 Blob으로 만들어 FormData에 추가
+    const request = JSON.stringify(dto);
+    const blob = new Blob([request], { type: "application/json" });
+    formData.append('request', blob);
+
+    return jwtAxios.post(`${API_SERVER_HOST}/feed`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
+        .then(response => response.data)
+        .catch((error) => {
+            console.error(error);
+            throw error; // 에러를 호출한 곳으로 던짐
+        });
+};
+
+
+export const follow = async (nickname) => {
+    try {
+        console.log("API 호출 시작");
+        const response = await jwtAxios.post(`${API_SERVER_HOST}/member/${nickname}`);
+        console.log("API 호출 완료");
+        return response.data; // 응답 객체의 데이터를 반환
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('팔로우 중 오류가 발생했습니다.');
+    }
+}
+
+
+export const follower = async (nickname) => {
+    try {
+        const response = await jwtAxios.get(`${API_SERVER_HOST}/member/follower/${nickname}`);
+        return response.data; // 응답 객체의 데이터를 반환
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(' 오류가 발생했습니다.');
+    }
+};
+export const following = async (nickname) =>{
+    try{
+        const response = await jwtAxios.get(`${API_SERVER_HOST}/member/following/${nickname}`);
+        return response.data; // 응답 객체의 데이터를 반환
+    }catch (error) {
+        console.error('Error:', error);
+        throw new Error('오류가 발생했습니다.');
+    }
+}
+
+export const setting = async() =>{
+    try{
+        const response = await jwtAxios.get(`${API_SERVER_HOST}/member/setting`);
+        return response.data;
+    }catch(error){
+        console.error('Error:', error);
+        throw new Error('오류가 발생했습니다.');
+    }
+}
+
+
+export default myPageProfile; // default 내보내기 추가

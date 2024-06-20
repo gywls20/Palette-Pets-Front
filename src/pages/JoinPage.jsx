@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import WelcomeImgComp from '../components/joinPage/WelcomeImgComp.jsx';
+
+import HomeDefaultLayout from "../layouts/HomeDefaultLayout.jsx";
 import JoinFormComp from '../components/joinPage/JoinFormComp.jsx';
-import DefaultLayout from "../layouts/DefaultLayout.jsx";
 
 const JoinPage = () => {
     return (
@@ -10,10 +10,9 @@ const JoinPage = () => {
                 <br/>
                 <br/>
                 <br/>
-                <DefaultLayout>
-                    <WelcomeImgComp/>
+                <HomeDefaultLayout>
                     <JoinFormComp/>
-                </DefaultLayout>
+                </HomeDefaultLayout>
                 <br/>
                 <br/>
                 <br/>

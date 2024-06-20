@@ -4,7 +4,7 @@ import '../../styles/carrot/CarrotForm.css';
 import '../../styles/carrot/CarrotError.css';
 import carrotService from '../../service/carrotService';
 import useForm from '../../hooks/useForm';
-import { Button } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography, IconButton  } from '@mui/material';
 import { formatDate } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +21,6 @@ const CarrotPostForm = () => {
     const navigate = useNavigate();
 
     const [reset] = useForm(form);
-    const [imgList, setImgList] = useState([]);
 
   const [carrotTitle, setCarrotTitle] = useState('');
   const [carrotContent, setCarrotContent] = useState('');
@@ -29,10 +28,25 @@ const CarrotPostForm = () => {
   const [carrot_price, setCarrot_price] = useState('');
   const [files, setFiles] = useState([]);
   const [errors, setErrors] = useState({});
+  const [previews, setPreviews] = useState([]);
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setFiles(files);
+
+    const newPreviews = files.map(file => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setPreviews(prev => [...prev, reader.result]);
+        };
+    });
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("핸들 서밋")
     const validationErrors = {};
         if (!carrotTitle) validationErrors.carrotTitle = '제목을 적어주세요.';
         if (!carrotContent) validationErrors.carrotContent = '설명을 적어주세요.';
@@ -50,7 +64,7 @@ const CarrotPostForm = () => {
       files.forEach((imgList) => {
         formData.append('files', imgList);
       });
-
+      console.log(formData.get(carrotContent))
       console.log(formData.get(files));
 
       try {
@@ -153,9 +167,30 @@ const CarrotPostForm = () => {
 
         <div className="form-group">
           <label>이미지</label>
-          <ImageUpdate imgList={imgList} setImgList={setImgList} value={imgList}/>
+          <Button variant="contained" component="label">
+            <input
+              type="file"
+              hidden
+              multiple
+              onChange={handleImageChange}
+          />
+          </Button>
+          {previews.length > 0 && (
+          <Grid item xs={12}>
+            {previews.map((preview, index) => (
+          <Box
+            key={index}
+            component="img"
+            src={preview}
+            sx={{ width: '100%', height: 'auto', objectFit: 'cover', mb: 2 }}
+          />
+            ))}
+          </Grid>
+          )}
+
+
         </div>
-        <button type="submit" className="submit-button" onClick={() => handleSubmit(formatDate)}>
+        <button type="submit" className="submit-button" >
           작성 완료
         </button><br/>
         <button type="reset" className="submit-button" onClick={() => setErrors({})}>다시 작성</button>
