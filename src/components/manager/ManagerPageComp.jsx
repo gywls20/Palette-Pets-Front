@@ -1,13 +1,11 @@
 // eslint-disable-next-line no-unused-vars
-import React, {useState, useEffect} from 'react';
-import "../../styles/board/BoardList.css"
-import ArticleService from '../../service/ArticleService.jsx';
-import { useLocation } from 'react-router-dom';
 import React, {useEffect, useState} from 'react';
-import "../../styles/managerPage/ManagerPage.css";
-import ArticleService from "../../service/ArticleService.jsx";
-import PetCategoryComp from '../PetCategoryComp.jsx';
+import "../../styles/manager/BoardList.css"
+import Category from "../../test/main/Category.jsx";
+import axios from 'axios';
 
+const ManagerPageComp = () => {
+    const [articleList, setArticleList] = useState([]);
 
 function ManagerPageComp() {
   //URL에서 sort 값 가져오기

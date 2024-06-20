@@ -30,4 +30,142 @@ body {
   max-width: 40rem;
   background-color: #ffffff;
   height: 100vh;
+<<<<<<< HEAD
 }
+=======
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1976d2;
+  /* color: white; */
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: lightskyblue;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/*reviewComp*/
+
+.slick-track {
+  display: block !important;
+}
+
+.reviewSlider {
+  display: flex !important;
+  margin-bottom: 1rem;
+  padding-bottom: 5rem;
+}
+
+.MuiContainer-root,
+.MuiContainer-maxWidthSm,
+.css-o31nrr-MuiContainer-root {
+  display: block;
+  width: 100% ;
+
+}
+
+/* heater, footer app width */
+@media only screen and (max-width: 600px) {
+  .css-11b3ww9-MuiPaper-root-MuiAppBar-root,
+  .css-gy4i07-MuiPaper-root{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 100%;
+  }
+}
+
+/* heater, footer wed width */
+@media only screen and (min-width: 600px) {
+  .css-11b3ww9-MuiPaper-root-MuiAppBar-root,
+  .css-gy4i07-MuiPaper-root{
+    text-align: center;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 40rem;
+  }
+
+}
+
+.topButton {
+  border-radius: 10px;
+  height: 30px;
+  width: 50px;
+  background-color: lightskyblue;
+  bottom: 70px;
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 70px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  background-color: #6366f1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.css-0{
+  background-color: #f3f4f6;
+}
+
+html{
+  height: 100%
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #ffffff;
+  font-size: 1rem;
+
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  padding-top: 0.5rem;
+  margin: auto;
+  place-items: center;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 40rem;
+  background-color: #ffffff;
+  height: 100vh;
+}
+>>>>>>> c536fe67c107d5da49014951fb4470d1ba6decd2

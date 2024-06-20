@@ -1,0 +1,15 @@
+.error {
+    color: red;
+    font-size: 12px;
+    text-align: left; 
+    display: flex;
+    align-items: center;
+}
+
+.error-icon {
+    margin-right: 5px;
+}
+
+.input-error {
+    border: 1px solid red;
+}
