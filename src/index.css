@@ -21,6 +21,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
 body {
   padding-top: 0.5rem;
   margin: auto;
@@ -28,6 +30,6 @@ body {
   justify-content: space-between;
   align-items: center;
   max-width: 40rem;
-  background-color: #ffffff;
+  background-color: white;
   height: 100vh;
 }
