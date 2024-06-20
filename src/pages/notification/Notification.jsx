@@ -1,13 +1,13 @@
 import NotificationList from "../../components/notification/NotificationList.jsx";
-import DefaultLayout from "../../layouts/DefaultLayout.jsx";
+import BackBtnLayout from "../../layouts/BackBtnLayout.jsx";
 
 const Notification = () => {
 
     return (
         <>
-            <DefaultLayout>
+            <BackBtnLayout>
                 <NotificationList/>
-            </DefaultLayout>
+            </BackBtnLayout>
         </>
     );
 }
