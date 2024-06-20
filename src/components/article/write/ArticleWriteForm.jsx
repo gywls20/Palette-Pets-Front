@@ -7,12 +7,9 @@ import InputTitle from './atoms/InputTitle';
 import InputContent from './atoms/InputContent';
 import ImageUpload from './atoms/ImageUpload';
 import { Button } from '@mui/material';
-import { writeArticle } from '../../../service/ArticleService.jsx'
-import { useSelector } from 'react-redux';
+import { writeArticle, spamCheck } from '../../../service/ArticleService.jsx'
+
 import { useNavigate } from 'react-router-dom';
-import MemberSlice from '../../../store/MemberSlice.js';
-
-
 
 
 const initialForm = {
@@ -25,29 +22,50 @@ const initialForm = {
 }
 
 const ArticleWriteForm = () => {
-    
-    const [form, onChange, onInput, reset,setForm] = useForm(initialForm);
+
+    const [form, onChange, onInput, reset] = useForm(initialForm);
     const [imgFiles, setImgFiles] = useState([]);
-    const [previewList,setPreviewList] = useState([]);
-
-    const navigate = useNavigate();
-
+    const [previewList, setPreviewList] = useState([]);
     
-    const onSubmit = async () => {
-
-        const formData = new FormData();
-        Object.values(imgFiles).map((item, index) => {
-            formData.append('files', item);
-        });
-        const blob = new Blob([JSON.stringify(form)], { type: "application/json" });
-        formData.append('dto', blob);
-
-        await writeArticle(formData);
-        navigate(-1);
+    const navigate = useNavigate();
+    
+    const validate = (form) =>{
+        const {articleHead,title,content} = form
         
+        if(articleHead === '' || articleHead === null){
+            return false
+        }else if(title === '' || title === null){
+            return false
+        }else if(content === '' || content === null){
+            return false
+        }
     }
 
-    const onReset = () =>{
+    const onSubmit = async () => {
+
+        validate(form);
+
+        const response = await spamCheck();
+
+        if (response.status === 400) {
+
+            alert(response.data)
+            
+        }
+        else {
+            const formData = new FormData();
+            Object.values(imgFiles).map((item, index) => {
+                formData.append('files', item);
+            });
+            const blob = new Blob([JSON.stringify(form)], { type: "application/json" });
+            formData.append('dto', blob);
+
+            await writeArticle(formData);
+            navigate(-1);
+        }
+    }
+
+    const onReset = () => {
 
         reset(initialForm)
         setImgFiles([]);
@@ -62,7 +80,7 @@ const ArticleWriteForm = () => {
 
             <SelectBoard boardName={form.boardName} onChange={onChange} />
             <UserMakeTags articleTags={form.articleTags} onInput={onInput} />
-            <InputTitle boardName={form.boardName} articleHead={form.articleHead} title={form.title} onChange={onChange} />
+            <InputTitle boardName={form.boardName} articleHead={form.articleHead} title={form.title} onChange={onChange} onInput={onInput}/>
             <InputContent content={form.content} onChange={onChange} />
             <ImageUpload previewList={previewList} setPreviewList={setPreviewList} imgFiles={imgFiles} setImgFiles={setImgFiles} />
 

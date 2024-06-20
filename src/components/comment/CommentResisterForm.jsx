@@ -25,13 +25,17 @@ const CommentResisterForm = ({ memberNickname, commentRef, articleId, parentId, 
 
     const onSubmit = async () => {
 
+        if(comment === '' || comment === null){
+            return false;
+        }
+
         const addDto = {
             articleId: articleId,
             ref: commentRef,
             parentId: parentId,
             content: comment
         }
-
+        
         const response = await addComment(addDto)
         console.log(response)
         setComment('');

@@ -91,7 +91,8 @@ const ImageUpload = ({ previewList,setPreviewList,imgFiles, setImgFiles }) => {
         
           window.URL.revokeObjectURL(deleteUrl);
           // 메모리 누수 방지
-          if (previewList.length === 0) {
+        
+          if (previewList.length === 1) {
             handleClose()
           }
         }

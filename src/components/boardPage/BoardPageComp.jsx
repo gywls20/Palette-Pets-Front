@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import "../../styles/board/BoardList.css"
-import PetCategory from "../PetCategoryComp.jsx";
 import ArticleService from '../../service/ArticleService.jsx';
 import { useLocation } from 'react-router-dom';
 import BoardPageItem from './BoardPageItem.jsx';
@@ -35,7 +34,7 @@ function BoardPageComp() {
     setWhere(search);
     setPage(1); // search 값이 들어오면 페이지를 1로 초기화(Page = 1일 때만 조회가 되기 때문)
     setArticles([]); // articles를 초기화
-    fetchArticles(dir);
+    fetchArticles(true);
   }, [search, sort, boardName,dir])
 
   useEffect(() => {
@@ -52,6 +51,7 @@ function BoardPageComp() {
     const searchString = search.map(item => item).join(',');
 
     const pageToFetch = reset ? 1 : page;
+
     ArticleService.getArticleList(pageToFetch, sort, dir, searchString, boardName).then((res) => {
       console.log("where =@!@!@!@!@" + search);
       // console.log(res);
@@ -112,9 +112,7 @@ function BoardPageComp() {
   return (
     <>
       <div className='header'>
-        <div className='searchInput'>
-          {/* <input type='text' value={search} /> */}
-        </div>
+      
         <div className='boardSelectBtn'>
           <button className='round-button' onClick={onReset}>전체</button>
           <button className={boardName === "FREEBOARD" ? "round-button active" : "round-button"} value="FREEBOARD" onClick={addBoardName}>자유</button>
@@ -138,6 +136,7 @@ function BoardPageComp() {
           }
         </div>
         <div className='selectedTagList'>
+          aaaaaaa
           {
             search && search.map((item, index) =>
 
