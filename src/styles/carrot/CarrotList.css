@@ -100,10 +100,11 @@ button.filter-button {
   border-bottom: 2px solid #D9D9D8;
   background: transparent;
   text-transform: uppercase;
-  font-size: 1.0625rem;
+  font-size: 1rem;
   transition: all 0.3s ease-in;
   background-color: #555;
 
+  color: #000;
 }
 
 .me-4 {

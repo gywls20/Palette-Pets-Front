@@ -8,6 +8,7 @@ import petRouter from "./petRouter.jsx";
 import hotSpotRouter from "./hotSpotRouter.jsx";
 import SseTest from "../pages/test/SseTest.jsx";
 import IsLogin from "./IsLogin.jsx";
+import carrotRouter from "./carrotRouter.jsx";
 
 
 
@@ -22,8 +23,11 @@ const AriticlePage = lazy(()=>import('../pages/AriticlePage.jsx'));
 const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'));
 const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
 const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
-const CarrotPage = lazy(() => import('../pages/carrot/CarrotPage.jsx'));
+<<<<<<<<< Temporary merge branch 1
 const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
+=========
+const CarrotPage = lazy(() => import('../pages/carrot/CarrotPage.jsx'));
+>>>>>>>>> Temporary merge branch 2
 
 const root = createBrowserRouter([
     {
@@ -50,7 +54,11 @@ const root = createBrowserRouter([
 
     {
         path:"/article",
-        element: <Suspense fallback={<Loading />}><AriticlePage/></Suspense>, 
+        element: <Suspense fallback={<Loading />}>
+           
+            <AriticlePage/>
+            
+        </Suspense>, 
         children: articleRouter({Loading : Loading() })
     },
     // {
@@ -68,12 +76,6 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading />}><BoardPage/></Suspense>,
         // children:boardRouter()
     },
-    
-    {
-        path:"/manager",
-        element: <Suspense fallback={<Loading />}><ManagerPage/></Suspense>,
-        // children:boardRouter()
-    },
 
     {
         path:"/recent",
@@ -89,7 +91,12 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading/>}><HotSpotPage/></Suspense>,
         children: hotSpotRouter()
     },
+    {
+        path: "/carrot",
+        element: <Suspense fallback={<Loading/>}><CarrotPage/></Suspense>,
+        children: carrotRouter()
 
+    },
     {
         path: "/updateList",
         element: <Suspense fallback={<Loading/>}><UpdateList/></Suspense>
@@ -102,8 +109,19 @@ const root = createBrowserRouter([
         path: "/sseTest",
         element: <Suspense fallback={<Loading/>}><IsLogin Component={<SseTest/>} /></Suspense>
     },
+    {
+        path:"article",
+        element: <Suspense fallback={<Loading />}><ArticlePage/></Suspense>,
 
-
+    },
+    {
+        path:"/chat",
+        element: <Suspense fallback={<Loading />}><IsLogin Component={<ChatPage/>} /></Suspense>
+    },
+    {
+        path:"/notification",
+        element: <Suspense fallback={<Loading />}><IsLogin Component={<Notification/>} /></Suspense>
+    }
 ]);
 
 export default root;

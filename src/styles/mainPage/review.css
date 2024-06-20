@@ -4,17 +4,16 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
-    width: 20px;
+    width: 30px;
     height: 30px;
     border-radius: 50%;
-    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     min-width: 10px;
     opacity: 100%;
-    padding-top: 1rem;
+
 }
 
 .slick-prev {
@@ -154,7 +153,11 @@
 }
 
 .reviewSlider {
-    display: flex !important;
-    margin-bottom: 1rem;
-    margin-top: -1rem;
+    max-width: 620px;
+    height: 150px;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    border: solid 1px black;
+    border-radius: 10px !important;
+    background-color: white;
 }

@@ -1,8 +1,6 @@
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { addComment } from '../../service/commentApi';
-import { useSelector } from 'react-redux';
+
 
 const style = {
     width: '80%',
@@ -16,34 +14,41 @@ const style = {
 
 }
 
-const CommentResisterForm = ({ commentRef, articleId, parentId,setIsArticleSubmitted,isArticleSubmitted}) => {
-    
+const CommentResisterForm = ({ memberNickname, commentRef, articleId, parentId, setIsArticleSubmitted, isArticleSubmitted }) => {
+
     const [comment, setComment] = useState('');
-    
+
+
     const commentInput = (e) => {
         setComment(e.target.value)
     }
 
     const onSubmit = async () => {
-        
+
         const addDto = {
-          articleId: articleId,
-          ref: commentRef,
-          parentId: parentId,
-          content: comment
+            articleId: articleId,
+            ref: commentRef,
+            parentId: parentId,
+            content: comment
         }
-       
-        await addComment(addDto)
+
+        const response = await addComment(addDto)
+        console.log(response)
         setComment('');
         setIsArticleSubmitted(!isArticleSubmitted);
-      }
+    }
 
     return (
 
 
         <>
-            <textarea style={style} value={comment} rows={1} onChange={commentInput} placeholder='댓글을 입력해 주세요'/>
-            <FontAwesomeIcon icon={faPaperPlane} style={{ width: 40, height: 40 }} onClick={onSubmit} />
+            
+                <div>@{memberNickname}님 에게 댓글</div>
+                <div style={{ display: 'flex' }}>
+                    <textarea style={style} value={comment} rows={1} onChange={commentInput} placeholder='댓글을 입력해 주세요' />
+                    <button style={{ padding: '10px' }} onClick={onSubmit} >등록</button>
+                </div>
+          
         </>
 
     );

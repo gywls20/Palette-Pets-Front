@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { saveToken } from "../../store/MemberSlice.js";
 import {url} from '../../utils/single.js';
+import Swal from 'sweetalert2';
+import "./../../styles/toast/toast.css"
 
 const LoginFormComp = () => {
     const [username, setUsername] = useState("");
@@ -13,11 +15,35 @@ const LoginFormComp = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+        customClass: {
+            container: 'toastContainer',
+        }
+    });
+
     useEffect(() => {
         // URL에 error=true가 있는지 확인
         const queryParams = new URLSearchParams(location.search);
         if (queryParams.get('error') === 'true') {
-            alert('로그인에 실패했습니다. 다른 로그인 방법을 시도해 주세요.');
+            Toast.fire({
+                icon: 'error',
+                title: '로그인 실패',
+                width: 450
+            });
+            // Swal.fire({
+            //     title: '로그인 실패',
+            //     text: '다른 로그인 방법을 시도해 주세요.^^',
+            //     icon: 'warning'
+            // });
         }
     }, [location]);
 
@@ -26,10 +52,29 @@ const LoginFormComp = () => {
         try {
             const token = await login({ username, password });
             if (token === false) {
-                alert('Login failed');
-                window.location.reload();
+                Toast.fire({
+                    icon: 'error',
+                    title: '로그인 실패',
+                    width: 450
+                })
+                // Swal.fire({
+                //     title: '로그인 실패',
+                //     text: '다른 로그인 방법을 시도해 주세요.^^',
+                //     icon: 'warning'
+                // });
+                // window.location.reload();
             } else {
                 console.log('로그인 성공');
+                Toast.fire({
+                    icon: 'success',
+                    title: '로그인 하였습니다',
+                    width: 450
+                });
+                // Swal.fire({
+                //     title: '로그인 성공',
+                //     text: '환영합니다.^^',
+                //     icon: 'success'
+                // });
                 dispatch(saveToken(token));
                 navigate({ pathname: '/' }, { replace: true });
             }

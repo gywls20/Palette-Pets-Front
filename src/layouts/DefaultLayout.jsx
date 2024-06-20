@@ -1,15 +1,14 @@
 import Header from "./Header.jsx";
-import Footer from "./Footer.jsx";
+import FooterNoCreateIcon from "./FooterNoCreateIcon.jsx";
 
 const DefaultLayout = ({ children }) => {
-
     return (
         <>
             <br/>
             <br/>
             <Header />
             {children}
-            <Footer/>
+            <FooterNoCreateIcon />
             <br/>
             <br/>
         </>
