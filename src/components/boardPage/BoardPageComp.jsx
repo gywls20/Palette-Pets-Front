@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import "../../styles/board/BoardList.css"
 import ArticleService from '../../service/ArticleService.jsx';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import BoardPageItem from './BoardPageItem.jsx';
-import { Stack } from '@mui/system';
-import { Chip } from '@mui/material';
+import { Stack, useMediaQuery } from '@mui/system';
+import { Chip, Fab } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 function BoardPageComp() {
@@ -16,11 +17,13 @@ function BoardPageComp() {
   const [boardName, setBoardName] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const isSmallScreen = useMediaQuery('(max-width:500px)');
+  console.log(isSmallScreen)
   //URL에서 sort 값 가져오기
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const sortParam = queryParams.get("sort");
-
+  const navigate = useNavigate();
   //초기화 설정
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
@@ -36,7 +39,7 @@ function BoardPageComp() {
     setPage(1); // search 값이 들어오면 페이지를 1로 초기화(Page = 1일 때만 조회가 되기 때문)
     setArticles([]); // articles를 초기화
     fetchArticles(true);
-  }, [search, sort, boardName,dir])
+  }, [search, sort, boardName, dir])
 
   useEffect(() => {
     if (sortParam) {
@@ -62,7 +65,7 @@ function BoardPageComp() {
 
       setTagList(tagList => reset ? arrayWithoutDuplicateFromResult : [...tagList, ...(arrayWithoutDuplicateFromResult)]);
       setArticles(articles => reset ? res.data : [...articles, ...(res.data)]);
-      
+
       //setPage(page => page + 1);
       setPage(page => pageToFetch + 1);
     })
@@ -84,11 +87,11 @@ function BoardPageComp() {
     console.log(boardName)
     console.log(value)
 
-    if(boardName === value){
+    if (boardName === value) {
       setBoardName('');
     }
-    else{
-    setBoardName(value)
+    else {
+      setBoardName(value)
     }
   }
 
@@ -105,7 +108,7 @@ function BoardPageComp() {
     setSearch(search.filter(item => item !== tag))
   }
 
-  const onReset = ()=>{
+  const onReset = () => {
     setBoardName('')
     setSearch([])
     setTagList([])
@@ -113,16 +116,16 @@ function BoardPageComp() {
   return (
     <>
       <div className='header'>
-      
+
         <div className='boardSelectBtn'>
           <button className='round-button' onClick={onReset}>전체</button>
           <button className={boardName === "FREEBOARD" ? "round-button active" : "round-button"} value="FREEBOARD" onClick={addBoardName}>자유</button>
           <button className={boardName === "INFORMATION" ? "round-button active" : "round-button"} value="INFORMATION" onClick={addBoardName}>정보</button>
           <button className={boardName === "SHOW" ? "round-button active" : "round-button"} value="SHOW" onClick={addBoardName}>자랑</button>
-          <button className={boardName === "QNA" ? "round-button active" : "round-button"} value="QNA" onClick={addBoardName}>QNA</button>
+          <button className={boardName === "QNA" ? "round-button active" : "round-button"} value="QNA" onClick={addBoardName}>질문</button>
         </div>
 
-    
+
 
 
         <div className={`tagList ${isExpanded ? 'expanded' : ''}`}>
@@ -139,13 +142,13 @@ function BoardPageComp() {
             )
           }
         </div>
-         {tagList.length > 10 && (
+        {tagList.length > 10 && (
           <button onClick={() => setIsExpanded(!isExpanded)} className='toggleButton'>
             {isExpanded ? '접기' : '펼치기'}
           </button>
         )}
         <div className='selectedTagList'>
-          aaaaaaa
+
           {
             search && search.map((item, index) =>
 
@@ -160,17 +163,24 @@ function BoardPageComp() {
         </div>
       </div>
 
-
-      <hr />
-      <main className="container mx-auto px-4 py-4">
-        <div style={{textAlign:'right'}}><button onClick={()=>setDir(true)}>최신순</button> / <button onClick={()=>setDir(false)}>오래된순</button></div>
+      <div className="container mx-auto px-4 py-4">
+        <div style={{ textAlign: 'right' }}><button onClick={() => setDir(true)}>최신순</button> / <button onClick={() => setDir(false)}>오래된순</button></div>
         {
           articles.map(articles =>
             <BoardPageItem key={articles.articleId} article={articles} />
           )
         }
         <div ref={ref}>끝</div>
-      </main>
+      </div>
+      <Fab color="secondary" aria-label="edit" onClick={()=>navigate('/article/write')}
+       sx={{
+        position: 'fixed',
+        bottom: 75,
+        right: isSmallScreen ? 30:930
+        
+      }}>
+        <EditIcon sx={{fontSize:'30pt'}}/>
+      </Fab>
     </>
   );
 };

@@ -69,7 +69,7 @@ const BoardPageItem = (articles) => {
 
     return (
         <>
-            <div className="Item-container" onClick={articlePage}>
+            <Box className="Item-container" onClick={articlePage} sx={{m:2}}>
                 <div className="Item-content">
                     <div className="Item-text">
                         <Stack direction="row" spacing={1} >
@@ -106,7 +106,7 @@ const BoardPageItem = (articles) => {
                     }
                 </div>
 
-            </div>
+            </Box>
             <hr />
         </>
     );
