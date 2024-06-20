@@ -1,8 +1,11 @@
 
 @media only screen and (max-width: 600px) {
     .notice {
+        display: inline-block;
+        max-width: 620px;
         min-width: 17rem;
         height: auto;
+        margin: 15px 0 5px 0 ;
     }
     .updateButton {
         left: 0;
@@ -17,8 +20,11 @@
 
 @media only screen and (min-width: 600px) {
     .notice {
+        display: inline-block;
+        max-width: 620px;
         min-width: 39rem;
         height: 21rem;
+        margin: 0 0 5px 0 ;
     }
 
     .updateButton {
@@ -37,23 +43,8 @@
 
 .notice {
     border: solid 2px black;
-    border-radius: 7px;
+    border-radius: 5px;
     background-color: white;
-    margin-bottom: 1rem;
-}
-
-
-@media only screen and (min-width: 768px) {
-
-}
-
-
-@media only screen and (min-width: 992px) {
-
-}
-
-@media only screen and (min-width: 1200px) {
-
 }
 
 .updateButton {

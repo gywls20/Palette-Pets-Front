@@ -1,6 +1,7 @@
 import HomeDefaultLayout from "../layouts/HomeDefaultLayout.jsx";
 import LoginImgComp from '../components/loginPage/LoginImgComp.jsx'
 import LoginFormComp from '../components/loginPage/LoginFormComp.jsx'
+import DefaultLayout from "../layouts/DefaultLayout.jsx";
 
 const MainPage = () => {
 
@@ -8,10 +9,10 @@ const MainPage = () => {
         <>
             <br/>
             <br/>
-            <HomeDefaultLayout>
+            <DefaultLayout>
                 <LoginImgComp/>
                 <LoginFormComp/>
-            </HomeDefaultLayout>
+            </DefaultLayout>
             <br/>
             <br/>
         </>
