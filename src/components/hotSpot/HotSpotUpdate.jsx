@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
-import InputTitle from "../article/write/atoms/InputTitle.jsx";
-import InputContent from "../article/write/atoms/InputContent.jsx";
+import React, {useEffect, useState} from 'react';
 import ImageUpload from "../article/write/atoms/ImageUpload.jsx";
 import {Button} from "@mui/material";
-import useForm from "../../hooks/useForm.jsx";
-import {useNavigate} from "react-router-dom";
-import {writeArticle} from "../../service/ArticleService.jsx";
+import {useNavigate, useParams} from "react-router-dom";
 import "../../styles/hotspot/hotSpotUpdate.css";
+import {checkIsManager, getHotSpotDetail, updateHotSpot} from "../../service/hotSpotApi.jsx";
+import Swal from "sweetalert2";
 
 
 const HotSpotUpdate = () => {
@@ -23,6 +21,22 @@ const HotSpotUpdate = () => {
     const [previewList,setPreviewList] = useState([]);
 
     const navigate = useNavigate();
+    const {id} = useParams();
+
+    // 수정할 글 내용들 가져오기 -> 사진은 그냥 없앰
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await getHotSpotDetail(id);
+            console.log(result);
+            setTitle(result.placeName);
+            setSimpleContent(result.simpleContent);
+            setContent(result.content);
+            setAddress(result.address);
+            setLat(result.lat);
+            setLng(result.lng);
+        }
+        fetchData();
+    }, []);
 
     const changeTitle = (e) => {
         setTitle(e.target.value);
@@ -33,7 +47,7 @@ const HotSpotUpdate = () => {
         // 간단한 검증
 
         const dto = {
-            memberId: null,
+            hotSpotId:id,
             placeName: title,
             simpleContent:simpleContent,
             content: content,
@@ -47,13 +61,20 @@ const HotSpotUpdate = () => {
             formData.append('files', item);
         });
         const blob = new Blob([JSON.stringify(dto)], { type: "application/json" });
-        formData.append('dto', blob);
+        formData.append('request', blob);
 
-        // 글 등록 api 연결
-        console.log(dto);
-        alert("등록성공");
-        // await writeArticle(formData);
-        // navigate("/hotspot", {replace: true});
+        // 글 수정 api 연결
+        const result = await updateHotSpot(id, formData);
+
+        if (result === true) {
+            navigate("/hotspot", {replace: true});
+        } else {
+            await Swal.fire({
+                title: '명소 추천 글 수정 실패',
+                text: '알 수 없는 이유로 실패했습니다. 관리자에게 문의해주세요',
+                icon: 'warning'
+            });
+        }
 
     }
 
@@ -71,6 +92,7 @@ const HotSpotUpdate = () => {
     return (
         <>
             <h1>수정 페이지</h1>
+            <input type="hidden" value="6"/>
             <input
                 value={title}
                 className="update-title"

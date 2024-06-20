@@ -2,13 +2,12 @@ import {Box, Button, Card, CardContent, CardMedia, IconButton, Typography} from 
 import ListIcon from '@mui/icons-material/List';
 import SendIcon from '@mui/icons-material/Send';
 import CloseIcon from '@mui/icons-material/Close';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import PetUpdateForm from "./PetUpdateForm.jsx";
-import { styled } from '@mui/system';
-import {petDeleteRequest, petDetailRequest, petListRequest} from "../../service/petApi.jsx";
+import {styled} from '@mui/system';
+import {checkIsMaster, petDeleteRequest, petDetailRequest} from "../../service/petApi.jsx";
 import PetImgForm from "./PetImgForm.jsx";
 
 const RoundedCardMedia = styled(CardMedia)({
@@ -33,9 +32,21 @@ const PetDetails = () => {
     const [pet, setPet] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [hasAccess, setHasAccess] = useState(true); // 접근 권한 상태 추가
 
     // pet details query
     useEffect(() => {
+
+        const checkIsMasterRequest = async () => {
+            const isMaster = await checkIsMaster(id);
+            console.log("접근이 허용된 회원 = ", isMaster);
+            if (isMaster === 'REFRESH_TOKEN_EXPIRED_ERROR') {
+                window.location.replace('/login');
+            } else if (isMaster === false) {
+                setHasAccess(false); // 접근 권한이 없을 경우 상태 업데이트
+            }
+        }
+
         const fetchData = async () => {
             try {
                 const data = await petDetailRequest(id);
@@ -52,6 +63,8 @@ const PetDetails = () => {
                 setIsLoading(false);
             }
         }
+
+        checkIsMasterRequest();
         fetchData();
     }, []);
 
@@ -85,6 +98,15 @@ const PetDetails = () => {
     };
 
     const navigate = useNavigate();
+
+    if (!hasAccess) {
+        return (
+            <>
+                <h1>접근이 허용되지 않는 회원입니다</h1>
+                <Link to="/">처음으로</Link>
+            </>
+        )
+    }
 
     if (isLoading) {
         return <div>로딩 중...</div>;

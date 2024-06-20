@@ -28,7 +28,7 @@ const hotSpotRouter = () => {
             element: <Suspense fallback={Loading}><IsLogin Component={<HotSpotWrite/>} /></Suspense>
         },
         {
-            path: "update",
+            path: "update/:id",
             element: <Suspense fallback={Loading}><IsLogin Component={<HotSpotUpdate/>} /></Suspense>
         },
     ]

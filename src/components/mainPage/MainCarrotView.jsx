@@ -143,7 +143,7 @@ const MainCarrotView = () => {
                 </div>
             ))}
             <div className={BoardViewStyle.postHeader}>
-            <Link to={{ pathname: '/recent', search: '?sort=articleId' }} className={BoardViewStyle.moreplz}>
+            <Link to={{ pathname: '/carrot/list' }} className={BoardViewStyle.moreplz}>
                     <button className={BoardViewStyle.moreplz}>더보기</button>
             </Link>
             </div>

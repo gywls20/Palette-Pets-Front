@@ -20,3 +20,12 @@ body {
 .css-o69gx8-MuiCardMedia-root {
     border-radius: 5px;
 }
+
+hr {
+    height: 2px;
+    background-color: black;
+}
+
+.css-ag0gh4-MuiListItem-root {
+    padding-bottom: 10px;
+}

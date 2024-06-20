@@ -7,9 +7,9 @@ import {Home, KeyboardArrowUp, VolunteerActivism} from "@mui/icons-material";
 import ForumIcon from "@mui/icons-material/Forum.js";
 import PeopleIcon from "@mui/icons-material/People.js";
 import PetsIcon from "@mui/icons-material/Pets.js";
-import "./../styles/layout/footer.css"
+import "./../styles/layout/footerNoCreateIcon.css"
 
-const Footer = () => {
+const FooterNoCreateIcon = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [value, setValue] = useState();
@@ -56,7 +56,7 @@ const Footer = () => {
         navigate('/carrot');
         break;
       case 4:
-        navigate('/hotspot/list');
+        navigate('/hotspot');
         break;
       default:
         break;
@@ -89,22 +89,20 @@ const Footer = () => {
         <Paper
             sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
             elevation={3}>
-          <button className="floating-button"></button>
           <BottomNavigation
               showLabels
               value={value}
-              onChange={handleNavigationChange}>
+              onChange={handleNavigationChange}
+              sx={{
+                boxShadow: '0px -2px 5px rgba(0, 0, 0, 0.15)'
+              }}
+          >
             <BottomNavigationAction label="Home" icon={<Home />}/>
             <BottomNavigationAction label="채팅" icon={<ForumIcon />}/>
             <BottomNavigationAction label="커뮤니티" icon={<PeopleIcon />} />
             <BottomNavigationAction label="거래" icon={<VolunteerActivism/>}/>
             <BottomNavigationAction label="플레이스" icon={<PetsIcon />} />
           </BottomNavigation>
-          <Link to="/article/write">
-            <button className="floating-button">
-              <CreateIcon />
-            </button>
-          </Link>
         </Paper>
         {showButton && (
             <IconButton
@@ -118,4 +116,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default FooterNoCreateIcon;
