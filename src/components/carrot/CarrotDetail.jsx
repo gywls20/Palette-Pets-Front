@@ -34,8 +34,9 @@ const CarrotDetail = () => {
   const fetchCarrot = (id) => {
     console.log("id = "+id)
     carrotService.getCarrotDetails(id).then((res) => {
-      console.log(res.data);
+      console.log("데이터 === "+res.data.imgList);
       setCarrot(res.data);
+      console.log("dlalwldlskdlskd====="+carrot.imgList)
       //setPage(page => page + 1);
       }).catch((err) => { 
         console.log(err)
@@ -120,10 +121,17 @@ const CarrotDetail = () => {
       </IconButton>
       <div className="carrot-detail-container">
       <Carousel slide={false}>
-        <Carousel.Item>
-          <img src={`https://kr.object.ncloudstorage.com/palettepets/carrot/img/${carrot.img}`} alt="First slide" height="200" width="280" />
+      {/* {carrot.imgList.map((img, index) => (
+        <Carousel.Item key={index}>
+          <img
+            src={`https://kr.object.ncloudstorage.com/palettepets/carrot/img/${img}`}
+            alt={`Slide ${index}`}
+            height="200"
+            width="280"
+          />
         </Carousel.Item>
-      </Carousel>
+      ))} */}
+    </Carousel>
         <div className="content-container">
           <div className="seller-info">
             <img src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png" alt="Seller" />
