@@ -10,10 +10,6 @@ import SseTest from "../pages/test/SseTest.jsx";
 import IsLogin from "./IsLogin.jsx";
 import carrotRouter from "./carrotRouter.jsx";
 
-
-
-
-
 const Loading = () => (
     <>
         <br/>
@@ -30,8 +26,8 @@ const AriticlePage = lazy(()=>import('../pages/AriticlePage.jsx'));
 const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'));
 const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
 const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
-const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
 const CarrotPage = lazy(() => import('../pages/carrot/CarrotPage.jsx'));
+const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
 const ChatPage = lazy(() => import('../pages/chat/ChatPage.jsx'));
 const Notification = lazy(() => import('../pages/notification/Notification.jsx'));
 
@@ -67,11 +63,7 @@ const root = createBrowserRouter([
         </Suspense>, 
         children: articleRouter({Loading : Loading() })
     },
-    // {
-    //     path:"/view/:articleId",
-    //     element: <Suspense fallback={<Loading />}><ArticleView/></Suspense>, 
-     
-    // },
+    
     {
         path:"/healthCalculatorPage",
         element: <Suspense fallback={<Loading />}><HealthCalculatorPage/></Suspense>,

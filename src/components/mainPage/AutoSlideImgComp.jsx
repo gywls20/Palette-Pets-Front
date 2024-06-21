@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import ImgStyle from '../../styles/img.module.css';
+import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ImgStyle from '../../styles/img.module.css';
+import '../../styles/mainPage/slider.css'
 
 import donggeul from '../../image/donggeul.jpg';
 import ppaekkom from '../../image/ppaekkom.jpg';

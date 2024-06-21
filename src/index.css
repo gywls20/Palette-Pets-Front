@@ -21,6 +21,7 @@ html {
 }
 
 body {
+  padding-right: 0px !important;
   padding-top: 0.5rem;
   margin: auto;
   place-items: center;
@@ -29,6 +30,7 @@ body {
   max-width: 40rem;
   background-color: white;
   height: 100vh;
+
 }
 
 .css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected {
