@@ -257,7 +257,6 @@ const HotSpotDetails = () => {
                         <p style={{textAlign: 'left', marginLeft: '1%'}}>{hotspot.address}</p>
                         <Kakao
                             lat={hotspot.lat} lng={hotspot.lng}
-                            // style={{ width: '80%', marginLeft: '10%', marginRight: '10%'}}
                         />
                     </Card>
                 )
