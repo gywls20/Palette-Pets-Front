@@ -6,8 +6,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import "slick-carousel/slick/slick.css";
-import "../../styles/mainPage/review.css";
-import TransactionCategoryComp from '../TransactionCategoryComp';
+import "../../styles/mainPage/slider.css";
 
 // eslint-disable-next-line react/prop-types
 const NextArrow = ({ onClick }) => {
