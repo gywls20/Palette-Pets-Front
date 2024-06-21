@@ -7,14 +7,10 @@ const MainPage = () => {
 
     return (
         <>
-            <br/>
-            <br/>
             <DefaultLayout>
                 <LoginImgComp/>
                 <LoginFormComp/>
-            </DefaultLayout>
-            <br/>
-            <br/>
+            </DefaultLayout>           
         </>
     )
 }

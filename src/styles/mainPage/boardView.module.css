@@ -52,15 +52,18 @@
 }
 
 .postUserName {
+    text-align: left;
     font-size: 0.875rem;
     font-weight: 700;
 }
 
 .postTime {
+    text-align: left;
     font-size: 0.75rem;
 }
 
 .postContent {
+    text-align: left;
     margin-top: 0.5rem;
     font-size: 0.875rem;
 }
