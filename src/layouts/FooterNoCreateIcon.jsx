@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, {useEffect, useState} from "react";
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import CreateIcon from "@mui/icons-material/Create";
+import {useLocation, useNavigate} from "react-router-dom";
 import {BottomNavigation, BottomNavigationAction, CssBaseline, IconButton, Paper,} from "@mui/material";
 import {Home, KeyboardArrowUp, VolunteerActivism} from "@mui/icons-material";
 import ForumIcon from "@mui/icons-material/Forum.js";
