@@ -9,13 +9,35 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 const BoardPageItem = (articles) => {
     const { article } = articles
-    const { title, content, images,articleHead, articleId, articleTags, boardName, countLoves, countViews, countReview, createdAt,memberNickname } = article
+    const { title, content, images, articleHead, articleId, articleTags, boardName, countLoves, countViews, countReview, createdAt, memberNickname } = article
     const [formattedDateTime, setFormattedDateTime] = useState('');
 
-    
+    console.log(formattedDateTime)
 
-    // const dateTime = new Date(createdAt);
-    // const nowTime = new Date();
+
+    useEffect(() => {
+        const dateTime = new Date(createdAt);
+        const nowTime = new Date();
+
+        const beforeTime = nowTime - dateTime;
+        if (beforeTime < 1000) {
+            setFormattedDateTime('방금 전');
+        }
+        else if (beforeTime < 60000) {
+            setFormattedDateTime((beforeTime / 1000).toFixed(0) + ' 초 전')
+        }
+        else if (beforeTime < 3600000) {
+            setFormattedDateTime((beforeTime / 60000).toFixed(0) + ' 분 전')
+        }
+        else if (beforeTime < 86400000) {
+            setFormattedDateTime((beforeTime / 3600000).toFixed(0) + ' 시간 전')
+        }
+        else {
+            setFormattedDateTime(
+                `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')}`
+            )
+        }
+    })
 
     // useEffect(() => {
     //     let time = "";
@@ -41,13 +63,13 @@ const BoardPageItem = (articles) => {
     }
 
     const formattedString = articleTags.split(',')
-    .map(item => `#${item}`)
-    .join(' ');
-    
-    
+        .map(item => `#${item}`)
+        .join(' ');
+
+
     return (
         <>
-            <div className="Item-container" onClick={articlePage}>
+            <Box className="Item-container" onClick={articlePage} sx={{m:2}}>
                 <div className="Item-content">
                     <div className="Item-text">
                         <Stack direction="row" spacing={1} >
@@ -55,19 +77,19 @@ const BoardPageItem = (articles) => {
                         </Stack>
                         <div className="Item-title">{title}</div>
                         <div className="Item-info">
-                            {memberNickname}  &emsp; {createdAt[0] }.{createdAt[1] }.{createdAt[2] }
+                            {memberNickname}  &emsp; {formattedDateTime}
                             <span className='Item-icon'>
-                                <FavoriteBorderIcon sx={{fontSize:'16pt'}}/>
+                                <FavoriteBorderIcon sx={{ fontSize: '16pt' }} />
 
                             </span>
                             &nbsp; {countLoves}
                             <span className='Item-icon'>
-                                <TvIcon sx={{fontSize:'16pt'}} />
+                                <TvIcon sx={{ fontSize: '16pt' }} />
 
                             </span>
                             &nbsp; {countViews}
                             <span className='Item-icon'>
-                                <ChatBubbleOutlineIcon sx={{fontSize:'16pt'}} />
+                                <ChatBubbleOutlineIcon sx={{ fontSize: '16pt' }} />
 
                             </span>
                             &nbsp;  {countReview}
@@ -79,12 +101,12 @@ const BoardPageItem = (articles) => {
 
                     </div>
                     {
-                        images.length > 0  && 
-                        <div className="Item-image"><img src={`https://kr.object.ncloudstorage.com/palettepets/article/img/${images[0].imgUrl}`} alt='image'/></div>
+                        images.length > 0 &&
+                        <div className="Item-image"><img src={`https://kr.object.ncloudstorage.com/palettepets/article/img/${images[0].imgUrl}`} alt='image' /></div>
                     }
                 </div>
 
-            </div>
+            </Box>
             <hr />
         </>
     );
