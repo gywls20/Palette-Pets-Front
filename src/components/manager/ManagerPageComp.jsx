@@ -1,15 +1,14 @@
-// eslint-disable-next-line no-unused-vars
 import React, {useEffect, useState} from 'react';
 import "../../styles/manager/BoardList.css"
-import Category from "../../test/main/Category.jsx";
-import axios from 'axios';
+import "../../styles/managerPage/ManagerPage.css";
+import ArticleService from "../../service/ArticleService.jsx";
 
 
 function ManagerPageComp() {
-  //URL에서 sort 값 가져오기
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const sortParam = queryParams.get("sort");
+    //URL에서 sort 값 가져오기
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const sortParam = queryParams.get("sort");
 
     //초기화 설정
     const [articles, setArticles] = useState([]);
@@ -51,23 +50,18 @@ function ManagerPageComp() {
         } else {
           setHasMore(false);
         }
-      })
-      .catch((error) => {
+      }).catch(error => {
         console.error("Error fetching articles:", error);
       });
-  };
+    };
+  
+    const handleScroll = () => {
+      if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMore) return;
+      fetchArticles();
+    };
 
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.offsetHeight ||
-      !hasMore
-    )
-      return;
-    fetchArticles();
-  };
-
-  return (
+  
+    return (
     <>
         <div className='header'>
             <PetCategoryComp/>

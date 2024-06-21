@@ -27,22 +27,22 @@ const initialForm = {
 const imageAsFile = (url) => {
     const fullUrl = `https://kr.object.ncloudstorage.com/palettepets/article/img/${url}`
     const blob = new Blob([JSON.stringify(fullUrl)], { type: "application/json" });
-    const file = new File([blob],url, { type: blob.type });
+    const file = new File([blob], url, { type: blob.type });
     return file
 };
 
 const ArticleUpdateForm = () => {
-    
+
     const { articleId } = useParams();
 
-    const [form, onChange, onInput ,reset, setForm] = useForm(initialForm);
+    const [form, onChange, onInput, reset, setForm] = useForm(initialForm);
 
-    const [resetSwitch,setResetSwitch]  =useState(false);
+    const [resetSwitch, setResetSwitch] = useState(false);
 
     const [imgFiles, setImgFiles] = useState([]);
-    const [previewList,setPreviewList] = useState([]);
+    const [previewList, setPreviewList] = useState([]);
 
- 
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -60,8 +60,8 @@ const ArticleUpdateForm = () => {
                 content: response.content,
                 title: response.title
             })
-            const imgArray = response.images &&  response.images.map(image => `https://kr.object.ncloudstorage.com/palettepets/article/img/${image.imgUrl}`);
-            
+            const imgArray = response.images && response.images.map(image => `https://kr.object.ncloudstorage.com/palettepets/article/img/${image.imgUrl}`);
+
             const files = response.images && response.images.map((item) =>
                 imageAsFile(item.imgUrl)
             )
@@ -71,11 +71,27 @@ const ArticleUpdateForm = () => {
         }
 
         fetchData();
-        
+
     }, [resetSwitch]);
 
-   
+    const validate = (form) => {
+        
+        const { articleHead, title, content } = form
+
+        if (articleHead === '' || articleHead === null) {
+            return false
+        } else if (title === '' || title === null) {
+            return false
+        } else if (content === '' || content === null) {
+            return false
+        }
+        
+    }
+
+
     const onSubmit = async () => {
+
+        validate(form);
 
         const formData = new FormData();
         Object.values(imgFiles).map((item, index) => {
@@ -83,11 +99,11 @@ const ArticleUpdateForm = () => {
         });
         const blob = new Blob([JSON.stringify(form)], { type: "application/json" });
         formData.append('dto', blob);
-        await resistUpdateArticle(formData,articleId);
+        await resistUpdateArticle(formData, articleId);
 
-        
+
         navigate(-1);
-        
+
     }
 
     return (
@@ -96,7 +112,7 @@ const ArticleUpdateForm = () => {
 
             <SelectBoard boardName={form.boardName} onChange={onChange} />
             <UserMakeTags articleTags={form.articleTags} onInput={onInput} />
-            <InputTitle boardName={form.boardName} articleHead={form.articleHead} title={form.title} onChange={onChange} />
+            <InputTitle boardName={form.boardName} articleHead={form.articleHead} title={form.title} onChange={onChange} onInput={onInput}/>
             <InputContent content={form.content} onChange={onChange} />
             <ImageUpload previewList={previewList} setPreviewList={setPreviewList} imgFiles={imgFiles} setImgFiles={setImgFiles} />
 
