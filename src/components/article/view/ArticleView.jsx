@@ -9,6 +9,8 @@ import { FavoriteOutlined } from '@mui/icons-material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ArticleDelete from '../delete/ArticleDelete';
+import ArticleReport from './ArticleReport';
+import { useSelector } from 'react-redux';
 
 
 //모달창 css
@@ -24,15 +26,14 @@ const style = {
 };
 
 const ArticleView = () => {
+  const token = useSelector(state => state.MemberSlice).token;
 
   const { articleId } = useParams();
-
   const [articleDto, setArticleDto] = useState({});
   const [commentDto, setCommentDto] = useState([]);
 
 
-  const { articleTags, content, countLoves, countReview, created_who, memberImage, title, images,isLike ,createdAt} = articleDto
-
+  const { articleTags, content, countLoves, countReview, created_who, memberImage, title, images, createdAt } = articleDto
 
   //댓글 등록시 리렌더링
   const [isArticleSubmitted, setIsArticleSubmitted] = useState(false);
@@ -41,41 +42,61 @@ const ArticleView = () => {
   const [formattedDateTime, setFormattedDateTime] = useState('');
 
   const increaseLike = async () => {
-    const body = {
-      articleId: articleId
-    }
-    const response = await increaseLikeCount(body);
+    
 
-    alert(response);
-    setIsArticleSubmitted(!isArticleSubmitted)
+    if ((token === undefined) || (token === null) || (token === '')) {
+
+      alert("로그인 해 주세요")
+
+    }
+    else {
+
+      const body = {
+        articleId: articleId
+      }
+      const response = await increaseLikeCount(body);
+
+      alert(response);
+      setIsArticleSubmitted(!isArticleSubmitted)
+    }
+
   }
 
 
   //articleId 글 정보, 이미지 정보, 댓글 정보 받아오기
   useEffect(() => {
+
     const fetchData = async () => {
 
       const articleData = await getArticleView(articleId)
+
       const commentData = await getComment(articleId)
-      
+
       setArticleDto(articleData);
       setCommentDto(commentData);
-      
-      // const dateTime = new Date(articleData.createdAt);
-      // const nowTime = new Date();
 
-      // let time = "";
-      // if (dateTime.getDate !== nowTime.getDate) {
-      //   time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} 
-      //                           ${dateTime.getHours().toString().padStart(2, '0')}시
-      //                           ${dateTime.getMinutes().toString().padStart(2, '0')}분`;
-      // }
-      // else {
-      //   time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} `;
-      // }
+      const dateTime = new Date(articleData.createdAt);
+      const nowTime = new Date();
 
-      // 연.월.일 시 분 형식으로 포맷
-      // setFormattedDateTime(time);
+      const beforeTime = nowTime - dateTime;
+      if (beforeTime < 1000) {
+        setFormattedDateTime('방금 전');
+      }
+      else if (beforeTime < 60000) {
+        setFormattedDateTime((beforeTime / 1000).toFixed(0) + ' 초 전')
+      }
+      else if (beforeTime < 3600000) {
+        setFormattedDateTime((beforeTime / 60000).toFixed(0) + ' 분 전')
+      }
+      else if (beforeTime < 86400000) {
+        setFormattedDateTime((beforeTime / 3600000).toFixed(0) + ' 시간 전')
+      }
+      else {
+        setFormattedDateTime(
+          `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')}`
+        )
+      }
+
     }
     fetchData();
 
@@ -92,22 +113,31 @@ const ArticleView = () => {
     setAnchorEl(null);
   };
 
-  //모달창 handler
+  //글 삭제 모달창 handler
   const [openModal, setOpenModal] = useState(false);
   const modalHandleOpen = () => {
     setOpenModal(!openModal)
   };
   const modalHandleClose = () => {
-    console.log('aa')
+
     setOpenModal(false);
   }
+  // 신고 모달창 handler
+  const [openReport, setOpenReport] = useState(false);
+  const reportHandleOpen = () => {
+    setOpenReport(!openReport)
+  };
+  const reportHandleClose = () => {
 
-
+    setOpenReport(false);
+  }
 
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate(-1);
+    navigate(-1,
+      { replace: true }
+    );
   }
 
 
@@ -130,12 +160,13 @@ const ArticleView = () => {
             <Avatar alt={created_who} src={memberImage} />
           }
           action={
+            token === '' ? null :
             <IconButton aria-label="basic-menu" onClick={handleClick}>
               <MoreVertIcon />
             </IconButton>
           }
           title={created_who}
-          subheader={createdAt}
+          subheader={formattedDateTime}
           sx={{ textAlign: 'left', margin: '10px 20px' }}
         />
 
@@ -166,7 +197,7 @@ const ArticleView = () => {
 
         <CardActions disableSpacing sx={{ marginLeft: '20px', marginBottom: '20px' }}>
           <IconButton aria-label="add to favorites" onClick={increaseLike}>
-            <FavoriteOutlined sx={{ color: isLike ? 'red' : 'black' }} />
+            <FavoriteOutlined sx={{ color: 'red' }} />
 
           </IconButton>
           {countLoves}
@@ -183,6 +214,7 @@ const ArticleView = () => {
 
           }}
         >
+          <MenuItem onClick={reportHandleOpen}>신고하기</MenuItem>
           <MenuItem onClick={() => navigate(`/article/update/${articleId}`)}>수정하기</MenuItem>
           <MenuItem onClick={modalHandleOpen}>삭제하기</MenuItem>
 
@@ -199,9 +231,7 @@ const ArticleView = () => {
         )
       }
 
-
-
-      {/* 모달창 */}
+      {/* 모달창 삭제 */}
       <Modal
         open={openModal}
         onClose={modalHandleClose}
@@ -216,6 +246,20 @@ const ArticleView = () => {
         </Box>
       </Modal>
 
+      {/* 모달 창 신고 */}
+      <Modal
+        open={openReport}
+        onClose={reportHandleClose}
+        aria-labelledby="modal-modal-report"
+        aria-describedby="modal-modal-reportdescription"
+      >
+        <Box sx={style}>
+
+          <div style={{ textAlign: 'center' }}>
+            <ArticleReport articleId={articleId} reportedId={created_who} reportHandleClose={reportHandleClose} />
+          </div>
+        </Box>
+      </Modal>
 
       <footer>
 

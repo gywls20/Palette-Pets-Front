@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ImageUpload from "../article/write/atoms/ImageUpload.jsx";
-import { Button } from "@mui/material";
+import {Button, Card} from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../styles/hotspot/hotSpotUpdate.css";
 import { checkIsManager, getHotSpotDetail, updateHotSpot } from "../../service/hotSpotApi.jsx";
@@ -128,7 +128,9 @@ const HotSpotUpdate = () => {
     }
 
     return (
-        <>
+        <Card sx={{width: '90%', marginBottom: 2 , marginTop : 5, display: 'inline-block', }}
+              className="updateCard"
+        >
             <h1>수정 페이지</h1>
             <input type="hidden" value="6" />
             <input
@@ -184,7 +186,7 @@ const HotSpotUpdate = () => {
 
             <Button className="update-onSubmit" onClick={() => onSubmit()}>수정 완료</Button>
             <Button className="update-onReset" onClick={onReset}>다시 쓰기</Button>
-        </>
+        </Card>
     );
 };
 

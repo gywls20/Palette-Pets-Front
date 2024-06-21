@@ -5,9 +5,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Badge from '@mui/material/Badge';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {CssBaseline, Typography, useMediaQuery} from "@mui/material";
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllUnreadNotifications, logout} from "../service/api.jsx";
 import {deleteToken} from "../store/MemberSlice.js";
@@ -18,7 +19,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import "./../styles/toast/toast.css"
 import {useTheme} from "@mui/material/styles";
 import LoginIcon from '@mui/icons-material/Login';
-import * as React from "react";
 
 export default function Header() {
     const navigate = useNavigate();
@@ -203,7 +203,7 @@ export default function Header() {
                         <Box
                             component="img"
                             alt="logo"
-                            src="/src/image/header/logo.png"
+                            src="https://kr.object.ncloudstorage.com/palettepets/logo/logo.png"
                             onClick={goToMain}
                             sx={{
                                 width: isMobileView ? '30%' : '40%',

@@ -17,9 +17,8 @@ import {
 } from "../../service/hotSpotApi.jsx";
 import BuildIcon from "@mui/icons-material/Build.js";
 import Swal from "sweetalert2";
-import { Row, Col } from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 import "./../../styles/toast/toast.css"
-import toast from "bootstrap/js/src/toast.js";
 
 const HotSpotDetails = () => {
 
@@ -113,7 +112,9 @@ const HotSpotDetails = () => {
             setHotspot(result);
             // 회원 정보 가 role이 ADMIN인지 확인하는 요청
             const checkManager = await checkIsManager();
-            setIsManager(checkManager);
+            if (checkManager === true) {
+                setIsManager(checkManager);
+            }
             // 열람 중인 회원이 이미 별점 평가를 했는 지 여부 확인
             const isAlreadyRated = await getStarRate(id);
             console.log("isAlreadyRated = ", isAlreadyRated);
@@ -257,7 +258,6 @@ const HotSpotDetails = () => {
                         <p style={{textAlign: 'left', marginLeft: '1%'}}>{hotspot.address}</p>
                         <Kakao
                             lat={hotspot.lat} lng={hotspot.lng}
-                            // style={{ width: '80%', marginLeft: '10%', marginRight: '10%'}}
                         />
                     </Card>
                 )
