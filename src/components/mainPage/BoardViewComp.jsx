@@ -2,7 +2,6 @@
 import React from 'react';
 import AutoSlideImgComp from './AutoSlideImgComp';
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
-import PetCategoryComp from '../PetCategoryComp'
 import BoardView from './BoardView';
 import MainCarrotView from './MainCarrotView';
 import Banner from './Banner';
@@ -14,9 +13,7 @@ const BoardViewComp = () => {
     return (
         <>
             <AutoSlideImgComp/>
-            <br/>
-            {/* <PetCategoryComp/>·////             */}
-            
+            <br/>            
             <div className={BoardViewStyle.postsSection}>
                 <div className={BoardViewStyle.postsHeader}>
                     <span className={BoardViewStyle.postsTitle}>오늘의 인기글</span>
@@ -36,7 +33,6 @@ const BoardViewComp = () => {
                     </Link>
                 </div>
                 <MainCarrotView/>
-
             </div>
         </>
     );
