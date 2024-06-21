@@ -73,9 +73,16 @@ export const PostFeed = (dto, files) => {
         });
 };
 
-export const profile = async () => {
+export const profile = async (formData) => {
     try{
-        const response = await jwtAxios.post(`${API_SERVER_HOST}/member/image`);
+        const response = await jwtAxios.post(`${API_SERVER_HOST}/member/image`, formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        );
+        return response.data;
     }catch (error) {
         console.error('Error:', error);
         throw new Error('프로필 이미지 변경 중 오류가 발생했습니다.');

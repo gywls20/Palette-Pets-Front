@@ -21,30 +21,20 @@ const Loading = () => (
 import myPageRouter from "./myPageRouter.jsx";
 
 
-
-
-const Loading = () => <>Loading...</>;
 const MainPage = lazy(() => import('./../pages/MainPage'));
 const LoginPage = lazy(() => import('./../pages/LoginPage'));
 const JoinPage = lazy(() => import('./../pages/JoinPage'));
 const TestPage = lazy(() => import('../pages/test/TestPage.jsx'));
 const AriticlePage = lazy(()=>import('../pages/AriticlePage.jsx'));
-const ManagerPage = lazy(() => import('../pages/manager/ManagerPage'));
 const UpdateList = lazy(() => import('../pages/update/UpdateList.jsx'));
 const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
-const WalkingPage = lazy(() => import('../pages/walking/WalkingPage.jsx'));
 const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
 const CarrotPage = lazy(() => import('../pages/carrot/CarrotPage.jsx'));
 const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
 const ChatPage = lazy(() => import('../pages/chat/ChatPage.jsx'));
 const Notification = lazy(() => import('../pages/notification/Notification.jsx'));
+
 const RootMyPage = lazy(()=> import('../pages/member/rootMyPage.jsx'));
-
-const ChatPage = lazy(() => import('../pages/chat/ChatPage.jsx'))
-const Notification =lazy(()=> import('../pages/notification/Notification.jsx'))
-
-const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
-
 
 const root = createBrowserRouter([
     {

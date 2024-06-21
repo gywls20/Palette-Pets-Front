@@ -10,6 +10,8 @@ const FollowingPage = lazy(() => import('../pages/member/followingPage.jsx'))
 
 const FeedComp = lazy(() => import("../components/member/feedComp.jsx"))
 const SettingComp = lazy(() => import('../components/member/settingComp.jsx'))
+const Profile = lazy(() => import('../components/member/profileComp.jsx'))
+
 
 import {Navigate } from "react-router-dom";
 
@@ -40,6 +42,10 @@ const mypageRouter = () =>{
             {
                 path: "setting",
                 element: <Suspense fallback={Loading}><IsLogin Component={<SettingComp/>} /></Suspense>
+            },
+            {
+                path: "image/profile",
+                element: <Suspense fallback={Loading}><IsLogin Component={<Profile/>} /></Suspense>
             }
         ]
 }
