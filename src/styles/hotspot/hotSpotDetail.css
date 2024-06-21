@@ -98,6 +98,7 @@ root {
 }
 
 .update-button{
+    z-index: 99;
     left: 32%;
     bottom: 4.4rem;
     position: fixed;

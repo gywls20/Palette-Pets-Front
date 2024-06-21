@@ -1,20 +1,7 @@
-import axios from "axios";
+import axios, { Axios } from "axios";
 import jwtAxios from "./jwtAxios";
 
 const CARROT_API_BASE_URL = "http://localhost:8080/carrot";
-
-//글 작성
-// export const writeCarrot = (formData) => {
-//     return jwtAxios.post(`${CARROT_API_BASE_URL}/post`, formData, {
-//     headers: {
-//         "Content-Type": 'multipart/form-data'
-//     }
-// }
-// )
-//     .then(response => response.data)
-//     .catch(error => error.data)
-// }
-
 
 class carrotService {
     //리스트 출력
@@ -28,23 +15,51 @@ class carrotService {
     postCarrotWrite(formData) {
         console.log("폼데이터 = ", Object.fromEntries(formData.entries()));
         return jwtAxios.post(`${CARROT_API_BASE_URL}/post`, formData, {
-        headers: {
-            "Content-Type": 'multipart/form-data'
+            headers: {
+                "Content-Type": 'multipart/form-data'
+            }
         }
-    }
-    )
-        .then(response => response.data)
-        .catch(error => error.data)
+        )
+            .then(response => response.data)
+            .catch(error => error.data)
     }
 
     //검색 기능
     getSearchList(keyword) {
-        return jwtAxios.get(`${CARROT_API_BASE_URL}/search?keyword=${keyword}`)
+        return axios.get(`${CARROT_API_BASE_URL}/search?keyword=${keyword}`)
     }
 
     //상세 정보
-    getCarrotDetails(carrotId) {
-        return jwtAxios.get(`${CARROT_API_BASE_URL}/list/${carrotId}`)
+    getCarrotDetails(id) {
+        return axios.get(`${CARROT_API_BASE_URL}/list/${id}`)
+    }
+
+    //글 수정
+    putCarrotUpdate(formData, id) {
+        console.log("폼데이터 = ", Object.fromEntries(formData.entries()));
+        return jwtAxios.post(`${CARROT_API_BASE_URL}/update/${id}`, formData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        )
+            .then(response => response.data)
+            .catch(error => error.data)
+    }
+
+    //글 삭제
+    deleteCarrot(id) {
+        return axios.delete(`${CARROT_API_BASE_URL}/delete/${id}`)
+    }
+
+    //글쓴이와 로그인 사용자가 같은지 확인
+    checkCarrotId(id) {
+        return jwtAxios.get(`${CARROT_API_BASE_URL}/check/${id}`)
+    }
+
+    //회원 별 거래 리스트 출력
+    getUserList() {
+        return jwtAxios.get(`${CARROT_API_BASE_URL}/postList`)
     }
 
 }

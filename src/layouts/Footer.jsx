@@ -93,12 +93,9 @@ const Footer = () => {
           <BottomNavigation
               showLabels
               value={value}
-<<<<<<< HEAD
-              onChange={handleNavigationChange}>
-=======
+
               onChange={handleNavigationChange}
           >
->>>>>>> 04b89612132e6fc967a7e48b3b424641d5ef42aa
             <BottomNavigationAction label="Home" icon={<Home />}/>
             <BottomNavigationAction label="채팅" icon={<ForumIcon />}/>
             <BottomNavigationAction label="커뮤니티" icon={<PeopleIcon />} />

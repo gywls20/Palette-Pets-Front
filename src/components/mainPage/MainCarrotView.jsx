@@ -6,12 +6,12 @@ import Swal from 'sweetalert2'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
-
+import VisibilityIcon from "@mui/icons-material/Visibility.js";
 
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
 import Anhae from '../../image/anhae.jpg'
 import { useSelector } from 'react-redux';
-import connectChat from './connectChat';
+import connectChat from '../../utils/connectChat';
 import axios from 'axios';
 import {url} from '../../utils/single';
 
@@ -111,10 +111,12 @@ const MainCarrotView = () => {
                             <div>
                                 {/* <p className={BoardViewStyle.postUserName}>{carrot.memberNickname}님</p> */}
                                 <p className={BoardViewStyle.postContent}>{carrot.carrotTitle}</p>
-                                <p className={BoardViewStyle.postTime}>                             <span className='Item-icon'>
+                                <p className={BoardViewStyle.postTime}>                             
+                            <span className='Item-icon'>
                                 <FavoriteBorderIcon sx={{fontSize:'16pt'}}/>
-                            </span> {carrot.carrotLike}                                 <span className='Item-icon'>
-                                <ChatBubbleOutlineIcon sx={{fontSize:'16pt'}} /> </span> {carrot.carrotView}</p>
+                            </span> {carrot.carrotLike}                                 
+                            <span className='Item-icon'>
+                                <VisibilityIcon sx={{verticalAlign: 'middle', mr: 0.5}}/> </span> {carrot.carrotView}</p>
                             </div>
                         </div>
 
@@ -141,7 +143,7 @@ const MainCarrotView = () => {
                 </div>
             ))}
             <div className={BoardViewStyle.postHeader}>
-            <Link to={{ pathname: '/recent', search: '?sort=articleId' }} className={BoardViewStyle.moreplz}>
+            <Link to={{ pathname: '/carrot/list' }} className={BoardViewStyle.moreplz}>
                     <button className={BoardViewStyle.moreplz}>더보기</button>
             </Link>
             </div>

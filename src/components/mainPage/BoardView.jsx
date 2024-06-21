@@ -11,13 +11,12 @@ import { Link } from 'react-router-dom';
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
 import Anhae from '../../image/anhae.jpg'
 import { useSelector } from 'react-redux';
-import connectChat from './connectChat';
+import connectChat from '../../utils/connectChat';
 import axios from 'axios';
 import {url} from '../../utils/single';
 
 const BoardView = () => {
     const [modal, setModal] = useState({});
-    const [like, setLike] = useState({});
     const token = useSelector((state) => state).MemberSlice.token;
 
 
@@ -47,17 +46,6 @@ const BoardView = () => {
         });
     }
 
-    const ToggleLike = (articleId) => {
-        if (token === '') {
-            alarm();
-        } else {
-            setLike((prevState) => ({
-                ...prevState,
-                [articleId]: !prevState[articleId]
-            }));
-        }
-    };
-
     const requestChat = (e) =>() => {
         alert("글쓴이 아이디 : " + e)
         console.log("click")
@@ -71,19 +59,23 @@ const BoardView = () => {
 
     const fetchData = async () => {
         try {
-            const result = await axios.get(`${url}/popular`)
-            .then(res => res.data 
-            )
-            .catch(err => {
-                console.error(err);
-                return err.response.data;
-            });
-            console.log("List result :: ",result);
+        const controller = new AbortController();
+        const { signal } = controller;
+
+        const result = await axios.get(`${url}/popular`, { signal })
+        .then(res => res.data 
+        )
+        .catch(err => {
+            console.error(err);
+            return err.response.data;
+        });
+        if(result){
             setArticles(result);
+        }
+        return () => controller.abort();
         } catch (e) {
             console.error(e);
         }
-    
     };
 
     useEffect(() => {
