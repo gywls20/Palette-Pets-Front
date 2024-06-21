@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import VisibilityIcon from "@mui/icons-material/Visibility.js";
 
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
-import Anhae from '../../image/anhae.jpg'
 import { useSelector } from 'react-redux';
 import connectChat from '../../utils/connectChat';
 import axios from 'axios';
@@ -17,23 +16,22 @@ import {url} from '../../utils/single';
 
 const MainCarrotView = () => {
     const [modal, setModal] = useState({});
-    const [like, setLike] = useState({});
     const token = useSelector((state) => state).MemberSlice.token;
 
 
     const [carrots, setCarrots] = useState([]);
 
-    const openModal = (articleId) => {
+    const openModal = (carrotId) => {
         setModal((prevState) => ({
             ...prevState,
-            [articleId]: true
+            [carrotId]: true
         }));
     }
 
-    const closeModal = (articleId) => {
+    const closeModal = (carrotId) => {
         setModal((prevState) => ({
             ...prevState,
-            [articleId]: false
+            [carrotId]: false
         }));
     }
 
@@ -46,17 +44,6 @@ const MainCarrotView = () => {
             icon: 'warning'
         });
     }
-
-    const ToggleLike = (articleId) => {
-        if (token === '') {
-            alarm();
-        } else {
-            setLike((prevState) => ({
-                ...prevState,
-                [articleId]: !prevState[articleId]
-            }));
-        }
-    };
 
     const requestChat = (e) =>() => {
         alert("글쓴이 아이디 : " + e)
@@ -107,7 +94,9 @@ const MainCarrotView = () => {
                 <div key={carrot.carrotId} className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
                         <div className={BoardViewStyle.postHeader}>
-                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(carrot.articleId)} />
+                            <img src={carrot.carrotImage ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${carrot.carrotImage}`
+                                : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`}
+                            alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(carrot.carrotId)} />
                             <div>
                                 {/* <p className={BoardViewStyle.postUserName}>{carrot.memberNickname}님</p> */}
                                 <p className={BoardViewStyle.postContent}>{carrot.carrotTitle}</p>
@@ -121,24 +110,24 @@ const MainCarrotView = () => {
                         </div>
 
 
-                        {/* <Modal
+                        <Modal
                             open={modal[carrot.carrotId]}
                             onClose={() => closeModal(carrot.carrotId)}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description">
                             <Box sx={style}>
-                                <p className={BoardViewStyle.postUserName}>{article.memberNickname}</p>/
-                                <img src={Anhae} alt="User" />
+                                <p className={BoardViewStyle.postUserName}>{carrot.memberNickname}</p>/
+                                <img src={carrot.carrotImage ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${carrot.carrotImage}`
+                                : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`}
+                                alt="User" />
                                 <div className={BoardViewStyle.ModalCopontainer}>
                                     <button>팔로우</button>
-                                    <button onClick={requestChat(article.memberId)}>
+                                    <button onClick={requestChat(carrot.memberId)}>
                                         <span style={{ color: '#ffffff' }}>1:1 대화</span>
                                     </button>
                                 </div>
                             </Box>
-                        </Modal> */}
-
-
+                        </Modal>
                     </div>
                 </div>
             ))}

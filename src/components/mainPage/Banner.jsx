@@ -110,13 +110,7 @@ export default function Banner() {
                     </Container>
                 </div>
 
-                <div className={"reviewSlider"}>
-                    <Container maxWidth="sm" sx={{mt: 4}}>
-                            <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
-                                <img src="https://res.heraldm.com/content/image/2022/06/17/20220617000554_0.jpg"></img>
-                            </Box>
-                    </Container>
-                </div>
+                
 
                 <div className={"reviewSlider"}>
                     <Container maxWidth="sm" sx={{mt: 4}}>
