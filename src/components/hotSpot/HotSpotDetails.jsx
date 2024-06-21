@@ -17,9 +17,8 @@ import {
 } from "../../service/hotSpotApi.jsx";
 import BuildIcon from "@mui/icons-material/Build.js";
 import Swal from "sweetalert2";
-import { Row, Col } from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 import "./../../styles/toast/toast.css"
-import toast from "bootstrap/js/src/toast.js";
 
 const HotSpotDetails = () => {
 
