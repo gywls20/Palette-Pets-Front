@@ -112,7 +112,9 @@ const HotSpotDetails = () => {
             setHotspot(result);
             // 회원 정보 가 role이 ADMIN인지 확인하는 요청
             const checkManager = await checkIsManager();
-            setIsManager(checkManager);
+            if (checkManager === true) {
+                setIsManager(checkManager);
+            }
             // 열람 중인 회원이 이미 별점 평가를 했는 지 여부 확인
             const isAlreadyRated = await getStarRate(id);
             console.log("isAlreadyRated = ", isAlreadyRated);

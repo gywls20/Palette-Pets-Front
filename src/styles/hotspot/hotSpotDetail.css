@@ -68,6 +68,21 @@ root {
         width: 86%;
         display: inline-block;
     }
+
+    .update-button{
+        left: 300px;
+        bottom: 100px;
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        background-color: darkgoldenrod;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 }
 
 /* 일반 웹 */
@@ -95,22 +110,24 @@ root {
         width: 96%;
         display: inline-block;
     }
+
+    .update-button{
+        left: 1260px;
+        bottom: 115px;
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        background-color: darkgoldenrod;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
 }
 
-.update-button{
-    left: 32%;
-    bottom: 4.4rem;
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    background-color: darkgoldenrod;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
 .ql-clipboard {
     display: none;

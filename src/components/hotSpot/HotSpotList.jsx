@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Box, List, ListItem, ListItemText, Card, CardMedia, Typography, Rating, Divider, Button} from '@mui/material';
+import {Box, Card, CardMedia, Divider, List, ListItem, ListItemText, Rating, Typography} from '@mui/material';
 import {Link, useNavigate} from "react-router-dom";
 import "../../styles/hotspot/hotSpot.css";
 import VisibilityIcon from "@mui/icons-material/Visibility.js";
@@ -21,7 +21,9 @@ const HotSpotList = () => {
 
             // 회원 정보 가 role이 ADMIN인지 확인하는 요청
             const checkManager = await checkIsManager();
-            setIsManager(checkManager);
+            if (checkManager === true) {
+                setIsManager(checkManager);
+            }
         }
 
         fetchData();

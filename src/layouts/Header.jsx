@@ -203,7 +203,7 @@ export default function Header() {
                         <Box
                             component="img"
                             alt="logo"
-                            src="/src/image/header/logo.png"
+                            src="https://kr.object.ncloudstorage.com/palettepets/logo/logo.png"
                             onClick={goToMain}
                             sx={{
                                 width: isMobileView ? '30%' : '40%',
