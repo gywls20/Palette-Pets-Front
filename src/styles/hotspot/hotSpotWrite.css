@@ -1,5 +1,5 @@
 #root {
-    height: 1000px !important;
+    height: 100%;
     text-align: center;
 }
 
@@ -75,5 +75,6 @@
 }
 
 .MuiCard-root {
+    padding-bottom: 10px;
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
 }
