@@ -7,7 +7,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {CssBaseline, Typography, useMediaQuery} from "@mui/material";
+import {CssBaseline, useMediaQuery} from "@mui/material";
 import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllUnreadNotifications, logout} from "../service/api.jsx";
@@ -19,12 +19,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import "./../styles/toast/toast.css"
 import {useTheme} from "@mui/material/styles";
 import LoginIcon from '@mui/icons-material/Login';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-import base64 from 'base-64';
-
-
-
-export default function Header() {
+export default function BackBtnHeader() {
     const navigate = useNavigate();
     const token = useSelector((state) => state.MemberSlice.token);
     const dispatch = useDispatch();
@@ -32,20 +29,6 @@ export default function Header() {
     const [notification, setNotification] = useState([]);
     const [eventSource, setEventSource] = useState(null);
 
-
-
-
-// JWT 토큰에서 닉네임을 추출하는 함수
-const getNicknameFromToken = () => {
-    let payload = token.substring(token.indexOf('.')+1,token.lastIndexOf('.'));
-    let dec = base64.decode(payload)
-    
-    let nickname = JSON.parse(dec).memberNickname;
-    console.log("dec="+nickname);
-    return nickname;
-    // navigate(`/member/${nickname}}`);
-  };
-    //////////
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -168,8 +151,6 @@ const getNicknameFromToken = () => {
     
     // 로그인 했으면 프로필로, 아니면 로그인
     const handleProfileOrLogIn = () => {
-        let nickname = getNicknameFromToken();
-
         if (token === undefined || token === '' || !token) {
             Toast.fire({
                 icon: 'error',
@@ -178,7 +159,7 @@ const getNicknameFromToken = () => {
             })
             navigate("/login");
         } else {
-            navigate(`/member/${nickname}`);
+            navigate("/pet"); // 나중에 회원 마이페이지 가도록
         }
     }
 
@@ -192,19 +173,14 @@ const getNicknameFromToken = () => {
             icon: 'success',
             title: '로그아웃 하였습니다',
             width: 300
-        }).then((Res) => {
-            if(Res.value) {
-                navigate("/");
-            }
+        }).then(() => {
+            window.location.reload();
         })
     }
 
     // 모바일 메뉴 관련 기능
     const theme = useTheme();
     const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
-    const goToMain = () => {
-        navigate("/");
-    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -220,29 +196,15 @@ const getNicknameFromToken = () => {
                 }}
             >
                 <Toolbar>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            mr: 2,
-                            flexShrink: 0,
-                            display: 'flex',
-                            justifyContent: isMobileView ? 'flex-start' : 'flex-start',
-                            alignItems: 'center',
-                        }}
+                    <IconButton
+                        size={isMobileView ? 'small' : 'large'}
+                        aria-label="go back"
+                        onClick={() => navigate(-1)}
+                        color="inherit"
+                        sx={{ ml: isMobileView ? 0.5 : 1, color: 'black' }}
                     >
-                        <Box
-                            component="img"
-                            alt="logo"
-                            src="https://kr.object.ncloudstorage.com/palettepets/logo/logo.png"
-                            onClick={goToMain}
-                            sx={{
-                                width: isMobileView ? '30%' : '40%',
-                                height: 'auto',
-                                cursor: 'pointer',
-                            }}
-                        />
-                    </Typography>
+                        <ArrowBackIosNewIcon />
+                    </IconButton>
 
                     <Box sx={{ flexGrow: 1 }} />
                     <Box

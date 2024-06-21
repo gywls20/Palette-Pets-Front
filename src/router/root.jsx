@@ -9,6 +9,15 @@ import hotSpotRouter from "./hotSpotRouter.jsx";
 import SseTest from "../pages/test/SseTest.jsx";
 import IsLogin from "./IsLogin.jsx";
 import carrotRouter from "./carrotRouter.jsx";
+
+const Loading = () => (
+    <>
+        <br/>
+        <br/>
+        <br/>
+        <div>Loading...</div>
+    </>
+);
 import myPageRouter from "./myPageRouter.jsx";
 
 
@@ -26,6 +35,9 @@ const PetPage = lazy(() => import('../pages/pet/PetPage.jsx'));
 const WalkingPage = lazy(() => import('../pages/walking/WalkingPage.jsx'));
 const HotSpotPage = lazy(() => import('../pages/hotSpot/HotSpotPage.jsx'));
 const CarrotPage = lazy(() => import('../pages/carrot/CarrotPage.jsx'));
+const ArticlePage = lazy(() => import('../pages/article/ArticleTest.jsx'));
+const ChatPage = lazy(() => import('../pages/chat/ChatPage.jsx'));
+const Notification = lazy(() => import('../pages/notification/Notification.jsx'));
 const RootMyPage = lazy(()=> import('../pages/member/rootMyPage.jsx'));
 
 const ChatPage = lazy(() => import('../pages/chat/ChatPage.jsx'))
@@ -66,11 +78,7 @@ const root = createBrowserRouter([
         </Suspense>,
         children: articleRouter({Loading : Loading() })
     },
-    // {
-    //     path:"/view/:articleId",
-    //     element: <Suspense fallback={<Loading />}><ArticleView/></Suspense>, 
-     
-    // },
+
     {
         path:"/healthCalculatorPage",
         element: <Suspense fallback={<Loading />}><HealthCalculatorPage/></Suspense>,
@@ -79,12 +87,6 @@ const root = createBrowserRouter([
     {
         path:"/board",
         element: <Suspense fallback={<Loading />}><BoardPage/></Suspense>,
-        // children:boardRouter()
-    },
-    
-    {
-        path:"/manager",
-        element: <Suspense fallback={<Loading />}><ManagerPage/></Suspense>,
         // children:boardRouter()
     },
 
@@ -113,17 +115,13 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading/>}><UpdateList/></Suspense>
     },
     {
-        path: "/walking",
-        element: <Suspense fallback={<Loading/>}><WalkingPage/></Suspense>
-    },
-    {
         path: "/sseTest",
         element: <Suspense fallback={<Loading/>}><IsLogin Component={<SseTest/>} /></Suspense>
     },
     {
         path: "/member",
         element: <Suspense fallback={<Loading/>}><RootMyPage/></Suspense>,
-        children: myPageRouter()                       
+        children: myPageRouter()
     },
     {
         path:"article",

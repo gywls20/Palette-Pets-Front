@@ -11,7 +11,7 @@ const DEFAULT_HEAD_LIST = [
         { idx: 3, headName: '이야기' },
         { idx: 4, headName: '공유' },
     ],
-    [
+    [   
         { idx: 1, headName: '정보' },
         { idx: 2, headName: '꿀팁' },
         { idx: 3, headName: '뉴스' },
@@ -28,12 +28,17 @@ const DEFAULT_HEAD_LIST = [
     ]
 ]
 
-const InputTitle = memo(({ boardName, title, articleHead, onChange }) => {
+const InputTitle = memo(({ boardName, title, articleHead, onChange,onInput }) => {
     
     const [headList, setHeadList] = useState([]);
+    
 
     useEffect(() => {
         
+        onInput({
+            name:"articleHead",
+            value:''
+        })
         switch (boardName) {    
             case 'FREEBOARD':
                 return setHeadList(DEFAULT_HEAD_LIST[0])
@@ -44,6 +49,7 @@ const InputTitle = memo(({ boardName, title, articleHead, onChange }) => {
             case 'QNA':
                 return setHeadList(DEFAULT_HEAD_LIST[3])
         }
+
 
     }, [boardName])
 
@@ -64,7 +70,6 @@ const InputTitle = memo(({ boardName, title, articleHead, onChange }) => {
                         inputProps={{ MenuProps: { disableScrollLock: true } }}
                         label="머리말 선택"
                         onChange={onChange}
-
                     >
                         {
                             headList.map(item =>

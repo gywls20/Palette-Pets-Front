@@ -1,22 +1,66 @@
-// eslint-disable-next-line no-unused-vars
 import React, {useEffect, useState} from 'react';
 import "../../styles/manager/BoardList.css"
-import Category from "../../test/main/Category.jsx";
-import axios from 'axios';
+import "../../styles/managerPage/ManagerPage.css";
+import ArticleService from "../../service/ArticleService.jsx";
 
-const ManagerPageComp = () => {
-    const [articleList, setArticleList] = useState([]);
 
-    const getarticleList = async () => {
-        const resp = await (await axios.get('//localhost:8080/api/test/querydsl')).data; //목록 데이터에 할당
-        setArticleList(resp.data); //articleList 변수에 할당
-        console.log(articleList);
-    }
+function ManagerPageComp() {
+    //URL에서 sort 값 가져오기
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const sortParam = queryParams.get("sort");
+
+    //초기화 설정
+    const [articles, setArticles] = useState([]);
+    const [page, setPage] = useState(1);
+    //const [sort, setSort] = useState(sortParam); 
+    const [sort, setSort] = useState(sortParam || 'articleId'); 
+    const [dir, setDir] = useState(true); //오름차순
+    const [where, setWhere] = useState('');
+    const [hasMore, setHasMore] = useState(true); // 추가 데이터를 불러올 수 있는지 여부(스크롤 사용)
+  
+    useEffect(() => {
+      fetchArticles();
+      // 스크롤 이벤트 리스너 등록
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        // 컴포넌트 언마운트 시 스크롤 이벤트 리스너 제거
+        window.removeEventListener('scroll', handleScroll);
+      };
+      
+    }, []); // 페이지가 로드될 때 한 번만 실행
 
     useEffect(() => {
-        getarticleList(); //목록 조회 함수 호출
-    }, []);
+      if (sortParam) {
+            setSort(sortParam); // 쿼리 파라미터에서 sort 값을 읽어 설정
+            setArticles([]);
+            setPage(1);
+            setHasMore(true);
+        };
+    }, [sortParam]);
+  
+    const fetchArticles = () => {
+      if (!hasMore) return;
+      ArticleService.getArticleList(page, sort, dir, where).then((res) => {
+        //console.log("where =" + where);
+        if (res.data.length > 0) {
+          setArticles(prevArticles => [...prevArticles, ...res.data]);
+          setPage(prevPage => prevPage + 1);
+          //console.log("where =" + where);
+        } else {
+          setHasMore(false);
+        }
+      }).catch(error => {
+        console.error("Error fetching articles:", error);
+      });
+    };
+  
+    const handleScroll = () => {
+      if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMore) return;
+      fetchArticles();
+    };
 
+  
     return (
     <>
         <div className='header'>

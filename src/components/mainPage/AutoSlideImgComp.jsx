@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import ImgStyle from '../../styles/img.module.css';
+import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ImgStyle from '../../styles/img.module.css';
+import '../../styles/mainPage/slider.css'
 
 
 //필요한 이미지

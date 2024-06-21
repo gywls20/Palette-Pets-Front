@@ -70,15 +70,19 @@
     position: absolute;
     bottom: -25px;
 
-    display: block;
-
-    width: auto;
+    display: flex;
+    
     padding: 3rem;
     margin: 0;
 
     list-style: none;
 
     text-align: center;
+    position: absolute;
+    
+    width: 100%;
+    
+    justify-content: center;
 }
 .slick-dots li
 {

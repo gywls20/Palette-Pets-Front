@@ -1,11 +1,15 @@
-
+import LoginImgComp from '../components/loginPage/LoginImgComp.jsx'
 import LoginFormComp from '../components/loginPage/LoginFormComp.jsx'
+import DefaultLayout from "../layouts/DefaultLayout.jsx";
 
 const MainPage = () => {
 
     return (
         <>
-        <LoginFormComp/>
+            <DefaultLayout>
+                <LoginImgComp/>
+                <LoginFormComp/>
+            </DefaultLayout>
         </>
     )
 }
