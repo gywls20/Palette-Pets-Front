@@ -3,10 +3,11 @@ import { Box, Typography, Avatar, Button, Grid, IconButton, Link } from '@mui/ma
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate } from 'react-router-dom';
-import { myPageProfile, myPageFeed, follow } from '../../service/memberApi';
+import { myPageProfile, myPageFeed, follow, unfollow } from '../../service/memberApi';
+
 
 const MyPageComp = ({ nickname }) => {
-    const [user, setUser] = useState({ nickname: '', img: null, following: 0, followers: 0, feeds: 0, memberId: '' });
+    const [user, setUser] = useState({ nickname: '', img: null, following: 0, followers: 0, feeds: 0, memberId: '', followTF: false});
     const [feeds, setFeeds] = useState([]);
     const navigate = useNavigate();
 
@@ -21,10 +22,13 @@ const MyPageComp = ({ nickname }) => {
                     following: data.following || 0,
                     followers: data.follower || 0,
                     memberId: data.memberId,
-                    feeds: data.feed || 0
+                    feeds: data.feed || 0,
+                    followTF: data.followTF
                 });
                 console.log("현재 나 닉네임=="+data.memberId );
                 console.log("지금 들어가있는 프로필 닉네임=="+nickname)
+                console.log("팔로우 여부 입니다요!!"+ data.followTF);
+                console.log("팔로우 여부 입니다요!!"+ user.followTF);
             
             } catch (error) {
                 console.error('프로필 정보를 불러오는 중 오류 발생:', error);
@@ -65,13 +69,26 @@ const MyPageComp = ({ nickname }) => {
     const handleFloatingButtonClick = () => {
         navigate(`/member/feed`);
     };
-
+    const profileImgButton = () => {
+        navigate(`/member/profile`);
+    }
     const followButtonClick = async () => {
         try {
             const response = await follow(user.nickname);
             console.log("팔로우 성공:", response);
+            window.location.reload();
+            
         } catch (error) {
             console.error("팔로우 실패:", error);
+        }
+    };
+    const unfollowButtonClick = async () => {
+        try {
+            const response = await unfollow(user.nickname);
+            window.location.reload();
+        } catch (error) {
+            
+            console.error("언팔로우 실패:", error);
         }
     };
 
@@ -108,23 +125,41 @@ const MyPageComp = ({ nickname }) => {
 
                 </Box>
             </Box>
-
+            
             {nickname === user.memberId ? (
-                <Button 
-                    variant="contained"
-                    color="primary"
-                    onClick={handleFloatingButtonClick}
+                <>
+                <Button
+                    onClick={profileImgButton}
                 >
-                    피드 작성하기
+                    프로필 이미지 변경</Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleFloatingButtonClick}
+                >
+                  피드 작성하기
                 </Button>
+              </>
             ) : (
-                <Button 
+                    <>
+                {user.followTF ? (
+                    <Button
                     variant="contained"
                     color="primary"
                     onClick={followButtonClick}
-                >
+                    >
                     팔로우
-                </Button>
+                    </Button>
+                ) : (
+                    <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={unfollowButtonClick}
+                    >
+                    언팔로우
+                    </Button>
+                )}
+                </>
             )}
             {feeds.length === 0 ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh', border: '1px solid #ccc', borderRadius: 2, mt: 2 }}>

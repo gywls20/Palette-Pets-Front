@@ -73,19 +73,33 @@ export const PostFeed = (dto, files) => {
         });
 };
 
+export const profile = async () => {
+    try{
+        const response = await jwtAxios.post(`${API_SERVER_HOST}/member/image`);
+    }catch (error) {
+        console.error('Error:', error);
+        throw new Error('프로필 이미지 변경 중 오류가 발생했습니다.');
+    }
+}
 
 export const follow = async (nickname) => {
     try {
-        console.log("API 호출 시작");
         const response = await jwtAxios.post(`${API_SERVER_HOST}/member/${nickname}`);
-        console.log("API 호출 완료");
         return response.data; // 응답 객체의 데이터를 반환
     } catch (error) {
         console.error('Error:', error);
         throw new Error('팔로우 중 오류가 발생했습니다.');
     }
 }
-
+export const unfollow = async (nickname) =>{
+    try{
+        const response = await jwtAxios.delete(`${API_SERVER_HOST}/member/${nickname}`);
+        return response.data; // 응답 객체의 데이터를 반환
+    }catch (error) {
+        console.error('Error:', error);
+        throw new Error('언팔로우 중 오류가 발생');
+    }
+}
 
 export const follower = async (nickname) => {
     try {
@@ -115,6 +129,7 @@ export const setting = async() =>{
         throw new Error('오류가 발생했습니다.');
     }
 }
+
 
 
 export default myPageProfile; // default 내보내기 추가

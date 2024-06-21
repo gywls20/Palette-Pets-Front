@@ -75,6 +75,7 @@ const FollowerComp = ({ nickname }) => {
                 padding: '10px', // 패딩 추가
                 borderRadius: '10px' // 둥근 테두리 추가
               }}
+              onClick={() => navigate(`/member/${follower.nickname}`)}
             >
               <img
                 src={`https://kr.object.ncloudstorage.com/palettepets/member/Profile/${follower.profile}`}
