@@ -6,7 +6,7 @@ import "../../styles/hotspot/hotSpotDetail.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import {Button, Rating} from "@mui/material";
+import {Button, Card, Rating} from "@mui/material";
 import ReactQuill from "react-quill";
 import {
     checkIsManager,
@@ -17,9 +17,25 @@ import {
 } from "../../service/hotSpotApi.jsx";
 import BuildIcon from "@mui/icons-material/Build.js";
 import Swal from "sweetalert2";
-import { Row, Col } from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
+import "./../../styles/toast/toast.css"
 
 const HotSpotDetails = () => {
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+        customClass: {
+            container: 'toastContainer',
+        }
+    });
 
     const [hotspot, setHotspot] = useState({rating: 0});
     const [isManager, setIsManager] = useState(false);
@@ -63,25 +79,25 @@ const HotSpotDetails = () => {
             // 서버에 별점 평가 요청 보내기
             const result = await sendStarRating(dto);
             if (result === true) {
-                await Swal.fire({
-                    title: '별점 평가 성공',
-                    text: '소중한 평가 감사합니다!',
+                await Toast.fire({
                     icon: 'success',
-                    timer: 1500,
+                    title: '소중한 평가 감사합니다!',
+                    width: 450,
+                    allowOutsideClick: false
                 });
                 window.location.reload();
             } else {
-                await Swal.fire({
-                    title: '별점 평가 실패',
-                    text: '알 수 없는 이유로 실패했습니다. 다시 시도해주세요.',
-                    icon: 'warning'
+                await Toast.fire({
+                    icon: 'error',
+                    title: '별점 평가 실패했습니다',
+                    width: 450
                 });
             }
         } catch (err) {
-            await Swal.fire({
-                title: '별점 평가 실패',
-                text: '알 수 없는 이유로 실패했습니다. 다시 시도해주세요.',
-                icon: 'warning'
+            await Toast.fire({
+                icon: 'error',
+                title: '별점 평가 실패했습니다',
+                width: 450
             });
             console.error(err);
         }
@@ -96,7 +112,9 @@ const HotSpotDetails = () => {
             setHotspot(result);
             // 회원 정보 가 role이 ADMIN인지 확인하는 요청
             const checkManager = await checkIsManager();
-            setIsManager(checkManager);
+            if (checkManager === true) {
+                setIsManager(checkManager);
+            }
             // 열람 중인 회원이 이미 별점 평가를 했는 지 여부 확인
             const isAlreadyRated = await getStarRate(id);
             console.log("isAlreadyRated = ", isAlreadyRated);
@@ -167,21 +185,22 @@ const HotSpotDetails = () => {
         <>
             {
                 <>
-                    {/*<Link to="/hotspot/" className="toList">목록으로</Link>*/}
                     <div className="image-list">
                         {hotspot.imgList && (
                             hotspot.imgList.length > 1 ? (
-                                <Slider {...settings}>
-                                    {hotspot.imgList.map((imgSrc, index) => (
-                                        <div key={imgSrc.imgHotSpotId}>
-                                            <img
-                                                src={"https://kr.object.ncloudstorage.com/palettepets/hotspot/" + imgSrc.imgUrl}
-                                                alt={`Hotspot image ${index + 1}`}
-                                                className="centered-image"
-                                            />
-                                        </div>
-                                    ))}
-                                </Slider>
+                                <div id="sliderDiv">
+                                    <Slider {...settings}>
+                                        {hotspot.imgList.map((imgSrc, index) => (
+                                            <div key={imgSrc.imgHotSpotId}>
+                                                <img
+                                                    src={"https://kr.object.ncloudstorage.com/palettepets/hotspot/" + imgSrc.imgUrl}
+                                                    alt={`Hotspot image ${index + 1}`}
+                                                    className="centered-image"
+                                                />
+                                            </div>
+                                        ))}
+                                    </Slider>
+                                </div>
                             ) : (
                                 hotspot.imgList.map((imgSrc, index) => (
                                     <div key={imgSrc.imgHotSpotId}>
@@ -210,73 +229,94 @@ const HotSpotDetails = () => {
                             </Link>
                         </>
                     )}
-                    <h2>{hotspot.placeName}</h2>
-                    <Rating value={hotspot.rating} precision={0.5} readOnly size="big"/>
-                    <p>{hotspot.simpleContent}</p>
+                    <Card
+                        sx={{width: '96%', display: "inline-block", marginTop: '2%'}}
+                    >
+                        <h2>{hotspot.placeName}</h2>
+                        <div id="ratingAverage">
+                            <Rating value={hotspot.rating} precision={0.5} readOnly size="big"/>
+                            <span style={{fontWeight: 'bold'}}>&nbsp;{hotspot.rating}</span>
+                        </div>
+                        <p>{hotspot.simpleContent}</p>
+                    </Card>
                     <ReactQuill
                         value={hotspot.content}
                         readOnly={true}
                         theme="snow"
                         modules={{toolbar: false}}
-                        style={{height: 'auto', backgroundColor: 'white', minHeight: '500px'}}
+                        style={{height: 'auto', backgroundColor: 'white', display: 'inline-block',
+                                minHeight: '100px', width: '96%', marginTop: '2%'}}
                     />
                 </>
             }
             {
                 hotspot.lat && hotspot.lng && (
-                    <>
-                        <h3 style={{textAlign: 'left'}}>위치 보기</h3>
-                        <p style={{textAlign: 'left'}}>{hotspot.address}</p>
-                        <Kakao lat={hotspot.lat} lng={hotspot.lng}/>
-                    </>
+                    <Card
+                        sx={{width: '96%', display: "inline-block", marginTop: '2%'}}
+                    >
+                        <h3 style={{textAlign: 'left', marginLeft: '1%'}}>위치 보기</h3>
+                        <p style={{textAlign: 'left', marginLeft: '1%'}}>{hotspot.address}</p>
+                        <Kakao
+                            lat={hotspot.lat} lng={hotspot.lng}
+                        />
+                    </Card>
                 )
             }
             <br/>
             {
                 starRated === 0 ? (
-                    <Row className="mt-4">
-                        <Col>
-                            <h4>이 명소에 대한 별점을 남겨주세요!</h4>
-                            <Rating
-                                name="user-rating"
-                                value={userRating}
-                                onChange={handleRatingChange}
-                                size="large"
-                            />
-                            <br/>
-                            <Button
-                                variant="contained"
-                                color="success"
-                                onClick={handleRatingSubmit}
-                                disabled={userRating === 0}
-                                className="ml-2"
-                            >
-                                평가 제출
-                            </Button>
-                            &nbsp;
-                            <Button
-                                variant="contained"
-                                color="warning"
-                                onClick={handleRatingCancel}
-                                className="ml-2"
-                            >
-                                취소
-                            </Button>
-                        </Col>
-                    </Row>
+
+                    <Card
+                        sx={{width: '96%', display: "inline-block", marginTop: '2%', paddingBottom: '2.5%'}}
+                    >
+                        <Row className="mt-4">
+                            <Col>
+                                <h4>이 명소에 대한 별점을 남겨주세요!</h4>
+                                <Rating
+                                    name="user-rating"
+                                    value={userRating}
+                                    onChange={handleRatingChange}
+                                    size="large"
+                                />
+                                <br/>
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={handleRatingSubmit}
+                                    disabled={userRating === 0}
+                                    className="ml-2"
+                                >
+                                    평가 제출
+                                </Button>
+                                &nbsp;&nbsp;&nbsp;
+                                <Button
+                                    variant="contained"
+                                    color="warning"
+                                    onClick={handleRatingCancel}
+                                    className="ml-2"
+                                >
+                                    취소
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Card>
                 ) : (
-                    <Row className="mt-4" onClick={handleUpdateRating}>
-                        <Col>
-                            <h4>회원님의 평가</h4>
-                            <Rating
-                                name="user-rating"
-                                value={starRated}
-                                precision={1}
-                                readOnly
-                                size="large"
-                            />
-                        </Col>
-                    </Row>
+                    <Card
+                        sx={{width: '96%', display: "inline-block", marginTop: '2%', paddingBottom: '2%'}}
+                    >
+                        <Row className="mt-4" onClick={handleUpdateRating}>
+                            <Col>
+                                <h4>회원님의 평가</h4>
+                                <Rating
+                                    name="user-rating"
+                                    value={starRated}
+                                    precision={1}
+                                    readOnly
+                                    size="large"
+                                />
+                            </Col>
+                        </Row>
+                    </Card>
                 )
             }
             <br/>

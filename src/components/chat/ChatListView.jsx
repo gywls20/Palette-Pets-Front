@@ -4,7 +4,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import {url} from '../../utils/single';
 import { useSelector } from 'react-redux';
 import jwtAxios from '../../service/jwtAxios';
-import connectChat from '../mainPage/connectChat';
+import connectChat from '../../utils/connectChat';
 
 
 const ChatListView = () => {
@@ -47,12 +47,11 @@ const ChatListView = () => {
                     <div className="Item-content">
                         <div className="Item-text">
                             <div className="Item-title">{chat.roomId}</div>
-                            <div className="Item-info">
-                                {chat.nickname}
-                                <span className='Item-icon'>
+                                <div className="Item-info">
+                                    {chat.nickname}
                                     <ChatBubbleOutlineIcon sx={{fontSize:'16pt'}}/>
-                                </span>
-                            </div>
+                                </div>
+                            <div>안읽은 메세지 : {chat.count}</div>
                         </div>
                     </div>
                 </div>

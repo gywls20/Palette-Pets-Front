@@ -21,6 +21,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
 body {
   padding-right: 0px !important;
   padding-top: 0.5rem;
@@ -29,12 +31,11 @@ body {
   justify-content: space-between;
   align-items: center;
   max-width: 40rem;
-  background-color: #ffffff;
+  background-color: white;
   height: 100vh;
 
 }
 
-.swal2-container {
-  /* z-index 값을 높게 설정하여 최상단에 표시 */
-  z-index: 9999 !important;
+.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected {
+  color: black !important;
 }

@@ -7,7 +7,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {CssBaseline, Typography, useMediaQuery} from "@mui/material";
+import {CssBaseline, useMediaQuery} from "@mui/material";
 import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllUnreadNotifications, logout} from "../service/api.jsx";
@@ -19,8 +19,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import "./../styles/toast/toast.css"
 import {useTheme} from "@mui/material/styles";
 import LoginIcon from '@mui/icons-material/Login';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-export default function Header() {
+export default function BackBtnHeader() {
     const navigate = useNavigate();
     const token = useSelector((state) => state.MemberSlice.token);
     const dispatch = useDispatch();
@@ -172,19 +173,14 @@ export default function Header() {
             icon: 'success',
             title: '로그아웃 하였습니다',
             width: 300
-        }).then((Res) => {
-            if(Res.value) {
-                navigate("/");
-            }
+        }).then(() => {
+            window.location.reload();
         })
     }
 
     // 모바일 메뉴 관련 기능
     const theme = useTheme();
     const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
-    const goToMain = () => {
-        navigate("/");
-    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -200,29 +196,15 @@ export default function Header() {
                 }}
             >
                 <Toolbar>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            mr: 2,
-                            flexShrink: 0,
-                            display: 'flex',
-                            justifyContent: isMobileView ? 'flex-start' : 'flex-start',
-                            alignItems: 'center',
-                        }}
+                    <IconButton
+                        size={isMobileView ? 'small' : 'large'}
+                        aria-label="go back"
+                        onClick={() => navigate(-1)}
+                        color="inherit"
+                        sx={{ ml: isMobileView ? 0.5 : 1, color: 'black' }}
                     >
-                        <Box
-                            component="img"
-                            alt="logo"
-                            src="https://kr.object.ncloudstorage.com/palettepets/logo/logo.png"
-                            onClick={goToMain}
-                            sx={{
-                                width: isMobileView ? '30%' : '40%',
-                                height: 'auto',
-                                cursor: 'pointer',
-                            }}
-                        />
-                    </Typography>
+                        <ArrowBackIosNewIcon />
+                    </IconButton>
 
                     <Box sx={{ flexGrow: 1 }} />
                     <Box

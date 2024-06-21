@@ -4,6 +4,7 @@ import ArticleDelete from "../components/article/delete/ArticleDelete";
 import ArticleUpdateForm from "../components/article/update/ArticleUpdateForm";
 import ArticleView from "../components/article/view/ArticleView";
 import { useSelector } from "react-redux";
+import IsLogin from "./IsLogin";
 
 const ArticleWriteForm = lazy(() => import('../components/article/write/ArticleWriteForm'));
 
@@ -16,7 +17,7 @@ const articleRouter = ({ Loading }) => {
             path: "write",
             element: <Suspense fallback={Loading}>
 
-                    <ArticleWriteForm />
+                    <IsLogin Component={<ArticleWriteForm />}/>
                 
             </Suspense>
         },
@@ -32,18 +33,18 @@ const articleRouter = ({ Loading }) => {
             path: "update/:articleId",
             element: <Suspense fallback={Loading}>
                 
-                    <ArticleUpdateForm />
+                <IsLogin Component={ <ArticleUpdateForm />}/>
               
             </Suspense>
         },
-        {
-            path: "delete/:articleId",
-            element: <Suspense fallback={Loading}>
+        // {
+        //     path: "delete/:articleId",
+        //     element: <Suspense fallback={Loading}>
 
-                <ArticleDelete />
+        //         <ArticleDelete />
 
-            </Suspense>
-        }
+        //     </Suspense>
+        // }
 
 
     ]

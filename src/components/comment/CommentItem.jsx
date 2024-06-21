@@ -17,12 +17,9 @@ import { set } from 'date-fns';
 
 export default function CommentItem({ item, articleId, setIsArticleSubmitted, isArticleSubmitted }) {
 
-    const { articleCommentId, children, content, memberImage, memberNickname, updateAt } = item
-
+    const { articleCommentId, children, content, memberImage, memberNickname, createAt } = item
+    
     const [formattedDateTime, setFormattedDateTime] = useState('');
-
-    const dateTime = new Date(updateAt);
-    const nowTime = new Date();
 
     //대댓글 등록창 handler
     const [expanded, setExpanded] = useState(false);
@@ -44,19 +41,27 @@ export default function CommentItem({ item, articleId, setIsArticleSubmitted, is
 
   
     useEffect(() => {
-        let time = "";
-        if (dateTime.getDate !== nowTime.getDate) {
-            time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} 
-                                  ${dateTime.getHours().toString().padStart(2, '0')}시
-                                  ${dateTime.getMinutes().toString().padStart(2, '0')}분`;
+        const dateTime = new Date(createAt);
+        const nowTime = new Date();
+  
+        const beforeTime = nowTime - dateTime;
+        if (beforeTime < 1000) {
+            setFormattedDateTime('방금 전');
+        }
+        else if (beforeTime < 60000) {
+            setFormattedDateTime((beforeTime / 1000).toFixed(0) + ' 초 전')
+        }
+        else if (beforeTime < 3600000) {
+            setFormattedDateTime((beforeTime / 60000).toFixed(0) + ' 분 전')
+        }
+        else if (beforeTime < 86400000) {
+            setFormattedDateTime((beforeTime / 3600000).toFixed(0) + ' 시간 전')
         }
         else {
-            time = `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')} `;
+            setFormattedDateTime(
+                `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')}`
+            )
         }
-
-        // 연.월.일 시 분 형식으로 포맷
-        setFormattedDateTime(time);
-        setExpanded(false)
     }, [item])
 
 
@@ -93,10 +98,10 @@ export default function CommentItem({ item, articleId, setIsArticleSubmitted, is
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <CommentResisterForm memberNickname={memberNickname} commentRef={articleCommentId} articleId={articleId} parentId={articleCommentId} setIsArticleSubmitted={setIsArticleSubmitted} isArticleSubmitted={isArticleSubmitted} />
+                        <CommentResisterForm memberNickname={memberNickname} commentRef={articleCommentId} articleId={articleId} parentId={articleCommentId} setIsArticleSubmitted={setIsArticleSubmitted} isArticleSubmitted={isArticleSubmitted} handleExpandClick={handleExpandClick}/>
                     </CardContent>
                 </Collapse>
-                <Menu
+                {/* <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}
                     open={open}
@@ -110,7 +115,7 @@ export default function CommentItem({ item, articleId, setIsArticleSubmitted, is
                     <MenuItem>수정하기</MenuItem>
                     <MenuItem>삭제하기</MenuItem>
 
-                </Menu>
+                </Menu> */}
             </Card>
 
             <div style={{ marginLeft: 20 }}>
