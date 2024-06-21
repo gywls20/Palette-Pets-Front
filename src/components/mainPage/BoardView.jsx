@@ -5,7 +5,6 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
 
-
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
 import Anhae from '../../image/anhae.jpg'
 import { useSelector } from 'react-redux';
