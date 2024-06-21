@@ -19,13 +19,11 @@ const BoardViewComp = () => {
                     <span className={BoardViewStyle.postsTitle}>오늘의 인기글</span>
                 </div>
                 <BoardView/>
+            </div>
 
-                <hr></hr>
+            <hr></hr>
 
-                <Banner/>
-
-                <hr></hr>
-
+            <div className={BoardViewStyle.postsSection}>
                 <div className={BoardViewStyle.postsHeader}>
                     <span className={BoardViewStyle.postsTitle}>최신 거래글</span>
                     <Link to={{ pathname: '/recent', search: '?sort=articleId' }}>
@@ -34,6 +32,14 @@ const BoardViewComp = () => {
                 </div>
                 <MainCarrotView/>
             </div>
+            
+            <hr></hr>
+
+            <div className={BoardViewStyle.postsSection}>
+                <Banner/>
+            </div>
+
+
         </>
     );
 };
