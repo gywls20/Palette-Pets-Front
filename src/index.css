@@ -14,14 +14,11 @@ html {
   background-color: #ffffff;
   font-size: 1rem;
 
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-
 
 body {
   padding-top: 0.5rem;

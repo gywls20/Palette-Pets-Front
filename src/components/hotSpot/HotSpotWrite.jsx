@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import ImageUpload from "../article/write/atoms/ImageUpload.jsx";
-import {Button} from "@mui/material";
+import {Button, Card} from "@mui/material";
 import "../../styles/hotspot/hotSpotWrite.css";
 import {useNavigate} from "react-router-dom";
 import {createHotSpot} from "../../service/hotSpotApi.jsx";
@@ -96,7 +96,9 @@ const HotSpotWrite = () => {
     }
 
     return (
-        <>
+        <Card sx={{width: '90%', marginBottom: 2 , marginTop : 5, display: 'inline-block', }}
+              className="writeCard"
+        >
             <h1>등록 페이지</h1>
             <input
                 value={title}
@@ -151,7 +153,7 @@ const HotSpotWrite = () => {
 
             <Button className="write-onSubmit" onClick={onSubmit}>작성 완료</Button>
             <Button className="write-onReset" onClick={onReset}>다시 쓰기</Button>
-        </>
+        </Card>
     );
 };
 

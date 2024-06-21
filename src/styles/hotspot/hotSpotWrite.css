@@ -4,50 +4,58 @@
 }
 
 .write-title{
+    position: relative;
+    border-radius: 5px;
     color: black;
     background-color: white;
-    width: 500px;
+    width: 90%;
     height: 40px;
     margin-bottom: 10px;
 }
 
 .write-simpleContent{
+    position: relative;
+    border-radius: 5px;
     color: black;
     background-color: white;
-    width: 500px;
+    width: 90%;
     height: 40px;
     margin-bottom: 10px;
 }
 
 .write-content{
+    border: solid 2px #000;
+    border-radius: 5px;
     color: black;
     background-color: white;
-    width: 500px;
+    width: 90%;
     height: 200px;
 }
 
 .write-address{
-    right: 50px;
+    border-radius: 5px;
     position: relative;
     color: black;
     background-color: white;
-    width: 400px;
+    width: 90%;
 }
 
 .write-lat{
-    right: 150px;
+    border-radius: 5px;
+    right: 30%;
     position: relative;
     color: black;
     background-color: white;
-    width: 200px;
+    width: 30%;
 }
 
 .write-lng{
-    right: 150px;
+    border-radius: 5px;
+    right: 30%;
     position: relative;
     color: black;
     background-color: white;
-    width: 200px;
+    width: 30%;
 }
 
 .write-onSubmit{
@@ -64,4 +72,8 @@
 
 .css-1e6y48t-MuiButtonBase-root-MuiButton-root:hover {
     background-color: #45a049;
+}
+
+.MuiCard-root {
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
 }
