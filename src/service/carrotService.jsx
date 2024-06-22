@@ -1,7 +1,8 @@
-import axios, { Axios } from "axios";
+import axios from "axios";
 import jwtAxios from "./jwtAxios";
+import {url} from "../utils/single.js";
 
-const CARROT_API_BASE_URL = "http://localhost:8080/carrot";
+const CARROT_API_BASE_URL = `${url}/carrot`;
 
 class carrotService {
     //리스트 출력

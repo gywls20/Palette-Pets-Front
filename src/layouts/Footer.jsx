@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CreateIcon from "@mui/icons-material/Create";
-import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import {
   BottomNavigation,
   BottomNavigationAction,
@@ -16,11 +16,11 @@ import {
   LocationOn,
   Home,
   KeyboardArrowUp,
-  VolunteerActivism
+  VolunteerActivism,
 } from "@mui/icons-material";
 
 const Footer = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [value, setValue] = useState(0);
   const [showButton, setShowButton] = useState(false);
 
@@ -59,11 +59,31 @@ const Footer = () => {
           showLabels
           value={value}
           onChange={handleNavigationChange}>
-          <BottomNavigationAction label="Archive" icon={<Archive />} onClick={onChat}/>
-          <BottomNavigationAction label="PetList" icon={<Favorite />} onClick={onPetList} />
-          <BottomNavigationAction label="Home" icon={<Home />} onClick={onHome} />
-          <BottomNavigationAction label="Market" icon={<VolunteerActivism/>} onClick={onCarrot}/>
-          <BottomNavigationAction label="Location On" icon={<LocationOn />} onClick={onHotSpot} />
+          <BottomNavigationAction
+            label="Archive"
+            icon={<Archive />}
+            onClick={onChat}
+          />
+          <BottomNavigationAction
+            label="PetList"
+            icon={<Favorite />}
+            onClick={onPetList}
+          />
+          <BottomNavigationAction
+            label="Home"
+            icon={<Home />}
+            onClick={onHome}
+          />
+          <BottomNavigationAction
+            label="Market"
+            icon={<VolunteerActivism />}
+            onClick={onCarrot}
+          />
+          <BottomNavigationAction
+            label="Location On"
+            icon={<LocationOn />}
+            onClick={onHotSpot}
+          />
         </BottomNavigation>
         <Link to="/article/write">
           <button className="floating-button">

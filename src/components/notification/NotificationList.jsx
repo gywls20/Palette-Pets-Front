@@ -1,4 +1,3 @@
-import LinkIcon from "@mui/icons-material/Link.js";
 import {useEffect, useState} from "react";
 import {changeIsReadNotification, getAllUnreadNotifications} from "../../service/api.jsx";
 import {useSelector} from "react-redux";
@@ -102,9 +101,6 @@ const NotificationList = () => {
                                 />
                                 <IconButton onClick={() => changeUnReadToRead(item.memberIssueId)}>
                                     <CheckCircleOutline />
-                                </IconButton>
-                                <IconButton onClick={() => alert("링크가기")}>
-                                    <LinkIcon />
                                 </IconButton>
                             </ListItem>
                         ))}
