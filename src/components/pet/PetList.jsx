@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, CardMedia, Typography} from '@mui/material';
+import {Button, Card, CardContent, CardMedia, createTheme, Typography, useMediaQuery} from '@mui/material';
 import PetRegisterForm from "./PetRegisterForm.jsx";
 import {useEffect, useState} from "react";
 import {json, useNavigate} from "react-router-dom";
@@ -10,20 +10,27 @@ import "./../../styles/pet/slickArrows.css"
 import {petListRequest} from "../../service/petApi.jsx";
 import {CardImg} from "react-bootstrap";
 
-const RoundedCardMedia = styled(CardMedia)({
+const RoundedCardMedia = styled(CardMedia)(({ theme }) => ({
     borderRadius: '50%',
     width: 150,
     height: 150,
     margin: 'auto',
     marginTop: 20,
     marginBottom: 10,
-});
+    [theme.breakpoints.down('sm')]: {
+        width: 100,
+        height: 100,
+    },
+}));
+
 
 const PetList = () => {
 
     const [petList, setPetList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const theme = createTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     // pet list query
     useEffect(() => {
@@ -108,47 +115,69 @@ const PetList = () => {
     return (
         <>
             <h1>반려 동물 목록</h1>
-            {
-                petList.length === 0 ?
-                    (
-                        <Card>
-                            <CardImg
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMAnGv9ThfxJ0b0vVQ3zcT114cT6C-675rmg&s"
-                            />
-                            <CardContent>
-                                등록된 반려동물이 없습니다! 반려 동물을 등록해주세요
-                            </CardContent>
-                        </Card>
-                    ) : (
-                    <Slider {...settings}>
-                        {
-                            petList.map((pet) => (
-                                <div key={pet.petId}>
-                                    <Card onClick={() => navigate(`/pet/details/${pet.petId}`)}>
-                                        <RoundedCardMedia component="img" height="200"
-                                                          image={"https://kr.object.ncloudstorage.com/palettepets/pet/" + pet.petImage} alt={pet.petName}
-                                        />
-                                        <CardContent>
-                                            <Typography variant="h5" component="div">
-                                                {pet.petName}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary">
-                                                {pet.petCategory1} - {pet.petCategory2}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary">
-                                                생일: {pet.petBirth}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary">
-                                                체중: {pet.petWeight}kg
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </div>
-                            ))
-                        }
-                    </Slider>
-                )
-            }
+            {petList.length === 0 ? (
+                <Card>
+                    <CardImg
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMAnGv9ThfxJ0b0vVQ3zcT114cT6C-675rmg&s"
+                        style={{ width: '50%', height: 'auto' }}
+                    />
+                    <CardContent>
+                        등록된 반려동물이 없습니다! 반려 동물을 등록해주세요
+                    </CardContent>
+                </Card>
+            ) : petList.length === 1 ? (
+                <Card onClick={() => navigate(`/pet/details/${petList[0].petId}`)}>
+                    <RoundedCardMedia
+                        component="img"
+                        height="200"
+                        image={"https://kr.object.ncloudstorage.com/palettepets/pet/" + petList[0].petImage}
+                        alt={petList[0].petName}
+                    />
+                    <CardContent>
+                        <Typography variant="h5" component="div">
+                            {petList[0].petName}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {petList[0].petCategory1} - {petList[0].petCategory2}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            생일: {petList[0].petBirth}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            체중: {petList[0].petWeight}kg
+                        </Typography>
+                    </CardContent>
+                </Card>
+            ) : (
+                <Slider {...settings}>
+                    {petList.map((pet) => (
+                        <div key={pet.petId}>
+                            <Card onClick={() => navigate(`/pet/details/${pet.petId}`)}>
+                                <RoundedCardMedia
+                                    component="img"
+                                    height="200"
+                                    image={"https://kr.object.ncloudstorage.com/palettepets/pet/" + pet.petImage}
+                                    alt={pet.petName}
+                                />
+                                <CardContent>
+                                    <Typography variant="h5" component="div">
+                                        {pet.petName}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {pet.petCategory1} - {pet.petCategory2}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        생일: {pet.petBirth}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        체중: {pet.petWeight}kg
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    ))}
+                </Slider>
+            )}
             <br />
             <br />
             <Button onClick={openModal}>펫 등록하기</Button>
