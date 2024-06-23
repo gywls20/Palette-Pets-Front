@@ -163,5 +163,18 @@ return jwtAxios.delete(`${API_SERVER_HOST}/feed/detail/${id}`)
 
 }
 
+//비밀번호 수정
+export const putPW = async (formData) => {
+    console.log("폼데이터 =", formData)
+    try{
+        return jwtAxios.put(`${API_SERVER_HOST}/member/password`,formData)
+        }catch(error){
+            console.error('Error:', error);
+            throw new Error('비밀번호 수정 중 오류가 발생했습니다.');
+        }
+};
+
+
+
 
 export default myPageProfile; // default 내보내기 추가
