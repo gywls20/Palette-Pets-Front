@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Box, Button, Grid, TextField, Typography, IconButton } from '@mui/material';
 import { PostFeed } from '../../service/memberApi'; // API 함수 import
 import { useNavigate } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -26,15 +26,26 @@ const FeedComp = () => {
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
         setImages(files);
-
-        const newPreviews = files.map(file => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                setPreviews(prev => [...prev, reader.result]);
-            };
-        });
+    
+        const readFileAsync = (file) => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+            });
+        };
+    
+        Promise.all(files.map(file => readFileAsync(file)))
+            .then(results => {
+                setPreviews(results);
+            })
+            .catch(error => {
+                console.error('Error reading files:', error);
+            });
     };
+    
+    
 
     const handleTextChange = (e) => {
         setText(e.target.value);
@@ -47,6 +58,8 @@ const FeedComp = () => {
             alert('이미지를 추가해주세요.');
             return;
         }
+
+        console.log(images.length);
 
         try {
             const dto = { text };
@@ -72,7 +85,7 @@ const FeedComp = () => {
         <Box component="form" onSubmit={handleSubmit} sx={{ p: 2 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <IconButton onClick={navigateBack}>
-                    <ArrowBackIcon />
+                    <ChevronLeftIcon />
                 </IconButton>
                 <Typography variant="h6" sx={{ flexGrow: 1, textAlign: 'center' }}>새로운 피드 올리기</Typography>
                 <Box sx={{ width: 48 }} /> {/* 아이콘 버튼의 너비와 동일한 크기의 빈 박스 */}

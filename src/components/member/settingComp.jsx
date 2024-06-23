@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Typography, Divider, Link, IconButton } from '@mui/material';
 import { setting } from '../../service/memberApi';
 import { useNavigate } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 const SettingCom = () => {
     const [userInfo, setUserInfo] = useState({ nickname: '', email: '' });
@@ -31,7 +31,7 @@ const SettingCom = () => {
         <Box sx={{ p: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <IconButton onClick={navigateBack}>
-                <ArrowBackIcon />
+                <ChevronLeftIcon />
                 </IconButton>
                 <Typography variant="h6" sx={{ flexGrow: 1, textAlign: 'center' }}>내 정보</Typography>
                 <Box sx={{ width: 48 }} /> {/* 아이콘 버튼의 너비와 동일한 크기의 빈 박스 */}

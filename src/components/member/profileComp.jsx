@@ -33,6 +33,7 @@ const ImageUploadComp = () => {
 
         const formData = new FormData();
         formData.append('files', selectedImage);
+        console.log(formData);
 
         try {
             const response = await profile(formData); // profile API 호출

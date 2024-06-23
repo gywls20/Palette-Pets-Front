@@ -70,7 +70,7 @@ const MyPageComp = ({ nickname }) => {
         navigate(`/member/feed`);
     };
     const profileImgButton = () => {
-        navigate(`/member/image/profile`);
+        navigate(`/member/profile`);
     }
     const followButtonClick = async () => {
         try {

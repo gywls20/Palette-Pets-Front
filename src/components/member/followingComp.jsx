@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {following } from '../../service/memberApi'; // API 호출 함수 경로에 맞게 수정
 import { Box, Typography, Avatar, Button, Grid, IconButton } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 const FollowingComp = ({ nickname }) => {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const FollowingComp = ({ nickname }) => {
     <div style={{ padding: '20px', position: 'relative' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
         <IconButton onClick={navigateBack}>
-          <ArrowBackIcon />
+          <ChevronLeftIcon />
         </IconButton>
         <Typography variant="h6" sx={{ flexGrow: 1, textAlign: 'center' }}>{nickname}</Typography>
         <Box sx={{ width: 48 }} /> {/* 아이콘 버튼의 너비와 동일한 크기의 빈 박스 */}
@@ -64,7 +64,7 @@ const FollowingComp = ({ nickname }) => {
       ) : (
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {followings.map(following => (
-            <li
+            <li 
               key={following.id}
               style={{
                 display: 'flex',
