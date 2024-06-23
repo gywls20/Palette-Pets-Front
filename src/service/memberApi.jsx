@@ -137,6 +137,31 @@ export const setting = async() =>{
     }
 }
 
+//피드 상세
+export const GetFeed = (id) => {
+
+    return jwtAxios.get(`${API_SERVER_HOST}/feed/detail/${id}`)
+
+    .then(response => response.data)
+    .catch((error) => {
+        console.error(error);
+        console.error(error.response);
+        console.error(error.response.data);
+        return error.response.data;
+    });
+
+
+}
+//피드 삭제
+export const DeleteFeed = (id) => {
+try{
+return jwtAxios.delete(`${API_SERVER_HOST}/feed/detail/${id}`)
+}catch(error){
+    console.error('Error:', error);
+    throw new Error('피드 삭제 오류가 발생했습니다.');
+}
+
+}
 
 
 export default myPageProfile; // default 내보내기 추가

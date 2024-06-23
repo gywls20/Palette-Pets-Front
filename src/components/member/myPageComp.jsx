@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Avatar, Button, Grid, IconButton, Link } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate } from 'react-router-dom';
 import { myPageProfile, myPageFeed, follow, unfollow } from '../../service/memberApi';
@@ -70,7 +70,7 @@ const MyPageComp = ({ nickname }) => {
         navigate(`/member/feed`);
     };
     const profileImgButton = () => {
-        navigate(`/member/profile`);
+        navigate(`/member/image/profile`);
     }
     const followButtonClick = async () => {
         try {
@@ -96,7 +96,7 @@ const MyPageComp = ({ nickname }) => {
         <Box sx={{ padding: 2 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                 <IconButton onClick={navigateBack}>
-                    <ArrowBackIcon />
+                    <ChevronLeftIcon />
                 </IconButton>
                 <Typography variant="h6">{user.nickname}</Typography>
                 <IconButton onClick={navigateToSettings}>
@@ -176,6 +176,7 @@ const MyPageComp = ({ nickname }) => {
                                 src={`https://kr.object.ncloudstorage.com/palettepets/feed/img/${feed.img}`}
                                 alt={`feed-${index}`}
                                 sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                onClick={() => navigate(`/member/feed/detail/${feed.feedId}`)}
                             />
                         </Grid>
                     ))}
