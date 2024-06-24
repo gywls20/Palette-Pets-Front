@@ -100,10 +100,10 @@ const MainCarrotView = () => {
                             <div>
                                 {/* <p className={BoardViewStyle.postUserName}>{carrot.memberNickname}님</p> */}
                                 <p className={BoardViewStyle.postContent}>{carrot.carrotTitle}</p>
-                                <p className={BoardViewStyle.postTime}>                             
+                                <p className={BoardViewStyle.postTime}>
                             <span className='Item-icon'>
                                 <FavoriteBorderIcon sx={{fontSize:'16pt'}}/>
-                            </span> {carrot.carrotLike}                                 
+                            </span> {carrot.carrotLike}
                             <span className='Item-icon'>
                                 <VisibilityIcon sx={{verticalAlign: 'middle', mr: 0.5}}/> </span> {carrot.carrotView}</p>
                             </div>

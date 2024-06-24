@@ -14,6 +14,7 @@ import {url} from '../../utils/single';
 
 const BoardView = () => {
     const [modal, setModal] = useState({});
+    const [like, setLike] = useState({});
     const token = useSelector((state) => state).MemberSlice.token;
 
 
@@ -44,6 +45,7 @@ const BoardView = () => {
     }
 
     const requestChat = (e) =>() => {
+        alert("글쓴이 아이디 : " + e)
         console.log("click")
         if (token === '') {
             console.log("token is on")
@@ -72,6 +74,7 @@ const BoardView = () => {
         } catch (e) {
             console.error(e);
         }
+    
     };
 
     useEffect(() => {
@@ -131,6 +134,8 @@ const BoardView = () => {
                                 </div>
                             </Box>
                         </Modal>
+
+
                     </div>
                 </div>
             ))}

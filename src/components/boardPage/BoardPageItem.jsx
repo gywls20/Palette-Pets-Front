@@ -16,11 +16,7 @@ const BoardPageItem = (articles) => {
     useEffect(() => {
         
         const dateTime = new Date(
-<<<<<<< HEAD
-            createdAt
-=======
            createdAt
->>>>>>> f98608b7544efc0176891eb760dfc3f469bad583
         );
         const nowTime = new Date();
        

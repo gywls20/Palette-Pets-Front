@@ -36,7 +36,14 @@ export const memberTest = () => {
             return error.response.data;
         });
 }
-
+// 서버 응답에서 Authorization 헤더를 읽어 토큰을 저장하는 함수
+const saveTokenFromResponse = (response) => {
+    const authorizationHeader = response.headers.get('Authorization');
+    if (authorizationHeader && authorizationHeader.startsWith('Bearer ')) {
+      const token = authorizationHeader.split(' ')[1];
+      localStorage.setItem('Authorization', token);
+    }
+  };
 // login 로직
 export const login = (dto) => {
     return axios.post(`${API_SERVER_HOST}/login`, {
@@ -46,6 +53,7 @@ export const login = (dto) => {
         headers: jsonHeaders
     })
         .then((response) => {
+            saveTokenFromResponse(response);
             const token = response.headers.authorization;
             return token;
         })
@@ -55,6 +63,24 @@ export const login = (dto) => {
             return error.response.data;
         });
 }
+
+// naver login 로직
+// export const naverLogin = () => {
+//     return axios.get(`http://localhost:8080/oauth2/authorization/naver`, {
+//         headers: jsonHeaders
+//     })
+//         .then((response) => {
+//             if (response.headers.oauth === "true") {
+//                 const token = response.headers.authorization;
+//                 return token;
+//             } 
+//         })
+//         .catch((error) => {
+//             console.error(error);
+//             console.error(error.response.data);
+//             return error.response.data;
+//         });
+// }
 
 // logout post 요청
 export const logout = () => {
