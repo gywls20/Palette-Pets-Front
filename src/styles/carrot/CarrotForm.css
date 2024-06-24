@@ -33,8 +33,9 @@
   }
   
   .submit-button {
-    display: block;
-    width: 100%;
+    display: inline-block; /* 인라인 블록 요소로 설정하여 한 줄에 표시 */
+    width: calc(50% - 5px); /* 버튼의 너비를 50%로 설정하고 간격을 위해 5px의 여유 공간을 두도록 계산 */
+    margin-right: 10px; /* 버튼 간의 우측 마진을 설정하여 간격을 줍니다 */
     padding: 12px 16px;
     background-color: black;
     color: #fff;
@@ -42,7 +43,11 @@
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-  }
+}
+
+.submit-button:last-child {
+    margin-right: 0; /* 마지막 버튼에는 우측 마진을 제거하여 두 버튼 사이의 간격을 조절합니다 */
+}
   
   .submit-button:hover {
     background-color: gray;

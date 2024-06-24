@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios, { Axios } from "axios";
-import Carousel from 'react-bootstrap/Carousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faL } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import {IconButton} from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import carrotService from '../../service/carrotService';
 import '../../styles/carrot/CarrotDetail.css';
 import CarrotMenu from './CarrotMenu';
-import kakaoAPI from './kakaoAPI';
+import image from '../../image/icon-photo.png';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 const CarrotDetail = () => {
@@ -19,6 +21,9 @@ const CarrotDetail = () => {
   const [carrot, setCarrot] = useState([]);
   const [visible, setVisible] = useState(false);
   const [state, setState] = useState(carrot.carrotState);
+  const [isLiked, setIsLiked] = useState(false);
+  const [imgList, setImgList] = useState([]);
+
 
   useEffect(() => {
     fetchCarrot(id);
@@ -31,12 +36,25 @@ const CarrotDetail = () => {
       })
   }, [id]);
 
+  //좋아요
+  useEffect(() => {
+      carrotService.getLike(id).then((res) => {
+          if(res.data) {
+            setIsLiked(true);
+          }else {
+            setIsLiked(false);
+          }
+      })
+  }, [id]);
+
+  //상세 피이지 & 이미지
   const fetchCarrot = (id) => {
     console.log("id = "+id)
     carrotService.getCarrotDetails(id).then((res) => {
       console.log("데이터 === "+res.data.imgList);
       setCarrot(res.data);
-      console.log("dlalwldlskdlskd====="+carrot.imgList)
+      setImgList(res.data.imgList)
+      console.log("dd = " + imgList);
       //setPage(page => page + 1);
       }).catch((err) => { 
         console.log(err)
@@ -63,84 +81,82 @@ const CarrotDetail = () => {
     }
   }
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://developers.kakao.com/sdk/js/kakao.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => document.body.removeChild(script);
-  }, []);
-
-  useEffect(() => {
-    // 카카오 SDK 초기화
-    if (!window.Kakao.isInitialized()) {
-      window.Kakao.init('19b10ccc3aa2bc5c3522f67de2c996da');
+  //좋아요
+  const handleLike = (id) => {
+    console.log("like = " + id);
+    const likeState = carrotService.getLike(id)
+    console.log("checkehcerjd = " + likeState)
+    try {
+      if (isLiked) {
+        // 좋아요 취소 요청
+        carrotService.postLike(id)
+      } else {
+        // 좋아요 요청
+        carrotService.postLike(id)
+      }
+      setIsLiked(!isLiked);
+    } catch (error) {
+      console.error(error);
     }
-  }, []);
-
-  const shareToKakao = () => {
-     // 카카오 공유 API 호출
-     window.Kakao.Share.sendDefault({
-      objectType: 'feed',
-      content: {
-        title: '공유할 제목',
-        description: '공유할 내용',
-        imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ48C4J0UyxfI5uRwOokboNaqQAQlTn5Qbgmg&s',
-        link: {
-          webUrl: 'http://localhost:3000',
-          mobileWebUrl: 'http://localhost:3000',
-        },
-      },
-      social: {
-        likeCount: 10,
-        commentCount: 20,
-        sharedCount: 30,
-      },
-      buttons: [
-        {
-          title: '웹으로 이동',
-          link: {
-            webUrl: 'https://example.com',
-            mobileWebUrl: 'https://example.com',
-          },
-        },
-      ],
-    });
   };
 
+  const NextArrow = ({ onClick }) => {
+    return (
+        <div
+            className="slick-next"
+            onClick={onClick}
+        >
+        </div>
+    );
+};
+
+const PrevArrow = ({ onClick }) => {
+    return (
+        <div
+            className="slick-prev"
+            onClick={onClick}
+        >
+        </div>
+    );
+};
+
+  const settings = {
+    dots: true,
+    infinite: imgList.length > 1, // 이미지가 1개일 때는 무한 반복하지 않음
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    nextArrow: <NextArrow />, // 화살표 버튼을 커스텀해서 사용
+    prevArrow: <PrevArrow />,
+}
 
     return (
       <>
-    <button onClick={shareToKakao}>
-      카카오톡으로 공유하기
-    </button>
-      {visible && <CarrotMenu />}
-      <IconButton aria-label="history back" sx={{ marginLeft: '20px', marginTop: '20px', display: 'flex', fontSize: '15pt' }} onClick={() => navigate(-1)}>
-        <ArrowBackIcon />
-        뒤로
-      </IconButton>
-      <div className="carrot-detail-container">
-      <Carousel slide={false}>
-      {carrot.imgList.map((img, index) => (
-        <Carousel.Item key={index}>
-          <img
-            src={`https://kr.object.ncloudstorage.com/palettepets/carrot/img/${img}`}
-            alt={`Slide ${index}`}
-            height="200"
-            width="280"
-          />
-        </Carousel.Item>
-      ))}
-    </Carousel>
+      <div className="carrot-detail-container" >
+      <div className="back-shape">
+        <IconButton aria-label="history back" sx={{display: 'flex', fontSize: '15pt' }} onClick={() => navigate(-1)}>
+          <ArrowBackIcon />
+        </IconButton>
+      </div>
+      {visible && <div className="menu-container"><CarrotMenu/></div>}
+      <div className="content-container">
+      <Slider {...settings} className="image-slider">
+            {imgList.map((img, index) => (
+              <div key={index} className="imageTool">
+                <img className="image" src={ img ? `https://kr.object.ncloudstorage.com/palettepets/carrot/img/${img}` : image} alt={`Image ${index}`} style={{height:"500px", width:"500px"}} />
+              </div>
+            ))}
+          </Slider>
+        </div>
         <div className="content-container">
           <div className="seller-info">
             <img src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png" alt="Seller" />
-            <span className="seller-name">{carrot.memberId}</span>
+            <span className="seller-name">{carrot.memberNickname}</span>
           </div>
         <div>
         </div>
 
-          <hr/>
           <div style={{ display: visible ? 'block' : 'none' }}>
           <select id="carrotState" value={state} onChange={handleChange}>
             <option value="0" selected={carrot.carrotState === 0}>판매중</option>
@@ -149,13 +165,13 @@ const CarrotDetail = () => {
           </select>
         </div>
 
-          <div className="header">
+          <div>
             <div className="title">{carrot.carrotTitle}</div>
           </div>
           <div className="tags-container">
-            <span className="tag">#{carrot.carrotTag}</span>
+            <span>#{carrot.carrotTag}</span> •
+            <span style={{color: "#998e8e"}}>{getTimeDifference(carrot.carrotCreatedAt)}</span>
           </div>
-          <div style={{ fontSize: "12px" ,color: "#998e8e"}}>{getTimeDifference(carrot.carrot_createdAt)}</div>
           <div className="description">
             <p>
               {carrot.carrotContent}
@@ -165,7 +181,14 @@ const CarrotDetail = () => {
           <br/>
           <div className="price-container">
             <div className="price">
-                <FontAwesomeIcon icon={faHeart} /> {carrot.carrot_price}원
+              <FontAwesomeIcon
+                icon={faHeart}
+                onClick={() => handleLike(carrot.carrotId)}
+                style={{ color: isLiked ? 'red' : 'grey' }}
+              /> 
+              <div style={{paddingLeft:'20px'}}>               
+              {carrot.carrotPrice}원
+              </div>
             </div>
             {carrot.carrotState === 2 ? null : (<button className="chat-button">채팅하기</button>) }
           </div>
