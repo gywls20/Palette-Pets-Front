@@ -95,7 +95,7 @@ const MyPageComp = ({ nickname }) => {
 
     return (
         <Box sx={{ padding: 2 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 ,color: 'black'}}>
                 <IconButton onClick={navigateBack}>
                     <ChevronLeftIcon />
                 </IconButton>
@@ -105,8 +105,8 @@ const MyPageComp = ({ nickname }) => {
                 </IconButton>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <Avatar src={`https://kr.object.ncloudstorage.com/palettepets/member/Profile/${user.img}`} sx={{ width: 80, height: 80, mr: 2 }} />
-                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <Avatar src={`https://kr.object.ncloudstorage.com/palettepets/member/Profile/${user.img}`} sx={{ width: 190, height: 190, mr: 2 }} />
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center',color: 'black' }}>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mr: 2 }}>
                         <Typography>{user.feeds}</Typography>
                         <Typography>게시물</Typography>
@@ -162,6 +162,51 @@ const MyPageComp = ({ nickname }) => {
                 )}
                 </>
             )}
+            <div
+            style={{
+                textAlign: 'right', // 글자 왼쪽 정렬
+                fontSize: '12px', // 글자 크기 작게 설정
+                color: 'gray'
+            }}
+            > 나의 반려동물 </div>
+            {/* 이곳에 가로 슬라이드를 만들어 */}
+            <Box sx={{ overflowX: 'auto', whiteSpace: 'nowrap', mt: 2 }}>
+                {feeds.map((feed, index) => (
+                    <Box
+                        key={index}
+                        component="img"
+                        src={`https://kr.object.ncloudstorage.com/palettepets/feed/img/${feed.img}`}
+                        alt={`feed-${index}`}
+                        sx={{ width: 150, height: 150, objectFit: 'cover', display: 'inline-block', mr: 1 }}
+                        onClick={() => navigate(`/member/feed/detail/${feed.feedId}`)}
+                    />
+                ))}
+                <Button
+                    onClick={() => navigate()}
+                    sx={{
+                        width: 150,
+                        height: 150,
+                        borderRadius: '50%', // 원형 버튼
+                        display: 'inline-block',
+                        mr: 1,
+                        verticalAlign: 'top',
+                        backgroundColor: 'white', // 버튼 배경색을 검정색으로 설정
+                        fontSize: '60px', // 텍스트 크기 설정
+                        color: 'black',
+                        '&:hover': {
+                            backgroundColor: 'white', // 호버 시 배경색 변경
+                            color: 'black' // 호버 시 텍스트 색상 변경
+                        }
+                    }}
+                >+</Button>
+            </Box>
+            <div
+            style={{
+                textAlign: 'right', // 글자 왼쪽 정렬
+                fontSize: '12px', // 글자 크기 작게 설정
+                color: 'gray'
+            }}
+            > 나의 피드</div>
             {feeds.length === 0 ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh', border: '1px solid #ccc', borderRadius: 2, mt: 2 }}>
                     <Typography variant="body1" align="center">
