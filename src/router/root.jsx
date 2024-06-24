@@ -35,6 +35,8 @@ const ChatPage = lazy(() => import('../pages/chat/ChatPage.jsx'));
 const Notification = lazy(() => import('../pages/notification/Notification.jsx'));
 
 const RootMyPage = lazy(()=> import('../pages/member/rootMyPage.jsx'));
+const PassowrdComp = lazy(()=> import('../components/member/passwordComp.jsx'));
+
 
 const root = createBrowserRouter([
     {
@@ -125,6 +127,10 @@ const root = createBrowserRouter([
     {
         path:"/notification",
         element: <Suspense fallback={<Loading />}><IsLogin Component={<Notification/>} /></Suspense>
+    },
+    {
+        path: "/password",
+        element: <Suspense fallback={<Loading />}> <PassowrdComp/></Suspense>
     }
 ]);
 

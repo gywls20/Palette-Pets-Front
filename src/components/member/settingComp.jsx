@@ -45,9 +45,8 @@ const SettingCom = () => {
             <Divider sx={{ my: 2 }} />
 
             <Box sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
-                <Link onClick={() => handleNavigation('')} sx={{ mb: 1 }}>회원정보수정</Link>
+                <Link onClick={() => handleNavigation('/member/setting/other')} sx={{ mb: 1 }}>회원정보수정</Link>
                 <Link onClick={() => handleNavigation('/member/setting/password')} sx={{ mb: 1 }}>비밀번호 변경</Link>
-                <Link onClick={() => handleNavigation('')} sx={{ mb: 1 }}>닉네임 변경</Link>
                 <Link onClick={() => handleNavigation('')} sx={{ mb: 1 }}>주소지 입력</Link>
             </Box>
             <Divider sx={{ my: 2 }} />

@@ -75,7 +75,7 @@ const FeedComp = () => {
 
     const settings = {
         dots: true,
-        infinite: true,
+        infinite: previews.length > 1, // 이미지가 1개일 때는 무한 반복하지 않음
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,

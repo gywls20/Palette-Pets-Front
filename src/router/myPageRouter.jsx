@@ -13,6 +13,7 @@ const SettingComp = lazy(() => import('../components/member/settingComp.jsx'))
 const Profile = lazy(() => import('../components/member/profileComp.jsx'))
 const FeedDetailComp = lazy(() => import('../components/member/feedDetailComp.jsx'))
 const SettingPwComp = lazy(() => import('../components/member/settingPwComp.jsx'))
+const SettingOtherComp = lazy(() => import('../components/member/settingOtherComp.jsx'))
 
 import {Navigate } from "react-router-dom";
 
@@ -55,7 +56,11 @@ const mypageRouter = () =>{
             {
                 path: "setting/password",
                 element: <Suspense fallback={Loading}><IsLogin Component={<SettingPwComp/>} /></Suspense>
-            }
+            },
+            {
+                path: "setting/other",
+                element: <Suspense fallback={Loading}><IsLogin Component={<SettingOtherComp/>} /></Suspense>
+            },
         ]
 }
 

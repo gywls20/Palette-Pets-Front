@@ -163,6 +163,18 @@ return jwtAxios.delete(`${API_SERVER_HOST}/feed/detail/${id}`)
 
 }
 
+
+//성별 생일 추가
+export const putOther = async (formData) => {
+    console.log("폼데이터 =", formData)
+    try{
+        return jwtAxios.put(`${API_SERVER_HOST}/member/other`,formData)
+        }catch(error){
+            console.error('Error:', error);
+            throw new Error('성별, 생일 입력 중 오류가 발생했습니다.');
+        }
+};
+
 //비밀번호 수정
 export const putPW = async (formData) => {
     console.log("폼데이터 =", formData)
@@ -174,6 +186,19 @@ export const putPW = async (formData) => {
         }
 };
 
+//비밀번호 찾기
+export const FindPW =(email) => {
+    return axios.post(`${API_SERVER_HOST}/memberF/findPw`, {
+        email: email,
+    }, {
+        headers: jsonHeaders
+    })
+        .catch((error) => {
+            console.error(error);
+            console.error(error.response.data);
+            return error.response.data;
+        });
+}
 
 
 

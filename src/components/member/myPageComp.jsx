@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Avatar, Button, Grid, IconButton, Link } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import SettingsIcon from '@mui/icons-material/Settings';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
 import { useNavigate } from 'react-router-dom';
 import { myPageProfile, myPageFeed, follow, unfollow } from '../../service/memberApi';
 
@@ -100,7 +101,7 @@ const MyPageComp = ({ nickname }) => {
                 </IconButton>
                 <Typography variant="h6">{user.nickname}</Typography>
                 <IconButton onClick={navigateToSettings}>
-                    <SettingsIcon />
+                <MoreVertIcon />
                 </IconButton>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
