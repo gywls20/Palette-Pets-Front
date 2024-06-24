@@ -1,125 +1,147 @@
-import React, { useState } from 'react';
-import styled from "@emotion/styled";
+import React, { useState, useRef } from 'react';
+import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
+import { Box, Button, Container, Modal } from '@mui/material';
+import ImageEdit from './ImageEdit';
 import '../../styles/carrot/CarrotForm.css';
 import '../../image/icon-image.png'
 
 
-const ImageUpdate = () => {
-    const [imgList, setImgList] = useState([]);
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
-    const onImgSelected = (e) => {
-        console.log(e);
-        let now = new Date();
-        let id = now.toString(); // -> '2021-09-09T10:00:00'
-        let reader = new FileReader(); //객체 생성
-        reader.readAsDataURL(e.target.files[0]); //내가 선택한 파일을 읽어주는 함수 
+const ImageUpdate = ({ previewList,setPreviewList,imgFiles, setImgFiles }) => {
+     //imgfiles -> Object Storage 및 DB 저장용 , 배열
+    //previewList -> 미리보기 및 편집용 , 배열
 
-        reader.onload = () => { //이미지가 url로 만들어진 후에 실행되는 함수
-            console.log(reader.result); //이미지가 url로 만들어짐
-            setImgList([...imgList, { id, previewUrl: reader.result, originFile: e.target.files[0] }]);  
+    //trigger 사용을 대체할 ref -> icon 클릭시 파일 열림
+    const imgRef = useRef();
+
+    const onCamera = () => {
+        imgRef.current.click();
+    }
+
+    // 사진 편집 모달창 열기 / 닫기
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => {
+        previewList.length !== 0 ? setOpen(true) : alert('사진을 등록해 주세요')
+    };
+    const handleClose = () => setOpen(false);
+
+
+    //이미지 업로드 
+    const onImageInput = (e) => {
+
+        if ((previewList.length + e.target.files.length) > 4) {
+            alert('최대 개수는 3개 입니다.')
+        } else {
+
+            // 여러개의 파일 선택 -> Array로 저장
+            const uploadFiles = Array.from(e.target.files)
+
+            //URL 을 만들어 imgArray에 저장 -> 미리보기용 이미지
+            var imgArray = [...previewList];
+
+            //서버로 보낼 filesArray
+            var filesArray = [];
+
+            uploadFiles.map((item, index) => {
+
+                const objectURL = URL.createObjectURL(item);
+
+                //중복된 이미지 거르기
+                // const isDuplicate = files.some(img => img.name === item.name);
+                if (true) {
+                    imgArray.push(objectURL);
+                    filesArray.push(item);
+                } else {
+                    alert('동일한 사진은 1장씩만 가능합니다.' + item.name)
+                }
+            })
+
+            // 미리보기로 뿌려줄 이미지
+            setPreviewList(imgArray);
+            // 서버로 보낼 이미지
+            setImgFiles(imgFiles.concat(filesArray))
         }
+
+        e.target.value = '';
+        // 마지막으로 저장된 파일의 value 삭제
+        // 이미지 편집시 지우는 파일이 e.target.value에 남아있는 값과 같으면 올라가지 않는다.
     }
 
-    const onImgChanged = (id, e) => {
-        let cpy = JSON.parse(JSON.stringify(imgList)); //문자열로 바꾸고 다시 객체로 바꾸면 복제본이 생성된다.
+    const deleteChoiceImage = (choiceIndex) => {
 
-        let target = cpy.find((e) => { //복제본을 넣어준다.
-            return e.id === id;
-        }); //복제본을 넣고, find 함수로 id가 같은것을 찾으면 taget이라는 이름으로 . 
-
-        const reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]); //미리보기 url. 어떤url을 미리보기할건지()안에 넣어줘야한다. 그래서, e.target.files[0] --> 사용자가 업로드한 이미지 파일
-        reader.onload = () => { //다 읽어지면(완료가되면) 실행되는 함수
-            target.previewUrl = reader.result; //previewUrl -> 미리보기 바꾸고,
-            target.originFile = e.target.files[0]; //origin -> 원본파일도 바꾸고
-            setImgList(cpy); //setImgList에서, cpy원본으로 바꿔줘
+        if (window.confirm("삭제하시겠습니까?")) {
+          const deleteUrl = previewList[choiceIndex]
+          const newImgList = previewList.filter((item, index) => index !== choiceIndex);
+          const newFiles = imgFiles.filter((item, index) => index !== choiceIndex);
+        
+          setPreviewList(newImgList)
+          setImgFiles(newFiles)
+        
+          window.URL.revokeObjectURL(deleteUrl);
+          // 메모리 누수 방지
+        
+          if (previewList.length === 1) {
+            handleClose()
+          }
         }
-    }
-
-    const onImgDelete = (id) => {
-        setImgList(imgList.filter((e) => e.id !== id));
-    }
+      }
 
     return (
-        <div className="form-group">
-        <ImgInputWrap>
-                    {
-                    imgList.map((img) =>
-                        <label style={{ position: 'relative' }} key={img.id}>
-                            <img
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    objectFit: 'cover',
-                                    objectPosition: 'center'
-                                }}
-                                src={img.previewUrl} />
-                            <input
-                                onChange={(e) => onImgChanged(img.id, e)} //받아온 id랑 ,지금받아온 event를 받아옴
-                                accept="image/*"
-                                type="file" />
-                            <button
-                                style={{ 
-                                    position: 'absolute', 
-                                    top: '0', 
-                                    right: '0',
-                                    width: '40px', // 버튼 width 설정
-                                    height: '40px', // 버튼 height 설정
-                                    fontSize: '20px', // 버튼 내부 텍스트 크기 설정
-                                    padding: '0', // 버튼 내부 여백 제거
-                                    opacity: 0.5, // 버튼 투명도 설정
-                                    background: 'transparent', // 버튼 배경 투명 설정
-                                    border: 'none', // 버튼 테두리 제거
-                                }}
-                                onClick={() => { onImgDelete(img.id) }}
-                                type='button'>
-                                <img
-                                    src="https://cdn-icons-png.flaticon.com/512/3875/3875148.png"
-                                    alt="Close"
-                                    style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    }}
-                                />
-                            </button>  
-                        </label>
-                        )
-                    }
-                    <label>
-                        +
-                        <input onChange={onImgSelected} accept="image/*" type="file" />
-                    </label>
-        </ImgInputWrap>
-    </div>
+
+        <Container sx={{ marginTop: 2 }}>
+
+            <span>사진 추가 (최대 4장)</span>
+
+            <Button onClick={handleOpen}>사진 편집</Button>
+
+            <Box sx={{ minWidth: 200, display: 'block', marginTop: 2 }}>
+
+                {
+
+                    previewList.map((item, index) =>
+                        <div className='image-container ' key={index}>
+                            <img src={item} alt={index} className="image" width='80' height='80' />
+                        </div>
+                    )
+
+                }
+                <div className='image-container inputImage-container'>
+                    <AddPhotoAlternateOutlinedIcon onClick={onCamera} sx={{ width: '80px', height: '80px', margin: '0', display: 'block' }} />
+                </div>
+
+            </Box>
+
+            <input type="file" name="img[]" multiple='multiple' ref={imgRef} style={{ visibility: 'hidden' }}
+                onChange={onImageInput}
+            />
+
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <ImageEdit previewList={previewList} setPreviewList={setPreviewList} imgFiles={imgFiles} setImgFiles={setImgFiles} deleteChoiceImage={deleteChoiceImage}  />
+                    <div style={{ textAlign: 'center' }}>
+                        <Button onClick={handleClose} >편집 완료</Button>
+                    </div>
+                </Box>
+            </Modal>
+
+        </Container>
+
     );
 };
 
 export default ImageUpdate;
-
-
-export const ImgInputWrap = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  column-gap: 10px;
-
-  & label{
-    width: 150px;
-    height: 150px;
-    background-color: white;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    color: black;
-    font-size: 60px;
-    cursor: pointer;
-
-	border: 1px solid silver;
-  }
-
-  & label input{
-    display: none;
-  }
-`;

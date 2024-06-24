@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import ImageUpload from "../article/write/atoms/ImageUpload.jsx";
-import {Button, Card} from "@mui/material";
+import {Button, Card, Grid, TextField} from "@mui/material";
 import "../../styles/hotspot/hotSpotWrite.css";
 import {useNavigate} from "react-router-dom";
 import {createHotSpot} from "../../service/hotSpotApi.jsx";
@@ -96,63 +96,82 @@ const HotSpotWrite = () => {
     }
 
     return (
-        <Card sx={{width: '90%', marginBottom: 2 , marginTop : 5, display: 'inline-block', }}
-              className="writeCard"
-        >
+        <Card sx={{ width: '90%', maxWidth: 800, margin: '50px auto', padding: 4 }}>
             <h1>등록 페이지</h1>
-            <input
-                value={title}
-                className="write-title"
-                type="text"
-                placeholder="제목 작성"
-                onChange={(e) => changeTitle(e)}
-            />
-            <br/>
-            <input
-                value={simpleContent}
-                className="write-simpleContent"
-                type="text"
-                placeholder="간단 소개 작성"
-                onChange={(e) => setSimpleContent(e.target.value)}
-            />
-            <br/>
-            <textarea
-                value={content}
-                className="write-content"
-                type="text"
-                placeholder="내용 작성"
-                onChange={(e) => setContent(e.target.value)}
-            />
-            <br/>
-            <input
-                value={address}
-                className="write-address"
-                type="text"
-                placeholder="주소 작성"
-                onChange={(e) => setAddress(e.target.value)}
-            />
-            <br/>
-            <input
-                value={lat}
-                className="write-lat"
-                type="number"
-                placeholder="위도"
-                onChange={(e) => setLat(e.target.value)}
-            />
-            <br/>
-            <input
-                value={lng}
-                className="write-lng"
-                type="number"
-                placeholder="경도"
-                onChange={(e) => setLng(e.target.value)}
-            />
-            <br/>
-            <br/>
-            <ImageUpload previewList={previewList} setPreviewList={setPreviewList} imgFiles={imgFiles} setImgFiles={setImgFiles}/>
-
-            <Button className="write-onSubmit" onClick={onSubmit}>작성 완료</Button>
-            <Button className="write-onReset" onClick={onReset}>다시 쓰기</Button>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <TextField
+                        fullWidth
+                        label="제목"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        fullWidth
+                        label="간단 소개"
+                        value={simpleContent}
+                        onChange={(e) => setSimpleContent(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        fullWidth
+                        label="내용"
+                        multiline
+                        rows={8}
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        fullWidth
+                        label="주소"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                    <TextField
+                        fullWidth
+                        label="위도"
+                        type="number"
+                        value={lat}
+                        onChange={(e) => setLat(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                    <TextField
+                        fullWidth
+                        label="경도"
+                        type="number"
+                        value={lng}
+                        onChange={(e) => setLng(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <ImageUpload
+                        previewList={previewList}
+                        setPreviewList={setPreviewList}
+                        imgFiles={imgFiles}
+                        setImgFiles={setImgFiles}
+                    />
+                </Grid>
+                <Grid item xs={12} container justifyContent="flex-end" spacing={2}>
+                    <Grid item>
+                        <Button variant="contained" color="primary" onClick={onSubmit}>
+                            작성 완료
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="outlined" color="secondary" onClick={onReset}>
+                            다시 쓰기
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
         </Card>
     );
 };

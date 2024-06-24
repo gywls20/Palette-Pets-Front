@@ -42,7 +42,7 @@ const ArticleView = () => {
   const [formattedDateTime, setFormattedDateTime] = useState('');
 
   const increaseLike = async () => {
-    
+
 
     if ((token === undefined) || (token === null) || (token === '')) {
 
@@ -75,7 +75,14 @@ const ArticleView = () => {
       setArticleDto(articleData);
       setCommentDto(commentData);
 
-      const dateTime = new Date(articleData.createdAt);
+      const dateTime = new Date(
+        articleData.createdAt[0], // 연도
+        articleData.createdAt[1] - 1 , // 월 (0부터 시작하므로 -1 해줘야 함)
+        articleData.createdAt[2], // 일
+        articleData.createdAt[3] || 0, // 시 (없을 경우 기본값 0)
+        articleData.createdAt[4] || 0, // 분 (없을 경우 기본값 0)
+        articleData.createdAt[5] || 0 // 초 (없을 경우 기본값 0)
+      );
       const nowTime = new Date();
 
       const beforeTime = nowTime - dateTime;
@@ -161,9 +168,9 @@ const ArticleView = () => {
           }
           action={
             token === '' ? null :
-            <IconButton aria-label="basic-menu" onClick={handleClick}>
-              <MoreVertIcon />
-            </IconButton>
+              <IconButton aria-label="basic-menu" onClick={handleClick}>
+                <MoreVertIcon />
+              </IconButton>
           }
           title={created_who}
           subheader={formattedDateTime}
@@ -222,15 +229,15 @@ const ArticleView = () => {
       </Card>
 
 
+      <Card sx={{ maxWidth: 630, border: 'none', margin: '20px auto' }}>
+        <div style={{ marginBottom: '10px', padding: '10px', textAlign: 'left' }}>&emsp; 댓글 {countReview}</div>
+        {
+          commentDto && commentDto.map((item) =>
 
-      <div style={{ marginBottom: '10px', padding: '10px', textAlign: 'left' }}>&emsp; 댓글 {countReview}</div>
-      {
-        commentDto && commentDto.map((item) =>
-
-          <CommentItem key={item.articleCommentId} item={item} articleId={articleId} setIsArticleSubmitted={setIsArticleSubmitted} isArticleSubmitted={isArticleSubmitted} />
-        )
-      }
-
+            <CommentItem key={item.articleCommentId} item={item} articleId={articleId} setIsArticleSubmitted={setIsArticleSubmitted} isArticleSubmitted={isArticleSubmitted} />
+          )
+        }
+      </Card>
       {/* 모달창 삭제 */}
       <Modal
         open={openModal}
