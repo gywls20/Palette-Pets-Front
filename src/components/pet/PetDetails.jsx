@@ -9,6 +9,7 @@ import PetUpdateForm from "./PetUpdateForm.jsx";
 import {styled} from '@mui/system';
 import {checkIsMaster, petDeleteRequest, petDetailRequest} from "../../service/petApi.jsx";
 import PetImgForm from "./PetImgForm.jsx";
+import Swal from "sweetalert2";
 
 const RoundedCardMedia = styled(CardMedia)({
     borderRadius: '50%',
@@ -84,17 +85,30 @@ const PetDetails = () => {
         setIsPicturesOpen(false);
     };
 
-    const handleCloseClick =  async () => {
-        // X 버튼 클릭 시 수행할 동작을 여기에 작성합니다.
-        const isDelete = confirm("정말로 삭제 하시겠습니까?");
-        if (isDelete) {
-            const result = await petDeleteRequest(pet.petId);
-            console.log(result);
-            alert("반려동물 정보를 삭제했습니다.");
-            navigate('/pet/list');
-        } else {
-            alert("삭제안됨 flag=" + isDelete);
-        }
+    const handleCloseClick = () => {
+        Swal.fire({
+            title: '정말로 삭제 하시겠습니까?',
+            text: '한번 삭제하면 되돌릴 수 없습니다',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '네!',
+            cancelButtonText: '아니오',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const result = await petDeleteRequest(pet.petId);
+                console.log(result);
+                if (result === true) {
+                    Swal.fire('삭제 완료', '성공적으로 삭제했습니다', 'success');
+                    navigate('/pet/list', {replace: true});
+                } else {
+                    Swal.fire('삭제 실패', '삭제에 실패했습니다', 'error');
+                }
+            } else {
+                Swal.fire('삭제 취소', '삭제를 취소하셨습니다', 'info');
+            }
+        });
     };
 
     const navigate = useNavigate();

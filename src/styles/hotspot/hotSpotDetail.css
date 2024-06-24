@@ -1,134 +1,127 @@
 root {
-    height: auto !important;
+  height: auto !important;
 }
 
 * {
-    list-style: none;
+  list-style: none;
 }
 
 #__react-kakao-maps-sdk___Map {
-    display: inline-block;
-    position: relative;
-    border-radius: 10px;
-    z-index: 0;
-    width: 95% !important;
-    margin-top: 0 !important;
-    margin-bottom: 2% !important;
+  display: inline-block;
+  position: relative;
+  border-radius: 10px;
+  z-index: 0;
+  width: 95% !important;
+  margin-top: 0 !important;
+  margin-bottom: 2% !important;
 }
 
 /*슬라이드*/
 .slick-prev,
 .slick-next {
-    width: 100px;
-    position: absolute;
-    top: 60%;
-    transform: translateY(-50%);
-    z-index: 1;
-    border-radius: 50%;
-    color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    min-width: 10px;
-    opacity: 100%;
-    padding-top: 1rem;
+  width: 100px;
+  position: absolute;
+  top: 60%;
+  transform: translateY(-50%);
+  z-index: 1;
+  border-radius: 50%;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  min-width: 10px;
+  opacity: 100%;
+  padding-top: 1rem;
 }
 
 .image-list {
-    display: block;
-    justify-content: center;
-    align-items: center;
+  display: block;
+  justify-content: center;
+  align-items: center;
 }
-
-
 
 /* 모바일 */
 @media only screen and (max-width: 600px) {
-    .centered-image {
-        display: inline-block;
-        position: relative;
-        width: 360px;
-        height: 300px;
-        margin-top: 10px;
-        border-radius: 5px;
-        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
-    }
+  .centered-image {
+    display: inline-block;
+    position: relative;
+    width: 360px;
+    height: 300px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+  }
 
-    #root {
-        background-color: #f1f3f5;
-    }
+  #root {
+    background-color: #f1f3f5;
+  }
 
-    #ratingAverage {
-        display: flex;
-        margin-left: 31%;
-    }
+  #ratingAverage {
+    display: flex;
+    margin-left: 31%;
+  }
 
-    #sliderDiv {
-        width: 86%;
-        display: inline-block;
-    }
+  #sliderDiv {
+    width: 86%;
+    display: inline-block;
+  }
 
-    .update-button{
-        left: 300px;
-        bottom: 100px;
-        position: fixed;
-        width: 40px;
-        height: 40px;
-        background-color: darkgoldenrod;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+  .update-button {
+    left: 300px;
+    bottom: 100px;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background-color: darkgoldenrod;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 }
 
 /* 일반 웹 */
 @media only screen and (min-width: 600px) {
-    .centered-image {
-        display: inline-block;
-        position: relative;
-        width: 610px;
-        height: 539px;
-        margin-top: 20px;
-        border-radius: 10px;
-        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
-    }
+  .centered-image {
+    display: inline-block;
+    position: relative;
+    width: 610px;
+    height: 539px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+  }
 
-    #root {
-        background-color: #f1f3f5;
-    }
+  #root {
+    background-color: #f1f3f5;
+  }
 
-    #ratingAverage {
-        display: flex;
-        margin-left: 39%;
-    }
+  #ratingAverage {
+    display: flex;
+    margin-left: 39%;
+  }
 
-    #sliderDiv {
-        width: 96%;
-        display: inline-block;
-    }
+  #sliderDiv {
+    width: 96%;
+    display: inline-block;
+  }
 
-    .update-button{
-        left: 1260px;
-        bottom: 115px;
-        position: fixed;
-        width: 40px;
-        height: 40px;
-        background-color: darkgoldenrod;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-}
-
-
-.ql-clipboard {
-    display: none;
+  .update-button {
+    z-index: 99;
+    left: 69%;
+    bottom: 8%;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background-color: darkgoldenrod;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 }

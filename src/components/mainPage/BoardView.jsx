@@ -5,8 +5,8 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
 
-import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
-import Anhae from '../../image/anhae.jpg'
+
+import BoardViewStyle from '../../styles/mainPage/boardView.module.css';
 import { useSelector } from 'react-redux';
 import connectChat from '../../utils/connectChat';
 import axios from 'axios';
@@ -95,7 +95,8 @@ const BoardView = () => {
                 <div key={article.articleId} className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
                         <div className={BoardViewStyle.postHeader}>
-                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(article.articleId)} />
+                            <img src={article.memberImg ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${article.memberImg}`
+                            : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(article.articleId)} />
                             <div>
                                 <p className={BoardViewStyle.postUserName}>{article.memberNickname}님</p>
                                 <p className={BoardViewStyle.postContent}>{article.title}</p>
@@ -119,10 +120,12 @@ const BoardView = () => {
                             aria-describedby="modal-modal-description">
                             <Box sx={style}>
                                 <p className={BoardViewStyle.postUserName}>{article.memberNickname}</p>
-                                <img src={Anhae} alt="User" />
-                                <div className={BoardViewStyle.ModalContainer}>
-                                    <button className={BoardViewStyle.chackBt}>팔로우</button>
-                                    <button className={BoardViewStyle.chackBt} onClick={requestChat(article.memberId)}>
+                                <img src={article.memberImg ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${article.memberImg}`
+                                : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`}
+                                alt="User" />
+                                <div className={BoardViewStyle.ModalCopontainer}>
+                                <button className={BoardViewStyle.chackBt}>팔로우</button>
+                                <button className={BoardViewStyle.chackBt} onClick={requestChat(article.memberId)}>
                                         <span style={{ color: '#ffffff' }}>1:1 대화</span>
                                     </button>
                                 </div>

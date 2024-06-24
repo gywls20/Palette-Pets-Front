@@ -14,24 +14,24 @@ import connectChat from '../../utils/connectChat';
 import axios from 'axios';
 import {url} from '../../utils/single';
 
-const MainCarrotView = () => {
+const MainHotSpotView = () => {
     const [modal, setModal] = useState({});
     const token = useSelector((state) => state).MemberSlice.token;
 
 
-    const [carrots, setCarrots] = useState([]);
+    const [hotSpots, setHotSpots] = useState([]);
 
-    const openModal = (carrotId) => {
+    const openModal = (hotSpotId) => {
         setModal((prevState) => ({
             ...prevState,
-            [carrotId]: true
+            [hotSpotId]: true
         }));
     }
 
-    const closeModal = (carrotId) => {
+    const closeModal = (hotSpotId) => {
         setModal((prevState) => ({
             ...prevState,
-            [carrotId]: false
+            [hotSpotId]: false
         }));
     }
 
@@ -58,7 +58,7 @@ const MainCarrotView = () => {
 
     const fetchData = async () => {
         try {
-            const result = await axios.get(`${url}/carrot/recent`)
+            const result = await axios.get(`${url}/api/hotspot/main`)
             .then(res => res.data 
             )
             .catch(err => {
@@ -66,7 +66,7 @@ const MainCarrotView = () => {
                 return err.response.data;
             });
             console.log("List result :: ",result);
-            setCarrots(result);
+            setHotSpots(result);
         } catch (e) {
             console.error(e);
         }
@@ -90,39 +90,42 @@ const MainCarrotView = () => {
 
     return (
         <>
-            {carrots && carrots.map((carrot) => (
-                <div key={carrot.carrotId} className={BoardViewStyle.postsList}>
+            {hotSpots && hotSpots.map((hotSpot) => (
+                <div key={hotSpot.hotSpotId} className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
                         <div className={BoardViewStyle.postHeader}>
-                            <img src={carrot.carrotImage ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${carrot.carrotImage}`
-                                : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`}
-                            alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(carrot.carrotId)} />
+                            <img src = {`https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`}
+                            /* <img src={carrot.carrotImage ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${carrot.carrotImage}`
+                                : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`} */
+                            alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(hotSpot.hotSpotId)} />
                             <div>
                                 {/* <p className={BoardViewStyle.postUserName}>{carrot.memberNickname}님</p> */}
-                                <p className={BoardViewStyle.postContent}>{carrot.carrotTitle}</p>
-                                <p className={BoardViewStyle.postTime}>                             
-                            <span className='Item-icon'>
+                                <p className={BoardViewStyle.postContent}>{hotSpot.placeName}</p>
+                                <p className={BoardViewStyle.postTime}>{hotSpot.uploadAt}</p>
+                            {/* <span className='Item-icon'>
                                 <FavoriteBorderIcon sx={{fontSize:'16pt'}}/>
-                            </span> {carrot.carrotLike}                                 
-                            <span className='Item-icon'>
-                                <VisibilityIcon sx={{verticalAlign: 'middle', mr: 0.5}}/> </span> {carrot.carrotView}</p>
+                            </span> {carrot.carrotLike}                                  */}
+                            {/* <span className='Item-icon'>
+                                <VisibilityIcon sx={{verticalAlign: 'middle', mr: 0.5}}/> </span> {carrot.carrotView}</p> */}
                             </div>
                         </div>
 
 
                         <Modal
-                            open={modal[carrot.carrotId]}
-                            onClose={() => closeModal(carrot.carrotId)}
+                            open={modal[hotSpot.hotSpotId]}
+                            onClose={() => closeModal(hotSpot.hotSpotId)}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description">
                             <Box sx={style}>
-                                <p className={BoardViewStyle.postUserName}>{carrot.memberNickname}</p>/
-                                <img src={carrot.carrotImage ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${carrot.carrotImage}`
+                                {/* <p className={BoardViewStyle.postUserName}>{carrot.memberNickname}</p> */}
+                                <img src = {`https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`}
+                                alt="User"/>
+                                {/* <img src={carrot.carrotImage ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${carrot.carrotImage}`
                                 : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`}
-                                alt="User" />
+                                alt="User" /> */}
                                 <div className={BoardViewStyle.ModalCopontainer}>
                                     <button>팔로우</button>
-                                    <button onClick={requestChat(carrot.memberId)}>
+                                    <button onClick={requestChat(hotSpots.userId)}>
                                         <span style={{ color: '#ffffff' }}>1:1 대화</span>
                                     </button>
                                 </div>
@@ -132,7 +135,7 @@ const MainCarrotView = () => {
                 </div>
             ))}
             <div className={BoardViewStyle.postHeader}>
-            <Link to={{ pathname: '/carrot/list' }} className={BoardViewStyle.moreplz}>
+            <Link to={{ pathname: '/hotspot/list' }} className={BoardViewStyle.moreplz}>
                     <button className={BoardViewStyle.moreplz}>더보기</button>
             </Link>
             </div>
@@ -140,4 +143,4 @@ const MainCarrotView = () => {
     );
 };
 
-export default MainCarrotView;
+export default MainHotSpotView;

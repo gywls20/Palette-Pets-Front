@@ -24,9 +24,9 @@ body {
 /* 일반 웹 */
 @media only screen and (min-width: 600px) {
     .write-button {
-        left: 1259px;
+        left: 69%;
         position: fixed;
-        bottom: 120px;
+        bottom: 8%;
         width: 40px;
         height: 40px;
         background-color: lightseagreen;

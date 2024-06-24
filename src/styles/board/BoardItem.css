@@ -1,21 +1,22 @@
 .Item-container {
    
     margin: auto;
-    padding: 10px;
+    padding: 5px;
     width: 90%;
-    height: 170px; /* 원하는 너비로 조정 */
+    height: 110px; /* 원하는 너비로 조정 */
     cursor: pointer;  
    
+
   }
   
-  .Item-header {
-    margin-bottom: 10px;
-  }
+ 
+  
   
   .Item-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 6px;
     
   }
   
@@ -24,38 +25,50 @@
   }
   
   .Item-title {
-    margin-bottom: 10px;
+    vertical-align: middle;
     text-align: left;
-    margin-top: 15px;
-    margin-left: 10px;
-    font-size: 19pt;
+    max-width: 450px;
+    margin-left: 10px;  
+    font-size: 12pt;
+    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis; /* 넘치는 텍스트를 ...으로 표시 */
   }
-  
+  .Item-small-title{
+    max-width: 250px;
+  }
   .Item-info {
     display: flex;
    
-    font-size: 0.9em; /* 글자 크기 조정 */
+    font-size: 0.7em; /* 글자 크기 조정 */
     margin-top: 10px;
     margin-left: 10px;
-    font-size: 11pt;
+    /* font-size: 11pt; */
   }
   .Item-tags {
     display: flex;
     justify-content: space-between;
     font-size: 0.9em; /* 글자 크기 조정 */
-    margin-top: 10px;
+    margin-top: 2px;
     margin-left: 12px;
-    font-size: 13pt;
+    font-size: 10pt;
   }
   
   .Item-image {
-    width: 100px;
-    height: 100px;
+    width: 85px;
+    height: 85px;
     background-color: white;
     display: flex;
     justify-content: center;
-    margin-right: 10px;
+    margin-right: 5px;
     align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding:5px
+  }
+  .Item-image img{
+    width: 78px;
+    height: 78px;
   }
 
   
