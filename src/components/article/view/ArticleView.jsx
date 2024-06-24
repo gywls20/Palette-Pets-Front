@@ -179,7 +179,7 @@ const ArticleView = () => {
               </IconButton>
           }
           title={created_who}
-          subheader={formattedDateTime}
+          subheader={createdAt}
           sx={{ textAlign: 'left', margin: '10px 20px' }}
         />
 
