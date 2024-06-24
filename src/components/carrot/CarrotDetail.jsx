@@ -133,29 +133,6 @@ const PrevArrow = ({ onClick }) => {
 
     return (
       <>
-<<<<<<< HEAD
-    <button onClick={shareToKakao}>
-      카카오톡으로 공유하기
-    </button>
-      {visible && <CarrotMenu />}
-      <IconButton aria-label="history back" sx={{ marginLeft: '20px', marginTop: '20px', display: 'flex', fontSize: '15pt' }} onClick={() => navigate(-1)}>
-        <ArrowBackIcon />
-        뒤로
-      </IconButton>
-      <div className="carrot-detail-container">
-      <Carousel slide={false}>
-      {carrot.imgList.map((img, index) => (
-        <Carousel.Item key={index}>
-          <img
-            src={`https://kr.object.ncloudstorage.com/palettepets/carrot/img/${img}`}
-            alt={`Slide ${index}`}
-            height="200"
-            width="280"
-          />
-        </Carousel.Item>
-      ))}
-    </Carousel>
-=======
       <div className="carrot-detail-container" >
       <div className="back-shape">
         <IconButton aria-label="history back" sx={{display: 'flex', fontSize: '15pt' }} onClick={() => navigate(-1)}>
@@ -172,7 +149,6 @@ const PrevArrow = ({ onClick }) => {
             ))}
           </Slider>
         </div>
->>>>>>> bef3c212406cb585e511037659351faed8bc947d
         <div className="content-container">
           <div className="seller-info">
             <img src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png" alt="Seller" />
