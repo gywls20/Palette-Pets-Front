@@ -15,3 +15,9 @@ export const getComment = (articleId) =>{
         .then(response => response.data)
         .catch(response => console.log(response.data))
 }
+
+export const getIsLike = (articleId) =>{
+    return jwtAxios.post(`${API_SERVER_HOST}/Post/isLike/${articleId}`)
+    .then(response => response.data)
+    .catch(error => console.log(error) )
+}

@@ -12,11 +12,15 @@ const BoardPageItem = (articles) => {
     const { title, content, images, articleHead, articleId, articleTags, boardName, countLoves, countViews, countReview, createdAt, createdWho } = article
     const [formattedDateTime, setFormattedDateTime] = useState('');
     const isSmallScreen = useMediaQuery('(max-width:500px)');
-   
+   console.log(createdAt)
     useEffect(() => {
         
         const dateTime = new Date(
+<<<<<<< HEAD
             createdAt
+=======
+           createdAt
+>>>>>>> f98608b7544efc0176891eb760dfc3f469bad583
         );
         const nowTime = new Date();
        
