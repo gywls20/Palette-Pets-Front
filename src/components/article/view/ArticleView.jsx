@@ -11,6 +11,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ArticleDelete from '../delete/ArticleDelete';
 import ArticleReport from './ArticleReport';
 import { useSelector } from 'react-redux';
+import ReactQuill from 'react-quill';
 
 
 //모달창 css
@@ -189,14 +190,23 @@ const ArticleView = () => {
         </CardContent>
 
         <CardContent>
-          <Typography 
+          {/* <Typography 
             variant="body2" 
             color="text.secondary" 
             fontSize='15pt' 
             textAlign='left'  
             sx={{ margin: '0 20px', whiteSpace: 'pre-line' }}
             dangerouslySetInnerHTML={{ __html: content }}
-          />
+          /> */}
+          <ReactQuill
+                        value={content}
+                        readOnly={true}
+                        theme="snow"
+                        modules={{toolbar: false}}
+                        style={{height: 'auto', backgroundColor: 'white', display: 'inline-block',
+                                minHeight: '100px', width: '96%', marginTop: '1%', whiteSpace: 'pre-line'}}
+                                
+                    />
         </CardContent>
         {
           images && images.map((item, index) => <CardMedia
