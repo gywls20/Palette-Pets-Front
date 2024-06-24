@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {getCarrotLike} from '../../service/memberApi';
 import '../../styles/carrot/CarrotList.css';
-import image from '../../image/icon-camera.png';
+import image from '../../image/icon-photo.png';
 
 const CarrotUserList = () => {
     const navigate = useNavigate();
