@@ -18,7 +18,7 @@ function BoardPageComp() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const isSmallScreen = useMediaQuery('(max-width:500px)');
-  
+
   //URL에서 sort 값 가져오기
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -113,17 +113,22 @@ function BoardPageComp() {
     setSearch([])
     setTagList([])
   }
-  
+
+  const FreeBoardClassName = `${boardName === "FREEBOARD" ? "round-button active" : "round-button"} ${isSmallScreen ? "small-round-button" : ""}`;
+  const INFORMATIONClassName = `${boardName === "INFORMATION" ? "round-button active" : "round-button"} ${isSmallScreen ? "small-round-button" : ""}`;
+  const SHOWClassName = `${boardName === "SHOW" ? "round-button active" : "round-button"} ${isSmallScreen ? "small-round-button" : ""}`;
+  const QNAClassName = `${boardName === "QNA" ? "round-button active" : "round-button"} ${isSmallScreen ? "small-round-button" : ""}`;
+
   return (
     <>
-      <div className='header'>
+      <div className='Item-header'>
 
         <div className='boardSelectBtn'>
-          <button className='round-button' onClick={onReset}>전체</button>
-          <button className={boardName === "FREEBOARD" ? "round-button active" : "round-button"} value="FREEBOARD" onClick={addBoardName}>자유</button>
-          <button className={boardName === "INFORMATION" ? "round-button active" : "round-button"} value="INFORMATION" onClick={addBoardName}>정보</button>
-          <button className={boardName === "SHOW" ? "round-button active" : "round-button"} value="SHOW" onClick={addBoardName}>자랑</button>
-          <button className={boardName === "QNA" ? "round-button active" : "round-button"} value="QNA" onClick={addBoardName}>질문</button>
+          <button className={`round-button ${isSmallScreen ? "small-round-button" : ""}`} onClick={onReset}>전체</button>
+          <button className={FreeBoardClassName} value="FREEBOARD" onClick={addBoardName}>자유</button>
+          <button className={INFORMATIONClassName} value="INFORMATION" onClick={addBoardName}>정보</button>
+          <button className={SHOWClassName} value="SHOW" onClick={addBoardName}>자랑</button>
+          <button className={QNAClassName} value="QNA" onClick={addBoardName}>질문</button>
         </div>
 
 
@@ -143,7 +148,8 @@ function BoardPageComp() {
             )
           }
         </div>
-        {tagList.length > 10 && (
+        {
+        tagList.length > 10 && (
           <button onClick={() => setIsExpanded(!isExpanded)} className='toggleButton'>
             {isExpanded ? '접기' : '펼치기'}
           </button>
@@ -163,9 +169,9 @@ function BoardPageComp() {
 
         </div>
       </div>
-
+      <div style={{ textAlign: 'right' ,margin:'15px 0' }}><button onClick={() => setDir(true)}>최신순</button> / <button onClick={() => setDir(false)}>오래된순</button></div>
       <div className="container mx-auto px-4 py-4">
-        <div style={{ textAlign: 'right' }}><button onClick={() => setDir(true)}>최신순</button> / <button onClick={() => setDir(false)}>오래된순</button></div>
+
         {
           articles.map(articles =>
             <BoardPageItem key={articles.articleId} article={articles} />
@@ -173,14 +179,14 @@ function BoardPageComp() {
         }
         <div ref={ref}>끝</div>
       </div>
-      <Fab color="secondary" aria-label="edit" onClick={()=>navigate('/article/write')}
-       sx={{
-        position: 'fixed',
-        bottom: 75,
-        right: isSmallScreen ? 30:480
-        
-      }}>
-        <EditIcon sx={{fontSize:'30pt'}}/>
+      <Fab color="secondary" aria-label="edit" onClick={() => navigate('/article/write')}
+        sx={{
+          position: 'fixed',
+          bottom: 75,
+          right: isSmallScreen ? 30 : 480
+
+        }}>
+        <EditIcon sx={{ fontSize: '30pt' }} />
       </Fab>
     </>
   );

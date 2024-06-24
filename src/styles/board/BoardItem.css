@@ -6,11 +6,11 @@
     height: 110px; /* 원하는 너비로 조정 */
     cursor: pointer;  
    
+
   }
   
-  .Item-header {
+ 
   
-  }
   
   .Item-content {
     display: flex;

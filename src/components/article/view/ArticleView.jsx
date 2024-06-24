@@ -75,7 +75,14 @@ const ArticleView = () => {
       setArticleDto(articleData);
       setCommentDto(commentData);
 
-      const dateTime = new Date(articleData.createdAt);
+      const dateTime = new Date(
+        articleData.createdAt[0], // 연도
+        articleData.createdAt[1] - 1 , // 월 (0부터 시작하므로 -1 해줘야 함)
+        articleData.createdAt[2], // 일
+        articleData.createdAt[3] || 0, // 시 (없을 경우 기본값 0)
+        articleData.createdAt[4] || 0, // 분 (없을 경우 기본값 0)
+        articleData.createdAt[5] || 0 // 초 (없을 경우 기본값 0)
+      );
       const nowTime = new Date();
 
       const beforeTime = nowTime - dateTime;
