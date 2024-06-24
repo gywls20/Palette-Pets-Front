@@ -6,8 +6,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import "slick-carousel/slick/slick.css";
-import "../../styles/mainPage/review.css";
-import TransactionCategoryComp from '../TransactionCategoryComp';
+import "../../styles/mainPage/slider.css";
 
 // eslint-disable-next-line react/prop-types
 const NextArrow = ({ onClick }) => {
@@ -110,13 +109,7 @@ export default function Banner() {
                     </Container>
                 </div>
 
-                <div className={"reviewSlider"}>
-                    <Container maxWidth="sm" sx={{mt: 4}}>
-                            <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
-                                <img src="https://res.heraldm.com/content/image/2022/06/17/20220617000554_0.jpg"></img>
-                            </Box>
-                    </Container>
-                </div>
+                
 
                 <div className={"reviewSlider"}>
                     <Container maxWidth="sm" sx={{mt: 4}}>

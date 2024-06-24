@@ -4,7 +4,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import {url} from '../../utils/single';
 import { useSelector } from 'react-redux';
 import jwtAxios from '../../service/jwtAxios';
-import connectChat from '../mainPage/connectChat';
+import connectChat from '../../utils/connectChat';
 
 
 const ChatListView = () => {

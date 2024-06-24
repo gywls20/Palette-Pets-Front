@@ -2,20 +2,44 @@ body {
     height: auto !important;
 }
 
-.write-button {
-    left: 1109px;
-    position: fixed;
-    bottom: 120px;
-    width: 40px;
-    height: 40px;
-    background-color: lightseagreen;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* 모바일 */
+@media only screen and (max-width: 600px) {
+    .write-button {
+        left: 300px;
+        bottom: 100px;
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        background-color: lightseagreen;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
 }
+
+/* 일반 웹 */
+@media only screen and (min-width: 600px) {
+    .write-button {
+        left: 69%;
+        position: fixed;
+        bottom: 8%;
+        width: 40px;
+        height: 40px;
+        background-color: lightseagreen;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+}
+
 
 .css-o69gx8-MuiCardMedia-root {
     border-radius: 5px;

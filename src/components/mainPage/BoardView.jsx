@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Box, Modal } from '@mui/material';
 import Swal from 'sweetalert2'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
@@ -8,16 +6,14 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
 
 
-import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
-import Anhae from '../../image/anhae.jpg'
+import BoardViewStyle from '../../styles/mainPage/boardView.module.css';
 import { useSelector } from 'react-redux';
-import connectChat from './connectChat';
+import connectChat from '../../utils/connectChat';
 import axios from 'axios';
 import {url} from '../../utils/single';
 
 const BoardView = () => {
     const [modal, setModal] = useState({});
-    const [like, setLike] = useState({});
     const token = useSelector((state) => state).MemberSlice.token;
 
 
@@ -47,19 +43,7 @@ const BoardView = () => {
         });
     }
 
-    const ToggleLike = (articleId) => {
-        if (token === '') {
-            alarm();
-        } else {
-            setLike((prevState) => ({
-                ...prevState,
-                [articleId]: !prevState[articleId]
-            }));
-        }
-    };
-
     const requestChat = (e) =>() => {
-        alert("글쓴이 아이디 : " + e)
         console.log("click")
         if (token === '') {
             console.log("token is on")
@@ -71,19 +55,23 @@ const BoardView = () => {
 
     const fetchData = async () => {
         try {
-            const result = await axios.get(`${url}/popular`)
-            .then(res => res.data 
-            )
-            .catch(err => {
-                console.error(err);
-                return err.response.data;
-            });
-            console.log("List result :: ",result);
+        const controller = new AbortController();
+        const { signal } = controller;
+
+        const result = await axios.get(`${url}/popular`, { signal })
+        .then(res => res.data 
+        )
+        .catch(err => {
+            console.error(err);
+            return err.response.data;
+        });
+        if(result){
             setArticles(result);
+        }
+        return () => controller.abort();
         } catch (e) {
             console.error(e);
         }
-    
     };
 
     useEffect(() => {
@@ -107,14 +95,20 @@ const BoardView = () => {
                 <div key={article.articleId} className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
                         <div className={BoardViewStyle.postHeader}>
-                            <img src={Anhae} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(article.articleId)} />
+                            <img src={article.memberImg ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${article.memberImg}`
+                            : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(article.articleId)} />
                             <div>
                                 <p className={BoardViewStyle.postUserName}>{article.memberNickname}님</p>
                                 <p className={BoardViewStyle.postContent}>{article.title}</p>
-                                <p className={BoardViewStyle.postTime}>                             <span className='Item-icon'>
-                                <FavoriteBorderIcon sx={{fontSize:'16pt'}}/>
-                            </span> {article.countLoves}                                 <span className='Item-icon'>
-                                <ChatBubbleOutlineIcon sx={{fontSize:'16pt'}} /> </span> {article.countComments}</p>
+                                <p className={BoardViewStyle.postTime}>                             
+                                <span className='Item-icon'>
+                                    <FavoriteBorderIcon sx={{fontSize:'16pt'}}/>
+                                </span> {article.countLoves}                                 
+
+                                <span className='Item-icon'>
+                                    <ChatBubbleOutlineIcon sx={{fontSize:'16pt'}} /> 
+                                </span> 
+                                {article.countComments}</p>
                             </div>
                         </div>
 
@@ -126,17 +120,17 @@ const BoardView = () => {
                             aria-describedby="modal-modal-description">
                             <Box sx={style}>
                                 <p className={BoardViewStyle.postUserName}>{article.memberNickname}</p>
-                                <img src={Anhae} alt="User" />
+                                <img src={article.memberImg ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${article.memberImg}`
+                                : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`}
+                                alt="User" />
                                 <div className={BoardViewStyle.ModalCopontainer}>
-                                    <button>팔로우</button>
-                                    <button onClick={requestChat(article.memberId)}>
+                                <button className={BoardViewStyle.chackBt}>팔로우</button>
+                                <button className={BoardViewStyle.chackBt} onClick={requestChat(article.memberId)}>
                                         <span style={{ color: '#ffffff' }}>1:1 대화</span>
                                     </button>
                                 </div>
                             </Box>
                         </Modal>
-
-
                     </div>
                 </div>
             ))}

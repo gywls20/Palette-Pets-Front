@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from "@emotion/styled";
 import '../../styles/carrot/CarrotForm.css';
+import '../../image/icon-image.png'
 
 
 const ImageUpdate = () => {
@@ -71,7 +72,15 @@ const ImageUpdate = () => {
                                     border: 'none', // 버튼 테두리 제거
                                 }}
                                 onClick={() => { onImgDelete(img.id) }}
-                                type='button'>X
+                                type='button'>
+                                <img
+                                    src="https://cdn-icons-png.flaticon.com/512/3875/3875148.png"
+                                    alt="Close"
+                                    style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    }}
+                                />
                             </button>  
                         </label>
                         )

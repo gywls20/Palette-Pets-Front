@@ -14,24 +14,23 @@ html {
   background-color: #ffffff;
   font-size: 1rem;
 
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
 body {
+  padding-right: 0px !important;
   padding-top: 0.5rem;
   margin: auto;
   place-items: center;
   justify-content: space-between;
   align-items: center;
   max-width: 40rem;
-  background-color: #ffffff;
+  background-color: white;
   height: 100vh;
+
 }
 
 .css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected {

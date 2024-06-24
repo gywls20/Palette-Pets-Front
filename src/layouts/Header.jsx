@@ -5,9 +5,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Badge from '@mui/material/Badge';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {CssBaseline, Typography, useMediaQuery} from "@mui/material";
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllUnreadNotifications, logout} from "../service/api.jsx";
 import {deleteToken} from "../store/MemberSlice.js";
@@ -18,7 +19,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import "./../styles/toast/toast.css"
 import {useTheme} from "@mui/material/styles";
 import LoginIcon from '@mui/icons-material/Login';
-import * as React from "react";
 
 export default function Header() {
     const navigate = useNavigate();
@@ -43,6 +43,17 @@ export default function Header() {
         }
     })
 
+    const ToastLogout = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 500,
+        timerProgressBar: false,
+        customClass: {
+            container: 'toastContainer',
+        }
+    })
+
     // 알림 버튼 누르면 알림으루
     const handleGoToNotification = () => {
         if (token) {
@@ -51,7 +62,7 @@ export default function Header() {
             Toast.fire({
                 icon: 'error',
                 title: '로그인 해주세요!',
-                width: 450
+                width: 300
             })
             navigate("/login");
         }
@@ -143,7 +154,7 @@ export default function Header() {
             Toast.fire({
                 icon: 'error',
                 title: '로그인 해주세요!',
-                width: 450
+                width: 300
             })
             navigate("/login");
         } else {
@@ -157,10 +168,10 @@ export default function Header() {
         dispatch(deleteToken());
         setNotification([]);
         console.log(result);
-        Toast.fire({
+        ToastLogout.fire({
             icon: 'success',
             title: '로그아웃 하였습니다',
-            width: 450
+            width: 300
         }).then((Res) => {
             if(Res.value) {
                 navigate("/");
@@ -203,7 +214,7 @@ export default function Header() {
                         <Box
                             component="img"
                             alt="logo"
-                            src="/src/image/header/logo.png"
+                            src="https://kr.object.ncloudstorage.com/palettepets/logo/logo.png"
                             onClick={goToMain}
                             sx={{
                                 width: isMobileView ? '30%' : '40%',

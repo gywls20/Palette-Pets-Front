@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import WelcomeImgComp from '../components/joinPage/WelcomeImgComp.jsx';
 import JoinFormComp from '../components/joinPage/JoinFormComp.jsx';

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Box, List, ListItem, ListItemText, Card, CardMedia, Typography, Rating, Divider, Button} from '@mui/material';
+import {Box, Card, CardMedia, Divider, List, ListItem, ListItemText, Rating, Typography} from '@mui/material';
 import {Link, useNavigate} from "react-router-dom";
 import "../../styles/hotspot/hotSpot.css";
 import VisibilityIcon from "@mui/icons-material/Visibility.js";
@@ -21,7 +21,9 @@ const HotSpotList = () => {
 
             // 회원 정보 가 role이 ADMIN인지 확인하는 요청
             const checkManager = await checkIsManager();
-            setIsManager(checkManager);
+            if (checkManager === true) {
+                setIsManager(checkManager);
+            }
         }
 
         fetchData();
@@ -40,7 +42,7 @@ const HotSpotList = () => {
                 {hotSpotList.map((hotSpot, index) => (
                     <React.Fragment key={hotSpot.hotSpotId}>
                         <ListItem sx={{flexDirection: 'column', alignItems: 'center', paddingTop: 3, paddingBottom: 3}}>
-                            <Card sx={{width: '100%', marginBottom: 2}}
+                            <Card sx={{width: '100%'}}
                                   className="card"
                                   onClick={() => navigate(`/hotspot/details/${hotSpot.hotSpotId}`)}
                             >
