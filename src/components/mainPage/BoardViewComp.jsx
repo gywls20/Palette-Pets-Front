@@ -4,6 +4,7 @@ import AutoSlideImgComp from './AutoSlideImgComp';
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css'
 import BoardView from './BoardView';
 import MainCarrotView from './MainCarrotView';
+import MainHotSpotView from './MainHotSpotView';
 import Banner from './Banner';
 import { Link } from 'react-router-dom';
 
@@ -26,9 +27,6 @@ const BoardViewComp = () => {
             <div className={BoardViewStyle.postsSection}>
                 <div className={BoardViewStyle.postsHeader}>
                     <span className={BoardViewStyle.postsTitle}>최신 거래글</span>
-                    <Link to={{ pathname: '/recent', search: '?sort=articleId' }}>
-                        <button className={BoardViewStyle.postsMore}>더보기</button>
-                    </Link>
                 </div>
                 <MainCarrotView/>
             </div>
@@ -37,6 +35,12 @@ const BoardViewComp = () => {
 
             <div className={BoardViewStyle.postsSection}>
                 <Banner/>
+            </div>
+            <div className={BoardViewStyle.postsSection}>
+                <div className={BoardViewStyle.postsHeader}>
+                    <span className={BoardViewStyle.postsTitle}>최신 명소</span>
+                </div>
+                <MainHotSpotView/>
             </div>
 
 
