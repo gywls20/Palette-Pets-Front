@@ -4,15 +4,14 @@ import { Chip, CssBaseline } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import TvIcon from '@mui/icons-material/Tv';
 import { useNavigate } from 'react-router-dom';
-import { Box, Stack } from '@mui/system';
+import { Box, Stack, maxWidth, useMediaQuery } from '@mui/system';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 const BoardPageItem = (articles) => {
     const { article } = articles
-    const { title, content, images, articleHead, articleId, articleTags, boardName, countLoves, countViews, countReview, createdAt, memberNickname } = article
+    const { title, content, images, articleHead, articleId, articleTags, boardName, countLoves, countViews, countReview, createdAt, createdWho } = article
     const [formattedDateTime, setFormattedDateTime] = useState('');
-
-    console.log(formattedDateTime)
+    const isSmallScreen = useMediaQuery('(max-width:500px)');
 
 
     useEffect(() => {
@@ -69,27 +68,30 @@ const BoardPageItem = (articles) => {
 
     return (
         <>
-            <Box className="Item-container" onClick={articlePage} sx={{m:2}}>
+            <Box className="Item-container" onClick={articlePage}>
                 <div className="Item-content">
                     <div className="Item-text">
-                        <Stack direction="row" spacing={1} >
-                            <Chip label={articleHead} variant="outlined" />
-                        </Stack>
-                        <div className="Item-title">{title}</div>
+
+                        <div className={isSmallScreen ? "Item-title Item-small-title" : "Item-title"} >
+                            <Stack direction="row" spacing={1} sx={{display:'inline-block' , marginRight: 1}} >
+                                <Chip label={articleHead} variant="outlined" />
+                            </Stack>
+                            {title}
+                        </div>
                         <div className="Item-info">
-                            {memberNickname}  &emsp; {formattedDateTime}
+                        {createdWho} &nbsp; {formattedDateTime}
                             <span className='Item-icon'>
-                                <FavoriteBorderIcon sx={{ fontSize: '16pt' }} />
+                                <FavoriteBorderIcon sx={{ fontSize: '13pt' }} />
 
                             </span>
                             &nbsp; {countLoves}
                             <span className='Item-icon'>
-                                <TvIcon sx={{ fontSize: '16pt' }} />
+                                <TvIcon sx={{ fontSize: '13pt' }} />
 
                             </span>
                             &nbsp; {countViews}
                             <span className='Item-icon'>
-                                <ChatBubbleOutlineIcon sx={{ fontSize: '16pt' }} />
+                                <ChatBubbleOutlineIcon sx={{ fontSize: '13pt' }} />
 
                             </span>
                             &nbsp;  {countReview}
@@ -102,7 +104,7 @@ const BoardPageItem = (articles) => {
                     </div>
                     {
                         images.length > 0 &&
-                        <div className="Item-image"><img src={`https://kr.object.ncloudstorage.com/palettepets/article/img/${images[0].imgUrl}`} alt='image' /></div>
+                        <div className="Item-image"><img src={`https://kr.object.ncloudstorage.com/palettepets/article/img/${images[0].imgUrl}`} alt='image'  /></div>
                     }
                 </div>
 
