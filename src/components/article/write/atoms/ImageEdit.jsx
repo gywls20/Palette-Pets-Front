@@ -73,7 +73,7 @@ const ImageEdit = ({previewList,setPreviewList,imgFiles,setImgFiles,deleteChoice
             className='image-container editImage-container'
           >
 
-            <img src={item} alt={index} width={isSmallScreen ? '123':'180'} height={isSmallScreen ? '123':'180'} style={{display:'inline-block'}}/>
+            <img src={item} alt={index} width={isSmallScreen ? '123':'123'} height={isSmallScreen ? '123':'123'} style={{display:'inline-block'}}/>
             <FontAwesomeIcon icon={faTimes} className="close-icon" onClick={() => deleteChoiceImage(index)} />
 
           </div>
