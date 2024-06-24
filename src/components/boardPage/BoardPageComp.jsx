@@ -18,6 +18,7 @@ function BoardPageComp() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const isSmallScreen = useMediaQuery('(max-width:500px)');
+  
 
   //URL에서 sort 값 가져오기
   const location = useLocation();
@@ -33,6 +34,7 @@ function BoardPageComp() {
   const [where, setWhere] = useState(""); //검색
   const [ref, inView] = useInView();
 
+  
   useEffect(() => {
     console.log("board page search changed = " + search);
     setWhere(search);

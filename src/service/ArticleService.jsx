@@ -65,6 +65,13 @@ export const increaseLikeCount = (body) => {
         .then(response => response.data)
         .catch(response => console.log(response.data))
 }
+//좋아요 취소
+export const decreaseLikeCount = (articleId) =>{
+    return jwtAxios.delete(`${API_SERVER_HOST}/like/${articleId}`)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+}
+
 
 class ArticleService {
     getArticleList(page, sort, dir, search, boardName) {
