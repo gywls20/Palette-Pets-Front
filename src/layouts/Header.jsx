@@ -47,6 +47,7 @@ export default function Header() {
 
     // JWT 토큰에서 닉네임을 추출하는 함수
     const getNicknameFromToken = () => {
+        console.log("ddududududud")
         let payload = token.substring(token.indexOf('.')+1,token.lastIndexOf('.'));
         let dec = base64.decode(payload)
         
@@ -163,15 +164,17 @@ export default function Header() {
     
     // 로그인 했으면 프로필로, 아니면 로그인
     const handleProfileOrLogIn = () => {
-        let nickname = getNicknameFromToken();
+
         if (token === undefined || token === '' || !token) {
             Toast.fire({
                 icon: 'error',
                 title: '로그인 해주세요!',
                 width: 300
             })
-            navigate("/login/{}");
+            navigate("/login");
         } else {
+            let nickname = getNicknameFromToken();
+            console.log("nickname : "+ nickname)
             navigate(`/member/${nickname}`); // 나중에 회원 마이페이지 가도록
         }
     }

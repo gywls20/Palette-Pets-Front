@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Box, Button, Avatar } from '@mui/material';
-import 'react-toastify/dist/ReactToastify.css';
 import { profile } from '../../service/memberApi'; // profile API 가져오기
 import { useNavigate } from 'react-router-dom';
 

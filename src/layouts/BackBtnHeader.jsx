@@ -159,7 +159,9 @@ export default function BackBtnHeader() {
             })
             navigate("/login");
         } else {
-            navigate("/pet"); // 나중에 회원 마이페이지 가도록
+            let nickname = getNicknameFromToken();
+            console.log("nickname : "+ nickname)
+            navigate(`/member/${nickname}`); // 나중에 회원 마이페이지 가도록
         }
     }
 
