@@ -1,17 +1,15 @@
-
 import axios from "axios";
 import jwtAxios from "./jwtAxios.js";
-import {url} from "../utils/single";
-const API_SERVER_HOST = `http://localhost:8080`;
+import {url, urlNoPort} from "../utils/single.js";
+
+const API_SERVER_HOST = `${url}`;
+
+axios.defaults.withCredentials = true; // withCredentials 전역 설정
+axios.defaults.baseURL = url;
 
 const jsonHeaders = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": `http://localhost:3000`,
-}
-
-// new FormData() 로 파일 보낼때는 json 헤더말고 이 헤더를 쓰기
-const defaultHeaders = {
-    "Access-Control-Allow-Origin": `http://localhost:3000`,
+    "Access-Control-Allow-Origin": `${urlNoPort}`,
 }
 
 axios.defaults.withCredentials = true; // withCredentials 전역 설정
@@ -211,6 +209,14 @@ export const getCarrotLike = async () => {
         }
 };
 
-
-
-export default myPageProfile; // default 내보내기 추가
+//당근 좋아요 누른거
+export const getMemberNickname = async () => {
+    try{
+        const res = await jwtAxios.get(`${API_SERVER_HOST}/member/nickname`);
+        // console.log("[memberApi - getMemberNickname]닉네임 가져오기 ", res.data);
+        return res.data;
+    }catch(error){
+        console.error('Error:', error);
+        throw new Error('닉네임 가져오기 중 에러 발생');
+    }
+};
