@@ -1,46 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import carrotService from '../../service/carrotService';
-import ImageUpdate from './ImageUpdate';
 import '../../styles/carrot/CarrotForm.css';
+import ImageUpdate from './ImageUpdate';
 
+
+const imageAsFile = (url) => {
+  const fullUrl = `https://kr.object.ncloudstorage.com/palettepets/carrot/img/${url}`
+  const blob = new Blob([JSON.stringify(fullUrl)], { type: "application/json" });
+  const file = new File([blob], url, { type: blob.type });
+  return file
+};
 
 const CarrotUpdateForm = () => {
   const navigate = useNavigate();
 
   const {id} = useParams();
   const [carrot, setCarrot] = useState([]);
-  const [imgList, setImgList] = useState([]);
+  const [carrotTitle, setCarrotTitle] = useState('');
+  const [carrotContent, setCarrotContent] = useState('');
+  const [carrotTag, setCarrotTag] = useState('');
+  const [carrotPrice, setCarrotPrice] = useState('');
+  const [imgFiles, setImgFiles] = useState([]);
+  const [previewList, setPreviewList] = useState([]);
 
   useEffect(() => {
     fetchCarrot(id);
-    console.log("carrotId = "+ id)
   }, [id]);
 
   const fetchCarrot = (id) => {
     console.log("id = "+id)
+    //기존 정보 가져오기
     carrotService.getCarrotDetails(id).then((res) => {
-      console.log(res.data);
       setCarrot(res.data);
-      //setPage(page => page + 1);
+
+      const imgArray = res.data.imgList && res.data.imgList.map(image => `https://kr.object.ncloudstorage.com/palettepets/carrot/img/${image}`)
+      console.log("real = " + imgArray);
+
+      const files = res.data.imgList && res.data.imgList.map((item) => 
+        imageAsFile(item)
+      )
+
+      setImgFiles(files);
+      setPreviewList(imgArray);
       }).catch((err) => { 
         console.log(err)
       });
     }
 
-
-  const [carrotTitle, setCarrotTitle] = useState('');
-  const [carrotContent, setCarrotContent] = useState('');
-  const [carrotTag, setCarrotTag] = useState('');
-  const [carrot_price, setCarrot_price] = useState('');
-  const [files, setFiles] = useState([]);
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
+
   // 사용자가 새로 입력한 값이 있는 경우 FormData에 추가
   if (carrotTitle !== '') {
     formData.append('carrotTitle', carrotTitle);
@@ -60,19 +72,20 @@ const CarrotUpdateForm = () => {
     formData.append('carrotTag', carrot.carrotTag);
   }
 
-  if (carrot_price !== '') {
-    formData.append('carrot_price', carrot_price);
+  if (carrotPrice !== '') {
+    formData.append('carrotPrice', carrotPrice);
   } else {
-    formData.append('carrot_price', carrot.carrot_price);
+    formData.append('carrotPrice', carrot.carrotPrice);
   }
   // 이미지 파일 추가
-  files.forEach((file) => {
-    formData.append('files', file);
-    });
+  Object.values(imgFiles).map((item, index) => {
+    formData.append('files', item);
+});
 
     try {
-      const result = await carrotService.putCarrotUpdate(formData, id);
-      if (result !== null) {
+      const response = await carrotService.putCarrotUpdate(formData, id);
+      console.log("stauts" + response.status);
+      if (response.status === 200) {
           alert('글 수정에 성공했습니다.')
           navigate(-1); // 이전 페이지로 이동
       } else {
@@ -86,57 +99,65 @@ const CarrotUpdateForm = () => {
     }
   };
 
+  const handleCancel = () => {
+    navigate(-1); // 이전 페이지로 이동
+  };
+
     return (
         <form className="write-post-form" onSubmit={handleSubmit}>
             <h2 >내 물건 수정하기</h2>
         <div className="form-group">
-          <label>제목</label>
+          <label style={{textAlign: 'left'}}>제목</label>
           <input
             type="text"
             id="carrotTitle"
             value={carrotTitle}
             onChange={(event) => setCarrotTitle(event.target.value)}            
             placeholder={carrot.carrotTitle}
+            style={{backgroundColor : 'white', color:'black'}}
           />
         </div>
         <div className="form-group">
-          <label>설명</label>
+          <label style={{textAlign: 'left'}}>설명</label>
           <textarea
             id="carrotContent"
             value={carrotContent}
             onChange={(event) => setCarrotContent(event.target.value)}
             placeholder={carrot.carrotContent}
+            style={{backgroundColor : 'white', color:'black'}}
           ></textarea>
         </div>
         <div className="form-group">
-          <label>거래 방식</label>
-          <select id="carrotTag" value={carrotTag || carrot.carrotContent} onChange={(event) => setCarrotTag(event.target.value)}>
-            <option value="">선택</option>
-            <option value="판매">판매</option>
-            <option value="구매">구매</option>
-            <option value="나눔">나눔</option>
-            <option value="산책">산책</option>
+          <label style={{textAlign: 'left'}}>거래 방식</label>
+          <select 
+              id="carrotTag" 
+              value={carrotTag || carrot.carrotContent} 
+              onChange={(event) => setCarrotTag(event.target.value)}
+              style={{backgroundColor : 'white', color:'black'}}>
+            <option value="판매" selected={carrotTag === '판매'}>판매</option>
+            <option value="구매" selected={carrotTag === '구매'}>구매</option>
+            <option value="나눔" selected={carrotTag === '나눔'}>나눔</option>
+            <option value="산책" selected={carrotTag === '산책'}>산책</option>
           </select>
         </div>
         <div className="form-group">
-          <label>가격</label>
+          <label style={{textAlign: 'left'}}>가격</label>
           <input
             type="text"
             id="carrot_price"
-            value={carrot_price}
-            onChange={(event) => setCarrot_price(event.target.value)}
-            placeholder={carrot.carrot_price}
+            value={carrotPrice}
+            onChange={(event) => setCarrotPrice(event.target.value)}
+            placeholder={carrot.carrotPrice}
+            style={{backgroundColor : 'white', color:'black'}}
           />
         </div>
         <div className="form-group">
-        <label>이미지</label>
-          <img src={`https://kr.object.ncloudstorage.com/palettepets/carrot/img/${carrot.img}`} alt="First slide" height="200" width="280" />
-          <ImageUpdate imgList={imgList} setImgList={setImgList}/>
+          <ImageUpdate previewList={previewList} setPreviewList={setPreviewList} imgFiles={imgFiles} setImgFiles={setImgFiles}/>
         </div>
         <button type="submit" className="submit-button" onClick={() => handleSubmit(formatDate)}>
           수정 완료
-        </button><br/>
-        <button type="reset" className="submit-button">다시 작성</button>
+        </button>
+        <button type="reset" className="submit-button" onClick={() => handleCancel()}>취소</button>
       </form>
     );
 };
