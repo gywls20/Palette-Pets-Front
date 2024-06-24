@@ -44,6 +44,17 @@ export default function Header() {
         }
     })
 
+    const ToastLogout = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 500,
+        timerProgressBar: false,
+        customClass: {
+            container: 'toastContainer',
+        }
+    })
+
     // 알림 버튼 누르면 알림으루
     const handleGoToNotification = () => {
         if (token) {
@@ -52,7 +63,7 @@ export default function Header() {
             Toast.fire({
                 icon: 'error',
                 title: '로그인 해주세요!',
-                width: 450
+                width: 300
             })
             navigate("/login");
         }
@@ -144,7 +155,7 @@ export default function Header() {
             Toast.fire({
                 icon: 'error',
                 title: '로그인 해주세요!',
-                width: 450
+                width: 300
             })
             navigate("/login");
         } else {
@@ -158,10 +169,10 @@ export default function Header() {
         dispatch(deleteToken());
         setNotification([]);
         console.log(result);
-        Toast.fire({
+        ToastLogout.fire({
             icon: 'success',
             title: '로그아웃 하였습니다',
-            width: 450
+            width: 300
         }).then((Res) => {
             if(Res.value) {
                 navigate("/");

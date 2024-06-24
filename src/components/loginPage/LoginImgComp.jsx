@@ -7,8 +7,8 @@ const LoginImgComp = () => {
         <div
             style={{ backgroundColor: "white", width: "100%" }}
         >
-            <div className={ImgStyle.imageTool}>
-                <img src={LoginImage} alt="Login" className={ImgStyle.image}/>
+            <div className={ImgStyle.imageToolLoginImg}>
+                <img src={LoginImage} alt="Login" className={ImgStyle.imageLoginImg}/>
             </div>
             <div>
                 <h3>로그인</h3>

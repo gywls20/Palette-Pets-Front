@@ -42,7 +42,7 @@ const HotSpotList = () => {
                 {hotSpotList.map((hotSpot, index) => (
                     <React.Fragment key={hotSpot.hotSpotId}>
                         <ListItem sx={{flexDirection: 'column', alignItems: 'center', paddingTop: 3, paddingBottom: 3}}>
-                            <Card sx={{width: '100%', marginBottom: 2}}
+                            <Card sx={{width: '100%'}}
                                   className="card"
                                   onClick={() => navigate(`/hotspot/details/${hotSpot.hotSpotId}`)}
                             >
