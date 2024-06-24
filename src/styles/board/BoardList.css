@@ -42,8 +42,8 @@
     background-color: #b2b7bd; /* Green background */
     border: none; /* Remove borders */
     color: white; /* White text */
-    width: 12%;
-    height: 50px;
+    width: 13%;
+    height: 80px;
     text-align: center; /* Centered text */
     text-decoration: none; /* Remove underline */
     display: inline-block;
@@ -55,6 +55,10 @@
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin : 15px
+}
+.small-round-button{
+    width: 12%;
+    height: 50px;
 }
 
 
@@ -76,7 +80,7 @@ hr {
   opacity: 0.3;
 }
 
-.header{
+.Item-header{
     padding: 2rem 0 0 0 ;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 헤더에 그림자 추가 */
@@ -103,7 +107,7 @@ hr {
 
 .selectedTagList{
     background-color:rgb(246, 247, 255);
-   height: 100px; /* 기본 높이 설정 */
+   height: 70px; /* 기본 높이 설정 */
 }
 .tagList {
     max-height: 75px; /* 기본 높이 설정 */
