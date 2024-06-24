@@ -25,3 +25,6 @@
     right: 0;
 }
 
+.mainFooter {
+    z-index: 99;
+}
