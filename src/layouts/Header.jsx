@@ -21,6 +21,8 @@ import "./../styles/layout/header.css"
 import {useTheme} from "@mui/material/styles";
 import LoginIcon from '@mui/icons-material/Login';
 
+import base64 from 'base-64';
+
 export default function Header() {
     const navigate = useNavigate();
     const token = useSelector((state) => state.MemberSlice.token);
@@ -43,6 +45,17 @@ export default function Header() {
             container: 'toastContainer',
         }
     })
+
+    // JWT 토큰에서 닉네임을 추출하는 함수
+    const getNicknameFromToken = () => {
+        let payload = token.substring(token.indexOf('.')+1,token.lastIndexOf('.'));
+        let dec = base64.decode(payload)
+        
+        let nickname = JSON.parse(dec).memberNickname;
+        console.log("dec="+nickname);
+        return nickname;
+        // navigate(`/member/${nickname}}`);
+    };
 
     const ToastLogout = Swal.mixin({
         toast: true,
@@ -151,15 +164,16 @@ export default function Header() {
     
     // 로그인 했으면 프로필로, 아니면 로그인
     const handleProfileOrLogIn = () => {
+        let nickname = getNicknameFromToken();
         if (token === undefined || token === '' || !token) {
             Toast.fire({
                 icon: 'error',
                 title: '로그인 해주세요!',
                 width: 300
             })
-            navigate("/login");
+            navigate("/login/{}");
         } else {
-            navigate("/pet"); // 나중에 회원 마이페이지 가도록
+            navigate(`/member/${nickname}`); // 나중에 회원 마이페이지 가도록
         }
     }
 
