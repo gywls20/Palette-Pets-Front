@@ -18,7 +18,7 @@ function BoardPageComp() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const isSmallScreen = useMediaQuery('(max-width:500px)');
-  console.log(isSmallScreen)
+  
   //URL에서 sort 값 가져오기
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -113,6 +113,7 @@ function BoardPageComp() {
     setSearch([])
     setTagList([])
   }
+  
   return (
     <>
       <div className='header'>
@@ -176,7 +177,7 @@ function BoardPageComp() {
        sx={{
         position: 'fixed',
         bottom: 75,
-        right: isSmallScreen ? 30:930
+        right: isSmallScreen ? 30:480
         
       }}>
         <EditIcon sx={{fontSize:'30pt'}}/>

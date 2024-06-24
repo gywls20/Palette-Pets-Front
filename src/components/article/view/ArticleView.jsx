@@ -42,7 +42,7 @@ const ArticleView = () => {
   const [formattedDateTime, setFormattedDateTime] = useState('');
 
   const increaseLike = async () => {
-    
+
 
     if ((token === undefined) || (token === null) || (token === '')) {
 
@@ -161,9 +161,9 @@ const ArticleView = () => {
           }
           action={
             token === '' ? null :
-            <IconButton aria-label="basic-menu" onClick={handleClick}>
-              <MoreVertIcon />
-            </IconButton>
+              <IconButton aria-label="basic-menu" onClick={handleClick}>
+                <MoreVertIcon />
+              </IconButton>
           }
           title={created_who}
           subheader={formattedDateTime}
@@ -222,15 +222,15 @@ const ArticleView = () => {
       </Card>
 
 
+      <Card sx={{ maxWidth: 630, border: 'none', margin: '20px auto' }}>
+        <div style={{ marginBottom: '10px', padding: '10px', textAlign: 'left' }}>&emsp; 댓글 {countReview}</div>
+        {
+          commentDto && commentDto.map((item) =>
 
-      <div style={{ marginBottom: '10px', padding: '10px', textAlign: 'left' }}>&emsp; 댓글 {countReview}</div>
-      {
-        commentDto && commentDto.map((item) =>
-
-          <CommentItem key={item.articleCommentId} item={item} articleId={articleId} setIsArticleSubmitted={setIsArticleSubmitted} isArticleSubmitted={isArticleSubmitted} />
-        )
-      }
-
+            <CommentItem key={item.articleCommentId} item={item} articleId={articleId} setIsArticleSubmitted={setIsArticleSubmitted} isArticleSubmitted={isArticleSubmitted} />
+          )
+        }
+      </Card>
       {/* 모달창 삭제 */}
       <Modal
         open={openModal}
