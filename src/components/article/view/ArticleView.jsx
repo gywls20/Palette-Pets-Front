@@ -55,7 +55,7 @@ const ArticleView = () => {
     await decreaseLikeCount(articleId);
 
      alert("좋아요 취소되었습니다.")
-     
+      
      setIsArticleSubmitted(!isArticleSubmitted)
     }
     else{
@@ -81,7 +81,7 @@ const ArticleView = () => {
       const commentData = await getComment(articleId)
 
       const isLikeArticle = await getIsLike(articleId)
-      
+      console.log(isLikeArticle)
       setArticleDto(articleData);
       setCommentDto(commentData);
       setIsLike(isLikeArticle);
@@ -179,7 +179,7 @@ const ArticleView = () => {
               </IconButton>
           }
           title={created_who}
-          subheader={createdAt}
+          subheader={formattedDateTime}
           sx={{ textAlign: 'left', margin: '10px 20px' }}
         />
 

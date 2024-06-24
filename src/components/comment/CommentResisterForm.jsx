@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { addComment } from '../../service/commentApi';
 import { useSelector } from 'react-redux';
-
+import useToast from '../../hooks/useToast.jsx'
 
 const style = {
     width: '80%',
@@ -17,7 +17,7 @@ const style = {
 
 const CommentResisterForm = ({ memberNickname, commentRef, articleId, parentId, setIsArticleSubmitted, isArticleSubmitted, handleExpandClick }) => {
     const token = useSelector(state => state.MemberSlice).token;
-
+    const toast = useToast();
     
     const [comment, setComment] = useState('');
 
@@ -28,12 +28,12 @@ const CommentResisterForm = ({ memberNickname, commentRef, articleId, parentId, 
     const onSubmit = async () => {
         if ((token === undefined) || (token === null) || (token === '')) {
             
-            alert('로그인 해 주세요')
-            return false;
+            toast("로그인 해 주세요!")
+            
             
         }
         if (comment === '' || comment === null) {
-            return false;
+            toast("댓글 내용을 입력하세요.")
         }
 
         const addDto = {
@@ -47,6 +47,7 @@ const CommentResisterForm = ({ memberNickname, commentRef, articleId, parentId, 
         console.log(response)
         setComment('');
         setIsArticleSubmitted(!isArticleSubmitted);
+        toast("댓글이 정상적으로 등록되었습니다.")
         handleExpandClick()
     }
 
