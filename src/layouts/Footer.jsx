@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CreateIcon from "@mui/icons-material/Create";
+import "./../styles/layout/footer.css"
+
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import {
   BottomNavigation,
@@ -49,7 +51,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <>
+    <div className={'mainFooter'}>
       <CssBaseline />
       <Paper
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
@@ -99,7 +101,7 @@ const Footer = () => {
           <KeyboardArrowUp />
         </IconButton>
       )}
-    </>
+    </div>
   );
 };
 

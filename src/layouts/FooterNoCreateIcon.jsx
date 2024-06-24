@@ -83,10 +83,10 @@ const FooterNoCreateIcon = () => {
   }, []);
 
   return (
-      <>
-        <CssBaseline />
+      <div className={'mainFooter'}>
+        <CssBaseline/>
         <Paper
-            sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+            sx={{position: "fixed", bottom: 0, left: 0, right: 0}}
             elevation={3}>
           <BottomNavigation
               showLabels
@@ -96,11 +96,11 @@ const FooterNoCreateIcon = () => {
                 boxShadow: '0px -2px 5px rgba(0, 0, 0, 0.15)'
               }}
           >
-            <BottomNavigationAction label="Home" icon={<Home />}/>
-            <BottomNavigationAction label="채팅" icon={<ForumIcon />}/>
-            <BottomNavigationAction label="커뮤니티" icon={<PeopleIcon />} />
+            <BottomNavigationAction label="Home" icon={<Home/>}/>
+            <BottomNavigationAction label="채팅" icon={<ForumIcon/>}/>
+            <BottomNavigationAction label="커뮤니티" icon={<PeopleIcon/>}/>
             <BottomNavigationAction label="거래" icon={<VolunteerActivism/>}/>
-            <BottomNavigationAction label="플레이스" icon={<PetsIcon />} />
+            <BottomNavigationAction label="플레이스" icon={<PetsIcon/>}/>
           </BottomNavigation>
         </Paper>
         {showButton && (
@@ -108,10 +108,10 @@ const FooterNoCreateIcon = () => {
                 className={"topButton"}
                 onClick={moveToTop}
                 aria-label="move to top">
-              <KeyboardArrowUp />
+              <KeyboardArrowUp/>
             </IconButton>
         )}
-      </>
+      </div>
   );
 };
 

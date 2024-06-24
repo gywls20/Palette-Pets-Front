@@ -17,6 +17,7 @@ import {EventSourcePolyfill} from "event-source-polyfill";
 import {url} from "../utils/single.js";
 import LogoutIcon from '@mui/icons-material/Logout';
 import "./../styles/toast/toast.css"
+import "./../styles/layout/header.css"
 import {useTheme} from "@mui/material/styles";
 import LoginIcon from '@mui/icons-material/Login';
 
@@ -176,7 +177,7 @@ export default function Header() {
     }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }} className={'mainHeader'}>
             <CssBaseline />
             <AppBar
                 sx={{
