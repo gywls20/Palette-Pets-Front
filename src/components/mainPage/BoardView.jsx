@@ -123,9 +123,9 @@ const BoardView = () => {
                                 <img src={article.memberImg ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${article.memberImg}`
                                 : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`}
                                 alt="User" />
-                                <div className={BoardViewStyle.ModalCopontainer}>
-                                <button className={BoardViewStyle.chackBt}>팔로우</button>
-                                <button className={BoardViewStyle.chackBt} onClick={requestChat(article.memberId)}>
+                                <div className={BoardViewStyle.ModalContainer}>
+                                    <button className={BoardViewStyle.chackBt}>팔로우</button>
+                                    <button className={BoardViewStyle.chackBt} onClick={requestChat(article.memberId)}>
                                         <span style={{ color: '#ffffff' }}>1:1 대화</span>
                                     </button>
                                 </div>
@@ -136,7 +136,7 @@ const BoardView = () => {
             ))}
             <div className={BoardViewStyle.postHeader}>
             <Link to={{ pathname: '/recent', search: '?sort=articleId' }} className={BoardViewStyle.moreplz}>
-                    <button className={BoardViewStyle.moreplz}>더보기</button>
+                    <button className={BoardViewStyle.moreplzBtn}>더보기</button>
             </Link>
             </div>
             
