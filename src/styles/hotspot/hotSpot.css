@@ -5,8 +5,9 @@ body {
 /* 모바일 */
 @media only screen and (max-width: 600px) {
     .write-button {
-        left: 300px;
-        bottom: 100px;
+        z-index: 99;
+        left: 87%;
+        bottom: 8%;
         position: fixed;
         width: 40px;
         height: 40px;
@@ -18,6 +19,14 @@ body {
         color: white;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         cursor: pointer;
+    }
+
+    .truncated-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* 2줄로 제한 */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
@@ -37,6 +46,14 @@ body {
         color: white;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         cursor: pointer;
+    }
+
+    .truncated-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 4; /* 4줄로 제한 */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
