@@ -68,8 +68,9 @@ root {
   }
 
   .update-button {
-    left: 300px;
-    bottom: 100px;
+    z-index: 99;
+    left: 87%;
+    bottom: 8%;
     position: fixed;
     width: 40px;
     height: 40px;
@@ -112,7 +113,7 @@ root {
   .update-button {
     z-index: 99;
     left: 69%;
-    bottom: 8%;
+    bottom:8%;
     position: fixed;
     width: 40px;
     height: 40px;
