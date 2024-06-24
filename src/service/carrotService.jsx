@@ -7,9 +7,7 @@ const CARROT_API_BASE_URL = `${url}/carrot`;
 class carrotService {
     //리스트 출력
     getCarrotList(page, sort, dir, where) {
-        //return axios.get(ARTICLE_API_BASE_URL);
         return axios.get(`${CARROT_API_BASE_URL}/list?page=${page}&sort=${sort}&dir=${dir}&where=${where}`)
-        //return axios.get(`${ARTICLE_API_BASE_URL2}?articleTags=${where}`)
     }
 
     //글 작성
@@ -40,7 +38,7 @@ class carrotService {
         console.log("폼데이터 = ", Object.fromEntries(formData.entries()));
         return jwtAxios.post(`${CARROT_API_BASE_URL}/update/${id}`, formData, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'multipart/form-data'
             }
         }
         )
@@ -61,6 +59,16 @@ class carrotService {
     //회원 별 거래 리스트 출력
     getUserList() {
         return jwtAxios.get(`${CARROT_API_BASE_URL}/postList`)
+    }
+
+    //좋아요 등록 & 삭제
+    postLike(id) {
+        return jwtAxios.post(`${CARROT_API_BASE_URL}/like/${id}`)
+    }
+    
+    //좋아요 확인
+    getLike(id) {
+        return jwtAxios.get(`${CARROT_API_BASE_URL}/likeState/${id}`)
     }
 
 }

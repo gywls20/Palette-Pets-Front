@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import Dropdown from 'react-bootstrap/Dropdown';
 import '../../styles/carrot/CarrotList.css';
 import carrotService from '../../service/carrotService';
 import CreateIcon from "@mui/icons-material/Create";
+import { Box, Button, ButtonGroup, Fab, MenuItem, IconButton } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import CarrotResults from './CarrotResults';
+import EditIcon from '@mui/icons-material/Edit';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
 
 const CarrotList = () => {
     const navigate = useNavigate();
@@ -104,11 +107,11 @@ const CarrotList = () => {
                     <input class="search_input" 
                         type="text" 
                         placeholder="물품을 검색해보세요" 
-                        style={{marginRight:'10px'}}
+                        style={{marginRight:'10px', backgroundColor:'#EAEAEA', color:'black'}}
                         value={keyword}
                         onChange={onKeywordChange}
                         />
-                <button type="submit" class="chat_button" >검색하기</button>
+                <button variant="outlined" type="submit">검색하기</button>
                 </form>
             </div>
             <div class="filter-buttons-container">
@@ -119,47 +122,46 @@ const CarrotList = () => {
                       <button className="filter-button me-4" onClick={() => WhereChange('나눔')}>나눔</button>
                       <button className="filter-button me-4" onClick={() => WhereChange('산책')}>산책</button>
               </div>
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic" style={{backgroundColor:"black"}}>
-                  정렬
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => SortChange('carrot_price', true)}>가격 높은 순</Dropdown.Item>
-                  <Dropdown.Item onClick={() => SortChange('carrot_price', false)}>가격 낮은 순</Dropdown.Item>
-                  <Dropdown.Item onClick={() => SortChange('carrotLike', true)}>인기순</Dropdown.Item>
-                  <Dropdown.Item onClick={() => SortChange('carrot_createdAt', false)}>오래된 순</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
             </div>
-
-      <div>
+          <div>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                  paddingTop: '10px'
+                }}
+              >
+                <ButtonGroup variant="text" aria-label="Basic button group" 
+                sx={{      
+                  '& .MuiButtonGroup-grouped': {
+                    borderColor: '#d0d0d0', // 구분선 색상
+                    padding: '4px 3px', // 버튼 내부 여백 조절
+                    fontSize: '12px', // 버튼 글자 크기 조절
+                  },}}>
+                  <Button onClick={() => SortChange('carrotLike', true)} sx={{color:'black'}}>인기순</Button>
+                  <Button onClick={() => SortChange('carrot_price', true)} sx={{color:'black'}}>가격 높은 순</Button>
+                  <Button onClick={() => SortChange('carrot_price', false)} sx={{color:'black'}}>가격 낮은 순</Button>
+                  <Button onClick={() => SortChange('carrot_createdAt', false)} sx={{color:'black'}}>오래된 순</Button>
+                </ButtonGroup>
+              </Box>
             {search.length > 0 ? (
                 <CarrotResults carrot={search} />
             ) : (
                 <CarrotResults carrot={carrot} />
             )}
-
-            {/* 페이징 리스트는 있고 검색어 리스트가 없거나,
-             사용자가 input에 입력한 값이 없을 때만 페이징 리스트를 출력 */}
-            {/* {((carrot && search) || !keyword) && (
-                <div>
-                    <CarrotDetail list={carrot}/>
-                </div>
-            )}
-            {search && <CarrotDetail list={search} />} */}
                 <Link to="/carrot/post">
                     <button className="floating-button">
                       <CreateIcon />
                     </button>
                 </Link>
                 <div ref={ref}></div>
-        </div> 
-                {/* <Link to="/carrot/post">
-                    <button className="floating-button">
-                    <CreateIcon />
-                    </button>
-                </Link>
-                <button onClick={handleWriteClick}>글쓰기</button> */}
+            </div> 
+            <Box sx={{ '& > :not(style)': { m: 1 } }}>
+              <Fab color="secondary" aria-label="edit">
+                <EditIcon />
+              </Fab>
+            </Box>
       </div>
     );
 };
