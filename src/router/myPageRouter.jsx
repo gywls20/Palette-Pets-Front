@@ -14,7 +14,7 @@ const Profile = lazy(() => import('../components/member/profileComp.jsx'))
 const FeedDetailComp = lazy(() => import('../components/member/feedDetailComp.jsx'))
 const SettingPwComp = lazy(() => import('../components/member/settingPwComp.jsx'))
 const SettingOtherComp = lazy(() => import('../components/member/settingOtherComp.jsx'))
-
+const CarrotLikeComp = lazy(() => import('../components/member/carrotLikeComp.jsx'))
 import {Navigate } from "react-router-dom";
 
 const mypageRouter = () =>{
@@ -61,6 +61,10 @@ const mypageRouter = () =>{
                 path: "setting/other",
                 element: <Suspense fallback={Loading}><IsLogin Component={<SettingOtherComp/>} /></Suspense>
             },
+            {
+                path: "carrot/like",
+                element: <Suspense fallback={Loading}><IsLogin Component={<CarrotLikeComp/>} /></Suspense>
+            }
         ]
 }
 

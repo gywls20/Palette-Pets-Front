@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import carrotService from '../../service/carrotService';
+import {getCarrotLike} from '../../service/memberApi';
 import '../../styles/carrot/CarrotList.css';
 import image from '../../image/icon-camera.png';
 
@@ -13,7 +13,8 @@ const CarrotUserList = () => {
       }, []);
 
       const fetchCarrot = () => {
-            carrotService.getUserList().then((res) => {
+            getCarrotLike().then((res) => {
+                console.log(res.data)
               setCarrot(res.data);
             }).catch((err) => {
               console.log(err);
@@ -43,7 +44,7 @@ const CarrotUserList = () => {
     return (
       <div className="product-list-container">
         {carrot.length === 0 ? (
-                <div className="no-products">당근장터에 올린 글이 없습니다.</div>
+                <div className="no-products">당근장터에서 좋아요 누른 글이 없습니다.</div>
             ) : (
               carrot.map(carrot =>
                   <div className="product-item-container" onClick={() => navigate(`/carrot/details/${carrot.carrotId}`)}>

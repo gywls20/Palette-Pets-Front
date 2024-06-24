@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HomeDefaultLayout from "../layouts/HomeDefaultLayout.jsx";
+import HomeDefaultLayout from "../layouts/DefaultLayout.jsx";
 import JoinFormComp from '../components/joinPage/JoinFormComp.jsx';
 
 const JoinPage = () => {

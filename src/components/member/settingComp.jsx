@@ -58,8 +58,8 @@ const SettingCom = () => {
             <Divider sx={{ my: 2 }} />
 
             <Box sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
-                <Link onClick={() => handleNavigation('')} sx={{ mb: 1 }}>당근장터 쓴 글</Link>
-                <Link onClick={() => handleNavigation('')} sx={{ mb: 1 }}>당근장터 좋아요</Link>
+                <Link onClick={() => navigate(`/carrot/myCarrot`)} sx={{ mb: 1 }}>당근장터 쓴 글</Link>
+                <Link onClick={() => handleNavigation('/member/carrot/like')} sx={{ mb: 1 }}>당근장터 좋아요</Link>
             </Box>
             <Divider sx={{ my: 2 }} />
 

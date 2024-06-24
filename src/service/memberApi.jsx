@@ -200,6 +200,17 @@ export const FindPW =(email) => {
         });
 }
 
+//당근 좋아요 누른거
+export const getCarrotLike = async () => {
+    console.log("들어왔어요")
+    try{
+        return jwtAxios.get(`${API_SERVER_HOST}/carrot/like`)
+        }catch(error){
+            console.error('Error:', error);
+            throw new Error('당근 좋아요 리스트 처리 중 오류가 발생했습니다.');
+        }
+};
+
 
 
 export default myPageProfile; // default 내보내기 추가
