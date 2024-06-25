@@ -12,6 +12,7 @@ import image from '../../image/icon-photo.png';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import connectChat from '../../utils/connectChat';
 
 
 const CarrotDetail = () => {
@@ -169,7 +170,7 @@ const PrevArrow = ({ onClick }) => {
             <div className="title">{carrot.carrotTitle}</div>
           </div>
           <div className="tags-container">
-            <span>#{carrot.carrotTag}</span> •
+            <span>#{carrot.carrotTag}</span>
             <span style={{color: "#998e8e"}}>{getTimeDifference(carrot.carrotCreatedAt)}</span>
           </div>
           <div className="description">
@@ -190,7 +191,7 @@ const PrevArrow = ({ onClick }) => {
               {carrot.carrotPrice}원
               </div>
             </div>
-            {carrot.carrotState === 2 ? null : (<button className="chat-button">채팅하기</button>) }
+            {carrot.carrotState === 2 ? null : (<button className="chat-button" onClick={() => connectChat(carrot.memberId)}>채팅하기</button>) }
           </div>
         </div>
       </div>
