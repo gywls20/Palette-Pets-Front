@@ -203,7 +203,6 @@ const MyPageComp = ({ nickname }) => {
   )}
 </Box>
 
-
             <div
             style={{
                 textAlign: 'left', // 글자 왼쪽 정렬
@@ -217,7 +216,7 @@ const MyPageComp = ({ nickname }) => {
                     <Box
                         key={index}
                         component="img"
-                        src={`https://kr.object.ncloudstorage.com/palettepets/feed/img/${feed.img}`}
+                        src={`https://kr.object.ncloudstorage.com/palettepets/pet/img/${feed.img}`}
                         alt={`feed-${index}`}
                         sx={{ width: 150, height: 150, objectFit: 'cover', display: 'inline-block', mr: 1 }}
                         onClick={() => navigate(`/member/feed/detail/${feed.feedId}`)}
