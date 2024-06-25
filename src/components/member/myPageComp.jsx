@@ -251,8 +251,8 @@ const MyPageComp = ({ nickname }) => {
             > 피드</div>
             {feeds.length === 0 ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh', border: '1px solid #ccc', borderRadius: 2, mt: 2 }}>
-                    <Typography variant="body1" align="center">
-                        피드가 존재하지 않습니다. 피드 작성하기를 눌러 만들어보세요.
+                    <Typography variant="body1" align="center" sx={{color: 'black'}}>
+                        피드가 존재하지 않습니다.
                     </Typography>
                 </Box>
             ) : (
