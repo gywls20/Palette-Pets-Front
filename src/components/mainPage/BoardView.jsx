@@ -127,7 +127,7 @@ const BoardView = () => {
                                 : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`}
                                 alt="User" />
                                 <div className={BoardViewStyle.ModalContainer}>
-                                    <button className={BoardViewStyle.chackBt}>팔로우</button>
+                                    {/* <button className={BoardViewStyle.chackBt}>팔로우</button> */}
                                     <button className={BoardViewStyle.chackBt} onClick={requestChat(article.memberId)}>
                                         <span style={{ color: '#ffffff' }}>1:1 대화</span>
                                     </button>
