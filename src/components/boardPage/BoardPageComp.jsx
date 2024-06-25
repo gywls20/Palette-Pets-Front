@@ -153,7 +153,7 @@ function BoardPageComp() {
 
           <IconButton id="basic-button" aria-label="settings" onClick={() => addBoardName('QNA')} className={QNAClassName}>
             <span>
-              <ContactSupportIcon sx={{ fontSize: '20pt', fontSize: '25pt' }} />
+              <ContactSupportIcon sx={{fontSize: '26pt' }} />
               <Typography variant="body2" sx={{}}>질문</Typography>
             </span>
           </IconButton>

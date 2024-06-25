@@ -5,6 +5,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { useNavigate } from 'react-router-dom';
 import { myPageProfile, myPageFeed, follow, unfollow } from '../../service/memberApi';
+import MyPagePetImgList from "../pet/MyPagePetImgList.jsx";
 
 
 const MyPageComp = ({ nickname }) => {
@@ -162,6 +163,7 @@ const MyPageComp = ({ nickname }) => {
                 )}
                 </>
             )}
+            <MyPagePetImgList />
             {feeds.length === 0 ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh', border: '1px solid #ccc', borderRadius: 2, mt: 2 }}>
                     <Typography variant="body1" align="center">

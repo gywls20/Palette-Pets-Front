@@ -11,7 +11,7 @@ export const addComment = (dto) => {
 }
 
 export const getComment = (articleId) =>{
-    return axios.get(`${API_SERVER_HOST}/Get/comments/${articleId}`)
+    return jwtAxios.get(`${API_SERVER_HOST}/Get/comments/${articleId}`)
         .then(response => response.data)
         .catch(response => console.log(response.data))
 }
