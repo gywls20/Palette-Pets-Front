@@ -12,6 +12,7 @@ axios.defaults.baseURL = API_SERVER_HOST;
 
 // joinApi.js
 export const join = async (formData) => {
+    console.log("시작시작")
     try {
         const response = await fetch(`${API_SERVER_HOST}/join`, { // 서버의 실제 URL로 변경
             method: 'POST',

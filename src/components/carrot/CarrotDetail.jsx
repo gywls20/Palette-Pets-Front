@@ -144,7 +144,7 @@ const PrevArrow = ({ onClick }) => {
       <Slider {...settings} className="image-slider">
             {imgList.map((img, index) => (
               <div key={index} className="imageTool">
-                <img className="image" src={ img ? `https://kr.object.ncloudstorage.com/palettepets/carrot/img/${img}` : image} alt={`Image ${index}`} style={{height:"500px", width:"500px"}} />
+                <img className="image" src={ img ? `https://kr.object.ncloudstorage.com/palettepets/carrot/img/${img}` : image} alt={`Image ${index}`} style={{height:"450px", width:"400px"}} />
               </div>
             ))}
           </Slider>

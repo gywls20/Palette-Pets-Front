@@ -78,9 +78,9 @@ const CarrotUpdateForm = () => {
     formData.append('carrotPrice', carrot.carrotPrice);
   }
   // 이미지 파일 추가
-  Object.values(imgFiles).map((item, index) => {
-    formData.append('files', item);
-});
+//   Object.values(imgFiles).map((item, index) => {
+//     formData.append('files', item);
+// });
 
     try {
       const response = await carrotService.putCarrotUpdate(formData, id);
