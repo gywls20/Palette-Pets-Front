@@ -51,7 +51,7 @@ export default function Header() {
     // const getNicknameFromToken = () => {
     //     let payload = token.substring(token.indexOf('.')+1,token.lastIndexOf('.'));
     //     let dec = base64.decode(payload)
-    //
+    
     //     let nickname = JSON.parse(dec).memberNickname;
     //     console.log("dec="+nickname);
     //     return nickname;

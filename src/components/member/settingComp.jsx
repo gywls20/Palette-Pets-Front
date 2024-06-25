@@ -54,7 +54,7 @@ const SettingCom = () => {
             <Divider sx={{ my: 2 }} />
 
                 <h2 style={{display: 'flex', flexDirection: 'column', alignItems: 'start'}}>나의 정보</h2>   
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start' , p: 2 }}>
                     <Link className="my-page-list-link" onClick={() => handleNavigation('/member/setting/other')}><AccountCircleIcon /> 회원정보수정</Link>
                     <Link className="my-page-list-link" onClick={() => handleNavigation('/member/setting/password')} ><VpnKeyIcon /> 비밀번호 변경</Link>
                     <Link className="my-page-list-link" onClick={() => handleNavigation('')} ><LocationOnIcon /> 주소지 입력</Link>
@@ -62,14 +62,14 @@ const SettingCom = () => {
                 <Divider sx={{ my: 2 }} />
 
                 <h2 style={{display: 'flex', flexDirection: 'column', alignItems: 'start'}}>나의 게시판</h2>   
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start' , p: 2 }}>
                     <Link className="my-page-list-link" onClick={() => handleNavigation('')} sx={{ mb: 1 }}><CreateIcon /> 게시판 내가 쓴 글</Link>
                     <Link className="my-page-list-link" onClick={() => handleNavigation('')} sx={{ mb: 1 }}><CommentIcon /> 게시판 내가 쓴 댓글</Link>
                 </Box>
                 <Divider sx={{ my: 2 }} />
 
                 <h2 style={{display: 'flex', flexDirection: 'column', alignItems: 'start'}}>나의 거래</h2>   
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start' , p: 2 }}>
                     <Link className="my-page-list-link" onClick={() => navigate(`/carrot/myCarrot`)} sx={{ mb: 1 }}><ShoppingBasketIcon /> 당근장터 쓴 글</Link>
                     <Link className="my-page-list-link" onClick={() => handleNavigation('/member/carrot/like')} sx={{ mb: 1 }}><FavoriteIcon /> 당근장터 좋아요</Link>
                 </Box>
