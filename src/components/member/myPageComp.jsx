@@ -5,12 +5,15 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { useNavigate } from 'react-router-dom';
 import { myPageProfile, myPageFeed, follow, unfollow } from '../../service/memberApi';
+import {petImgListInMyPageRequest} from "../../service/petApi.jsx";
 
 
 const MyPageComp = ({ nickname }) => {
     const [user, setUser] = useState({ nickname: '', img: null, following: 0, followers: 0, feeds: 0, memberId: '', followTF: false});
     const [feeds, setFeeds] = useState([]);
     const navigate = useNavigate();
+    // 반려동물
+    const [pets, setPets] = useState([]);
 
     useEffect(() => {
         const fetchProfileData = async () => {
@@ -47,8 +50,18 @@ const MyPageComp = ({ nickname }) => {
             }
         };
 
+        const fetchPetData = async () => {
+            try {
+                const data = await petImgListInMyPageRequest();
+                setPets(data);
+            } catch (error) {
+                console.error('반려동물 정보를 불러오는 중 오류 발생:', error);
+            }
+        }
+
         fetchProfileData();
         fetchFeedData();
+        fetchPetData();
     }, [nickname]);
 
     const handleFollowingClick = () => {
@@ -66,6 +79,11 @@ const MyPageComp = ({ nickname }) => {
     const navigateToSettings = () => {
         navigate('/member/setting'); 
     };
+
+    // 반려동물 추가 페이지 이동 버튼
+    const petAddPageButton = () => {
+        navigate(`/pet/list`);
+    }
 
     const handleFloatingButtonClick = () => {
         navigate(`/member/feed`);
@@ -212,18 +230,18 @@ const MyPageComp = ({ nickname }) => {
             > 반려동물 </div>
             {/* 이곳에 가로 슬라이드를 만들어 */}
             <Box sx={{ overflowX: 'auto', whiteSpace: 'nowrap', mt: 2 }}>
-                {feeds.map((feed, index) => (
+                {pets.map((pet, index) => (
                     <Box
                         key={index}
                         component="img"
-                        src={`https://kr.object.ncloudstorage.com/palettepets/pet/img/${feed.img}`}
-                        alt={`feed-${index}`}
+                        src={`https://kr.object.ncloudstorage.com/palettepets/pet/img/${pet.imgUrl}`}
+                        alt={`pet-${index}`}
                         sx={{ width: 150, height: 150, objectFit: 'cover', display: 'inline-block', mr: 1 }}
-                        onClick={() => navigate(`/member/feed/detail/${feed.feedId}`)}
+                        onClick={() => navigate(`/pet/details/${pet.petId}`)}
                     />
                 ))}
                 <Button
-                    onClick={() => navigate()}
+                    onClick={petAddPageButton}
                     sx={{
                         width: 150,
                         height: 150,
