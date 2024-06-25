@@ -245,7 +245,9 @@ const HotSpotDetails = () => {
                         theme="snow"
                         modules={{toolbar: false}}
                         style={{height: 'auto', backgroundColor: 'white', display: 'inline-block',
-                                minHeight: '100px', width: '96%', marginTop: '2%'}}
+                                minHeight: '100px', width: '96%', marginTop: '2%',
+                                whiteSpace: 'pre-wrap' // 줄바꿈과 공백 유지
+                        }}
                     />
                 </>
             }

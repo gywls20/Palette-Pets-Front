@@ -46,8 +46,14 @@ const HotSpotList = () => {
                                   className="card"
                                   onClick={() => navigate(`/hotspot/details/${hotSpot.hotSpotId}`)}
                             >
-                                <div className='cardCapter'>
-                                <CardMedia component="img" height="200"
+                                <div className='cardCapter' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <CardMedia component="img"
+                                           sx={{
+                                               height: 200,
+                                               width: '100%',
+                                               objectFit: 'cover', // 이미지 비율을 유지하면서 크기 조정
+                                               objectPosition: 'center' // 이미지의 중심을 기준으로 자르기
+                                           }}
                                            image={"https://kr.object.ncloudstorage.com/palettepets/hotspot/" + hotSpot.imgUrl}
                                            alt={hotSpot.placeName}/>
                                     <ListItemText
@@ -55,7 +61,7 @@ const HotSpotList = () => {
                                         secondary={
                                             <>
                                                 <Rating value={hotSpot.rating} precision={0.5} readOnly size="small"/>
-                                                <Typography variant="body2" color="textSecondary" component="p">
+                                                <Typography variant="body2" color="textSecondary" component="p" className="truncated-text">
                                                     {hotSpot.simpleContent}
                                                 </Typography>
                                                 <Typography variant="" color="text.secondary">

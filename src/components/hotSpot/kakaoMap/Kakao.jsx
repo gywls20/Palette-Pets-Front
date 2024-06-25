@@ -15,15 +15,24 @@ const Kakao = ({ lat, lng }) => {
     // 기본 위치 설정 지정
     const [state, setState] = useState({
         center: {
-            // lat: lat,
-            // lng: lng,
-            lat: 37.528073,
-            lng: 126.934038,
+            lat: lat || 37.528073,
+            lng: lng || 126.934038,
         },
         errMsg: null,
         isLoading: true,
-        draggable:true,
+        draggable: true,
     });
+
+    // lat와 lng props가 변경될 때마다 state 업데이트
+    useEffect(() => {
+        setState((prev) => ({
+            ...prev,
+            center: {
+                lat: lat || 37.528073,
+                lng: lng || 126.934038,
+            },
+        }));
+    }, [lat, lng]);
 
     // // 현재 사용자 위치 받아오기 (geolocation)
     // useEffect(() => {
@@ -77,8 +86,6 @@ const Kakao = ({ lat, lng }) => {
                         },
                     }}
                 />
-
-
             </Map>
         </>
     );

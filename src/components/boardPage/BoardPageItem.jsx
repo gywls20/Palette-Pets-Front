@@ -12,19 +12,14 @@ const BoardPageItem = (articles) => {
     const { title, content, images, articleHead, articleId, articleTags, boardName, countLoves, countViews, countReview, createdAt, createdWho } = article
     const [formattedDateTime, setFormattedDateTime] = useState('');
     const isSmallScreen = useMediaQuery('(max-width:500px)');
-   
+ 
     useEffect(() => {
         
         const dateTime = new Date(
-            createdAt[0], // 연도
-            createdAt[1] - 1 , // 월 (0부터 시작하므로 -1 해줘야 함)
-            createdAt[2], // 일
-            createdAt[3] || 0, // 시 (없을 경우 기본값 0)
-            createdAt[4] || 0, // 분 (없을 경우 기본값 0)
-            createdAt[5] || 0 // 초 (없을 경우 기본값 0)
+           createdAt
         );
         const nowTime = new Date();
-
+       
         const beforeTime = nowTime - dateTime;
         
 

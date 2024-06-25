@@ -20,6 +20,7 @@ import "./../styles/toast/toast.css"
 import {useTheme} from "@mui/material/styles";
 import LoginIcon from '@mui/icons-material/Login';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import {getMemberNickname} from "../service/memberApi.jsx";
 
 export default function BackBtnHeader() {
     const navigate = useNavigate();
@@ -148,9 +149,9 @@ export default function BackBtnHeader() {
         fetchData();
 
     }, []);
-    
+
     // 로그인 했으면 프로필로, 아니면 로그인
-    const handleProfileOrLogIn = () => {
+    const handleProfileOrLogIn = async () => {
         if (token === undefined || token === '' || !token) {
             Toast.fire({
                 icon: 'error',
@@ -159,8 +160,7 @@ export default function BackBtnHeader() {
             })
             navigate("/login");
         } else {
-            let nickname = getNicknameFromToken();
-            console.log("nickname : "+ nickname)
+            let nickname = await getMemberNickname();
             navigate(`/member/${nickname}`); // 나중에 회원 마이페이지 가도록
         }
     }

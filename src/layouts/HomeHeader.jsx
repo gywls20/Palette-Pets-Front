@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import HomeIcon from '@mui/icons-material/Home';
 import {CssBaseline} from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
+import "./../styles/layout/header.css"
 
 export default function Header() {
     const navigate = useNavigate()
@@ -13,7 +14,7 @@ export default function Header() {
     const Home = () => navigate("/") 
    
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }} className={'mainHeader'}>
             <CssBaseline />
             <AppBar position="fixed">
                 <Toolbar>

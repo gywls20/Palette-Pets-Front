@@ -2,3 +2,6 @@
     padding: 0 !important;
 }
 
+.mainHeader {
+    z-index: 99;
+}
