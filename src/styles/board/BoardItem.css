@@ -9,6 +9,13 @@
 
   }
   
+.chatting {
+  border-radius: 10px;
+  border: solid black;
+}
+.chatting:hover {
+  background-color: #f0f0f0;
+}
 
   .Item-content {
     display: flex;
