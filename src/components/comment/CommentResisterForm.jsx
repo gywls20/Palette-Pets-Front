@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { addComment } from '../../service/commentApi';
 import { useSelector } from 'react-redux';
 import useToast from '../../hooks/useToast.jsx'
+import { Button } from '@mui/material';
+import { display, margin } from '@mui/system';
+import { MarginOutlined } from '@mui/icons-material';
 
 const style = {
     width: '80%',
@@ -11,7 +14,7 @@ const style = {
     fontSize: '12pt',
     overflow: 'hidden',
     borderRadius: '20px',
-    margin: '0px 7px'
+    margin:'0 auto'
 
 }
 
@@ -56,9 +59,9 @@ const CommentResisterForm = ({ memberNickname, commentRef, articleId, parentId, 
 
         <>
                 <div>@{memberNickname}님 에게 댓글</div>
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex',textAlign:'center', margin:'0 auto' }}>
                     <textarea style={style} value={comment} rows={1} onChange={commentInput} placeholder={token === '' ? '로그인 해 주세요' : '댓글을 입력해 주세요'} />
-                    <button style={{ padding: '10px' }} onClick={onSubmit} >등록</button>
+                    <Button sx={{fontSize:'12pt'}} onClick={onSubmit} >등록</Button>
                 </div>
           
 

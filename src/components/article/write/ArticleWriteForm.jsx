@@ -114,7 +114,7 @@ const ArticleWriteForm = () => {
     return (
 
 
-        <div>
+        <div style={{margin:'40px auto'}}>
             <Overlay loading={loading.toString()}>
 
                 <Box sx={{ display: loading ? 'flex' : 'none' }}>
