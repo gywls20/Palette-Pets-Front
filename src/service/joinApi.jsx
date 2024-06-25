@@ -1,10 +1,11 @@
 import axios from "axios";
+import {url, urlNoPort} from "../utils/single.js";
 
-const API_SERVER_HOST = `http://localhost:8080`;
+const API_SERVER_HOST = url;
 
 const jsonHeaders = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": `http://localhost:3000`,
+    "Access-Control-Allow-Origin": `${urlNoPort}`,
 }
 
 axios.defaults.withCredentials = true; // withCredentials 전역 설정
