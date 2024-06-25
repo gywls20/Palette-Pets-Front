@@ -8,6 +8,7 @@ const jsonHeaders = {
     "Access-Control-Allow-Origin": `${urlNoPort}`,
 }
 
+
 axios.defaults.withCredentials = true; // withCredentials 전역 설정
 axios.defaults.baseURL = API_SERVER_HOST;
 

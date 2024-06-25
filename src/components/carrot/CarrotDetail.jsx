@@ -151,7 +151,7 @@ const PrevArrow = ({ onClick }) => {
         </div>
         <div className="content-container">
           <div className="seller-info">
-            <img src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png" alt="Seller" />
+            <img src={`https://kr.object.ncloudstorage.com/palettepets/member/Profile/${carrot.memberImg}`} alt="Seller" />
             <span className="seller-name">{carrot.memberNickname}</span>
           </div>
         <div>
