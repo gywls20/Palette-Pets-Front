@@ -82,7 +82,8 @@ const ArticleView = () => {
       const commentData = await getComment(articleId)
 
       const isLikeArticle = await getIsLike(articleId)
-      console.log(isLikeArticle)
+
+    
       setArticleDto(articleData);
       setCommentDto(commentData);
       setIsLike(isLikeArticle);
