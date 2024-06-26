@@ -83,7 +83,7 @@ const ArticleView = () => {
 
       const commentData = await getComment(articleId)
 
-      const result = await getIsLike(articleId)
+
 
 
       setArticleDto(articleData);
@@ -113,15 +113,16 @@ const ArticleView = () => {
         )
       }
 
-      setIsLike(result.isLike);
+      const result = await getIsLike(articleId)
+      if (result !== null || result !== '') {
 
-      if (result.memberNickname === articleData.created_who) {
+        setIsLike(result.isLike);
 
-        setVerify(true);
-
+        if (result.memberNickname === articleData.created_who) {
+          
+          setVerify(true);
+        }
       }
-      
-
     }
     fetchData();
 
@@ -196,13 +197,13 @@ const ArticleView = () => {
         />
 
         <CardContent >
-          <Typography variant="body2" color="text.secondary" fontSize="16pt" textAlign='left' sx={{ textAlign: 'center'}}>
-          {title}
-        </Typography>
-      </CardContent>
+          <Typography variant="body2" color="text.secondary" fontSize="16pt" textAlign='left' sx={{ textAlign: 'center' }}>
+            {title}
+          </Typography>
+        </CardContent>
 
-      <CardContent>
-        {/* <Typography 
+        <CardContent>
+          {/* <Typography 
             variant="body2" 
             color="text.secondary" 
             fontSize='15pt' 
@@ -210,65 +211,65 @@ const ArticleView = () => {
             sx={{ margin: '0 20px', whiteSpace: 'pre-line' }}
             dangerouslySetInnerHTML={{ __html: content }}
           /> */}
-        <ReactQuill
-          value={content}
-          readOnly={true}
-          theme="snow"
-          modules={{ toolbar: false }}
-          style={{
-            height: 'auto', backgroundColor: 'white', display: 'inline-block',
-            width: '96%', marginTop: '1%',padding:'10px', marginBottom: '40px', whiteSpace: 'pre-wrap',
-            textAlign:'left'
-            
-          }}
+          <ReactQuill
+            value={content}
+            readOnly={true}
+            theme="snow"
+            modules={{ toolbar: false }}
+            style={{
+              height: 'auto', backgroundColor: 'white', display: 'inline-block',
+              width: '96%', marginTop: '1%', padding: '10px', marginBottom: '40px', whiteSpace: 'pre-wrap',
+              textAlign: 'left'
 
-        />
-      </CardContent>
-      {
-        images && images.map((item, index) => <CardMedia
-          key={index}
-          component="img"
-          width="100%"
-          height="100%"
-          image={`https://kr.object.ncloudstorage.com/palettepets/article/img/${item.imgUrl}`}
-          alt={index}
-          sx={{ width: '50%', margin: '10px auto', border: '1px solid rgba(0,0,0,0.3)', borderRadius: '20px', padding: '2px' }}
-        />)
-      }
-      <CardContent style={{ textAlign: 'left', marginLeft: '20px' }}>
-        {formattedString}
-      </CardContent>
-      <CardActions disableSpacing sx={{ marginLeft: '20px', marginBottom: '20px' }}>
-        <IconButton aria-label="add to favorites" onClick={increaseLike}>
-          <FavoriteOutlined sx={{ color: isLike ? 'red' : 'black' }} />
+            }}
 
-        </IconButton>
-        {countLoves}
-      </CardActions>
-
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        disableScrollLock
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-
-        }}
-      >
-        <MenuItem onClick={reportHandleOpen}>신고하기</MenuItem>
-
+          />
+        </CardContent>
         {
-          verify &&
-          <>
-            <MenuItem onClick={() => navigate(`/article/update/${articleId}`)}>수정하기</MenuItem>
-            <MenuItem onClick={modalHandleOpen}>삭제하기</MenuItem>
-          </>
+          images && images.map((item, index) => <CardMedia
+            key={index}
+            component="img"
+            width="100%"
+            height="100%"
+            image={`https://kr.object.ncloudstorage.com/palettepets/article/img/${item.imgUrl}`}
+            alt={index}
+            sx={{ width: '50%', margin: '10px auto', border: '1px solid rgba(0,0,0,0.3)', borderRadius: '20px', padding: '2px' }}
+          />)
         }
+        <CardContent style={{ textAlign: 'left', marginLeft: '20px' }}>
+          {formattedString}
+        </CardContent>
+        <CardActions disableSpacing sx={{ marginLeft: '20px', marginBottom: '20px' }}>
+          <IconButton aria-label="add to favorites" onClick={increaseLike}>
+            <FavoriteOutlined sx={{ color: isLike ? 'red' : 'black' }} />
 
-      </Menu>
-    </Card >
+          </IconButton>
+          {countLoves}
+        </CardActions>
+
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          disableScrollLock
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+
+          }}
+        >
+          <MenuItem onClick={reportHandleOpen}>신고하기</MenuItem>
+
+          {
+            verify &&
+            <>
+              <MenuItem onClick={() => navigate(`/article/update/${articleId}`)}>수정하기</MenuItem>
+              <MenuItem onClick={modalHandleOpen}>삭제하기</MenuItem>
+            </>
+          }
+
+        </Menu>
+      </Card >
 
 
       <Card sx={{ maxWidth: 630, border: 'none', margin: '20px auto' }}>
@@ -280,22 +281,22 @@ const ArticleView = () => {
           )
         }
       </Card>
-  {/* 모달창 삭제 */ }
-  <Modal
-    open={openModal}
-    onClose={modalHandleClose}
-    aria-labelledby="modal-modal-title"
-    aria-describedby="modal-modal-description"
-  >
-    <Box sx={style}>
+      {/* 모달창 삭제 */}
+      <Modal
+        open={openModal}
+        onClose={modalHandleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
 
-      <div style={{ textAlign: 'center' }}>
-        <ArticleDelete articleId={articleId} modalHandleClose={modalHandleClose} />
-      </div>
-    </Box>
-  </Modal>
+          <div style={{ textAlign: 'center' }}>
+            <ArticleDelete articleId={articleId} modalHandleClose={modalHandleClose} />
+          </div>
+        </Box>
+      </Modal>
 
-  {/* 모달 창 신고 */ }
+      {/* 모달 창 신고 */}
       <Modal
         open={openReport}
         onClose={reportHandleClose}
