@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Modal } from '@mui/material';
 import Swal from 'sweetalert2'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
-
+import '../../styles/mainPage/mainPage.css';
 
 import BoardViewStyle from '../../styles/mainPage/boardView.module.css';
 import { useSelector } from 'react-redux';
