@@ -50,12 +50,9 @@ const CarrotDetail = () => {
 
   //상세 피이지 & 이미지
   const fetchCarrot = (id) => {
-    console.log("id = "+id)
     carrotService.getCarrotDetails(id).then((res) => {
-      console.log("데이터 === "+res.data.imgList);
       setCarrot(res.data);
       setImgList(res.data.imgList)
-      console.log("dd = " + imgList);
       //setPage(page => page + 1);
       }).catch((err) => { 
         console.log(err)
@@ -65,7 +62,6 @@ const CarrotDetail = () => {
     //거래 상태 변경
   const handleChange = async (event) => {
     const newValue = parseInt(event.target.value, 10);
-    console.log("바뀐 상태ㅋㅋ"+newValue);
     if (newValue !== state) {
       if (window.confirm("상태를 바꾸시겠습니까?")) {
         try {
