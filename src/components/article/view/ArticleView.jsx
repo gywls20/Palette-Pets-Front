@@ -13,7 +13,7 @@ import ArticleReport from './ArticleReport';
 import { useSelector } from 'react-redux';
 import ReactQuill from 'react-quill';
 import useToast from '../../../hooks/useToast';
-import css from '../../../styles/article/articleView.css'
+import '../../../styles/article/articleView.css'
 
 //모달창 css
 const style = {
@@ -88,13 +88,6 @@ const ArticleView = () => {
 
       setArticleDto(articleData);
       setCommentDto(commentData);
-      setIsLike(result.isLike);
-
-      if (result.memberNickname === articleData.created_who) {
-
-        setVerify(true);
-
-      }
 
       const dateTime = new Date(
         articleData.createdAt
@@ -119,6 +112,15 @@ const ArticleView = () => {
           `${dateTime.getFullYear()}.${(dateTime.getMonth() + 1).toString().padStart(2, '0')}.${dateTime.getDate().toString().padStart(2, '0')}`
         )
       }
+
+      setIsLike(result.isLike);
+
+      if (result.memberNickname === articleData.created_who) {
+
+        setVerify(true);
+
+      }
+      
 
     }
     fetchData();
@@ -194,7 +196,7 @@ const ArticleView = () => {
         />
 
         <CardContent >
-          <Typography variant="body2" color="text.secondary" fontSize="20pt" textAlign='left' sx={{ textAlign: 'center'}}>
+          <Typography variant="body2" color="text.secondary" fontSize="16pt" textAlign='left' sx={{ textAlign: 'center'}}>
           {title}
         </Typography>
       </CardContent>
@@ -215,8 +217,9 @@ const ArticleView = () => {
           modules={{ toolbar: false }}
           style={{
             height: 'auto', backgroundColor: 'white', display: 'inline-block',
-            width: '96%', marginTop: '1%', marginLeft: '20px', marginBottom: '40px', whiteSpace: 'pre-wrap'
-           
+            width: '96%', marginTop: '1%',padding:'10px', marginBottom: '40px', whiteSpace: 'pre-wrap',
+            textAlign:'left'
+            
           }}
 
         />

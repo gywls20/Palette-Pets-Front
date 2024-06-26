@@ -52,7 +52,7 @@ const MyPageComp = ({ nickname }) => {
 
         const fetchPetData = async () => {
             try {
-                const data = await petImgListInMyPageRequest();
+                const data = await petImgListInMyPageRequest(user.memberId);
                 setPets(data);
             } catch (error) {
                 console.error('반려동물 정보를 불러오는 중 오류 발생:', error);
