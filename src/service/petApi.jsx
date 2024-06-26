@@ -177,11 +177,7 @@ export const petImgListRequest = (petId) => {
 
 // 펫 이미지 리스트 GET 요청 -> 회원이 소유한 반려 동물의 모든 이미지 리스트
 export const petImgListInMyPageRequest = (memberId) => {
-<<<<<<< HEAD
     return jwtAxios.get(`${API_SERVER_HOST}/pet/img/myPageList/${memberId}`)
-=======
-    return jwtAxios.get(`${API_SERVER_HOST}/pet/img/list/${memberId}`)
->>>>>>> 72d3202f85ba18e0cdfb745aa2961e410daabc1c
         .then(response => response.data)
         .catch((error) => {
             console.error(error);
