@@ -6,6 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
 import { myPageProfile, myPageFeed, follow, unfollow } from '../../service/memberApi';
 import {petImgListInMyPageRequest} from "../../service/petApi.jsx";
+import { parseJSON } from 'date-fns';
 
 
 const MyPageComp = ({ nickname }) => {
@@ -16,6 +17,7 @@ const MyPageComp = ({ nickname }) => {
     const [pets, setPets] = useState([]);
 
     useEffect(() => {
+        const namenick = ''
         const fetchProfileData = async () => {
             
             try {
@@ -33,6 +35,7 @@ const MyPageComp = ({ nickname }) => {
                 console.log("지금 들어가있는 프로필 닉네임=="+nickname)
                 console.log("팔로우 여부 입니다요!!"+ data.followTF);
                 console.log("팔로우 여부 입니다요!!"+ user.followTF);
+                namenick = data.memberId;
             
             } catch (error) {
                 console.error('프로필 정보를 불러오는 중 오류 발생:', error);
@@ -51,8 +54,10 @@ const MyPageComp = ({ nickname }) => {
         };
 
         const fetchPetData = async () => {
+            console.log("user ::  "+ JSON.stringify(user))
+            console.log("user id ::  "+nickname)
             try {
-                const data = await petImgListInMyPageRequest();
+                const data = await petImgListInMyPageRequest(nickname);
                 setPets(data);
             } catch (error) {
                 console.error('반려동물 정보를 불러오는 중 오류 발생:', error);
