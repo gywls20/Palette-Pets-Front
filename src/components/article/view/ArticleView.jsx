@@ -114,12 +114,13 @@ const ArticleView = () => {
       }
 
       const result = await getIsLike(articleId)
+      
       if (result !== null || result !== '') {
 
         setIsLike(result.isLike);
 
         if (result.memberNickname === articleData.created_who) {
-          
+
           setVerify(true);
         }
       }
