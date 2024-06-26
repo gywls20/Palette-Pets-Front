@@ -60,7 +60,6 @@ const CarrotUserList = () => {
                           <span className="like">
                               <i className="fas fa-heart"></i>
                               <span className="like-count">관심 {carrot.carrotLike}</span>
-                              <span className="chat-count">채팅 ?</span>
                           </span>
                           </div>
                       </div>
