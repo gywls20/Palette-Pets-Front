@@ -61,7 +61,7 @@ const BoardView = () => {
         const { signal } = controller;
 
         const result = await axios.get(`${url}/popular`, { signal })
-        .then(res => res.data
+        .then(res => res.data[0]
         )
         .catch(err => {
             console.error(err);
