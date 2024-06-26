@@ -92,12 +92,16 @@ const BoardView = () => {
         p: 4,
     };
 
+    const connectArticle = (articleId) => {
+        window.location.href = `/article/view/${articleId}`;
+    }
+
     return (
         <>
             {articles && articles.map((article) => (
                 <div key={article.articleId} className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
-                        <div className={BoardViewStyle.postHeader}>
+                        <div className={BoardViewStyle.postHeader} onClick={()=>connectArticle(article.articleId)}>
                             <img src={article.memberImg ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${article.memberImg}`
                             : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(article.articleId)} />
                             <div>
