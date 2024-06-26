@@ -101,10 +101,10 @@ const BoardView = () => {
             {articles && articles.map((article) => (
                 <div key={article.articleId} className={BoardViewStyle.postsList}>
                     <div className={BoardViewStyle.post}>
-                        <div className={BoardViewStyle.postHeader} onClick={()=>connectArticle(article.articleId)}>
+                        <div className={BoardViewStyle.postHeader}>
                             <img src={article.memberImg ? `https://kr.object.ncloudstorage.com/palettepets/member/Profile/${article.memberImg}`
                             : `https://kr.object.ncloudstorage.com/palettepets/member/Profile/icon-image.png`} alt="User" className={BoardViewStyle.postUserImage} onClick={() => openModal(article.articleId)} />
-                            <div>
+                            <div onClick={()=>connectArticle(article.articleId)}>
                                 <p className={BoardViewStyle.postUserName}>{article.memberNickname}님</p>
                                 <p className={BoardViewStyle.postContent}>{article.title}</p>
                                 <p className={BoardViewStyle.postTime}>                             
